@@ -9,16 +9,39 @@ namespace VoidTime
         public Point Coordinates { get; private set; }
         public Size Size { get; private set; }
 
-        private List<GameObject> GameObjects = new List<GameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
 
-        public void AddGameObject()
+        #region Constructor
+
+        public Chunk()
         {
 
         }
 
-        public void AddGameObjects()
+        public Chunk(Point coordinates, Size size)
         {
+            Coordinates = coordinates;
+            Size = size;
+        }
 
+        #endregion
+
+        public void AddGameObject(GameObject gameObject)
+        {
+            gameObjects.Add(gameObject);
+        }
+
+        public void AddGameObjects(IEnumerable<GameObject> gameObjects)
+        {
+            foreach (var gameObject in gameObjects)
+            {
+                this.gameObjects.Add(gameObject);
+            }
+        }
+
+        public List<GameObject> GetGameObjects()
+        {
+            return gameObjects;
         }
 
         public event Action<GameObject> GameObjectOutOfChunk;
