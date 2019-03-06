@@ -4,6 +4,9 @@ namespace VoidTime
 {
     public class MainForm : Form
     {
-        
+        public MainForm()
+        {
+
+        }
     }
 }
