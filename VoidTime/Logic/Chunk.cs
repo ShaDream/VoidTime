@@ -6,10 +6,18 @@ namespace VoidTime
 {
     public class Chunk
     {
-        public Point Coordinates { get; private set; }
-        public Size Size { get; private set; }
+        #region Public Properties
 
-        private List<GameObject> gameObjects = new List<GameObject>();
+        public Point Coordinates { get; }
+        public Size Size { get; }
+
+        #endregion
+
+        #region Private Fields
+
+        private readonly List<GameObject> gameObjects = new List<GameObject>();
+
+        #endregion
 
         #region Constructor
 
@@ -26,6 +34,8 @@ namespace VoidTime
 
         #endregion
 
+        #region Public Methods
+
         public void AddGameObject(GameObject gameObject)
         {
             gameObjects.Add(gameObject);
@@ -39,12 +49,14 @@ namespace VoidTime
             }
         }
 
-        public List<GameObject> GetGameObjects()
-        {
-            return gameObjects;
-        }
+        public List<GameObject> GetGameObjects() => gameObjects;
+
+        #endregion
+
+        #region Public Events
 
         public event Action<GameObject> GameObjectOutOfChunk;
 
+        #endregion
     }
 }
