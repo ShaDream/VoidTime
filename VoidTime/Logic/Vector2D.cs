@@ -7,8 +7,8 @@ namespace VoidTime
     {
         #region Public Properties
 
-        public float X { get; set; }
-        public float Y { get; set; }
+        public float X { get; }
+        public float Y { get; }
 
         public float Length => (float)Math.Sqrt(X * X + Y * Y);
         public Vector2D Normilized => new Vector2D(X / Length, Y / Length);
@@ -70,7 +70,11 @@ namespace VoidTime
                 return Math.Abs(d.X - X) < float.Epsilon && Math.Abs(d.Y - Y) < float.Epsilon;
             }
             throw new ArgumentException($"{obj.GetType()} is not equals to {typeof(Vector2D)}");
+        }
 
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode();
         }
 
         public Vector2D Rotate(double angle)
