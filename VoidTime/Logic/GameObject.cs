@@ -42,5 +42,14 @@ namespace VoidTime
 
         #endregion
 
+        #region Public Methods
+
+        public virtual void Update() { }
+
+        public void Destoy() => OnDestroy?.Invoke(this);
+
+        #endregion
+
+        public event Action<GameObject> OnDestroy;
     }
 }
