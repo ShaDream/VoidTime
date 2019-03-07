@@ -39,6 +39,7 @@ namespace VoidTime
         public void AddGameObject(GameObject gameObject)
         {
             gameObjects.Add(gameObject);
+            gameObject.OnDestroy += RemoveGameObject;
         }
 
         public void AddGameObjects(IEnumerable<GameObject> gameObjects)
@@ -46,16 +47,17 @@ namespace VoidTime
             foreach (var gameObject in gameObjects)
             {
                 this.gameObjects.Add(gameObject);
+                gameObject.OnDestroy += RemoveGameObject;
             }
         }
 
+        public void RemoveGameObject(GameObject gameObject)
+        {
+            gameObjects.Remove(gameObject);
+            gameObject.OnDestroy -= RemoveGameObject;
+        }
+
         public List<GameObject> GetGameObjects() => gameObjects;
-
-        #endregion
-
-        #region Public Events
-
-        public event Action<GameObject> GameObjectOutOfChunk;
 
         #endregion
     }
