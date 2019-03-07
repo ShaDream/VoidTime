@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace VoidTime
 {
@@ -29,24 +30,59 @@ namespace VoidTime
             this.chunkSize = chunkSize;
             chunks = new Chunk[MapSize.Width, MapSize.Height];
             Initialization();
-            AddGameObjectsToChunks(gameObjects);
+            AddGameObjects(gameObjects);
         }
 
         #endregion
 
         #region Public Methods
 
-        public void AddGameObjectsToChunks(IEnumerable<GameObject> gameObjects)
+        public void AddGameObjects(IEnumerable<GameObject> gameObjects)
         {
             foreach (var gameObject in gameObjects)
             {
-                var x = (int)gameObject.Position.X / chunkSize.Width;
-                var y = (int)gameObject.Position.Y / chunkSize.Height;
-                if (x >= MapSize.Width || y >= MapSize.Height || x < 0 || y < 0)
-                    throw new IndexOutOfRangeException(
-                        $"Index was out of range when {typeof(GameObject)}, was initialize in {typeof(GameMap)}");
-                chunks[x, y].AddGameObject(gameObject);
+                var chunkCoordinate = ChunkCoordinateFromVector(gameObject.Position);
+                chunks[chunkCoordinate.X, chunkCoordinate.Y].AddGameObject(gameObject);
             }
+        }
+
+        public void AddGameObject(GameObject gameObject) =>
+            AddGameObjects(new List<GameObject> { gameObject });
+
+        public List<GameObject> GetGameObjects(Camera camera)
+        {
+            var points = camera.ToVectors();
+            return points
+                .Select(ChunkCoordinateFromVector)
+                .Distinct()
+                .Select(coordinate =>
+                    {
+                        CheckChunk(coordinate);
+                        return chunks[coordinate.X, coordinate.Y].GetGameObjects();
+                    })
+                .SelectMany(x => x).ToList();
+        }
+
+        private void CheckChunk(Point chunkCoordinate)
+        {
+            var gameObjects = chunks[chunkCoordinate.X, chunkCoordinate.Y].GetGameObjects();
+            foreach (var gameObject in gameObjects)
+            {
+                var chunkCoordinateObject = ChunkCoordinateFromVector(gameObject.Position);
+                if (chunkCoordinateObject == chunkCoordinate) continue;
+                gameObject.Destoy();
+                chunks[chunkCoordinate.X, chunkCoordinate.Y].AddGameObject(gameObject);
+            }
+        }
+
+        private Point ChunkCoordinateFromVector(Vector2D vector)
+        {
+            var x = (int)vector.X / chunkSize.Width;
+            var y = (int)vector.Y / chunkSize.Height;
+            if (x >= MapSize.Width || y >= MapSize.Height || x < 0 || y < 0)
+                throw new IndexOutOfRangeException(
+                    $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
+            return new Point(x, y);
         }
 
         #endregion
@@ -56,14 +92,13 @@ namespace VoidTime
         private void Initialization()
         {
             for (var i = 0; i < MapSize.Width; i++)
-            for (var j = 0; j < MapSize.Height; j++)
-            {
-                var coordinates = new Point(i, j);
-                chunks[i, j] = new Chunk(coordinates, chunkSize);
-            }
+                for (var j = 0; j < MapSize.Height; j++)
+                {
+                    var coordinates = new Point(i, j);
+                    chunks[i, j] = new Chunk(coordinates, chunkSize);
+                }
         }
 
         #endregion
-        
     }
 }
