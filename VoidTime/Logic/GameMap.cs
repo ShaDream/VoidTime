@@ -66,19 +66,21 @@ namespace VoidTime
         private void CheckChunk(Point chunkCoordinate)
         {
             var gameObjects = chunks[chunkCoordinate.X, chunkCoordinate.Y].GetGameObjects();
-            foreach (var gameObject in gameObjects)
+            for (var i = 0; i < gameObjects.Count; i++)
             {
+                var gameObject = gameObjects[i];
                 var chunkCoordinateObject = ChunkCoordinateFromVector(gameObject.Position);
                 if (chunkCoordinateObject == chunkCoordinate) continue;
                 gameObject.Destoy();
-                chunks[chunkCoordinate.X, chunkCoordinate.Y].AddGameObject(gameObject);
+                chunks[chunkCoordinateObject.X, chunkCoordinateObject.Y].AddGameObject(gameObject);
+                i--;
             }
         }
 
         private Point ChunkCoordinateFromVector(Vector2D vector)
         {
-            var x = (int)vector.X / chunkSize.Width;
-            var y = (int)vector.Y / chunkSize.Height;
+            var x = (int)Math.Floor(vector.X / chunkSize.Width);
+            var y = (int)Math.Floor(vector.Y / chunkSize.Height);
             if (x >= MapSize.Width || y >= MapSize.Height || x < 0 || y < 0)
                 throw new IndexOutOfRangeException(
                     $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
