@@ -50,6 +50,9 @@
     <Compile Include="Logic\GameObject.cs" />
     <Compile Include="Logic\Chunk.cs" />
     <Compile Include="Logic\GameModel.cs" />
+    <Compile Include="Logic\Player.cs" />
+    <Compile Include="Logic\PressedKeys.cs" />
+    <Compile Include="Logic\ReadonlyKeys.cs" />
     <Compile Include="Logic\Vector2D.cs" />
     <Compile Include="Logic\GameMap.cs" />
     <Compile Include="MainForm.cs">
@@ -79,6 +82,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DrawClasses\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
