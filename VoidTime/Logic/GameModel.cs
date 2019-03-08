@@ -50,6 +50,7 @@ namespace VoidTime
         private void FrameTick(object sender, ElapsedEventArgs e)
         {
             var activeObjects = map.GetGameObjects(GameBasicCamera);
+            map.UpdateMap(GameBasicCamera);
             activeObjects.ForEach(x => x.Update());
             GameBasicCamera.Update();
             Tick?.Invoke(activeObjects, GameBasicCamera);

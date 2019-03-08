@@ -59,7 +59,7 @@ namespace VoidTime
                 .SelectMany(x => x).ToList();
         }
 
-        public void UpdateMap(Camera camera)
+        public void UpdateMap(BasicCamera camera)
         {
             var chunksCoordinate = GetChunksCoordinateFromCamera(camera);
             chunksCoordinate
