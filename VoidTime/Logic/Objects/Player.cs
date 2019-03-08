@@ -6,7 +6,7 @@ namespace VoidTime
     {
         #region Public Properties
 
-        public float Speed;
+        public float Speed = 10;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace VoidTime
 
         public override void Update()
         {
-            if (ReadonlyKeys.GetKeys(Keys.D, Keys.W, Keys.A, Keys.S))
+            if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
                 Position += new Vector2D(ReadonlyKeys.GetAxis("horizontal") * Speed,
                     ReadonlyKeys.GetAxis("vertical") * Speed);
         }

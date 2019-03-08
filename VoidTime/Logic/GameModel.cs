@@ -31,7 +31,10 @@ namespace VoidTime
 
         public GameModel()
         {
-            ReadonlyKeys k = new ReadonlyKeys(keys, new HashSet<Axis>());
+            var axes = new HashSet<Axis>();
+            axes.Add(new Axis("horizontal", Keys.D, Keys.A));
+            axes.Add(new Axis("vertical", Keys.W, Keys.S));
+            ReadonlyKeys k = new ReadonlyKeys(keys, axes);
 
             gameTick = new Timer(16);
             player = new Player("player", new Vector2D(10000, 10000));

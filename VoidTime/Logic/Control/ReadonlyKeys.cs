@@ -34,22 +34,24 @@ namespace VoidTime
 
         #region Public Methods
 
-        public static bool GetKey(Keys key)
+        public static bool IsKeyPressed(Keys key)
         {
             return keys.keys.Contains(key);
         }
 
-        public static bool GetKeys(params Keys[] keys)
+        public static bool IsAnyKeyPressed(params Keys[] keys)
         {
-            return keys.All(x => ReadonlyKeys.keys.keys.Contains(x));
+            return keys.Any(x => ReadonlyKeys.keys.keys.Contains(x));
         }
 
         public static float GetAxis(string name)
         {
-            if (axes.ContainsKey(name))
-                return axes[name].GetValue(keys.keys.Contains(axes[name].PositiveKey),
-                    keys.keys.Contains(axes[name].PositiveKey));
-            return 0;
+            if (!axes.ContainsKey(name)) return 0;
+
+            var local = axes[name];
+            return local.GetValue(keys.keys.Contains(local.PositiveKey),
+                keys.keys.Contains(local.NegativeKey));
+
         }
 
         #endregion
