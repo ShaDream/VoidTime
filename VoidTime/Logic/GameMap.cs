@@ -49,9 +49,9 @@ namespace VoidTime
         public void AddGameObject(GameObject gameObject) =>
             AddGameObjects(new List<GameObject> { gameObject });
 
-        public List<GameObject> GetGameObjects(Camera camera)
+        public List<GameObject> GetGameObjects(BasicCamera basicCamera)
         {
-            var points = camera.ToVectors();
+            var points = basicCamera.ToVectors();
             return points
                 .Select(ChunkCoordinateFromVector)
                 .Distinct()

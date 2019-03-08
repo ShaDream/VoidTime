@@ -42,7 +42,7 @@ namespace VoidTime.Tests
                 new GameObject("Planet", new Vector2D(2, 2)),
                 new GameObject("Star", new Vector2D(15, 15))
             };
-            var camera = new Camera(objects[2], new Size(2, 2));
+            var camera = new BasicCamera(objects[2], new Size(2, 2));
             var map = new GameMap(new Size(2, 2), new Size(10, 10), objects);
             var objectsFromMap = map.GetGameObjects(camera);
             objectsFromMap[0].Destoy();
@@ -59,7 +59,7 @@ namespace VoidTime.Tests
                 new GameObject("Planet", new Vector2D(2, 2)),
                 new GameObject("Star", new Vector2D(15, 15))
             };
-            var camera = new Camera(objects[2], new Size(2, 2));
+            var camera = new BasicCamera(objects[2], new Size(2, 2));
             var map = new GameMap(new Size(2, 2), new Size(10, 10), objects);
             var objectsFromMap = map.GetGameObjects(camera);
             objectsFromMap[0].Position = new Vector2D(3, 3);
@@ -75,7 +75,7 @@ namespace VoidTime.Tests
         public void FailCameraSize()
         {
             var player =  new[] { new GameObject("Player", new Vector2D(1, 1)) } ;
-            var camera = new Camera(player[0], new Size(20, 20));
+            var camera = new BasicCamera(player[0], new Size(20, 20));
             var map = new GameMap(new Size(2, 2), new Size(10, 10), player);
             try
             {
