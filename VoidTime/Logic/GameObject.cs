@@ -49,7 +49,12 @@ namespace VoidTime
         public void Destoy() => OnDestroy?.Invoke(this);
 
         #endregion
+        
+        #region Public Events
 
         public event Action<GameObject> OnDestroy;
+
+        #endregion
+
     }
 }

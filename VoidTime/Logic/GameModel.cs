@@ -10,12 +10,24 @@ namespace VoidTime
 {
     public class GameModel
     {
+
+        #region Private Fields
+
         private Timer gameTick;
         private GameMap map;
-        public Camera GameCamera;
-        public bool Paused = true;
         private GameObject player;
         private PressedKeys keys = new PressedKeys();
+
+        #endregion
+
+        #region Public Properties
+
+        public BasicCamera GameBasicCamera;
+        public bool Paused = true;
+
+        #endregion
+
+        #region Constructor
 
         public GameModel()
         {
@@ -24,18 +36,25 @@ namespace VoidTime
             gameTick = new Timer(16);
             player = new Player("player", new Vector2D(10000, 10000));
             map = new GameMap(new Size(100, 100), new Size(1000, 1000), new[] { player });
-            GameCamera = new Camera(player, new Size(800, 800));
+            GameBasicCamera = new SmoothCamera(new Size(800, 800), player);
             gameTick.Elapsed += FrameTick;
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void FrameTick(object sender, ElapsedEventArgs e)
         {
-            var activeObjects = map.GetGameObjects(GameCamera);
+            var activeObjects = map.GetGameObjects(GameBasicCamera);
             activeObjects.ForEach(x => x.Update());
-            GameCamera.Update();
-            var s = activeObjects.Select(x => GameCamera.GamePositionToWindow(x.Position)).ToList();
-            Tick?.Invoke(activeObjects, s);
+            GameBasicCamera.Update();
+            Tick?.Invoke(activeObjects, GameBasicCamera);
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void Run()
         {
@@ -67,6 +86,13 @@ namespace VoidTime
                 keys.keys.Remove(args.KeyCode);
         }
 
-        public event Action<List<GameObject>, List<Vector2D>> Tick;
+        #endregion
+
+        #region Public Events
+
+        public event Action<List<GameObject>, BasicCamera> Tick;
+
+        #endregion
+
     }
 }

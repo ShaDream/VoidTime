@@ -46,14 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\Camera.cs" />
-    <Compile Include="Logic\Control\Axis.cs" />
+    <Compile Include="Logic\Cameras\BasicCamera.cs" />
+    <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\GameObject.cs" />
     <Compile Include="Logic\Chunk.cs" />
     <Compile Include="Logic\GameModel.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="Logic\Control\PressedKeys.cs" />
     <Compile Include="Logic\Control\ReadonlyKeys.cs" />
+    <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Vector2D.cs" />
     <Compile Include="Logic\GameMap.cs" />
     <Compile Include="MainForm.cs">
