@@ -16,21 +16,23 @@ namespace VoidTime
 
         #region Public Properties
 
+        public Size MapSizeInChunks { get; }
         public Size MapSize { get; }
 
         #endregion
 
         #region Сonstructor
 
-        public GameMap(Size mapSize, Size chunkSize) : this(mapSize, chunkSize, new List<GameObject>()) { }
+        public GameMap(Size mapSizeInChunks, Size chunkSize) : this(mapSizeInChunks, chunkSize, new List<GameObject>()) { }
 
-        public GameMap(Size mapSize, Size chunkSize, IEnumerable<GameObject> gameObjects)
+        public GameMap(Size mapSizeInChunks, Size chunkSize, IEnumerable<GameObject> gameObjects)
         {
-            MapSize = mapSize;
+            MapSizeInChunks = mapSizeInChunks;
             this.chunkSize = chunkSize;
-            chunks = new Chunk[MapSize.Width, MapSize.Height];
+            chunks = new Chunk[MapSizeInChunks.Width, MapSizeInChunks.Height];
             Initialization();
             AddGameObjects(gameObjects);
+            MapSize = new Size(MapSizeInChunks.Width * chunkSize.Width, MapSizeInChunks.Height * chunkSize.Height);
         }
 
         #endregion
@@ -51,16 +53,22 @@ namespace VoidTime
 
         public List<GameObject> GetGameObjects(BasicCamera basicCamera)
         {
-            var points = basicCamera.ToVectors();
-            return points
-                .Select(ChunkCoordinateFromVector)
-                .Distinct()
-                .Select(coordinate =>
-                    {
-                        CheckChunk(coordinate);
-                        return chunks[coordinate.X, coordinate.Y].GetGameObjects();
-                    })
+            var chunksCoordinate = GetChunksCoordinateFromCamera(camera);
+            return chunksCoordinate
+                .Select(coordinate => chunks[coordinate.X, coordinate.Y].GetGameObjects())
                 .SelectMany(x => x).ToList();
+        }
+
+        public void UpdateMap(Camera camera)
+        {
+            var chunksCoordinate = GetChunksCoordinateFromCamera(camera);
+            chunksCoordinate
+                .ForEach(CheckChunk);
+        }
+
+        private List<Point> GetChunksCoordinateFromCamera(Camera camera)
+        {
+            return camera.ToVectors().Select(ChunkCoordinateFromVector).Distinct().ToList();
         }
 
         private void CheckChunk(Point chunkCoordinate)
@@ -81,7 +89,7 @@ namespace VoidTime
         {
             var x = (int)Math.Floor(vector.X / chunkSize.Width);
             var y = (int)Math.Floor(vector.Y / chunkSize.Height);
-            if (x >= MapSize.Width || y >= MapSize.Height || x < 0 || y < 0)
+            if (x >= MapSizeInChunks.Width || y >= MapSizeInChunks.Height || x < 0 || y < 0)
                 throw new IndexOutOfRangeException(
                     $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
             return new Point(x, y);
@@ -93,8 +101,8 @@ namespace VoidTime
 
         private void Initialization()
         {
-            for (var i = 0; i < MapSize.Width; i++)
-                for (var j = 0; j < MapSize.Height; j++)
+            for (var i = 0; i < MapSizeInChunks.Width; i++)
+                for (var j = 0; j < MapSizeInChunks.Height; j++)
                 {
                     var coordinates = new Point(i, j);
                     chunks[i, j] = new Chunk(coordinates, chunkSize);
