@@ -11,7 +11,7 @@ namespace VoidTime
 
         #endregion
 
-        #region Public Methods
+        #region Constructor
 
         public PressedKeys()
         {
