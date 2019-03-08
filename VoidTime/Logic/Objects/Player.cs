@@ -4,7 +4,13 @@ namespace VoidTime
 {
     public class Player : GameObject
     {
+        #region Public Properties
+
         public float Speed;
+
+        #endregion
+
+        #region Constructor
 
         public Player(string nameObject) : base(nameObject)
         {
@@ -18,11 +24,18 @@ namespace VoidTime
         {
         }
 
+        #endregion
+
+        #region Public Methods
+
         public override void Update()
         {
             if (ReadonlyKeys.GetKeys(Keys.D, Keys.W, Keys.A, Keys.S))
                 Position += new Vector2D(ReadonlyKeys.GetAxis("horizontal") * Speed,
                     ReadonlyKeys.GetAxis("vertical") * Speed);
         }
+
+        #endregion
+
     }
 }

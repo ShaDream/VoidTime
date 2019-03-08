@@ -7,8 +7,14 @@ namespace VoidTime
 {
     public class MainForm : Form
     {
+        #region Public Properties
+
         public List<Vector2D> DrawObjects = new List<Vector2D>();
         public Image plane = new Bitmap(@"C:\Users\Иван\Documents\Projects\TestFormApp\plane.png");
+
+        #endregion
+
+        #region Constructor
 
         public MainForm(GameModel model)
         {
@@ -24,6 +30,9 @@ namespace VoidTime
             model.Run();
         }
 
+        #endregion
+
+        #region Private Methods
 
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
         {
@@ -40,5 +49,8 @@ namespace VoidTime
                 e.Graphics.DrawImage(plane, drawObject.X, drawObject.Y, 50, 50);
             }
         }
+
+        #endregion
+
     }
 }

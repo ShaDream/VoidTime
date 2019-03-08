@@ -4,9 +4,15 @@ namespace VoidTime
 {
     public class Axis
     {
+        #region Public Properties
+
         public string Name { get; }
         public Keys PositiveKey { get; }
         public Keys NegativeKey { get; }
+
+        #endregion
+
+        #region Public Methods
 
         public Axis(string name, Keys positiveKey, Keys negativeKey)
         {
@@ -22,5 +28,8 @@ namespace VoidTime
             result -= isNegativeKeyPressed ? 1 : 0;
             return result;
         }
+
+        #endregion
+
     }
 }

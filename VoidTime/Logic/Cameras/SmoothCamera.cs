@@ -4,20 +4,35 @@ namespace VoidTime
 {
     public class SmoothCamera : Camera
     {
-        public float LerpСoefficient = 0.05f;
+        #region Private Fields
 
-        public SmoothCamera(Size size, GameObject gameObject) : base(size, gameObject)
-        {
-        }
+        private readonly float lerpСoefficient = 0.05f;
+
+        #endregion
+
+        #region Constructor
+
+        public SmoothCamera(Size size, GameObject gameObject) : base(size, gameObject) { }
+
+        #endregion
+
+        #region Public Methods
 
         public override void Update()
         {
-            Position = Lerp(Position, FollowTo.Position, LerpСoefficient);
+            Position = Lerp(Position, FollowTo.Position, lerpСoefficient);
         }
 
-        public Vector2D Lerp(Vector2D a, Vector2D b, float t)
+        #endregion
+
+        #region Private Methods
+
+        private static Vector2D Lerp(Vector2D a, Vector2D b, float t)
         {
             return a + (b - a) * t;
         }
+
+        #endregion
+
     }
 }

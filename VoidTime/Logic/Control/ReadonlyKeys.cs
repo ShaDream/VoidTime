@@ -6,9 +6,15 @@ namespace VoidTime
 {
     public class ReadonlyKeys
     {
+        #region Private Fields
+
         private static PressedKeys keys;
         private static Dictionary<string, Axis> axes;
         private static bool IsCreated = false;
+
+        #endregion
+
+        #region Constructor
 
         public ReadonlyKeys(PressedKeys keys, HashSet<Axis> axes)
         {
@@ -23,6 +29,10 @@ namespace VoidTime
                 ReadonlyKeys.axes.Add(axis.Name, axis);
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         public static bool GetKey(Keys key)
         {
@@ -41,5 +51,8 @@ namespace VoidTime
                     keys.keys.Contains(axes[name].PositiveKey));
             return 0;
         }
+
+        #endregion
+
     }
 }
