@@ -53,7 +53,7 @@ namespace VoidTime
 
         public List<GameObject> GetGameObjects(BasicCamera basicCamera)
         {
-            var chunksCoordinate = GetChunksCoordinateFromCamera(camera);
+            var chunksCoordinate = GetChunksCoordinateFromCamera(basicCamera);
             return chunksCoordinate
                 .Select(coordinate => chunks[coordinate.X, coordinate.Y].GetGameObjects())
                 .SelectMany(x => x).ToList();
@@ -66,7 +66,7 @@ namespace VoidTime
                 .ForEach(CheckChunk);
         }
 
-        private List<Point> GetChunksCoordinateFromCamera(Camera camera)
+        private List<Point> GetChunksCoordinateFromCamera(BasicCamera camera)
         {
             return camera.ToVectors().Select(ChunkCoordinateFromVector).Distinct().ToList();
         }
