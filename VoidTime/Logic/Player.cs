@@ -20,14 +20,9 @@ namespace VoidTime
 
         public override void Update()
         {
-            if (ReadonlyKeys.keys.keys.Contains(Keys.D))
-                Position += new Vector2D(10, 0);
-            if (ReadonlyKeys.keys.keys.Contains(Keys.A))
-                Position += new Vector2D(-10, 0);
-            if (ReadonlyKeys.keys.keys.Contains(Keys.W))
-                Position += new Vector2D(0, 10);
-            if (ReadonlyKeys.keys.keys.Contains(Keys.S))
-                Position += new Vector2D(0, -10);
+            if (ReadonlyKeys.GetKeys(Keys.D, Keys.W, Keys.A, Keys.S))
+                Position += new Vector2D(ReadonlyKeys.GetAxis("horizontal") * Speed,
+                    ReadonlyKeys.GetAxis("vertical") * Speed);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace VoidTime
 
         public GameModel()
         {
-            ReadonlyKeys.keys = keys;
+            ReadonlyKeys k = new ReadonlyKeys(keys, new HashSet<Axis>());
 
             gameTick = new Timer(16);
             player = new Player("player", new Vector2D(10000, 10000));
@@ -34,7 +34,7 @@ namespace VoidTime
             activeObjects.ForEach(x => x.Update());
             GameCamera.Update();
             var s = activeObjects.Select(x => GameCamera.GamePositionToWindow(x.Position)).ToList();
-            Tick?.Invoke(activeObjects,s);
+            Tick?.Invoke(activeObjects, s);
         }
 
         public void Run()
@@ -67,6 +67,6 @@ namespace VoidTime
                 keys.keys.Remove(args.KeyCode);
         }
 
-        public event Action<List<GameObject>,List<Vector2D>> Tick;
+        public event Action<List<GameObject>, List<Vector2D>> Tick;
     }
 }

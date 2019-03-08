@@ -47,12 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\Camera.cs" />
+    <Compile Include="Logic\Control\Axis.cs" />
     <Compile Include="Logic\GameObject.cs" />
     <Compile Include="Logic\Chunk.cs" />
     <Compile Include="Logic\GameModel.cs" />
     <Compile Include="Logic\Player.cs" />
-    <Compile Include="Logic\PressedKeys.cs" />
-    <Compile Include="Logic\ReadonlyKeys.cs" />
+    <Compile Include="Logic\Control\PressedKeys.cs" />
+    <Compile Include="Logic\Control\ReadonlyKeys.cs" />
     <Compile Include="Logic\Vector2D.cs" />
     <Compile Include="Logic\GameMap.cs" />
     <Compile Include="MainForm.cs">
@@ -84,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DrawClasses\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
