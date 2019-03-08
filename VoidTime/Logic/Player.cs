@@ -4,6 +4,8 @@ namespace VoidTime
 {
     public class Player : GameObject
     {
+        public float Speed;
+
         public Player(string nameObject) : base(nameObject)
         {
         }
