@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
+    <Compile Include="Logic\Control\Axis.cs" />
     <Compile Include="Logic\GameObject.cs" />
     <Compile Include="Logic\Chunk.cs" />
     <Compile Include="Logic\GameModel.cs" />
