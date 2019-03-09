@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VoidTime.Generator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("gypnor")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("VoidTime.Generator")]
-[assembly: AssemblyCopyright("Copyright © gypnor 2019")]
+[assembly: AssemblyCopyright("Copyright © 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
