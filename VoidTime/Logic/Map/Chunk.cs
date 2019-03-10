@@ -30,7 +30,7 @@ namespace VoidTime
             Coordinates = coordinates;
             Size = size;
             gameObjects.Add(new Background("back",
-                new Vector2D(Coordinates.X * Size.Width, Coordinates.Y * Size.Height), 2));
+                new Vector2D(Coordinates.X * Size.Width, Coordinates.Y * Size.Height + 999), 2));
         }
 
         #endregion

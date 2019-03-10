@@ -28,6 +28,8 @@ namespace VoidTime
 
             KeyUp += model.OnKeyRelease;
             KeyDown += model.OnKeyPress;
+            SizeChanged += (s, a) => model.GameBasicCamera.Size = Size;
+            model.GameBasicCamera.Size = Size;
             HelperInitialization();
             model.Run();
         }
