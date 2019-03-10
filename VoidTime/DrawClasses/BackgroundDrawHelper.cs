@@ -5,7 +5,7 @@ namespace VoidTime
 {
     public class BackgroundDrawHelper : IDrawable
     {
-        public Type GameObjectType { get; }
+        public Type GameObjectType { get; } = typeof(Background);
         public Image BackgroundImage =
             new Bitmap(@"C:\Users\Иван\source\repos\ShaDream\VoidTime\VoidTime\Resources\Textures\back.png");
 
