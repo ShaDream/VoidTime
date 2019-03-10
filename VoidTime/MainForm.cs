@@ -9,8 +9,7 @@ namespace VoidTime
     {
         #region Public Properties
 
-        public List<Vector2D> DrawObjects = new List<Vector2D>();
-        public Image plane = new Bitmap(@"C:\Users\Иван\Documents\Projects\TestFormApp\plane.png");
+        public List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
 
         #endregion
 
@@ -36,18 +35,15 @@ namespace VoidTime
 
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
         {
-            var positions = objectsToDraw.Select(x => gameBasicCamera.GamePositionToWindow(x.Position)).ToList();
-            DrawObjects = positions;
+            DrawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
+                           let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
+                           select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
             Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var pen = new Pen(Color.Black);
-            foreach (var drawObject in DrawObjects)
-            {
-                e.Graphics.DrawImage(plane, drawObject.X, drawObject.Y, 50, 50);
-            }
+
         }
 
         #endregion

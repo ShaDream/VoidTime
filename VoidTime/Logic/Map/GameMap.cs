@@ -66,9 +66,37 @@ namespace VoidTime
                 .ForEach(CheckChunk);
         }
 
+        #endregion
+
+        #region Private Methods
+
+        private void Initialization()
+        {
+            for (var i = 0; i < MapSizeInChunks.Width; i++)
+                for (var j = 0; j < MapSizeInChunks.Height; j++)
+                {
+                    var coordinates = new Point(i, j);
+                    chunks[i, j] = new Chunk(coordinates, chunkSize);
+                }
+        }
+
         private List<Point> GetChunksCoordinateFromCamera(BasicCamera camera)
         {
-            return camera.ToVectors().Select(ChunkCoordinateFromVector).Distinct().ToList();
+            var bottomLeftPoint = ChunkCoordinateFromVector(camera.BottomLeft);
+            var topRightPoint = ChunkCoordinateFromVector(camera.TopRight);
+            var xMin = bottomLeftPoint.X;
+            var xMax = topRightPoint.X;
+            var yMin = bottomLeftPoint.Y;
+            var yMax = topRightPoint.Y;
+            var result = new List<Point>();
+            for (var x = xMin; x <= xMax; x++)
+            {
+                for (var y = yMin; y <= yMax; y++)
+                {
+                    result.Add(new Point(x, y));
+                }
+            }
+            return result;
         }
 
         private void CheckChunk(Point chunkCoordinate)
@@ -93,20 +121,6 @@ namespace VoidTime
                 throw new IndexOutOfRangeException(
                     $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
             return new Point(x, y);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void Initialization()
-        {
-            for (var i = 0; i < MapSizeInChunks.Width; i++)
-                for (var j = 0; j < MapSizeInChunks.Height; j++)
-                {
-                    var coordinates = new Point(i, j);
-                    chunks[i, j] = new Chunk(coordinates, chunkSize);
-                }
         }
 
         #endregion
