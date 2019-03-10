@@ -22,13 +22,12 @@ namespace VoidTime
         public MainForm(GameModel model)
         {
             DoubleBuffered = true;
-            Size = new Size(800, 800);
-
+            WindowState = FormWindowState.Maximized;
+            ShowIcon = false;
             model.Tick += FrameTick;
 
             KeyUp += model.OnKeyRelease;
             KeyDown += model.OnKeyPress;
-
 
             model.Run();
         }
