@@ -28,7 +28,7 @@ namespace VoidTime
 
             KeyUp += model.OnKeyRelease;
             KeyDown += model.OnKeyPress;
-
+            HelperInitialization();
             model.Run();
         }
 
