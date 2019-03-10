@@ -12,8 +12,8 @@ namespace VoidTime
 
         public void DrawObject(ObjectOnDisplay obj, Graphics graphics)
         {
-            var x = obj.GameObject.Position.X;
-            var y = obj.GameObject.Position.Y;
+            var x = obj.PositionOnDisplay.X;
+            var y = obj.PositionOnDisplay.Y;
             graphics.DrawImage(PlayerImage, x, y);
         }
     }
