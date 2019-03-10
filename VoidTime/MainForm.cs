@@ -28,7 +28,7 @@ namespace VoidTime
 
             KeyUp += model.OnKeyRelease;
             KeyDown += model.OnKeyPress;
-
+            HelperInitialization();
             model.Run();
         }
 
@@ -41,10 +41,12 @@ namespace VoidTime
             foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
                 .Where(x => typeof(IDrawable).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract))
             {
-                drawHelpers.Add(
-                    (Type)drawClass.GetProperty("GameObjectType", BindingFlags.Static).GetValue(null, null),
-                    (Action<ObjectOnDisplay, Graphics>)drawClass.GetMethod("DrawObject", BindingFlags.Static)
-                        .CreateDelegate(typeof(Action<ObjectOnDisplay, Graphics>)));
+                var inscance = Activator.CreateInstance(drawClass);
+                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType").GetValue(inscance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, Graphics>) drawClass.GetMethod("DrawObject")
+                    .CreateDelegate(typeof(Action<ObjectOnDisplay, Graphics>), inscance);
+
+                drawHelpers.Add(typeGameObject, drawingMethod);
             }
 
         }
@@ -60,9 +62,7 @@ namespace VoidTime
         protected override void OnPaint(PaintEventArgs e)
         {
             foreach (var objectOnDisplay in DrawObjects)
-            {
-                drawHelpers[objectOnDisplay.GetType()]?.Invoke(objectOnDisplay, e.Graphics);
-            }
+                drawHelpers[objectOnDisplay.GameObject.GetType()](objectOnDisplay, e.Graphics);
         }
 
         #endregion
