@@ -30,7 +30,7 @@ namespace VoidTime
         public Vector2D GamePositionToWindow(Vector2D position)
         {
             var topLeftOffset = position - TopLeft;
-            return new Vector2D(topLeftOffset.X, Math.Abs(topLeftOffset.Y));
+            return new Vector2D(topLeftOffset.X, -topLeftOffset.Y);
         }
 
         #endregion

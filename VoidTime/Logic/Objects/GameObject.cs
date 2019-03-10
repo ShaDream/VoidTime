@@ -8,6 +8,7 @@ namespace VoidTime
 
         public string NameObject { get; }
         public Vector2D Position { get; set; }
+        public Vector2D Size { get; set; }
         public byte DrawingPriority { get; }
 
         #endregion
@@ -17,6 +18,7 @@ namespace VoidTime
         public GameObject(string nameObject)
         {
             NameObject = nameObject;
+            Size = new Vector2D(0,0);
             DrawingPriority = 0;
             Position = new Vector2D();
         }
@@ -24,6 +26,7 @@ namespace VoidTime
         public GameObject(string nameObject, Vector2D position)
         {
             NameObject = nameObject;
+            Size = new Vector2D(0,0);
             DrawingPriority = 0;
             Position = position;
         }
@@ -31,6 +34,7 @@ namespace VoidTime
         public GameObject(string nameObject, Vector2D position, byte drawingPriority)
         {
             NameObject = nameObject;
+            Size = new Vector2D(0,0);
             DrawingPriority = drawingPriority;
             Position = position;
         }
