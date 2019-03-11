@@ -11,9 +11,13 @@ namespace VoidTime
     {
         #region Public Properties
 
-        private Dictionary<Type, Action<ObjectOnDisplay, Graphics>> drawHelpers = new Dictionary<Type, Action<ObjectOnDisplay, Graphics>>();
+        private DateTime lastTime;
+        private int framesRendered;
+        private int fps;
+        private Dictionary<Type, Action<ObjectOnDisplay, Graphics>> drawHelpers =
+            new Dictionary<Type, Action<ObjectOnDisplay, Graphics>>();
 
-        public List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
+        private List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
 
         #endregion
 
@@ -43,10 +47,10 @@ namespace VoidTime
             foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
                 .Where(x => typeof(IDrawable).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract))
             {
-                var inscance = Activator.CreateInstance(drawClass);
-                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType").GetValue(inscance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, Graphics>) drawClass.GetMethod("DrawObject")
-                    .CreateDelegate(typeof(Action<ObjectOnDisplay, Graphics>), inscance);
+                var instance = Activator.CreateInstance(drawClass);
+                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType").GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, Graphics>)drawClass.GetMethod("DrawObject")
+                    .CreateDelegate(typeof(Action<ObjectOnDisplay, Graphics>), instance);
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
             }
@@ -65,6 +69,19 @@ namespace VoidTime
         {
             foreach (var objectOnDisplay in DrawObjects)
                 drawHelpers[objectOnDisplay.GameObject.GetType()](objectOnDisplay, e.Graphics);
+            e.Graphics.DrawString($"fps {fps.ToString()}", new Font("Arial", 40, FontStyle.Bold),
+                new SolidBrush(Color.Yellow), 0, 0);
+            Update();
+        }
+
+        private void Update()
+        {
+            framesRendered++;
+
+            if (!((DateTime.Now - lastTime).TotalSeconds >= 1)) return;
+            fps = framesRendered;
+            framesRendered = 0;
+            lastTime = DateTime.Now;
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace VoidTime
         {
             var x = obj.PositionOnDisplay.X;
             var y = obj.PositionOnDisplay.Y;
-            graphics.DrawImage(PlayerImage, x, y, 100, 130);
+            graphics.DrawImage(PlayerImage, x, y, PlayerImage.Width / 3, PlayerImage.Height / 3);
         }
     }
 }
