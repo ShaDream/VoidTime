@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using SharpGL;
 
 namespace VoidTime
 {
@@ -7,6 +8,6 @@ namespace VoidTime
     {
         Type GameObjectType { get; }
 
-        void DrawObject(ObjectOnDisplay obj, Graphics graphics);
+        void DrawObject(ObjectOnDisplay obj, OpenGL graphics);
     }
 }

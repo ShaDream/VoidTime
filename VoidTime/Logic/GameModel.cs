@@ -36,7 +36,7 @@ namespace VoidTime
             axes.Add(new Axis("vertical", Keys.W, Keys.S));
             ReadonlyKeys k = new ReadonlyKeys(keys, axes);
 
-            gameTick = new Timer(16);
+            gameTick = new Timer(8);
             player = new Player("player", new Vector2D(50000, 50000));
             map = new GameMap(new Size(100, 100), new Size(1000, 1000), new[] { player });
             GameBasicCamera = new SmoothCamera(new Size(800, 800), player);
