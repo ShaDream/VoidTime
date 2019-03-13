@@ -25,8 +25,6 @@ namespace VoidTime
 
         private List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
 
-        Texture texture = new Texture();
-
         public static Texture player = new Texture();
         public static Texture background = new Texture();
 
@@ -36,10 +34,10 @@ namespace VoidTime
 
         public MainForm(GameModel model)
         {
+            HelperInitialization();
 
             openGL = new OpenGLControl
             {
-                DrawFPS = true,
                 FrameRate = 60,
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
@@ -58,40 +56,12 @@ namespace VoidTime
             //ShowIcon = false;
             model.Tick += FrameTick;
 
-            KeyUp += model.OnKeyRelease;
-            KeyDown += model.OnKeyPress;
+            openGL.KeyUp += model.OnKeyRelease;
+            openGL.KeyDown += model.OnKeyPress;
             SizeChanged += (s, a) => model.GameBasicCamera.Size = Size;
             model.GameBasicCamera.Size = Size;
-            HelperInitialization();
             
-            //model.Run();
-        }
-
-        private void OpenGL_Resized(object sender, EventArgs e)
-        {
-            var gl = openGL.OpenGL;
-            //gImage1 = new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\back.png");// Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-
-            //Rectangle rect = new Rectangle(0, 0, gImage1.Width, gImage1.Height);
-            //gbitmapdata = gImage1.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            //gImage1.UnlockBits(gbitmapdata);
-            //gl.GenTextures(1, gtexture);
-            //gl.BindTexture(OpenGL.GL_TEXTURE_2D, gtexture[0]);
-            //gl.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, (int)OpenGL.GL_RGB8, gImage1.Width, gImage1.Height, 0, OpenGL.GL_BGR_EXT, OpenGL.GL_UNSIGNED_BYTE, gbitmapdata.Scan0);
-            //uint[] array = new uint[] { OpenGL.GL_NEAREST };
-
-
-            //  Create an orthographic projection.
-            //gl.MatrixMode(MatrixMode.Projection);
-            //gl.LoadIdentity();
-
-            // NOTE: Basically no matter what I do, the only points I see are those at
-            // the "near" surface (with z = -zNear)--in this case, I only see green points
-            //gl.Ortho(0, openGL.Width, openGL.Height, 0, 0,1);
-
-            //  Back to the modelview.
-            //gl.MatrixMode(MatrixMode.Modelview);
-
+            model.Run();
         }
 
         private void OpenGL_OpenGLInitialized(object sender, EventArgs e)
@@ -99,38 +69,34 @@ namespace VoidTime
             var gl = openGL.OpenGL;
 
             gl.Enable(OpenGL.GL_TEXTURE_2D);
-            //gl.Disable(OpenGL.GL_DEPTH_TEST);
 
-            //player.Create(openGL.OpenGL,
-            //    new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\player.png"));
-            //background.Create(openGL.OpenGL,
-            //    new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\back.png"));
-            texture.Create(gl, @"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\player.png");
-
+            player.Create(openGL.OpenGL,
+                new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\player.png"));
+            background.Create(openGL.OpenGL,
+                new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\back.png"));
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
         {
             var gl = openGL.OpenGL;
 
+            gl.Enable(OpenGL.GL_BLEND);
+            gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);
+
+
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.MatrixMode(MatrixMode.Projection);
             gl.LoadIdentity();
-            gl.Translate(0.0f, 0.0f, -6.0f);
+            gl.Ortho(0,openGL.Width,openGL.Height, 0, 0.01, -100);
 
+            gl.MatrixMode(MatrixMode.Modelview);
 
-            texture.Bind(gl);
-            //  Draw the sprite
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.TexCoord(0.0f, 0.0f); gl.Vertex(-1.0f, -1.0f, 1.0f); // Bottom Left Of The Texture and Quad
-            gl.TexCoord(1.0f, 0.0f); gl.Vertex(1.0f, -1.0f, 1.0f);  // Bottom Right Of The Texture and Quad
-            gl.TexCoord(1.0f, 1.0f); gl.Vertex(1.0f, 1.0f, 1.0f);   // Top Right Of The Texture and Quad
-            gl.TexCoord(0.0f, 1.0f); gl.Vertex(-1.0f, 1.0f, 1.0f);
-            gl.End();
+            foreach (var objectOnDisplay in DrawObjects)
+                drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay,gl);
+
+            gl.Disable(OpenGL.GL_BLEND);
 
             gl.Flush();
-            //foreach (var objectOnDisplay in DrawObjects)
-            //    drawHelpers[objectOnDisplay.GameObject.GetType()](objectOnDisplay, gl);
         }
 
         #endregion
