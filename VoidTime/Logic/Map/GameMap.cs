@@ -84,10 +84,10 @@ namespace VoidTime
         {
             var bottomLeftPoint = ChunkCoordinateFromVector(camera.BottomLeft);
             var topRightPoint = ChunkCoordinateFromVector(camera.TopRight);
-            var xMin = bottomLeftPoint.X;
-            var xMax = topRightPoint.X;
-            var yMin = bottomLeftPoint.Y;
-            var yMax = topRightPoint.Y;
+            var xMin = Math.Max(bottomLeftPoint.X - 1, 0);
+            var xMax = Math.Min(topRightPoint.X + 1, MapSizeInChunks.Width - 1);
+            var yMin = Math.Max(bottomLeftPoint.Y - 1, 0);
+            var yMax = Math.Min(topRightPoint.Y + 1, MapSizeInChunks.Height - 1);
             var result = new List<Point>();
             for (var x = xMin; x <= xMax; x++)
             {

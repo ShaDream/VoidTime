@@ -29,8 +29,11 @@ namespace VoidTime
         {
             Coordinates = coordinates;
             Size = size;
-            gameObjects.Add(new Background($"chunk [{coordinates.X}, {coordinates.Y}]",
-                new Vector2D(Coordinates.X * Size.Width, Coordinates.Y * Size.Height + Size.Height - 1), 2));
+            gameObjects.Add(new Background
+            {
+                Position = new Vector2D(Coordinates.X * Size.Width, Coordinates.Y * Size.Height + Size.Height - 1),
+                DrawingPriority = 2
+            });
         }
 
         #endregion

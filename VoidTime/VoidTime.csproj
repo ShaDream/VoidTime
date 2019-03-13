@@ -56,8 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawClasses\BackgroundDrawHelper.cs" />
+    <Compile Include="DrawClasses\DrawHelper.cs" />
     <Compile Include="DrawClasses\ObjectOnDisplay.cs" />
     <Compile Include="DrawClasses\IDrawable.cs" />
+    <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModel.cs" />
+    <Compile Include="Logic\Objects\Planet.cs" />
     <Compile Include="Logic\Objects\Player.cs" />
     <Compile Include="Logic\Control\PressedKeys.cs" />
     <Compile Include="Logic\Control\ReadonlyKeys.cs" />

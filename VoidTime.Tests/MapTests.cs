@@ -17,14 +17,14 @@ namespace VoidTime.Tests
         [Test]
         public void WithSomeRightObjects()
         {
-            var objects = new[] { new GameObject("Player"), new GameObject("Planet", new Vector2D(5, 5)), };
+            var objects = new[] { new GameObject(), new GameObject { Position = new Vector2D(5, 5) }, };
             var map = new GameMap(new Size(2, 2), new Size(100, 100), objects);
         }
 
         [Test]
         public void WithSomeNotRightObjects()
         {
-            var objects = new[] { new GameObject("Player"), new GameObject("Planet", new Vector2D(10005, 10005)), };
+            var objects = new[] { new GameObject(), new GameObject { Position = new Vector2D(10005, 10005) }, };
             try
             {
                 new GameMap(new Size(2, 2), new Size(100, 100), objects);
@@ -38,9 +38,9 @@ namespace VoidTime.Tests
         {
             var objects = new[]
             {
-                new GameObject("Player", new Vector2D(1, 1)),
-                new GameObject("Planet", new Vector2D(2, 2)),
-                new GameObject("Star", new Vector2D(15, 15))
+                new GameObject() { Position = new Vector2D(1, 1) },
+                new GameObject(){ Position = new Vector2D(2, 2) },
+                new GameObject(){ Position = new Vector2D(15, 15) }
             };
             var camera = new Camera(new Size(2, 2), objects[2]);
             var map = new GameMap(new Size(2, 2), new Size(10, 10), objects);
@@ -55,9 +55,9 @@ namespace VoidTime.Tests
         {
             var objects = new[]
             {
-                new GameObject("Player", new Vector2D(1, 1)),
-                new GameObject("Planet", new Vector2D(2, 2)),
-                new GameObject("Star", new Vector2D(15, 15))
+                new GameObject {Position =  new Vector2D(1, 1)},
+                new GameObject { Position =  new Vector2D(2, 2)},
+                new GameObject() {Position =  new Vector2D(15, 15)}
             };
             var camera = new Camera(new Size(2, 2), objects[2]);
             var map = new GameMap(new Size(2, 2), new Size(10, 10), objects);
@@ -74,7 +74,7 @@ namespace VoidTime.Tests
         [Test]
         public void FailCameraSize()
         {
-            var player =  new[] { new GameObject("Player", new Vector2D(1, 1)) } ;
+            var player = new[] { new GameObject { Position = new Vector2D(1, 1) } };
             var camera = new Camera(new Size(20, 20), player[0]);
             var map = new GameMap(new Size(2, 2), new Size(10, 10), player);
             try

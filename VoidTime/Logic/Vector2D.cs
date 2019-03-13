@@ -6,8 +6,8 @@ namespace VoidTime
     {
         #region Public Properties
 
-        public float X { get; }
-        public float Y { get; }
+        public float X { get; set; }
+        public float Y { get; set; }
 
         public float Length => (float)Math.Sqrt(X * X + Y * Y);
         public Vector2D Normilized => new Vector2D(X / Length, Y / Length);
@@ -80,6 +80,11 @@ namespace VoidTime
         {
             return new Vector2D((float) (X * Math.Cos(angle) - Y * Math.Sin(angle)),
                 (float) (X * Math.Sin(angle) + Y * Math.Cos(angle)));
+        }
+
+        public double GetAngle()
+        {
+            return Math.Atan2(Y, X);
         }
 
         #endregion

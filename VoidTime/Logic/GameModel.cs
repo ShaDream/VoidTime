@@ -36,10 +36,18 @@ namespace VoidTime
             axes.Add(new Axis("vertical", Keys.W, Keys.S));
             ReadonlyKeys k = new ReadonlyKeys(keys, axes);
 
-            gameTick = new Timer(8);
-            player = new Player("player", new Vector2D(50000, 50000));
-            map = new GameMap(new Size(100, 100), new Size(1000, 1000), new[] { player });
-            GameBasicCamera = new SmoothCamera(new Size(800, 800), player);
+            gameTick = new Timer(16);
+            
+            map = new GameMap(new Size(100, 100), new Size(1000, 1000));
+
+            var planet = new Planet { Position = new Vector2D(5000, 5000), DrawingPriority = 1 };
+            const int border = 1000;
+            var allowedCoordinates = new Rectangle(border, border, map.MapSize.Width - 2 * border,
+                map.MapSize.Height - 2 * border);
+            player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
+
+            map.AddGameObjects(new[] { planet, player });
+            GameBasicCamera = new SmoothCamera(new Size(), player);
             gameTick.Elapsed += FrameTick;
         }
 

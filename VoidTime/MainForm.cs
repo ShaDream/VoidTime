@@ -27,6 +27,7 @@ namespace VoidTime
 
         public static Texture player = new Texture();
         public static Texture background = new Texture();
+        public static Texture mars = new Texture();
 
         #endregion
 
@@ -42,18 +43,18 @@ namespace VoidTime
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,
+                DrawFPS = false
             };
 
             ((System.ComponentModel.ISupportInitialize)(openGL)).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGL_OpenGLInitialized;
-            //openGL.Resized += OpenGL_Resized;
 
             Controls.Add(openGL);
             ((System.ComponentModel.ISupportInitialize)(openGL)).EndInit();
 
             WindowState = FormWindowState.Maximized;
-            //ShowIcon = false;
+            ShowIcon = false;
             model.Tick += FrameTick;
 
             openGL.KeyUp += model.OnKeyRelease;
@@ -71,9 +72,11 @@ namespace VoidTime
             gl.Enable(OpenGL.GL_TEXTURE_2D);
 
             player.Create(openGL.OpenGL,
-                new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\player.png"));
+                new Bitmap(@"C:\Users\Иван\Desktop\TEXTURES\delodean.png"));
             background.Create(openGL.OpenGL,
-                new Bitmap(@"C:\Users\ShaDream\source\repos\VoidTime\VoidTime\Resources\Textures\back.png"));
+                new Bitmap(@"C:\Users\Иван\Desktop\TEXTURES\nebo.jpg"));
+            mars.Create(openGL.OpenGL,
+                new Bitmap(@"C:\Users\Иван\Desktop\TEXTURES\neptune1.png"));
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)

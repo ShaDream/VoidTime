@@ -6,7 +6,7 @@ namespace VoidTime
     {
         #region Private Fields
 
-        private readonly float lerpСoefficient = 0.05f;
+        private readonly float lerpСoefficient = 0.09f;
 
         #endregion
 

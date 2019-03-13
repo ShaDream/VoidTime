@@ -4,13 +4,12 @@ using SharpGL;
 
 namespace VoidTime
 {
-    public class BackgroundDrawHelper : IDrawable
+    public class PlanetDrawHelper : IDrawable
     {
-        public Type GameObjectType { get; } = typeof(Background);
-
+        public Type GameObjectType { get; } = typeof(Planet);
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
-            MainForm.background.Bind(gl);
+            MainForm.mars.Bind(gl);
             var size = new Size(1000, 1000);
             DrawHelper.Draw(obj, gl, size);
         }

@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace VoidTime
 {
@@ -6,23 +9,21 @@ namespace VoidTime
     {
         #region Public Properties
 
-        public float Speed = 10;
+        public double Angle = Math.PI / 2;
+        private Vector2D velocity = new Vector2D();
+        private float maxSpeed = 20;
+        private Rectangle AllowedCoordinates;
 
         #endregion
 
         #region Constructor
 
-        public Player(string nameObject) : base(nameObject)
+        public Player(Rectangle allowedCoordinates, Vector2D position)
         {
+            AllowedCoordinates = allowedCoordinates;
+            Position = position;
         }
 
-        public Player(string nameObject, Vector2D position) : base(nameObject, position)
-        {
-        }
-
-        public Player(string nameObject, Vector2D position, byte drawingPriority) : base(nameObject, position, drawingPriority)
-        {
-        }
 
         #endregion
 
@@ -30,9 +31,39 @@ namespace VoidTime
 
         public override void Update()
         {
+
+            Move();
+            CheckCoordinate();
+        }
+
+        private void Move()
+        {
+            var rotationVector = new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical"));
             if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
-                Position += new Vector2D(ReadonlyKeys.GetAxis("horizontal") * Speed,
-                    ReadonlyKeys.GetAxis("vertical") * Speed);
+            {
+                velocity += rotationVector;
+                if (velocity.Length > maxSpeed)
+                    velocity = velocity.Normilized * maxSpeed;
+                Angle = rotationVector.GetAngle();
+            }
+            else
+                velocity *= 0.95f;
+            Position += velocity;
+        }
+
+        private void CheckCoordinate()
+        {
+            if (Position.X < AllowedCoordinates.Left)
+                Position.X = AllowedCoordinates.Left;
+
+            if (Position.X > AllowedCoordinates.Right)
+                Position.X = AllowedCoordinates.Right;
+
+            if (Position.Y > AllowedCoordinates.Bottom)
+                Position.Y = AllowedCoordinates.Bottom;
+
+            if (Position.Y < AllowedCoordinates.Top)
+                Position.Y = AllowedCoordinates.Top;
         }
 
         #endregion
