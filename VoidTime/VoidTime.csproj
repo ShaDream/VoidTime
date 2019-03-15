@@ -61,6 +61,11 @@
     <Compile Include="DrawClasses\IDrawable.cs" />
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
+    <Compile Include="GUI\Character.cs" />
+    <Compile Include="GUI\FontAtlas.cs" />
+    <Compile Include="GUI\GUIControl.cs" />
+    <Compile Include="GUI\QuadData.cs" />
+    <Compile Include="GUI\TextRenderer.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
