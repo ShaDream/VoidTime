@@ -5,40 +5,54 @@ namespace VoidTime.GUI
 {
     public static class TextRenderer
     {
-        public static List<QuadData> GetTextQuads(string text, FontAtlas atlas, Vector2D start)
+        public static List<QuadData> GetTextQuads(string text, FontAtlas atlas, Vector2D start, float fontSize)
         {
             var data = new List<QuadData>();
-            var xOffset = 0f;
+            var xOffset = start.X;
+            var yRow = 0;
+            var fSize = fontSize / atlas.FontSize;
+            var spacing = atlas.Spacing * fSize;
+            var lineSpacing = atlas.LineSpacing * fSize;
 
             foreach (var symbol in text)
             {
-                if (symbol == ' ')
+                switch (symbol)
                 {
-                    xOffset += 40;
-                    continue;
+                    case ' ':
+                        xOffset += spacing;
+                        continue;
+                    case '\n':
+                        xOffset = start.X;
+                        yRow++;
+                        continue;
                 }
-
 
                 var character = atlas.GetCharacter(symbol);
 
-                var yFirst = start.Y + character.OriginOffset;
+                var yFirst = start.Y + yRow * lineSpacing + character.OriginOffset * fSize;
+                var characterSize = new SizeF(character.Size.Width * fSize, character.Size.Height * fSize);
+
                 var pointQuadData = new Vector2D[4];
                 var pointTextureData = new Vector2D[4];
+
                 pointQuadData[0] = new Vector2D(xOffset, yFirst);
                 pointTextureData[0] = character.AtlasOrigin;
-                pointQuadData[3] = new Vector2D(xOffset + character.Size.Width, yFirst);
-                pointTextureData[3] = new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
-                    character.AtlasOrigin.Y);
-                pointQuadData[2] = new Vector2D(xOffset + character.Size.Width, yFirst - character.Size.Height);
-                pointTextureData[2] = new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
-                    character.AtlasOrigin.Y - character.AtlasSize.Height);
-                pointQuadData[1] = new Vector2D(xOffset, yFirst - character.Size.Height);
+
+                pointQuadData[1] = new Vector2D(xOffset, yFirst - characterSize.Height);
                 pointTextureData[1] = new Vector2D(character.AtlasOrigin.X,
                     character.AtlasOrigin.Y - character.AtlasSize.Height);
 
-                xOffset += character.Size.Width + character.OffsetX;
+                pointQuadData[2] = new Vector2D(xOffset + characterSize.Width, yFirst - characterSize.Height);
+                pointTextureData[2] = new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
+                    character.AtlasOrigin.Y - character.AtlasSize.Height);
 
-                data.Add(new QuadData {Points = pointQuadData, Textures = pointTextureData});
+                pointQuadData[3] = new Vector2D(xOffset + characterSize.Width, yFirst);
+                pointTextureData[3] = new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
+                    character.AtlasOrigin.Y);
+
+                xOffset += characterSize.Width + character.OffsetX;
+
+                data.Add(new QuadData { Points = pointQuadData, Textures = pointTextureData });
             }
 
             return data;

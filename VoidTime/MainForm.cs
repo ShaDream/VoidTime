@@ -35,6 +35,7 @@ namespace VoidTime
 
         public static FontAtlas Font = EuropeFontAtlas.GetAtlas();
         public static List<QuadData> Text;
+        public static int fontSize = 1;
 
         #endregion
 
@@ -67,6 +68,12 @@ namespace VoidTime
             openGL.KeyUp += model.OnKeyRelease;
             openGL.KeyDown += model.OnKeyPress;
             SizeChanged += (s, a) => model.GameBasicCamera.Size = Size;
+            MouseWheel += (sender, args) =>
+            {
+                fontSize += Math.Sign(args.Delta);
+                Text = TextRenderer.GetTextQuads("Привет,\nпацаны!!!!", Font, new Vector2D(0, 500), fontSize);
+            };
+
             model.GameBasicCamera.Size = Size;
 
             model.Run();
@@ -86,7 +93,7 @@ namespace VoidTime
             FontTexture.Create(openGL.OpenGL,
                 Textures.EuropeFont);
 
-            Text = TextRenderer.GetTextQuads("Hello, World!", Font, new Vector2D(0, 500));
+            Text = TextRenderer.GetTextQuads("Привет, пацаны!!!!", Font, new Vector2D(0, 500), 72);
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
@@ -137,7 +144,6 @@ namespace VoidTime
 
             gl.End();
 
-
             gl.Disable(OpenGL.GL_BLEND);
         }
 
@@ -165,13 +171,6 @@ namespace VoidTime
             DrawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
                            let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
                            select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            //e.Graphics.DrawString($"fps {fps.ToString()}", new Font("Arial", 40, FontStyle.Bold),
-            //    new SolidBrush(Color.Yellow), 0, 0);
-            //Update();
         }
 
         private void Update()

@@ -816,7 +816,7 @@ namespace VoidTime.GUI
 
         public static FontAtlas GetAtlas()
         {
-            return new FontAtlas(Characters, Textures.EuropeFont);
+            return new FontAtlas(Characters, Textures.EuropeFont,72,72,52);
         }
     }
 }

@@ -35,7 +35,6 @@ namespace VoidTime.Generator
                 var character = characters[i];
                 var xCount = i % WidthCount;
                 var yCount = i / WidthCount;
-                var baseLine = yCount * CellSize + OriginLine;
                 var xMin = CellSize;
                 var xMax = 0;
                 var yMin = CellSize;
