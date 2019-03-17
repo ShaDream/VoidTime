@@ -62,6 +62,7 @@
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
     <Compile Include="GUI\Character.cs" />
+    <Compile Include="GUI\EuropeFontAtlas.cs" />
     <Compile Include="GUI\FontAtlas.cs" />
     <Compile Include="GUI\GUIControl.cs" />
     <Compile Include="GUI\QuadData.cs" />
@@ -108,11 +109,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\Textures\back.png" />
-    <Content Include="Resources\Textures\player.png" />
-    <Content Include="Resources\Textures\time.png" />
+    <ProjectReference Include="..\VoidTime.Resources\VoidTime.Resources.csproj">
+      <Project>{E478154A-A3DE-4E69-9590-1C6686952E50}</Project>
+      <Name>VoidTime.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

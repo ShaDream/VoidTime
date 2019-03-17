@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 using SharpGL;
 using SharpGL.Enumerations;
 using SharpGL.SceneGraph.Assets;
+using VoidTime.GUI;
+using VoidTime.Resources;
+using TextRenderer = VoidTime.GUI.TextRenderer;
 
 namespace VoidTime
 {
@@ -28,6 +31,10 @@ namespace VoidTime
         public static Texture player = new Texture();
         public static Texture background = new Texture();
         public static Texture mars = new Texture();
+        public static Texture FontTexture = new Texture();
+
+        public static FontAtlas Font = EuropeFontAtlas.GetAtlas();
+        public static List<QuadData> Text;
 
         #endregion
 
@@ -43,7 +50,7 @@ namespace VoidTime
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,
-                DrawFPS = false
+                DrawFPS = true,
             };
 
             ((System.ComponentModel.ISupportInitialize)(openGL)).BeginInit();
@@ -61,22 +68,25 @@ namespace VoidTime
             openGL.KeyDown += model.OnKeyPress;
             SizeChanged += (s, a) => model.GameBasicCamera.Size = Size;
             model.GameBasicCamera.Size = Size;
-            
+
             model.Run();
         }
 
         private void OpenGL_OpenGLInitialized(object sender, EventArgs e)
         {
             var gl = openGL.OpenGL;
-
             gl.Enable(OpenGL.GL_TEXTURE_2D);
 
             player.Create(openGL.OpenGL,
-                new Bitmap(@"C:\Users\Иван\Desktop\TEXTURES\delodean.png"));
+                Textures.player);
             background.Create(openGL.OpenGL,
-                new Bitmap(@"C:\Users\Иван\Desktop\TEXTURES\nebo.jpg"));
+                Textures.back);
             mars.Create(openGL.OpenGL,
-                new Bitmap(@"C:\Users\Иван\Desktop\TEXTURES\neptune1.png"));
+                Textures.time);
+            FontTexture.Create(openGL.OpenGL,
+                Textures.EuropeFont);
+
+            Text = TextRenderer.GetTextQuads("Hello, World!", Font, new Vector2D(0, 500));
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
@@ -85,21 +95,50 @@ namespace VoidTime
 
             gl.Enable(OpenGL.GL_BLEND);
             gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);
-
+            gl.Enable(OpenGL.GL_DOUBLEBUFFER);
 
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.MatrixMode(MatrixMode.Projection);
             gl.LoadIdentity();
-            gl.Ortho(0,openGL.Width,openGL.Height, 0, 0.01, -100);
+            gl.Ortho(0, openGL.Width, openGL.Height, 0, 0.01, -100);
 
             gl.MatrixMode(MatrixMode.Modelview);
 
+            gl.Color(1.0, 1.0, 1.0);
+
             foreach (var objectOnDisplay in DrawObjects)
-                drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay,gl);
+                drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay, gl);
+
+            FontTexture.Bind(gl);
+
+            gl.Begin(OpenGL.GL_QUADS);
+
+            foreach (var letter in Text)
+            {
+                //gl.TexCoord(0, 0.0810546875f);
+                //gl.Vertex(0, 83);
+                //gl.TexCoord(0, 0);
+                //gl.Vertex(0, 0);
+                //gl.TexCoord(0.04052734375f, 0);
+                //gl.Vertex(83, 0);
+                //gl.TexCoord(0.04052734375f, 0.0810546875f);
+                //gl.Vertex(83, 83);
+
+
+                gl.TexCoord(letter.Textures[0].X, letter.Textures[0].Y);
+                gl.Vertex(letter.Points[0].X, letter.Points[0].Y, 0);
+                gl.TexCoord(letter.Textures[1].X, letter.Textures[1].Y);
+                gl.Vertex(letter.Points[1].X, letter.Points[1].Y, 0);
+                gl.TexCoord(letter.Textures[2].X, letter.Textures[2].Y);
+                gl.Vertex(letter.Points[2].X, letter.Points[2].Y, 0);
+                gl.TexCoord(letter.Textures[3].X, letter.Textures[3].Y);
+                gl.Vertex(letter.Points[3].X, letter.Points[3].Y, 0);
+            }
+
+            gl.End();
+
 
             gl.Disable(OpenGL.GL_BLEND);
-
-            gl.Flush();
         }
 
         #endregion
