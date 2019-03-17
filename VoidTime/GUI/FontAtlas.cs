@@ -5,12 +5,18 @@ namespace VoidTime.GUI
 {
     public class FontAtlas
     {
-        private Dictionary<char, Character> Characters;
+        private Dictionary<char, Character> Characters = new Dictionary<char, Character>();
         private Bitmap Atlas;
 
-        public FontAtlas(List<Character> characters, Bitmap atlas)
+        public FontAtlas(Dictionary<char,Character> characters, Bitmap atlas)
         {
+            Atlas = atlas;
+            Characters = characters;
+        }
 
+        public Character GetCharacter(char ch)
+        {
+            return Characters?[ch];
         }
     }
 }
