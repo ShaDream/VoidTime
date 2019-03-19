@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Forms;
 using SharpGL;
 using SharpGL.Enumerations;
-using SharpGL.SceneGraph.Assets;
-using VoidTime.GUI;
-using VoidTime.Resources;
 using TextRenderer = VoidTime.GUI.TextRenderer;
 
 namespace VoidTime
@@ -16,23 +13,12 @@ namespace VoidTime
     {
         #region Public Properties
 
-        private DateTime lastTime;
         private readonly OpenGLControl openGL;
-        private int framesRendered;
-        private int fps;
-        private Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
+
+        private readonly Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
             new Dictionary<Type, Action<ObjectOnDisplay, OpenGL>>();
 
         private List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
-
-        public static Texture player = new Texture();
-        public static Texture background = new Texture();
-        public static Texture mars = new Texture();
-        public static Texture FontTexture = new Texture();
-
-        public static FontAtlas Font = EuropeFontAtlas.GetAtlas();
-        public static List<QuadData> Text;
-        public static int fontSize = 1;
 
         #endregion
 
@@ -40,23 +26,23 @@ namespace VoidTime
 
         public MainForm(GameModel model)
         {
-            HelperInitialization();
-
             openGL = new OpenGLControl
             {
                 FrameRate = 60,
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,
-                DrawFPS = true,
+                DrawFPS = true
             };
 
-            ((System.ComponentModel.ISupportInitialize)(openGL)).BeginInit();
+            HelperInitialization();
+
+            ((ISupportInitialize) openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGL_OpenGLInitialized;
 
             Controls.Add(openGL);
-            ((System.ComponentModel.ISupportInitialize)(openGL)).EndInit();
+            ((ISupportInitialize) openGL).EndInit();
 
             WindowState = FormWindowState.Maximized;
             ShowIcon = false;
@@ -76,21 +62,14 @@ namespace VoidTime
             model.Run();
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void OpenGL_OpenGLInitialized(object sender, EventArgs e)
         {
             var gl = openGL.OpenGL;
             gl.Enable(OpenGL.GL_TEXTURE_2D);
-
-            player.Create(openGL.OpenGL,
-                Textures.player);
-            background.Create(openGL.OpenGL,
-                Textures.back);
-            mars.Create(openGL.OpenGL,
-                Textures.time);
-            FontTexture.Create(openGL.OpenGL,
-                Textures.EuropeFont);
-
-            Text = TextRenderer.GetTextQuadsTextBox("Hello, World!", Font, 72, new RectangleF(new PointF(0, 500), new Size(100, 500)));
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
@@ -133,23 +112,24 @@ namespace VoidTime
             gl.Disable(OpenGL.GL_BLEND);
         }
 
-        #endregion
-
-        #region Private Methods
-
         private void HelperInitialization()
         {
-            foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
-                .Where(x => typeof(IDrawable).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract))
+            foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies()
+                                               .SelectMany(x => x.GetTypes())
+                                               .Where(x => typeof(IDrawable).IsAssignableFrom(x) &&
+                                                           !x.IsInterface &&
+                                                           !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType").GetValue(instance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>)drawClass.GetMethod("DrawObject")
-                    .CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>), instance);
+                ((IDrawable) instance).Init(openGL.OpenGL);
+                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType").GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>) drawClass.GetMethod("DrawObject")
+                                                                               .CreateDelegate(
+                                                                                   typeof(Action<ObjectOnDisplay,
+                                                                                       OpenGL>), instance);
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
             }
-
         }
 
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
@@ -159,17 +139,6 @@ namespace VoidTime
                            select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
         }
 
-        private void Update()
-        {
-            framesRendered++;
-
-            if (!((DateTime.Now - lastTime).TotalSeconds >= 1)) return;
-            fps = framesRendered;
-            framesRendered = 0;
-            lastTime = DateTime.Now;
-        }
-
         #endregion
-
     }
 }

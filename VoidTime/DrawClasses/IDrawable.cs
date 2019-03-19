@@ -9,5 +9,7 @@ namespace VoidTime
         Type GameObjectType { get; }
 
         void DrawObject(ObjectOnDisplay obj, OpenGL graphics);
+
+        void Init(OpenGL gl);
     }
 }

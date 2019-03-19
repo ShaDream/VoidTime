@@ -9,11 +9,18 @@ namespace VoidTime
     {
         public Type GameObjectType { get; } = typeof(Player);
 
+        private Texture player = new Texture();
+
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
-            MainForm.player.Bind(gl);
+            player.Bind(gl);
             var size = new Size(201, 100);
-            DrawHelper.Draw(obj, gl, size, ((Player) obj.GameObject).Angle);
+            DrawHelper.Draw(obj, gl, size, ((Player)obj.GameObject).Angle);
+        }
+
+        public void Init(OpenGL gl)
+        {
+            throw new NotImplementedException();
         }
     }
 }
