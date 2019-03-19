@@ -2,10 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using SharpGL;
 using SharpGL.Enumerations;
 using SharpGL.SceneGraph.Assets;
@@ -71,7 +68,7 @@ namespace VoidTime
             MouseWheel += (sender, args) =>
             {
                 fontSize += Math.Sign(args.Delta);
-                Text = TextRenderer.GetTextQuads("Привет,\nпацаны!!!!", Font, new Vector2D(0, 500), fontSize);
+                Text = TextRenderer.GetTextQuads("Hello, World!", Font, new Vector2D(0, 500), fontSize);
             };
 
             model.GameBasicCamera.Size = Size;
@@ -93,7 +90,7 @@ namespace VoidTime
             FontTexture.Create(openGL.OpenGL,
                 Textures.EuropeFont);
 
-            Text = TextRenderer.GetTextQuads("Привет, пацаны!!!!", Font, new Vector2D(0, 500), 72);
+            Text = TextRenderer.GetTextQuadsTextBox("Hello, World!", Font, 72, new RectangleF(new PointF(0, 500), new Size(100, 500)));
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
@@ -102,7 +99,6 @@ namespace VoidTime
 
             gl.Enable(OpenGL.GL_BLEND);
             gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);
-            gl.Enable(OpenGL.GL_DOUBLEBUFFER);
 
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.MatrixMode(MatrixMode.Projection);
@@ -122,16 +118,6 @@ namespace VoidTime
 
             foreach (var letter in Text)
             {
-                //gl.TexCoord(0, 0.0810546875f);
-                //gl.Vertex(0, 83);
-                //gl.TexCoord(0, 0);
-                //gl.Vertex(0, 0);
-                //gl.TexCoord(0.04052734375f, 0);
-                //gl.Vertex(83, 0);
-                //gl.TexCoord(0.04052734375f, 0.0810546875f);
-                //gl.Vertex(83, 83);
-
-
                 gl.TexCoord(letter.Textures[0].X, letter.Textures[0].Y);
                 gl.Vertex(letter.Points[0].X, letter.Points[0].Y, 0);
                 gl.TexCoord(letter.Textures[1].X, letter.Textures[1].Y);
