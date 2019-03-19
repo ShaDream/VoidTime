@@ -64,6 +64,7 @@
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
+    <Compile Include="Logic\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
