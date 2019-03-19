@@ -13,7 +13,7 @@ namespace VoidTime
 
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
-            mars.Bind(gl);
+            planet.Bind(gl);
             var size = new Size(1000, 1000);
             DrawHelper.Draw(obj, gl, size);
         }
