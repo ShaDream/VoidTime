@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            throw new NotImplementedException();
+            planet.Create(gl, Resources.Textures.time);
         }
     }
 }
