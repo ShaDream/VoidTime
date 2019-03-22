@@ -5,13 +5,15 @@ using System.Linq;
 using System.Windows.Forms;
 using SharpGL;
 using SharpGL.Enumerations;
+using SharpGL.SceneGraph.Assets;
+using VoidTime.GUI;
 using TextRenderer = VoidTime.GUI.TextRenderer;
 
 namespace VoidTime
 {
     public class MainForm : Form
     {
-        #region Public Properties
+        #region Private Fields
 
         private readonly OpenGLControl openGL;
 
@@ -20,9 +22,15 @@ namespace VoidTime
 
         private List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
 
+        private List<QuadData> Text;
+
+        private float fontSize = 25;
+
+        private Texture FontTexture = new Texture();
+
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public MainForm(GameModel model)
         {
@@ -35,14 +43,15 @@ namespace VoidTime
                 DrawFPS = true
             };
 
-            HelperInitialization();
 
-            ((ISupportInitialize) openGL).BeginInit();
+            ((ISupportInitialize)openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGL_OpenGLInitialized;
 
             Controls.Add(openGL);
-            ((ISupportInitialize) openGL).EndInit();
+            ((ISupportInitialize)openGL).EndInit();
+
+            HelperInitialization();
 
             WindowState = FormWindowState.Maximized;
             ShowIcon = false;
@@ -54,7 +63,7 @@ namespace VoidTime
             MouseWheel += (sender, args) =>
             {
                 fontSize += Math.Sign(args.Delta);
-                Text = TextRenderer.GetTextQuads("Hello, World!", Font, new Vector2D(0, 500), fontSize);
+                Text = TextRenderer.GetTextQuads("Hello, World!", EuropeFontAtlas.GetAtlas(), new Vector2D(0, 500), fontSize);
             };
 
             model.GameBasicCamera.Size = Size;
@@ -69,7 +78,9 @@ namespace VoidTime
         private void OpenGL_OpenGLInitialized(object sender, EventArgs e)
         {
             var gl = openGL.OpenGL;
+            FontTexture.Create(gl, Resources.Textures.EuropeFont);
             gl.Enable(OpenGL.GL_TEXTURE_2D);
+            Text = TextRenderer.GetTextQuads("Hello, World!", EuropeFontAtlas.GetAtlas(), new Vector2D(0, 500), 25);
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
@@ -86,7 +97,7 @@ namespace VoidTime
 
             gl.MatrixMode(MatrixMode.Modelview);
 
-            gl.Color(1.0, 1.0, 1.0);
+            gl.Color(1.0,1.0,1.0);
 
             foreach (var objectOnDisplay in DrawObjects)
                 drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay, gl);
@@ -115,18 +126,17 @@ namespace VoidTime
         private void HelperInitialization()
         {
             foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies()
-                                               .SelectMany(x => x.GetTypes())
-                                               .Where(x => typeof(IDrawable).IsAssignableFrom(x) &&
-                                                           !x.IsInterface &&
-                                                           !x.IsAbstract))
+                .SelectMany(x => x.GetTypes())
+                .Where(x => typeof(IDrawable).IsAssignableFrom(x) &&
+                            !x.IsInterface &&
+                            !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                ((IDrawable) instance).Init(openGL.OpenGL);
-                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType").GetValue(instance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>) drawClass.GetMethod("DrawObject")
-                                                                               .CreateDelegate(
-                                                                                   typeof(Action<ObjectOnDisplay,
-                                                                                       OpenGL>), instance);
+                ((IDrawable)instance).Init(openGL.OpenGL);
+                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>)drawClass
+                    .GetMethod("DrawObject")
+                    ?.CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>), instance);
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
             }
