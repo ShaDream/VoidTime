@@ -63,6 +63,7 @@
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
     <Compile Include="GUI\Character.cs" />
     <Compile Include="GUI\Controls\TextBox.cs" />
+    <Compile Include="GUI\Controls\UIWindow.cs" />
     <Compile Include="GUI\EuropeFontAtlas.cs" />
     <Compile Include="GUI\FontAtlas.cs" />
     <Compile Include="GUI\Controls\GUIControl.cs" />
