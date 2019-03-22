@@ -2,7 +2,7 @@
 
 namespace VoidTime.GUI
 {
-    public class GUIControl
+    public abstract class GUIControl
     {
         public string Name { get; set; }
         public Point Location { get; set; }
