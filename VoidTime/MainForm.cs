@@ -15,24 +15,59 @@ namespace VoidTime
     {
         #region Private Fields
 
-        private readonly OpenGLControl openGL;
+        private OpenGLControl openGL;
 
         private readonly Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
             new Dictionary<Type, Action<ObjectOnDisplay, OpenGL>>();
 
+        private readonly Dictionary<Type, Action<IDrawData, OpenGL>> uiDrawHelpers =
+            new Dictionary<Type, Action<IDrawData, OpenGL>>();
+
         private List<ObjectOnDisplay> DrawObjects = new List<ObjectOnDisplay>();
+        private List<IDrawData> drawUI = new List<IDrawData>();
 
-        private List<QuadData> Text;
-
-        private float fontSize = 25;
-
-        private Texture FontTexture = new Texture();
+        private IGameModel currentModel;
+        private UIWindow currentWindow;
 
         #endregion
 
         #region Constructors
 
-        public MainForm(GameModel model)
+        public MainForm(IGameModel model)
+        {
+            currentModel = model;
+
+            OpenGLCreate();
+
+            HelperInitialization();
+
+            WindowState = FormWindowState.Maximized;
+            ShowIcon = false;
+            currentModel.Tick += FrameTick;
+
+            currentWindow = GUIFactory.Create(currentModel);
+
+            openGL.KeyUp += currentWindow.OnKeyRelease;
+            openGL.KeyDown += currentWindow.OnKeyPress;
+            SizeChanged += currentWindow.OnSizeChanged;
+            currentWindow.UIChanged += UIChanged;
+
+            currentModel.GameModelChanged += ChangeGameModel;
+
+
+            model.Run();
+        }
+
+        private void UIChanged(List<IDrawData> obj)
+        {
+            drawUI = obj.OrderByDescending(x => x.DrawPriority).ToList();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OpenGLCreate()
         {
             openGL = new OpenGLControl
             {
@@ -43,44 +78,18 @@ namespace VoidTime
                 DrawFPS = true
             };
 
-
             ((ISupportInitialize)openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
-            openGL.OpenGLInitialized += OpenGL_OpenGLInitialized;
+            openGL.OpenGLInitialized += OpenGLInitialized;
 
             Controls.Add(openGL);
             ((ISupportInitialize)openGL).EndInit();
-
-            HelperInitialization();
-
-            WindowState = FormWindowState.Maximized;
-            ShowIcon = false;
-            model.Tick += FrameTick;
-
-            openGL.KeyUp += model.OnKeyRelease;
-            openGL.KeyDown += model.OnKeyPress;
-            SizeChanged += (s, a) => model.GameBasicCamera.Size = Size;
-            MouseWheel += (sender, args) =>
-            {
-                fontSize += Math.Sign(args.Delta);
-                Text = TextRenderer.GetTextQuads("Hello, World!", EuropeFontAtlas.GetAtlas(), new Vector2D(0, 500), fontSize);
-            };
-
-            model.GameBasicCamera.Size = Size;
-
-            model.Run();
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private void OpenGL_OpenGLInitialized(object sender, EventArgs e)
+        private void OpenGLInitialized(object sender, EventArgs e)
         {
             var gl = openGL.OpenGL;
-            FontTexture.Create(gl, Resources.Textures.EuropeFont);
             gl.Enable(OpenGL.GL_TEXTURE_2D);
-            Text = TextRenderer.GetTextQuads("Hello, World!", EuropeFontAtlas.GetAtlas(), new Vector2D(0, 500), 25);
         }
 
         private void OpenGLDraw(object sender, RenderEventArgs args)
@@ -97,28 +106,13 @@ namespace VoidTime
 
             gl.MatrixMode(MatrixMode.Modelview);
 
-            gl.Color(1.0,1.0,1.0);
+            gl.Color(1.0, 1.0, 1.0);
 
             foreach (var objectOnDisplay in DrawObjects)
                 drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay, gl);
 
-            FontTexture.Bind(gl);
-
-            gl.Begin(OpenGL.GL_QUADS);
-
-            foreach (var letter in Text)
-            {
-                gl.TexCoord(letter.Textures[0].X, letter.Textures[0].Y);
-                gl.Vertex(letter.Points[0].X, letter.Points[0].Y, 0);
-                gl.TexCoord(letter.Textures[1].X, letter.Textures[1].Y);
-                gl.Vertex(letter.Points[1].X, letter.Points[1].Y, 0);
-                gl.TexCoord(letter.Textures[2].X, letter.Textures[2].Y);
-                gl.Vertex(letter.Points[2].X, letter.Points[2].Y, 0);
-                gl.TexCoord(letter.Textures[3].X, letter.Textures[3].Y);
-                gl.Vertex(letter.Points[3].X, letter.Points[3].Y, 0);
-            }
-
-            gl.End();
+            foreach (var drawData in drawUI)
+                uiDrawHelpers[drawData.GetType()].Invoke(drawData, gl);
 
             gl.Disable(OpenGL.GL_BLEND);
         }
@@ -140,6 +134,21 @@ namespace VoidTime
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
             }
+
+            foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                .Where(x => typeof(IUIDrawable).IsAssignableFrom(x) &&
+                            !x.IsInterface &&
+                            !x.IsAbstract))
+            {
+                var instance = Activator.CreateInstance(drawClass);
+                var typeGameObject = (Type)drawClass.GetProperty("DrawDataType")?.GetValue(instance, null);
+                var drawingMethod = (Action<IDrawData, OpenGL>)drawClass
+                    .GetMethod("DrawUi")
+                    ?.CreateDelegate(typeof(Action<IDrawData, OpenGL>), instance);
+
+                uiDrawHelpers.Add(typeGameObject, drawingMethod);
+            }
         }
 
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
@@ -147,6 +156,13 @@ namespace VoidTime
             DrawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
                            let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
                            select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
+        }
+
+        private void ChangeGameModel(IGameModel obj)
+        {
+            currentWindow.Unsubscribe();
+            currentModel = obj;
+            currentWindow = GUIFactory.Create(obj);
         }
 
         #endregion
