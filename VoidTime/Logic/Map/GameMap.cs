@@ -107,7 +107,7 @@ namespace VoidTime
                 var gameObject = gameObjects[i];
                 var chunkCoordinateObject = ChunkCoordinateFromVector(gameObject.Position);
                 if (chunkCoordinateObject == chunkCoordinate) continue;
-                gameObject.Destoy();
+                chunks[chunkCoordinate.X, chunkCoordinate.Y].RemoveGameObject(gameObject);
                 chunks[chunkCoordinateObject.X, chunkCoordinateObject.Y].AddGameObject(gameObject);
                 i--;
             }
