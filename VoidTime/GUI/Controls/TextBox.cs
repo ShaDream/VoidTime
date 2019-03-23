@@ -6,6 +6,6 @@ namespace VoidTime.GUI
     {
         public string Text;
         public Color Background;
-
+        public FontSettings Font { get; set; }
     }
 }
