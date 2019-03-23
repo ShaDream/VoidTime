@@ -107,6 +107,26 @@ namespace VoidTime
                 keys.keys.Remove(args.KeyCode);
         }
 
+        public void OnMouseWheel(object sender, MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnMouseMove(object sender, MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnMouseClick(object sender, MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnMouseDoubleClick(object sender, MouseEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
