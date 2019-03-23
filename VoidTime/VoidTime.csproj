@@ -82,7 +82,7 @@
     <Compile Include="Logic\Control\PressedKeys.cs" />
     <Compile Include="Logic\Control\ReadonlyKeys.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
-    <Compile Include="Logic\Vector2D.cs" />
+    <Compile Include="Logic\Math\Vector2D.cs" />
     <Compile Include="Logic\Map\GameMap.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

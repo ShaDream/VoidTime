@@ -42,7 +42,7 @@ namespace VoidTime
             if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
-                if (velocity.Length > maxSpeed)
+                if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
                 Angle = rotationVector.GetAngle();
             }

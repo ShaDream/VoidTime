@@ -6,11 +6,14 @@ namespace VoidTime
     {
         #region Public Properties
 
+        public static Vector2D Zero => new Vector2D(0,0);
+
         public float X { get; set; }
         public float Y { get; set; }
 
-        public float Length => (float)Math.Sqrt(X * X + Y * Y);
-        public Vector2D Normilized => new Vector2D(X / Length, Y / Length);
+        public float Magnitude => (float)Math.Sqrt(X * X + Y * Y);
+        public float SqrMagnitude => X * X + Y * Y;
+        public Vector2D Normilized => new Vector2D(X / Magnitude, Y / Magnitude);
 
         #endregion
 
@@ -85,6 +88,16 @@ namespace VoidTime
         public double GetAngle()
         {
             return Math.Atan2(Y, X);
+        }
+
+        /// <summary>
+        /// Calculate the product of two vectors.
+        /// 0 if perpendicular.
+        /// If more than 90 degrees give negative value
+        /// </summary>
+        public static float Dot(Vector2D a, Vector2D b)
+        {
+            return (a.X * b.X) + (a.Y * b.Y);
         }
 
         #endregion
