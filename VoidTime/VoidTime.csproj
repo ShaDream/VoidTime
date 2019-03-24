@@ -68,6 +68,7 @@
     <Compile Include="GUI\Draw\UIDrawHelpers\RectangleDrawHelper.cs" />
     <Compile Include="GUI\Draw\UIDrawHelpers\TextDrawHelper.cs" />
     <Compile Include="GUI\Draw\UIDrawHelpers\TextureDrawHelper.cs" />
+    <Compile Include="GUI\EventList.cs" />
     <Compile Include="GUI\Font\Character.cs" />
     <Compile Include="GUI\Controls\TextBox.cs" />
     <Compile Include="GUI\Controls\UIWindow.cs" />

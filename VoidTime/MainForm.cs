@@ -58,7 +58,7 @@ namespace VoidTime
             model.Run();
         }
 
-        private void UIChanged(List<IDrawData> obj)
+        private void UIChanged(GUIControl control, List<IDrawData> obj)
         {
             drawUI = obj.OrderByDescending(x => x.DrawPriority).ToList();
         }
