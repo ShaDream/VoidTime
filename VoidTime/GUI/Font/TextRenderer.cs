@@ -6,7 +6,7 @@ namespace VoidTime.GUI
 {
     public static class TextRenderer
     {
-        public static TextDrawData GetTextQuads(string text, FontAtlas atlas, Vector2D start, float fontSize, float drawPriority)
+        public static TextDrawData GetTextData(string text, FontAtlas atlas, Vector2D start, float fontSize, float drawPriority)
         {
             var data = new List<TextDrawData>();
             var xOffset = start.X;
@@ -60,7 +60,7 @@ namespace VoidTime.GUI
             return new TextDrawData {Points = pointQuadData.ToArray(), Atlas = atlas, DrawPriority = drawPriority};
         }
 
-        public static TextDrawData GetTextQuadsTextBox(string text, FontAtlas atlas, float fontSize, RectangleF size, float drawPriority)
+        public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, RectangleF size, float drawPriority)
         {
             var data = new List<TextDrawData>();
             var xOffset = size.X;
