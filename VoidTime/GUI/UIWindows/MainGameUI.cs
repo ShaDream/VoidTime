@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace VoidTime.GUI
@@ -12,6 +13,9 @@ namespace VoidTime.GUI
         public MainGameUI(GameModel model)
         {
             this.model = model;
+            Controls.ItemAdded += Controls_ItemAdded;
+            Controls.ItemRemoved += Controls_ItemRemoved;
+
 
             var box = new TextBox
             {
@@ -22,8 +26,32 @@ namespace VoidTime.GUI
             };
 
             Controls.Add(box);
+        }
 
-            
+        private void Controls_ItemRemoved(GUIControl obj)
+        {
+            drawData.Remove(obj);
+            obj.UIChanged -= Obj_UIChanged;
+            OnUIChanged(this, drawData.Select(x => x.Value)
+                .SelectMany(x => x)
+                .ToList());
+        }
+
+        private void Controls_ItemAdded(GUIControl obj)
+        {
+            drawData.Add(obj, obj.Draw());
+            obj.UIChanged += Obj_UIChanged;
+            OnUIChanged(this, drawData.Select(x => x.Value)
+                .SelectMany(x => x)
+                .ToList());
+        }
+
+        private void Obj_UIChanged(GUIControl obj, List<IDrawData> data)
+        {
+            drawData[obj] = data;
+            OnUIChanged(this, drawData.Select(x => x.Value)
+                .SelectMany(x => x)
+                .ToList());
         }
 
         public override void Unsubscribe()
@@ -39,26 +67,6 @@ namespace VoidTime.GUI
         public override void OnKeyRelease(object sender, KeyEventArgs args)
         {
             model.OnKeyRelease(sender, args);
-        }
-
-        public override void OnMouseWheel(object sender, MouseEventArgs args)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnMouseMove(object sender, MouseEventArgs args)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnMouseClick(object sender, MouseEventArgs args)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnMouseDoubleClick(object sender, MouseEventArgs args)
-        {
-            throw new System.NotImplementedException();
         }
 
         public override void OnSizeChanged(object sender, EventArgs args)
