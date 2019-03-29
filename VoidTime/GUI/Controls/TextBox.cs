@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace VoidTime.GUI
@@ -6,30 +7,30 @@ namespace VoidTime.GUI
     public class TextBox : GUIControl
     {
         public string Text { get; set; }
-        public Color Background { get; set; }
-        public FontSettings Font { get; set; }
+        public FontAtlas Font { get; set; }
+        public float FontSize { get; set; }
 
         public override List<IDrawData> Draw()
         {
-            List<IDrawData> data = new List<IDrawData>();
-            if (Background != Color.Transparent)
+            var data = new List<IDrawData>();
+
+            if (Background != Color.Empty)
             {
                 data.Add(new RectangleDrawData
                 {
                     Color = Background,
                     DrawPriority = DrawIndex,
                     Mask = Mask,
-                    Points = new[]
-                    {
-                        new Vector2D(Location.X,Location.Y),
-                        new Vector2D(Location.X+Size.Width,Location.Y),
-                        new Vector2D(Location.X+Size.Width,Location.Y + Size.Height),
-                        new Vector2D(Location.X,Location.Y+ Size.Height),
-                    }
+                    Points = LocationSizeConverter.ToVector2DPoints(Location, Size),
                 });
             }
-
+            if (!string.IsNullOrWhiteSpace(Text) || Font == null)
+            {
+                data.Add(TextRenderer.GetTextData(Text, Font, FontSize, new RectangleF(Location, Size),
+                    DrawIndex));
+            }
             return data;
         }
+
     }
 }

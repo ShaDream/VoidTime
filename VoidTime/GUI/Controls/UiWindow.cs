@@ -10,6 +10,8 @@ namespace VoidTime.GUI
 
         public Dictionary<GUIControl,List<IDrawData>> drawData = new Dictionary<GUIControl, List<IDrawData>>();
 
+        public abstract void OnGameSizeChanged(object sender, EventArgs args);
+
         public abstract void Unsubscribe();
     }
 }
