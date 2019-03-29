@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace VoidTime.GUI
 {
     public static class TextRenderer
     {
-        public static TextDrawData GetTextData(string text, FontAtlas atlas, Vector2D start, float fontSize, float drawPriority)
+        public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, Vector2D start, float drawPriority)
         {
             var data = new List<TextDrawData>();
             var xOffset = start.X;
@@ -36,7 +35,7 @@ namespace VoidTime.GUI
                 var yFirst = start.Y + yRow * lineSpacing + character.OriginOffset * fSize;
                 var characterSize = new SizeF(character.Size.Width * fSize, character.Size.Height * fSize);
 
-                
+
 
                 pointQuadData.Add(new Vector2D(xOffset, yFirst));
                 pointTextureData.Add(character.AtlasOrigin);
@@ -45,19 +44,19 @@ namespace VoidTime.GUI
                 pointTextureData.Add(new Vector2D(character.AtlasOrigin.X,
                     character.AtlasOrigin.Y - character.AtlasSize.Height));
 
-                pointQuadData.Add( new Vector2D(xOffset + characterSize.Width, yFirst - characterSize.Height));
-                pointTextureData.Add( new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
+                pointQuadData.Add(new Vector2D(xOffset + characterSize.Width, yFirst - characterSize.Height));
+                pointTextureData.Add(new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
                     character.AtlasOrigin.Y - character.AtlasSize.Height));
 
-                pointQuadData.Add( new Vector2D(xOffset + characterSize.Width, yFirst));
-                pointTextureData.Add( new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
+                pointQuadData.Add(new Vector2D(xOffset + characterSize.Width, yFirst));
+                pointTextureData.Add(new Vector2D(character.AtlasOrigin.X + character.AtlasSize.Width,
                     character.AtlasOrigin.Y));
 
                 xOffset += characterSize.Width + character.OffsetX;
 
             }
 
-            return new TextDrawData {Points = pointQuadData.ToArray(), Atlas = atlas, DrawPriority = drawPriority};
+            return new TextDrawData { Points = pointQuadData.ToArray(), Atlas = atlas, DrawPriority = drawPriority };
         }
 
         public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, RectangleF size, float drawPriority)
@@ -116,7 +115,7 @@ namespace VoidTime.GUI
 
             }
 
-            return new TextDrawData { Points = pointQuadData.ToArray(), Atlas = atlas, DrawPriority = drawPriority };
+            return new TextDrawData { Points = pointQuadData.ToArray(),Textures = pointTextureData.ToArray(), Atlas = atlas, DrawPriority = drawPriority };
         }
 
         public static bool CanFitInTextBox(string text, FontAtlas atlas, float fontSize, RectangleF size)
