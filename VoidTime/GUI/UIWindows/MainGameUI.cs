@@ -15,17 +15,6 @@ namespace VoidTime.GUI
             this.model = model;
             Controls.ItemAdded += Controls_ItemAdded;
             Controls.ItemRemoved += Controls_ItemRemoved;
-
-
-            var box = new TextBox
-            {
-                Size = new Size(100, 100),
-                Font = new FontSettings { FontFamily = EuropeFontAtlas.GetAtlas(), FontSize = 24 },
-                Text = "HelloWorld",
-                Location = new Point(0, 0)
-            };
-
-            Controls.Add(box);
         }
 
         private void Controls_ItemRemoved(GUIControl obj)
@@ -46,9 +35,9 @@ namespace VoidTime.GUI
                 .ToList());
         }
 
-        private void Obj_UIChanged(GUIControl obj, List<IDrawData> data)
+        private void Obj_UIChanged(object obj, List<IDrawData> data)
         {
-            drawData[obj] = data;
+            drawData[(GUIControl)obj] = data;
             OnUIChanged(this, drawData.Select(x => x.Value)
                 .SelectMany(x => x)
                 .ToList());
@@ -69,7 +58,7 @@ namespace VoidTime.GUI
             model.OnKeyRelease(sender, args);
         }
 
-        public override void OnSizeChanged(object sender, EventArgs args)
+        public override void OnGameSizeChanged(object sender, EventArgs args)
         {
             Size = ((MainForm)sender).Size;
             model.GameBasicCamera.Size = ((MainForm)sender).Size;
