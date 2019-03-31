@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoidTime.Generator", "VoidT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoidTime.Resources", "VoidTime.Resources\VoidTime.Resources.csproj", "{E478154A-A3DE-4E69-9590-1C6686952E50}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{AD46CD58-D794-4884-A710-506274360923}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Box2DSharp.dll = Dependencies\Box2DSharp.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
