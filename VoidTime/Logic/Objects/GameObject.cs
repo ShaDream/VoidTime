@@ -7,8 +7,8 @@ namespace VoidTime
         #region Public Properties
 
         public string NameObject { get; set; }
-        public Vector2D Position { get; set; }
-        public Vector2D Size { get; set; }
+        public virtual Vector2D Position { get; set; }
+        public virtual Vector2D Size { get; set; }
         public byte DrawingPriority { get; set; }
 
         #endregion
