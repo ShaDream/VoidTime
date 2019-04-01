@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using Box2DSharp.Dynamics;
 
 namespace VoidTime
 {
@@ -59,6 +60,20 @@ namespace VoidTime
         {
             gameObjects.Remove(gameObject);
             gameObject.OnDestroy -= RemoveGameObject;
+        }
+
+        public void ClearPhysicsObjects()
+        {
+            foreach (var gameObject in gameObjects)
+                if(gameObject is PhysicalGameObject o)
+                    o.DeletePhysics();
+        }
+
+        public void ResumePhysics(World world)
+        {
+            foreach (var gameObject in gameObjects)
+                if (gameObject is PhysicalGameObject o)
+                    o.CreatePhysics(world);
         }
 
         public List<GameObject> GetGameObjects() => gameObjects;
