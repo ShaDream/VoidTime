@@ -2,14 +2,15 @@
 
 namespace VoidTime
 {
-    public class Vector2D
+    public struct Vector2D
     {
         #region Public Properties
 
-        public static Vector2D Zero => new Vector2D(0,0);
+        public static Vector2D Zero => new Vector2D();
+        public static Vector2D One => new Vector2D(1, 1);
 
-        public float X { get; set; }
-        public float Y { get; set; }
+        public float X { get; }
+        public float Y { get; }
 
         public float Magnitude => (float)Math.Sqrt(X * X + Y * Y);
         public float SqrMagnitude => X * X + Y * Y;
@@ -19,9 +20,7 @@ namespace VoidTime
 
         #region Constructors
 
-        public Vector2D() : this(0, 0) { }
-
-        public Vector2D(float x, float y)
+        public Vector2D(float x = 0, float y = 0)
         {
             X = x;
             Y = y;
@@ -81,8 +80,8 @@ namespace VoidTime
 
         public Vector2D Rotate(double angle)
         {
-            return new Vector2D((float) (X * Math.Cos(angle) - Y * Math.Sin(angle)),
-                (float) (X * Math.Sin(angle) + Y * Math.Cos(angle)));
+            return new Vector2D((float)(X * Math.Cos(angle) - Y * Math.Sin(angle)),
+                (float)(X * Math.Sin(angle) + Y * Math.Cos(angle)));
         }
 
         public double GetAngle()
