@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Box2DSharp.Dynamics;
 
 namespace VoidTime
 {
@@ -11,6 +12,8 @@ namespace VoidTime
 
         private readonly Chunk[,] chunks;
         private readonly Size chunkSize;
+        private HashSet<Point> lastChunks = new HashSet<Point>();
+        private World world;
 
         #endregion
 
@@ -23,10 +26,11 @@ namespace VoidTime
 
         #region Сonstructor
 
-        public GameMap(Size mapSizeInChunks, Size chunkSize) : this(mapSizeInChunks, chunkSize, new List<GameObject>()) { }
+        public GameMap(Size mapSizeInChunks, Size chunkSize, World world) : this(mapSizeInChunks, chunkSize, world, new List<GameObject>()) { }
 
-        public GameMap(Size mapSizeInChunks, Size chunkSize, IEnumerable<GameObject> gameObjects)
+        public GameMap(Size mapSizeInChunks, Size chunkSize, World world, IEnumerable<GameObject> gameObjects)
         {
+            this.world = world;
             MapSizeInChunks = mapSizeInChunks;
             this.chunkSize = chunkSize;
             chunks = new Chunk[MapSizeInChunks.Width, MapSizeInChunks.Height];
@@ -54,6 +58,18 @@ namespace VoidTime
         public List<GameObject> GetGameObjects(BasicCamera basicCamera)
         {
             var chunksCoordinate = GetChunksCoordinateFromCamera(basicCamera);
+
+            var isOnce = false;
+            foreach (var point in chunksCoordinate)
+                if (!lastChunks.Contains(point))
+                {
+                    isOnce = true;
+                    chunks[point.X, point.Y].ResumePhysics(world);
+                }
+            
+            if(isOnce)
+                lastChunks = new HashSet<Point>(chunksCoordinate);
+
             return chunksCoordinate
                 .Select(coordinate => chunks[coordinate.X, coordinate.Y].GetGameObjects())
                 .SelectMany(x => x).ToList();
