@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
+using Box2DSharp.Dynamics;
 using Timer = System.Timers.Timer;
 
 namespace VoidTime
@@ -18,10 +20,18 @@ namespace VoidTime
 
         #endregion
 
+        #region Public Events
+
+        public event Action<List<GameObject>, BasicCamera> Tick;
+        public event Action<IGameModel> GameModelChanged;
+
+        #endregion
+
         #region Public Properties
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
+        public World Physics { get; set; }
 
         #endregion
 
@@ -36,9 +46,11 @@ namespace VoidTime
             };
             var k = new ReadonlyKeys(keys, axes);
 
-            gameTick = new Timer(16);
+            gameTick = new Timer(16.66667F);
 
-            map = new GameMap(new Size(100, 100), new Size(1000, 1000));
+            Physics = new World(new Vector2(0, 0));
+
+            map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
 
             var planet = new Planet { Position = new Vector2D(5000, 5000), DrawingPriority = 1 };
             const int border = 1000;
@@ -47,18 +59,12 @@ namespace VoidTime
                                                    map.MapSize.Width - 2 * border,
                                                    map.MapSize.Height - 2 * border);
             player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
+            var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
 
-            map.AddGameObjects(new[] { planet, player });
+            map.AddGameObjects(new[] { planet, player, player2 });
             GameBasicCamera = new SmoothCamera(new Size(), player);
             gameTick.Elapsed += FrameTick;
         }
-
-        #endregion
-
-        #region Public Events
-
-        public event Action<List<GameObject>, BasicCamera> Tick;
-        public event Action<IGameModel> GameModelChanged;
 
         #endregion
 
@@ -68,6 +74,7 @@ namespace VoidTime
         {
             var activeObjects = map.GetGameObjects(GameBasicCamera);
             activeObjects.ForEach(x => x.Update());
+            Physics.Step(0.01666667F, 3, 6);
             map.UpdateMap(GameBasicCamera);
             GameBasicCamera.Update();
             Tick?.Invoke(activeObjects, GameBasicCamera);

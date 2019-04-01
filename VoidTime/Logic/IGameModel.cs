@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Box2DSharp.Dynamics;
 
 namespace VoidTime
 {
     public interface IGameModel
     {
+        World Physics { get; set; }
+
         void Run();
         void Pause();
 
