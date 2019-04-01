@@ -2,28 +2,33 @@
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using Box2DSharp.Collision;
+using Box2DSharp.Collision.Shapes;
+using Box2DSharp.Dynamics;
 
 namespace VoidTime
 {
-    public class Player : GameObject
+    public class Player : PhysicalGameObject
     {
         #region Public Properties
 
         public double Angle = Math.PI / 2;
         private Vector2D velocity = new Vector2D();
-        private float maxSpeed = 20;
+        private float maxSpeed = 1000;
         private Rectangle AllowedCoordinates;
+        private readonly bool canMove;
+        public AABB aabb;
 
         #endregion
 
         #region Constructor
 
-        public Player(Rectangle allowedCoordinates, Vector2D position)
+        public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
         {
             AllowedCoordinates = allowedCoordinates;
             Position = position;
+            this.canMove = canMove;
         }
-
 
         #endregion
 
@@ -31,14 +36,14 @@ namespace VoidTime
 
         public override void Update()
         {
-
-            Move();
+            if (canMove)
+                Move();
             CheckCoordinate();
         }
 
         private void Move()
         {
-            var rotationVector = new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical"));
+            var rotationVector = new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * 10;
             if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
@@ -48,25 +53,38 @@ namespace VoidTime
             }
             else
                 velocity *= 0.95f;
-            Position += velocity;
+            SetLinearVelocity(velocity);
         }
 
         private void CheckCoordinate()
         {
             if (Position.X < AllowedCoordinates.Left)
-                Position.X = AllowedCoordinates.Left;
+                Position = new Vector2D(AllowedCoordinates.Left, Position.Y);
 
             if (Position.X > AllowedCoordinates.Right)
-                Position.X = AllowedCoordinates.Right;
+                Position = new Vector2D(AllowedCoordinates.Right, Position.Y);
 
             if (Position.Y > AllowedCoordinates.Bottom)
-                Position.Y = AllowedCoordinates.Bottom;
+                Position = new Vector2D(Position.X, AllowedCoordinates.Bottom);
 
             if (Position.Y < AllowedCoordinates.Top)
-                Position.Y = AllowedCoordinates.Top;
+                Position = new Vector2D(Position.X, AllowedCoordinates.Top);
         }
 
         #endregion
 
+        public override void CreatePhysics(World world)
+        {
+            var bodyDef = CreateBodyDef();
+            bodyDef.FixedRotation = true;
+            bodyDef.Position = ConvertToPhysicsVector(Position);
+            bodyDef.BodyType = BodyType.DynamicBody;
+
+            var shape = new PolygonShape();
+            shape.SetAsBox(30 * ScaleFactor, 40 * ScaleFactor);
+            Body = world.CreateBody(bodyDef);
+            Fixtures.Add(canMove ? Body.CreateFixture(shape, 1) : Body.CreateFixture(shape, 100));
+            aabb = Fixtures[0].GetAABB(0);
+        }
     }
 }
