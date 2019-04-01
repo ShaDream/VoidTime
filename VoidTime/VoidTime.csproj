@@ -50,6 +50,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -97,6 +101,7 @@
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModel.cs" />
+    <Compile Include="Logic\Objects\PhysicalGameObject.cs" />
     <Compile Include="Logic\Objects\Planet.cs" />
     <Compile Include="Logic\Objects\Player.cs" />
     <Compile Include="Logic\Control\PressedKeys.cs" />
@@ -104,6 +109,7 @@
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Math\Vector2D.cs" />
     <Compile Include="Logic\Map\GameMap.cs" />
+    <Compile Include="Logic\Physics\GlobalContactListner.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
