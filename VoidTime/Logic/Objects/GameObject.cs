@@ -23,7 +23,7 @@ namespace VoidTime
 
         public virtual void Update() { }
 
-        public void Destoy() => OnDestroy?.Invoke(this);
+        public virtual void Destoy() => OnDestroy?.Invoke(this);
 
         #endregion
         
