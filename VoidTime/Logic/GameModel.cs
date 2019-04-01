@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
 using Box2DSharp.Dynamics;
+using VoidTime.Physics;
 using Timer = System.Timers.Timer;
 
 namespace VoidTime
@@ -49,6 +50,7 @@ namespace VoidTime
             gameTick = new Timer(16.66667F);
 
             Physics = new World(new Vector2(0, 0));
+            Physics.SetContactListener(new GlobalContactListner());
 
             map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
 
@@ -75,6 +77,7 @@ namespace VoidTime
             var activeObjects = map.GetGameObjects(GameBasicCamera);
             activeObjects.ForEach(x => x.Update());
             Physics.Step(0.01666667F, 3, 6);
+
             map.UpdateMap(GameBasicCamera);
             GameBasicCamera.Update();
             Tick?.Invoke(activeObjects, GameBasicCamera);
