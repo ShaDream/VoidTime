@@ -6,25 +6,13 @@ namespace VoidTime
 {
     public class Chunk
     {
-        #region Public Properties
+        private readonly List<GameObject> gameObjects = new List<GameObject>();
 
         public Point Coordinates { get; }
         public Size Size { get; }
 
-        #endregion
 
-        #region Private Fields
-
-        private readonly List<GameObject> gameObjects = new List<GameObject>();
-
-        #endregion
-
-        #region Constructor
-
-        public Chunk()
-        {
-
-        }
+        public Chunk() { }
 
         public Chunk(Point coordinates, Size size)
         {
@@ -37,9 +25,6 @@ namespace VoidTime
             });
         }
 
-        #endregion
-
-        #region Public Methods
 
         public void AddGameObject(GameObject gameObject)
         {
@@ -65,7 +50,7 @@ namespace VoidTime
         public void ClearPhysicsObjects()
         {
             foreach (var gameObject in gameObjects)
-                if(gameObject is PhysicalGameObject o)
+                if (gameObject is PhysicalGameObject o)
                     o.DeletePhysics();
         }
 
@@ -76,8 +61,9 @@ namespace VoidTime
                     o.CreatePhysics(world);
         }
 
-        public List<GameObject> GetGameObjects() => gameObjects;
-
-        #endregion
+        public List<GameObject> GetGameObjects()
+        {
+            return gameObjects;
+        }
     }
 }

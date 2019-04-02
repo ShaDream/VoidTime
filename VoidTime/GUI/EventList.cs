@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace VoidTime.GUI
 {
-    public class EventList<T> 
+    public class EventList<T>
     {
-        private List<T> objects = new List<T>();
+        private readonly List<T> objects = new List<T>();
 
         public void Add(T item)
         {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using SharpGL;
 using SharpGL.Enumerations;
 
@@ -9,21 +6,24 @@ namespace VoidTime
 {
     public static class DrawHelper
     {
-        private static readonly Vector2D[] ArrayTexCoords = new[]
+        private static readonly Vector2D[] ArrayTexCoords =
         {
             new Vector2D(0.0f, 0.0f),
             new Vector2D(0.0f, 1.0f),
             new Vector2D(1.0f, 1.0f),
-            new Vector2D(1.0f, 0.0f),
+            new Vector2D(1.0f, 0.0f)
         };
 
-        private static Vector2D[] GetObjectCorners(Vector2D vector, Size size) => new[]
+        private static Vector2D[] GetObjectCorners(Vector2D vector, Size size)
         {
-            vector + new Vector2D(-size.Width / 2, -size.Height / 2),
-            vector + new Vector2D(-size.Width / 2, size.Height / 2),
-            vector + new Vector2D(size.Width / 2, size.Height / 2),
-            vector + new Vector2D(size.Width / 2, -size.Height / 2),
-        };
+            return new[]
+            {
+                vector + new Vector2D(-size.Width / 2, -size.Height / 2),
+                vector + new Vector2D(-size.Width / 2, size.Height / 2),
+                vector + new Vector2D(size.Width / 2, size.Height / 2),
+                vector + new Vector2D(size.Width / 2, -size.Height / 2)
+            };
+        }
 
         public static void Draw(ObjectOnDisplay obj, OpenGL gl, Size size, double angle)
         {
@@ -39,6 +39,7 @@ namespace VoidTime
                 gl.TexCoord(ArrayTexCoords[i].X, ArrayTexCoords[i].Y);
                 gl.Vertex(rotatedVectors[i].X, rotatedVectors[i].Y, priority);
             }
+
             gl.End();
         }
 
@@ -53,6 +54,7 @@ namespace VoidTime
                 gl.TexCoord(ArrayTexCoords[i].X, ArrayTexCoords[i].Y);
                 gl.Vertex(arrayVectors[i].X, arrayVectors[i].Y, priority);
             }
+
             gl.End();
         }
     }

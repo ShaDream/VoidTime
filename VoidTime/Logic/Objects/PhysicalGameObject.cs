@@ -68,7 +68,7 @@ namespace VoidTime
         protected BodyDef CreateBodyDef()
         {
             return new BodyDef {UserData = this};
-        } 
+        }
 
         public void DeletePhysics()
         {

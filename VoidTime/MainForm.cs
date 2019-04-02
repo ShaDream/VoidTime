@@ -11,25 +11,20 @@ namespace VoidTime
 {
     public class MainForm : Form
     {
-        #region Private Fields
-
-        private OpenGLControl openGL;
-
         private readonly Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
             new Dictionary<Type, Action<ObjectOnDisplay, OpenGL>>();
 
         private readonly Dictionary<Type, Action<IDrawData, OpenGL>> drawHelpersUI =
             new Dictionary<Type, Action<IDrawData, OpenGL>>();
 
-        private List<ObjectOnDisplay> drawObjects = new List<ObjectOnDisplay>();
-        private List<IDrawData> drawUI = new List<IDrawData>();
-
         private IGameModel currentModel;
         private UIWindow currentWindow;
 
-        #endregion
+        private List<ObjectOnDisplay> drawObjects = new List<ObjectOnDisplay>();
+        private List<IDrawData> drawUI = new List<IDrawData>();
 
-        #region Constructors
+        private OpenGLControl openGL;
+
 
         public MainForm(IGameModel model)
         {
@@ -61,9 +56,6 @@ namespace VoidTime
             drawUI = obj.OrderByDescending(x => x.DrawPriority).ToList();
         }
 
-        #endregion
-
-        #region Private Methods
 
         private void OpenGLCreate()
         {
@@ -76,12 +68,12 @@ namespace VoidTime
                 DrawFPS = true
             };
 
-            ((ISupportInitialize)openGL).BeginInit();
+            ((ISupportInitialize) openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGLInitialized;
 
             Controls.Add(openGL);
-            ((ISupportInitialize)openGL).EndInit();
+            ((ISupportInitialize) openGL).EndInit();
         }
 
         private void OpenGLInitialized(object sender, EventArgs e)
@@ -124,9 +116,9 @@ namespace VoidTime
                             !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                ((IDrawable)instance).Init(openGL.OpenGL);
-                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>)drawClass
+                ((IDrawable) instance).Init(openGL.OpenGL);
+                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>) drawClass
                     .GetMethod("DrawObject")
                     ?.CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>), instance);
 
@@ -140,8 +132,8 @@ namespace VoidTime
                             !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                var typeGameObject = (Type)drawClass.GetProperty("DrawDataType")?.GetValue(instance, null);
-                var drawingMethod = (Action<IDrawData, OpenGL>)drawClass
+                var typeGameObject = (Type) drawClass.GetProperty("DrawDataType")?.GetValue(instance, null);
+                var drawingMethod = (Action<IDrawData, OpenGL>) drawClass
                     .GetMethod("DrawUi")
                     ?.CreateDelegate(typeof(Action<IDrawData, OpenGL>), instance);
 
@@ -152,8 +144,8 @@ namespace VoidTime
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
         {
             drawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
-                           let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
-                           select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
+                let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
+                select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
         }
 
         private void ChangeGameModel(IGameModel obj)
@@ -162,7 +154,5 @@ namespace VoidTime
             currentModel = obj;
             currentWindow = GUIFactory.Create(obj);
         }
-
-        #endregion
     }
 }

@@ -6,7 +6,7 @@ namespace VoidTime
     {
         public static Vector2D[] ToVector2DPoints(Rectangle rect)
         {
-            return ToVector2DPoints((RectangleF)rect);
+            return ToVector2DPoints((RectangleF) rect);
         }
 
         public static Vector2D[] ToVector2DPoints(RectangleF rect)
@@ -16,7 +16,7 @@ namespace VoidTime
                 new Vector2D(rect.X, rect.Y),
                 new Vector2D(rect.X + rect.Width, rect.Y),
                 new Vector2D(rect.X + rect.Width, rect.Y + rect.Height),
-                new Vector2D(rect.X, rect.Y + rect.Height),
+                new Vector2D(rect.X, rect.Y + rect.Height)
             };
         }
     }

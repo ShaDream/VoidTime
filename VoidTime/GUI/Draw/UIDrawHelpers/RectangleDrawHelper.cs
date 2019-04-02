@@ -10,7 +10,7 @@ namespace VoidTime.GUI
 
         public void DrawUi(IDrawData obj, OpenGL gl)
         {
-            var o = (RectangleDrawData)obj;
+            var o = (RectangleDrawData) obj;
             gl.Disable(OpenGL.GL_TEXTURE_2D);
 
             if (o.Mask != null)
@@ -20,7 +20,7 @@ namespace VoidTime.GUI
             gl.Begin(BeginMode.Quads);
             gl.Color(o.Color.R, o.Color.G, o.Color.B);
 
-            gl.Vertex(o.Points[0].X, o.Points[0].Y,o.DrawPriority);
+            gl.Vertex(o.Points[0].X, o.Points[0].Y, o.DrawPriority);
             gl.Vertex(o.Points[1].X, o.Points[1].Y, o.DrawPriority);
             gl.Vertex(o.Points[2].X, o.Points[2].Y, o.DrawPriority);
             gl.Vertex(o.Points[3].X, o.Points[3].Y, o.DrawPriority);

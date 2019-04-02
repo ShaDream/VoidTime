@@ -12,31 +12,15 @@ namespace VoidTime
 {
     public class GameModel : IGameModel
     {
-        #region Private Fields
-
         private readonly Timer gameTick;
+        private readonly PressedKeys keys = new PressedKeys();
         private readonly GameMap map;
         private readonly GameObject player;
-        private readonly PressedKeys keys = new PressedKeys();
 
-        #endregion
-
-        #region Public Events
-
-        public event Action<List<GameObject>, BasicCamera> Tick;
-        public event Action<IGameModel> GameModelChanged;
-
-        #endregion
-
-        #region Public Properties
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
-        public World Physics { get; set; }
 
-        #endregion
-
-        #region Constructor
 
         public GameModel()
         {
@@ -54,38 +38,25 @@ namespace VoidTime
 
             map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
 
-            var planet = new Planet { Position = new Vector2D(5000, 5000), DrawingPriority = 1 };
+            var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
             const int border = 1000;
             var allowedCoordinates = new Rectangle(border,
-                                                   border,
-                                                   map.MapSize.Width - 2 * border,
-                                                   map.MapSize.Height - 2 * border);
+                border,
+                map.MapSize.Width - 2 * border,
+                map.MapSize.Height - 2 * border);
             player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
             var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
 
-            map.AddGameObjects(new[] { planet, player, player2 });
+            map.AddGameObjects(new[] {planet, player, player2});
             GameBasicCamera = new SmoothCamera(new Size(), player);
             gameTick.Elapsed += FrameTick;
         }
 
-        #endregion
 
-        #region Private Methods
+        public event Action<List<GameObject>, BasicCamera> Tick;
+        public event Action<IGameModel> GameModelChanged;
+        public World Physics { get; set; }
 
-        private void FrameTick(object sender, ElapsedEventArgs e)
-        {
-            var activeObjects = map.GetGameObjects(GameBasicCamera);
-            activeObjects.ForEach(x => x.Update());
-            Physics.Step(0.01666667F, 3, 6);
-
-            map.UpdateMap(GameBasicCamera);
-            GameBasicCamera.Update();
-            Tick?.Invoke(activeObjects, GameBasicCamera);
-        }
-
-        #endregion
-
-        #region Public Methods
 
         public void Run()
         {
@@ -137,6 +108,16 @@ namespace VoidTime
             throw new NotImplementedException();
         }
 
-        #endregion
+
+        private void FrameTick(object sender, ElapsedEventArgs e)
+        {
+            var activeObjects = map.GetGameObjects(GameBasicCamera);
+            activeObjects.ForEach(x => x.Update());
+            Physics.Step(0.01666667F, 3, 6);
+
+            map.UpdateMap(GameBasicCamera);
+            GameBasicCamera.Update();
+            Tick?.Invoke(activeObjects, GameBasicCamera);
+        }
     }
 }

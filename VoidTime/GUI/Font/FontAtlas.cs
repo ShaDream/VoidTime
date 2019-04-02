@@ -7,10 +7,10 @@ namespace VoidTime.GUI
 {
     public class FontAtlas
     {
-        private Dictionary<char, Character> Characters = new Dictionary<char, Character>();
-        public Bitmap Atlas { get; }
-        private Texture texture { get; set; } = new Texture();
+        private readonly Dictionary<char, Character> Characters = new Dictionary<char, Character>();
         private bool first = true;
+        public Bitmap Atlas { get; }
+        private Texture texture { get; } = new Texture();
         public int FontSize { get; }
         public float LineSpacing { get; }
         public float Spacing { get; }

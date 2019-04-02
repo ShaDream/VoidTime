@@ -2,14 +2,14 @@
 using System.Drawing;
 using SharpGL;
 using SharpGL.SceneGraph.Assets;
+using VoidTime.Resources;
 
 namespace VoidTime
 {
     public class BackgroundDrawHelper : IDrawable
     {
+        private readonly Texture background = new Texture();
         public Type GameObjectType { get; } = typeof(Background);
-
-        private Texture background = new Texture();
 
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            background.Create(gl, Resources.Textures.back);
+            background.Create(gl, Textures.back);
         }
     }
 }

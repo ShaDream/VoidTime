@@ -1,12 +1,10 @@
 ﻿using SharpGL;
 using SharpGL.Enumerations;
-using SharpGL.OpenGLAttributes;
 
 namespace VoidTime.GUI
 {
     public static class MaskHelper
     {
-
         public static void Begin(UIMask mask, OpenGL GL)
         {
             GL.Enable(OpenGL.GL_STENCIL_TEST);

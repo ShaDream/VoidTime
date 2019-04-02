@@ -1,8 +1,4 @@
 ﻿namespace VoidTime
 {
-    public class Background : GameObject
-    {
-        #region Constructor
-        #endregion
-    }
+    public class Background : GameObject { }
 }

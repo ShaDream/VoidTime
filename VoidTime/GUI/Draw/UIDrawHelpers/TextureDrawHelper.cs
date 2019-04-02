@@ -10,7 +10,7 @@ namespace VoidTime.GUI
 
         public void DrawUi(IDrawData obj, OpenGL gl)
         {
-            var o = (TextureDrawData)obj;
+            var o = (TextureDrawData) obj;
             if (o.Mask != null)
                 MaskHelper.Begin(o.Mask, gl);
 

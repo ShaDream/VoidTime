@@ -7,11 +7,11 @@ namespace VoidTime.GUI
 {
     public abstract class GUIControl
     {
+        protected Color background;
+        protected Color foreground;
         protected Point location;
         protected Size size;
         protected bool visible;
-        protected Color background;
-        protected Color foreground;
 
         public virtual string Name { get; set; }
 

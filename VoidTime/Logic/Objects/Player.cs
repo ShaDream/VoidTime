@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Windows.Forms;
 using Box2DSharp.Collision;
 using Box2DSharp.Collision.Shapes;
@@ -10,18 +9,14 @@ namespace VoidTime
 {
     public class Player : PhysicalGameObject
     {
-        #region Public Properties
-
-        public double Angle = Math.PI / 2;
-        private Vector2D velocity = new Vector2D();
-        private float maxSpeed = 1000;
-        private Rectangle AllowedCoordinates;
+        private readonly Rectangle AllowedCoordinates;
         private readonly bool canMove;
+        private readonly float maxSpeed = 1000;
         public AABB aabb;
 
-        #endregion
+        public double Angle = Math.PI / 2;
+        private Vector2D velocity;
 
-        #region Constructor
 
         public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
         {
@@ -30,9 +25,6 @@ namespace VoidTime
             this.canMove = canMove;
         }
 
-        #endregion
-
-        #region Public Methods
 
         public override void Update()
         {
@@ -43,7 +35,8 @@ namespace VoidTime
 
         private void Move()
         {
-            var rotationVector = new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * 10;
+            var rotationVector =
+                new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * 10;
             if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
@@ -52,7 +45,10 @@ namespace VoidTime
                 Angle = rotationVector.GetAngle();
             }
             else
+            {
                 velocity *= 0.95f;
+            }
+
             SetLinearVelocity(velocity);
         }
 
@@ -71,7 +67,6 @@ namespace VoidTime
                 Position = new Vector2D(Position.X, AllowedCoordinates.Top);
         }
 
-        #endregion
 
         public override void CreatePhysics(World world)
         {

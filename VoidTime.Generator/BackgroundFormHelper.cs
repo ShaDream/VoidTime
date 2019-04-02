@@ -7,7 +7,6 @@ namespace VoidTime.Generator
 {
     public class BackgroundFormHelper
     {
-        #region Default Constructor
 
         public BackgroundFormHelper(Panel panel)
         {
@@ -34,9 +33,7 @@ namespace VoidTime.Generator
             AddToControls();
         }
 
-        #endregion
 
-        #region Private Fields
 
         private readonly BackgroundGenerater generator;
         private TableLayoutPanel grid;
@@ -61,9 +58,7 @@ namespace VoidTime.Generator
         private NumericUpDown starCount;
         private Label starCountLabel;
 
-        #endregion
 
-        #region Initializations Helper Methods
 
         private void StarCountInitialization()
         {
@@ -337,6 +332,5 @@ namespace VoidTime.Generator
             rightPanel.Controls.Add(saveButton);
         }
 
-        #endregion
     }
 }

@@ -5,7 +5,8 @@ namespace VoidTime.GUI
 {
     public static class TextRenderer
     {
-        public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, Vector2D start, float drawPriority)
+        public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, Vector2D start,
+            float drawPriority)
         {
             var data = new List<TextDrawData>();
             var xOffset = start.X;
@@ -36,7 +37,6 @@ namespace VoidTime.GUI
                 var characterSize = new SizeF(character.Size.Width * fSize, character.Size.Height * fSize);
 
 
-
                 pointQuadData.Add(new Vector2D(xOffset, yFirst));
                 pointTextureData.Add(character.AtlasOrigin);
 
@@ -53,13 +53,13 @@ namespace VoidTime.GUI
                     character.AtlasOrigin.Y));
 
                 xOffset += characterSize.Width + character.OffsetX;
-
             }
 
-            return new TextDrawData { Points = pointQuadData.ToArray(), Atlas = atlas, DrawPriority = drawPriority };
+            return new TextDrawData {Points = pointQuadData.ToArray(), Atlas = atlas, DrawPriority = drawPriority};
         }
 
-        public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, RectangleF size, float drawPriority)
+        public static TextDrawData GetTextData(string text, FontAtlas atlas, float fontSize, RectangleF size,
+            float drawPriority)
         {
             var data = new List<TextDrawData>();
             var xOffset = size.X;
@@ -73,7 +73,6 @@ namespace VoidTime.GUI
 
             foreach (var symbol in text)
             {
-
                 switch (symbol)
                 {
                     case ' ':
@@ -112,10 +111,15 @@ namespace VoidTime.GUI
                     character.AtlasOrigin.Y));
 
                 xOffset += characterSize.Width + character.OffsetX;
-
             }
 
-            return new TextDrawData { Points = pointQuadData.ToArray(),Textures = pointTextureData.ToArray(), Atlas = atlas, DrawPriority = drawPriority };
+            return new TextDrawData
+            {
+                Points = pointQuadData.ToArray(),
+                Textures = pointTextureData.ToArray(),
+                Atlas = atlas,
+                DrawPriority = drawPriority
+            };
         }
 
         public static bool CanFitInTextBox(string text, FontAtlas atlas, float fontSize, RectangleF size)
@@ -128,7 +132,6 @@ namespace VoidTime.GUI
 
             foreach (var symbol in text)
             {
-
                 switch (symbol)
                 {
                     case ' ':

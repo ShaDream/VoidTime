@@ -30,7 +30,7 @@ namespace VoidTime.GUI
                     Color = Background,
                     DrawPriority = DrawIndex,
                     Mask = Mask,
-                    Points = LocationSizeConverter.ToVector2DPoints(Location,Size)
+                    Points = LocationSizeConverter.ToVector2DPoints(Location, Size)
                 },
                 new RectangleDrawData
                 {
@@ -40,17 +40,14 @@ namespace VoidTime.GUI
                     Points = new[]
                     {
                         new Vector2D(Location.X, Location.Y),
-                        new Vector2D(Location.X + (Size.Width * Value), Location.Y),
-                        new Vector2D(Location.X + (Size.Width * Value), Location.Y + Size.Height),
-                        new Vector2D(Location.X, Location.Y + Size.Height),
+                        new Vector2D(Location.X + Size.Width * Value, Location.Y),
+                        new Vector2D(Location.X + Size.Width * Value, Location.Y + Size.Height),
+                        new Vector2D(Location.X, Location.Y + Size.Height)
                     }
-                },
-                
+                }
             };
 
             return data;
         }
-
-
     }
 }

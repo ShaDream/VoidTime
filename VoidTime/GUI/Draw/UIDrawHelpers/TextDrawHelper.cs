@@ -7,9 +7,10 @@ namespace VoidTime.GUI
     public class TextDrawHelper : IUIDrawable
     {
         public Type DrawDataType { get; } = typeof(TextDrawData);
+
         public void DrawUi(IDrawData obj, OpenGL gl)
         {
-            var o = (TextDrawData)obj;
+            var o = (TextDrawData) obj;
 
             if (o.Mask != null)
                 MaskHelper.Begin(o.Mask, gl);

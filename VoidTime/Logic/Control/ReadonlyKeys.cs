@@ -6,15 +6,10 @@ namespace VoidTime
 {
     public class ReadonlyKeys
     {
-        #region Private Fields
-
         private static PressedKeys keys;
         private static Dictionary<string, Axis> axes;
-        private static bool IsCreated = false;
+        private static bool IsCreated;
 
-        #endregion
-
-        #region Constructor
 
         public ReadonlyKeys(PressedKeys keys, HashSet<Axis> axes)
         {
@@ -24,15 +19,9 @@ namespace VoidTime
             ReadonlyKeys.keys = keys;
             ReadonlyKeys.axes = new Dictionary<string, Axis>();
 
-            foreach (var axis in axes)
-            {
-                ReadonlyKeys.axes.Add(axis.Name, axis);
-            }
+            foreach (var axis in axes) ReadonlyKeys.axes.Add(axis.Name, axis);
         }
 
-        #endregion
-
-        #region Public Methods
 
         public static bool IsKeyPressed(Keys key)
         {
@@ -51,10 +40,6 @@ namespace VoidTime
             var local = axes[name];
             return local.GetValue(keys.keys.Contains(local.PositiveKey),
                 keys.keys.Contains(local.NegativeKey));
-
         }
-
-        #endregion
-
     }
 }

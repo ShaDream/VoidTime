@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using SharpGL;
-using SharpGL.SceneGraph.Assets;
 using VoidTime.Resources;
 
 namespace VoidTime.GUI
 {
     public static class EuropeFontAtlas
     {
-        #region Hardcode
-
         private static readonly Dictionary<char, Character> Characters = new Dictionary<char, Character>
         {
             {
@@ -814,17 +810,11 @@ namespace VoidTime.GUI
             }
         };
 
-        #endregion
-
-        #region Private Fields
 
         private static bool IsFirst = true;
 
         private static FontAtlas atlas;
 
-        #endregion
-
-        #region Publick Methods
 
         public static FontAtlas GetAtlas()
         {
@@ -836,7 +826,5 @@ namespace VoidTime.GUI
 
             return atlas;
         }
-
-        #endregion
     }
 }

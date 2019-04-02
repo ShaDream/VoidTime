@@ -1,6 +1,4 @@
 ﻿namespace VoidTime
 {
-    public class Planet : GameObject
-    {
-    }
+    public class Planet : GameObject { }
 }

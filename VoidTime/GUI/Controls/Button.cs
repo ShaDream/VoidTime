@@ -17,20 +17,16 @@ namespace VoidTime.GUI
                 return data;
 
             if (Background != Color.Empty)
-            {
                 data.Add(new RectangleDrawData
                 {
                     Color = Background,
                     DrawPriority = DrawIndex,
                     Mask = Mask,
-                    Points = LocationSizeConverter.ToVector2DPoints(Location,Size)
+                    Points = LocationSizeConverter.ToVector2DPoints(Location, Size)
                 });
-            }
             if (!string.IsNullOrWhiteSpace(Text) || Font == null)
-            {
                 data.Add(TextRenderer.GetTextData(Text, Font, FontSize, new RectangleF(Location, Size),
                     DrawIndex));
-            }
             return data;
         }
     }

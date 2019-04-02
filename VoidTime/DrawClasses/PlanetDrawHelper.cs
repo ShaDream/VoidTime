@@ -2,14 +2,14 @@
 using System.Drawing;
 using SharpGL;
 using SharpGL.SceneGraph.Assets;
+using VoidTime.Resources;
 
 namespace VoidTime
 {
     public class PlanetDrawHelper : IDrawable
     {
+        private readonly Texture planet = new Texture();
         public Type GameObjectType { get; } = typeof(Planet);
-
-        private Texture planet = new Texture();
 
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            planet.Create(gl, Resources.Textures.time);
+            planet.Create(gl, Textures.time);
         }
     }
 }

@@ -8,25 +8,18 @@ namespace VoidTime
 {
     public class GameMap
     {
-        #region Private Fields
-
         private readonly Chunk[,] chunks;
         private readonly Size chunkSize;
         private HashSet<Point> lastChunks = new HashSet<Point>();
-        private World world;
+        private readonly World world;
 
-        #endregion
-
-        #region Public Properties
 
         public Size MapSizeInChunks { get; }
         public Size MapSize { get; }
 
-        #endregion
 
-        #region Сonstructor
-
-        public GameMap(Size mapSizeInChunks, Size chunkSize, World world) : this(mapSizeInChunks, chunkSize, world, new List<GameObject>()) { }
+        public GameMap(Size mapSizeInChunks, Size chunkSize, World world) : this(mapSizeInChunks, chunkSize, world,
+            new List<GameObject>()) { }
 
         public GameMap(Size mapSizeInChunks, Size chunkSize, World world, IEnumerable<GameObject> gameObjects)
         {
@@ -39,9 +32,6 @@ namespace VoidTime
             MapSize = new Size(MapSizeInChunks.Width * chunkSize.Width, MapSizeInChunks.Height * chunkSize.Height);
         }
 
-        #endregion
-
-        #region Public Methods
 
         public void AddGameObjects(IEnumerable<GameObject> gameObjects)
         {
@@ -52,8 +42,10 @@ namespace VoidTime
             }
         }
 
-        public void AddGameObject(GameObject gameObject) =>
-            AddGameObjects(new List<GameObject> { gameObject });
+        public void AddGameObject(GameObject gameObject)
+        {
+            AddGameObjects(new List<GameObject> {gameObject});
+        }
 
         public List<GameObject> GetGameObjects(BasicCamera basicCamera)
         {
@@ -66,8 +58,8 @@ namespace VoidTime
                     isOnce = true;
                     chunks[point.X, point.Y].ResumePhysics(world);
                 }
-            
-            if(isOnce)
+
+            if (isOnce)
                 lastChunks = new HashSet<Point>(chunksCoordinate);
 
             return chunksCoordinate
@@ -82,18 +74,15 @@ namespace VoidTime
                 .ForEach(CheckChunk);
         }
 
-        #endregion
-
-        #region Private Methods
 
         private void Initialization()
         {
             for (var i = 0; i < MapSizeInChunks.Width; i++)
-                for (var j = 0; j < MapSizeInChunks.Height; j++)
-                {
-                    var coordinates = new Point(i, j);
-                    chunks[i, j] = new Chunk(coordinates, chunkSize);
-                }
+            for (var j = 0; j < MapSizeInChunks.Height; j++)
+            {
+                var coordinates = new Point(i, j);
+                chunks[i, j] = new Chunk(coordinates, chunkSize);
+            }
         }
 
         private List<Point> GetChunksCoordinateFromCamera(BasicCamera camera)
@@ -106,12 +95,8 @@ namespace VoidTime
             var yMax = Math.Min(topRightPoint.Y + 1, MapSizeInChunks.Height - 1);
             var result = new List<Point>();
             for (var x = xMin; x <= xMax; x++)
-            {
-                for (var y = yMin; y <= yMax; y++)
-                {
-                    result.Add(new Point(x, y));
-                }
-            }
+            for (var y = yMin; y <= yMax; y++)
+                result.Add(new Point(x, y));
             return result;
         }
 
@@ -131,14 +116,12 @@ namespace VoidTime
 
         private Point ChunkCoordinateFromVector(Vector2D vector)
         {
-            var x = (int)Math.Floor(vector.X / chunkSize.Width);
-            var y = (int)Math.Floor(vector.Y / chunkSize.Height);
+            var x = (int) Math.Floor(vector.X / chunkSize.Width);
+            var y = (int) Math.Floor(vector.Y / chunkSize.Height);
             if (x >= MapSizeInChunks.Width || y >= MapSizeInChunks.Height || x < 0 || y < 0)
                 throw new IndexOutOfRangeException(
                     $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
             return new Point(x, y);
         }
-
-        #endregion
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,7 +7,7 @@ namespace VoidTime.GUI
 {
     public class MainGameUI : UIWindow
     {
-        private GameModel model;
+        private readonly GameModel model;
 
         public MainGameUI(GameModel model)
         {
@@ -37,7 +36,7 @@ namespace VoidTime.GUI
 
         private void Obj_UIChanged(object obj, List<IDrawData> data)
         {
-            drawData[(GUIControl)obj] = data;
+            drawData[(GUIControl) obj] = data;
             OnUIChanged(this, drawData.Select(x => x.Value)
                 .SelectMany(x => x)
                 .ToList());
@@ -45,7 +44,7 @@ namespace VoidTime.GUI
 
         public override void Unsubscribe()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void OnKeyPress(object sender, KeyEventArgs args)
@@ -60,8 +59,8 @@ namespace VoidTime.GUI
 
         public override void OnGameSizeChanged(object sender, EventArgs args)
         {
-            Size = ((MainForm)sender).Size;
-            model.GameBasicCamera.Size = ((MainForm)sender).Size;
+            Size = ((MainForm) sender).Size;
+            model.GameBasicCamera.Size = ((MainForm) sender).Size;
         }
     }
 }
