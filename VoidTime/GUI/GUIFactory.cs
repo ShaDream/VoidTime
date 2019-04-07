@@ -8,8 +8,8 @@ namespace VoidTime.GUI
         {
             switch (model)
             {
-                case GameModel _:
-                    var MainGameUI = new MainGameUI(model as GameModel);
+                case MainGameModel _:
+                    var MainGameUI = new MainGameUI(model as MainGameModel);
                     return MainGameUI;
             }
 

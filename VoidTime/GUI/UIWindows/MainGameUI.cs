@@ -7,9 +7,9 @@ namespace VoidTime.GUI
 {
     public class MainGameUI : UIWindow
     {
-        private readonly GameModel model;
+        private readonly MainGameModel model;
 
-        public MainGameUI(GameModel model)
+        public MainGameUI(MainGameModel model)
         {
             this.model = model;
             Controls.ItemAdded += Controls_ItemAdded;

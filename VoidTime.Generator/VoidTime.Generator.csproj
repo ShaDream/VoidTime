@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtlasSpriteGenerator.cs" />
     <Compile Include="BackgroundFormHelper.cs" />
     <Compile Include="BackgroundGenerater.cs" />
+    <Compile Include="FontSpriteFormHelper.cs" />
     <Compile Include="FontSpriteGenerator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

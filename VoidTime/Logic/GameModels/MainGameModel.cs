@@ -10,7 +10,7 @@ using Timer = System.Timers.Timer;
 
 namespace VoidTime
 {
-    public class GameModel : IGameModel
+    public class MainGameModel : IGameModel
     {
         private readonly Timer gameTick;
         private readonly PressedKeys keys = new PressedKeys();
@@ -22,7 +22,7 @@ namespace VoidTime
         public bool Paused = true;
 
 
-        public GameModel()
+        public MainGameModel()
         {
             var axes = new HashSet<Axis>
             {
