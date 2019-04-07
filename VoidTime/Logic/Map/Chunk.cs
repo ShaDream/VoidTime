@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Box2DSharp.Dynamics;
 
@@ -30,7 +31,7 @@ namespace VoidTime
         {
             gameObjects.Add(gameObject);
             gameObject.OnDestroy += RemoveGameObject;
-            gameObject.OnCreate += AddGameObject;
+            gameObject.OnCreate += OnObjectCreate;
         }
 
         public void AddGameObjects(IEnumerable<GameObject> gameObjects)
@@ -46,7 +47,7 @@ namespace VoidTime
         {
             gameObjects.Remove(gameObject);
             gameObject.OnDestroy -= RemoveGameObject;
-            gameObject.OnCreate -= AddGameObject;
+            gameObject.OnCreate -= OnObjectCreate;
         }
 
         public void ClearPhysicsObjects()
@@ -67,5 +68,7 @@ namespace VoidTime
         {
             return gameObjects;
         }
+
+        public Action<GameObject> OnObjectCreate;
     }
 }

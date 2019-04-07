@@ -21,7 +21,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            blast.Create(gl, Textures.player);
+            blast.Create(gl, Textures.Blast);
         }
     }
 }

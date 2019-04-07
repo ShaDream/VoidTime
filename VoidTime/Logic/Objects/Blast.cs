@@ -11,12 +11,12 @@ namespace VoidTime.Logic.Objects
     class Blast : PhysicalGameObject
     {
         private Vector2D velocity;
-        private const float speed = 10;
+        private const float speed = 200;
 
-        public Blast(Vector2D possition, Vector2D direction)
+        public Blast(Vector2D possition, double angle)
         {
             Position = possition;
-            velocity = direction * speed;
+            velocity = new Vector2D(speed, 0).Rotate(angle);
         }
 
         public override void Update()
