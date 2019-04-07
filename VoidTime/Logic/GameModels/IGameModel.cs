@@ -8,6 +8,7 @@ namespace VoidTime
     public interface IGameModel
     {
         World Physics { get; set; }
+        Controls Controls { get; set; }
 
         void Run();
         void Pause();

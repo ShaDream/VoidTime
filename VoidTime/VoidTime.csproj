@@ -96,6 +96,9 @@
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
+    <Compile Include="Logic\Control\MouseButton.cs" />
+    <Compile Include="Logic\Control\MouseContol.cs" />
+    <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
@@ -104,7 +107,7 @@
     <Compile Include="Logic\Objects\PhysicalGameObject.cs" />
     <Compile Include="Logic\Objects\Planet.cs" />
     <Compile Include="Logic\Objects\Player.cs" />
-    <Compile Include="Logic\Control\PressedKeys.cs" />
+    <Compile Include="Logic\Control\Controls.cs" />
     <Compile Include="Logic\Control\ReadonlyKeys.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Math\Vector2D.cs" />

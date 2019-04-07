@@ -61,7 +61,7 @@ namespace VoidTime
         {
             openGL = new OpenGLControl
             {
-                FrameRate = 60,
+                FrameRate = 1000,
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,

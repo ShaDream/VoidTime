@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ namespace VoidTime
     public class MainGameModel : IGameModel
     {
         private readonly Timer gameTick;
-        private readonly PressedKeys keys = new PressedKeys();
+        public Controls Controls { get; set; } = new Controls();
         private readonly GameMap map;
         private readonly GameObject player;
 
@@ -29,7 +30,8 @@ namespace VoidTime
                 new Axis("horizontal", Keys.D, Keys.A),
                 new Axis("vertical", Keys.W, Keys.S)
             };
-            var k = new ReadonlyKeys(keys, axes);
+            Controls.AxesHandler = axes.ToDictionary(x => x.Name);
+            var k = new ReadonlyKeys(Controls);
 
             gameTick = new Timer(16.66667F);
 
@@ -38,7 +40,7 @@ namespace VoidTime
 
             map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
 
-            var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
+            var planet = new Planet { Position = new Vector2D(5000, 5000), DrawingPriority = 1 };
             const int border = 1000;
             var allowedCoordinates = new Rectangle(border,
                 border,
@@ -47,7 +49,7 @@ namespace VoidTime
             player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
             var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
 
-            map.AddGameObjects(new[] {planet, player, player2});
+            map.AddGameObjects(new[] { planet, player, player2 });
             GameBasicCamera = new SmoothCamera(new Size(), player);
             gameTick.Elapsed += FrameTick;
         }
@@ -78,14 +80,14 @@ namespace VoidTime
 
         public void OnKeyPress(object sender, KeyEventArgs args)
         {
-            if (!keys.keys.Contains(args.KeyCode))
-                keys.keys.Add(args.KeyCode);
+            if (!Controls.KeysHandler.Contains(args.KeyCode))
+                Controls.KeysHandler.Add(args.KeyCode);
         }
 
         public void OnKeyRelease(object sender, KeyEventArgs args)
         {
-            if (keys.keys.Contains(args.KeyCode))
-                keys.keys.Remove(args.KeyCode);
+            if (Controls.KeysHandler.Contains(args.KeyCode))
+                Controls.KeysHandler.Remove(args.KeyCode);
         }
 
         public void OnMouseWheel(object sender, MouseEventArgs args)
@@ -114,7 +116,6 @@ namespace VoidTime
             var activeObjects = map.GetGameObjects(GameBasicCamera);
             activeObjects.ForEach(x => x.Update());
             Physics.Step(0.01666667F, 3, 6);
-
             map.UpdateMap(GameBasicCamera);
             GameBasicCamera.Update();
             Tick?.Invoke(activeObjects, GameBasicCamera);

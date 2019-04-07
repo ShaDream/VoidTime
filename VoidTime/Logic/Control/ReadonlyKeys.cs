@@ -6,40 +6,34 @@ namespace VoidTime
 {
     public class ReadonlyKeys
     {
-        private static PressedKeys keys;
-        private static Dictionary<string, Axis> axes;
+        private static Controls _controlses;
         private static bool IsCreated;
 
-
-        public ReadonlyKeys(PressedKeys keys, HashSet<Axis> axes)
+        public ReadonlyKeys(Controls controlses)
         {
             if (IsCreated)
                 return;
             IsCreated = true;
-            ReadonlyKeys.keys = keys;
-            ReadonlyKeys.axes = new Dictionary<string, Axis>();
-
-            foreach (var axis in axes) ReadonlyKeys.axes.Add(axis.Name, axis);
+            ReadonlyKeys._controlses = controlses;
         }
-
 
         public static bool IsKeyPressed(Keys key)
         {
-            return keys.keys.Contains(key);
+            return _controlses.KeysHandler.Contains(key);
         }
 
         public static bool IsAnyKeyPressed(params Keys[] keys)
         {
-            return keys.Any(x => ReadonlyKeys.keys.keys.Contains(x));
+            return keys.Any(x => ReadonlyKeys._controlses.KeysHandler.Contains(x));
         }
 
         public static float GetAxis(string name)
         {
-            if (!axes.ContainsKey(name)) return 0;
+            if (!_controlses.AxesHandler.ContainsKey(name)) return 0;
 
-            var local = axes[name];
-            return local.GetValue(keys.keys.Contains(local.PositiveKey),
-                keys.keys.Contains(local.NegativeKey));
+            var local = _controlses.AxesHandler[name];
+            return local.GetValue(_controlses.KeysHandler.Contains(local.PositiveKey),
+                _controlses.KeysHandler.Contains(local.NegativeKey));
         }
     }
 }
