@@ -17,7 +17,12 @@ namespace VoidTime
             OnDestroy?.Invoke(this);
         }
 
+        public virtual void Instance(GameObject obj)
+        {
+            OnCreate?.Invoke(obj);
+        }
 
         public event Action<GameObject> OnDestroy;
+        public event Action<GameObject> OnCreate;
     }
 }
