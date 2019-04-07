@@ -27,6 +27,11 @@ namespace VoidTime
             return keys.Any(x => ReadonlyKeys._controlses.KeysHandler.Contains(x));
         }
 
+        public static bool IsMouseButtonPressed(MouseButtons button)
+        {
+            return _controlses.MouseHandler.PressedPuttons.Contains(button);
+        }
+
         public static float GetAxis(string name)
         {
             if (!_controlses.AxesHandler.ContainsKey(name)) return 0;

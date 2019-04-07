@@ -96,7 +96,6 @@
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
-    <Compile Include="Logic\Control\MouseButton.cs" />
     <Compile Include="Logic\Control\MouseContol.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />

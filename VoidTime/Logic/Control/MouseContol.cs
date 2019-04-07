@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace VoidTime
 {
     public class MouseContol
     {
-        public HashSet<MouseButton> PressedPuttons = new HashSet<MouseButton>();
+        public HashSet<MouseButtons> PressedPuttons = new HashSet<MouseButtons>();
 
         public bool IsDoubleClicked;
         public Vector2D MousePosition;
