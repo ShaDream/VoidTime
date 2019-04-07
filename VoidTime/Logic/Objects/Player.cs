@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Box2DSharp.Collision;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
+using VoidTime.Logic.Objects;
 
 namespace VoidTime
 {
@@ -12,7 +13,6 @@ namespace VoidTime
         private readonly Rectangle AllowedCoordinates;
         private readonly bool canMove;
         private readonly float maxSpeed = 1000;
-        public AABB aabb;
 
         public double Angle = Math.PI / 2;
         private Vector2D velocity;
@@ -30,6 +30,11 @@ namespace VoidTime
         {
             if (canMove)
                 Move();
+            if (ReadonlyKeys.IsKeyPressed(Keys.Space))
+            {
+                var blast = new Blast(Position, velocity);
+                Instance(blast);
+            }
             CheckCoordinate();
         }
 
@@ -79,7 +84,6 @@ namespace VoidTime
             shape.SetAsBox(30 * ScaleFactor, 40 * ScaleFactor);
             Body = world.CreateBody(bodyDef);
             Fixtures.Add(canMove ? Body.CreateFixture(shape, 1) : Body.CreateFixture(shape, 100));
-            aabb = Fixtures[0].GetAABB(0);
         }
     }
 }

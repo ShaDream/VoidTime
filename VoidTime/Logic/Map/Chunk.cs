@@ -30,6 +30,7 @@ namespace VoidTime
         {
             gameObjects.Add(gameObject);
             gameObject.OnDestroy += RemoveGameObject;
+            gameObject.OnCreate += AddGameObject;
         }
 
         public void AddGameObjects(IEnumerable<GameObject> gameObjects)
@@ -45,6 +46,7 @@ namespace VoidTime
         {
             gameObjects.Remove(gameObject);
             gameObject.OnDestroy -= RemoveGameObject;
+            gameObject.OnCreate -= AddGameObject;
         }
 
         public void ClearPhysicsObjects()
