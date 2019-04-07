@@ -4,8 +4,11 @@ namespace VoidTime
 {
     public struct Vector2D
     {
-        public static Vector2D Zero => new Vector2D();
-        public static Vector2D One => new Vector2D(1, 1);
+        static Vector2D one = new Vector2D(1,1);
+        static Vector2D zero = new Vector2D(0, 0);
+
+        public static Vector2D Zero => zero;
+        public static Vector2D One => one;
 
         public float X { get; }
         public float Y { get; }
