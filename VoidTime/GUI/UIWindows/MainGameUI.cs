@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,8 +13,15 @@ namespace VoidTime.GUI
         public MainGameUI(MainGameModel model)
         {
             this.model = model;
+            var text = new TextBox();
+            text.Font = EuropeFontAtlas.GetAtlas();
+            text.FontSize = 40;
+            text.Location = new Point(0, 0);
+            text.Size = new Size(500, 500);
+            text.Text = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
             Controls.ItemAdded += Controls_ItemAdded;
             Controls.ItemRemoved += Controls_ItemRemoved;
+            Controls.Add(text);
         }
 
         private void Controls_ItemRemoved(GUIControl obj)

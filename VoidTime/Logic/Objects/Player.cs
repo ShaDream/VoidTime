@@ -32,7 +32,7 @@ namespace VoidTime
                 Move();
             if (ReadonlyKeys.IsKeyPressed(Keys.Space))
             {
-                var blast = new Blast(Position, velocity);
+                var blast = new Blast(Position, Angle);
                 Instance(blast);
             }
             CheckCoordinate();
