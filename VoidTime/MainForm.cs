@@ -47,7 +47,6 @@ namespace VoidTime
 
             currentModel.GameModelChanged += ChangeGameModel;
 
-
             model.Run();
         }
 
