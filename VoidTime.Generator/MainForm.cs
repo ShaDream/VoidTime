@@ -32,14 +32,11 @@ namespace VoidTime.Generator
             var menu = new MenuStrip {Height = 30};
             var generatorMenuItem = new ToolStripMenuItem("Generator");
             var createBackgroundGenerator = new ToolStripMenuItem("Create background image");
-            var createFontSpriteGenerator = new ToolStripMenuItem("Create Font Sprite");
             generatorMenuItem.DropDownItems.Add(createBackgroundGenerator);
-            generatorMenuItem.DropDownItems.Add(createFontSpriteGenerator);
 
             menu.Items.Add(generatorMenuItem);
 
             createBackgroundGenerator.Click += CreateBackgroundGeneratorPage;
-            createFontSpriteGenerator.Click += CreateFontSpriteGeneratorPage;
 
             grid.Controls.Add(menu, 0, 0);
             grid.Controls.Add(panel, 0, 1);
