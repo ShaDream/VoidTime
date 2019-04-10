@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace VoidTime.Logic.Objects
+namespace VoidTime
 {
     public class BattleShipPlayer : BattleShipObject
     {
@@ -13,6 +13,13 @@ namespace VoidTime.Logic.Objects
         public double Angle = Math.PI / 2;
         private Vector2D velocity;
         private float damage = 20;
+
+        public BattleShipPlayer(Vector2D position, float HP, float maxHP)
+        {
+            Position = position;
+            Data.MaxHealth = maxHP;
+            Data.CurrentHealth = HP;
+        }
 
         public override void Update()
         {
@@ -32,7 +39,7 @@ namespace VoidTime.Logic.Objects
         {
             var rotationVector =
                 new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * speed;
-            if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
+            if (Math.Abs(Math.Abs(ReadonlyKeys.GetAxis("horizontal")) + Math.Abs(ReadonlyKeys.GetAxis("vertical"))) > float.Epsilon)
             {
                 velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)

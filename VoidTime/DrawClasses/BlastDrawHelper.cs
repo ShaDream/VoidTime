@@ -2,7 +2,6 @@
 using System.Drawing;
 using SharpGL;
 using SharpGL.SceneGraph.Assets;
-using VoidTime.Logic.Objects;
 using VoidTime.Resources;
 
 namespace VoidTime

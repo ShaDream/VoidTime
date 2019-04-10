@@ -6,7 +6,6 @@ using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
 using Box2DSharp.Dynamics;
-using VoidTime.Physics;
 using Timer = System.Timers.Timer;
 
 namespace VoidTime
@@ -22,6 +21,9 @@ namespace VoidTime
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
 
+        public event Action<List<GameObject>, BasicCamera> Tick;
+        public event Action<IGameModel> GameModelChanged;
+        public World Physics { get; set; }
 
         public MainGameModel()
         {
@@ -53,12 +55,6 @@ namespace VoidTime
             GameBasicCamera = new SmoothCamera(new Size(), player);
             gameTick.Elapsed += FrameTick;
         }
-
-
-        public event Action<List<GameObject>, BasicCamera> Tick;
-        public event Action<IGameModel> GameModelChanged;
-        public World Physics { get; set; }
-
 
         public void Run()
         {
@@ -110,15 +106,23 @@ namespace VoidTime
             throw new NotImplementedException();
         }
 
+        public void OnSizeChanged(object sender, EventArgs args)
+        {
+            GameBasicCamera.Size = ((Form)sender).Size;
+        }
+
 
         private void FrameTick(object sender, ElapsedEventArgs e)
         {
-            var activeObjects = map.GetGameObjects(GameBasicCamera);
-            activeObjects.ForEach(x => x.Update());
-            Physics.Step(0.01666667F, 3, 6);
-            map.UpdateMap(GameBasicCamera);
-            GameBasicCamera.Update();
-            Tick?.Invoke(activeObjects, GameBasicCamera);
+            lock (this)
+            {
+                var activeObjects = map.GetGameObjects(GameBasicCamera, GameBasicCamera.Size);
+                activeObjects.ForEach(x => x.Update());
+                Physics.Step(0.01666667F, 3, 6);
+                map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
+                GameBasicCamera.Update();
+                Tick?.Invoke(activeObjects, GameBasicCamera);
+            }
         }
     }
 }

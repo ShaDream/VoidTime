@@ -1,27 +1,29 @@
 ﻿using System.Windows.Forms;
 
-namespace VoidTime.Logic.Objects
+namespace VoidTime
 {
     public class BattleShipEnemy : BattleShipObject
     {
         private BattleShipPlayer player;
 
         public double Angle;
-        private float maxSpeed = 500;
-        private float speed = 10;
+        private float maxSpeed = 600;
+        private float speed = 40;
         private Vector2D velocity;
 
-        private float recoveryTime = 5;
+        private float recoveryTime = 15;
         private float currentRecovery = 0;
         private bool canShoot => currentRecovery-- <= 0;
-        private float shootRange = 100;
+        private float shootRange = 2000;
         private float damage = 20;
 
 
-        public BattleShipEnemy(Vector2D position, BattleShipPlayer player)
+        public BattleShipEnemy(Vector2D position, BattleShipPlayer player, float HP, float maxHP)
         {
             Position = position;
             this.player = player;
+            Data.MaxHealth = maxHP;
+            Data.CurrentHealth = HP;
         }
 
         public override void Update()
@@ -37,7 +39,7 @@ namespace VoidTime.Logic.Objects
             if (player == null)
                 return;
 
-            var rotationVector = (player.Position - Position).Normilized * 10;
+            var rotationVector = (player.Position - Position).Normilized * speed;
             velocity += rotationVector;
             if (velocity.Magnitude > maxSpeed)
                 velocity = velocity.Normilized * maxSpeed;

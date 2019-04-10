@@ -22,5 +22,6 @@ namespace VoidTime
         void OnMouseMove(object sender, MouseEventArgs args);
         void OnMouseClick(object sender, MouseEventArgs args);
         void OnMouseDoubleClick(object sender, MouseEventArgs args);
+        void OnSizeChanged(object sender, EventArgs args);
     }
 }

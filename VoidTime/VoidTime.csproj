@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DA374777-5ADA-44B2-88E7-3ECDB4D9BF65}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>VoidTime</RootNamespace>
     <AssemblyName>VoidTime</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -36,7 +36,7 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>VoidTime.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Box2DSharp">
@@ -69,34 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawClasses\BackgroundDrawHelper.cs" />
+    <Compile Include="DrawClasses\BattleShipEnemyDrawHelper.cs" />
+    <Compile Include="DrawClasses\BattleShipPlayerDrawHelper.cs" />
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
     <Compile Include="DrawClasses\ObjectOnDisplay.cs" />
     <Compile Include="DrawClasses\IDrawable.cs" />
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
-    <Compile Include="GUI\Controls\Button.cs" />
-    <Compile Include="GUI\Controls\ProgressBar.cs" />
-    <Compile Include="GUI\Draw\DrawData\RectangleDrawData.cs" />
-    <Compile Include="GUI\Draw\DrawData\TextureDrawData.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\IUIDrawable.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\MaskHelper.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\RectangleDrawHelper.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\TextDrawHelper.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\TextureDrawHelper.cs" />
-    <Compile Include="GUI\EventList.cs" />
-    <Compile Include="GUI\Font\Character.cs" />
-    <Compile Include="GUI\Controls\TextBox.cs" />
-    <Compile Include="GUI\Controls\UIWindow.cs" />
-    <Compile Include="GUI\Font\Atlases\EuropeFontAtlas.cs" />
-    <Compile Include="GUI\Font\FontAtlas.cs" />
-    <Compile Include="GUI\Controls\GUIControl.cs" />
-    <Compile Include="GUI\GUIFactory.cs" />
-    <Compile Include="GUI\Draw\DrawData\IDrawData.cs" />
-    <Compile Include="GUI\UIMask.cs" />
-    <Compile Include="GUI\UIWindows\MainGameUI.cs" />
-    <Compile Include="GUI\Draw\DrawData\TextDrawData.cs" />
-    <Compile Include="GUI\Font\TextRenderer.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />

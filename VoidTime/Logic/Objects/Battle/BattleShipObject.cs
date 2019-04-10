@@ -1,17 +1,18 @@
 ﻿using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 
-namespace VoidTime.Logic.Objects
+namespace VoidTime
 {
     public class BattleShipObject : PhysicalGameObject
     {
-        public BattleShipStatsData data;
+        public BattleShipStatsData Data;
+        private Vector2D nextPosition;
 
         public void GetDamage(float damage)
         {
-            damage = data.Defence > damage ? 0 : damage - data.Defence;
-            data.CurrentHealth -= damage;
-            if (data.CurrentHealth <= 0)
+            damage = Data.Defence > damage ? 0 : damage - Data.Defence;
+            Data.CurrentHealth -= damage;
+            if (Data.CurrentHealth <= 0)
                 Destoy();
         }
 

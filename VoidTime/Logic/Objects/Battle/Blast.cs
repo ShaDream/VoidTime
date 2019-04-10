@@ -5,7 +5,7 @@ using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
 
-namespace VoidTime.Logic.Objects
+namespace VoidTime
 {
     class Blast : PhysicalGameObject
     {
@@ -30,7 +30,7 @@ namespace VoidTime.Logic.Objects
             this.owner = owner;
             this.damagableTypes = new HashSet<Type>(damagableTypes.Select(x =>
             {
-                if (!(x == typeof(BattleShipObject)))
+                if (!(x.IsSubclassOf(typeof(BattleShipObject))))
                     throw new ArgumentException("Only BattleShipObject allowed in blast damagable types");
                 return x;
             }));

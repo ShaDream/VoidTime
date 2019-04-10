@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using Box2DSharp.Collision;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
-using VoidTime.Logic.Objects;
 
 namespace VoidTime
 {

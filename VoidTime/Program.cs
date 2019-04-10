@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace VoidTime
@@ -10,7 +11,8 @@ namespace VoidTime
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(new MainGameModel()));
+            Application.Run(
+                new MainForm(new BattleGameModel(new BattleGameModelData { MapSize = new Size(20000, 20000) })));
         }
     }
 }
