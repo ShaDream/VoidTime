@@ -10,8 +10,8 @@ namespace VoidTime
     {
         private readonly Chunk[,] chunks;
         private readonly Size chunkSize;
-        private HashSet<Point> lastChunks = new HashSet<Point>();
         private readonly World world;
+        private readonly FrameListComparator<Point> lastChunks = new FrameListComparator<Point>();
 
 
         public Size MapSizeInChunks { get; }
@@ -23,6 +23,9 @@ namespace VoidTime
 
         public GameMap(Size mapSizeInChunks, Size chunkSize, World world, IEnumerable<GameObject> gameObjects)
         {
+            lastChunks.ItemAdded += ChunkLoad;
+            lastChunks.ItemRemoved += ChuckUnload;
+
             this.world = world;
             MapSizeInChunks = mapSizeInChunks;
             this.chunkSize = chunkSize;
@@ -32,16 +35,23 @@ namespace VoidTime
             MapSize = new Size(MapSizeInChunks.Width * chunkSize.Width, MapSizeInChunks.Height * chunkSize.Height);
         }
 
+        private void ChuckUnload(Point chunkCoordinate)
+        {
+            chunks[chunkCoordinate.X, chunkCoordinate.Y].ClearPhysicsObjects();
+        }
+
+        private void ChunkLoad(Point chunkCoordinate)
+        {
+            chunks[chunkCoordinate.X, chunkCoordinate.Y].ResumePhysics(world);
+        }
 
         public void AddGameObjects(IEnumerable<GameObject> gameObjects)
         {
             foreach (var gameObject in gameObjects)
             {
                 var chunkCoordinate = ChunkCoordinateFromVector(gameObject.Position);
-                if (lastChunks.Contains(chunkCoordinate) && gameObject is PhysicalGameObject)
-                {
-                    (gameObject as PhysicalGameObject).CreatePhysics(world);
-                }
+                if (lastChunks.Contains(chunkCoordinate) && gameObject is PhysicalGameObject o)
+                    o.CreatePhysics(world);
                 chunks[chunkCoordinate.X, chunkCoordinate.Y].AddGameObject(gameObject);
             }
         }
@@ -55,16 +65,7 @@ namespace VoidTime
         {
             var chunksCoordinate = GetChunksCoordinateFromCamera(basicCamera);
 
-            var isOnce = false;
-            foreach (var point in chunksCoordinate)
-                if (!lastChunks.Contains(point))
-                {
-                    isOnce = true;
-                    chunks[point.X, point.Y].ResumePhysics(world);
-                }
-
-            if (isOnce)
-                lastChunks = new HashSet<Point>(chunksCoordinate);
+            lastChunks.SetNewFrameData(chunksCoordinate);
 
             return chunksCoordinate
                 .Select(coordinate => chunks[coordinate.X, coordinate.Y].GetGameObjects())
@@ -114,6 +115,8 @@ namespace VoidTime
                 var chunkCoordinateObject = ChunkCoordinateFromVector(gameObject.Position);
                 if (chunkCoordinateObject == chunkCoordinate) continue;
                 chunks[chunkCoordinate.X, chunkCoordinate.Y].RemoveGameObject(gameObject);
+                if(gameObject is PhysicalGameObject o && !lastChunks.Contains(chunkCoordinateObject))
+                    o.DeletePhysics();
                 chunks[chunkCoordinateObject.X, chunkCoordinateObject.Y].AddGameObject(gameObject);
                 i--;
             }
@@ -124,7 +127,7 @@ namespace VoidTime
             var x = (int) Math.Floor(vector.X / chunkSize.Width);
             var y = (int) Math.Floor(vector.Y / chunkSize.Height);
             if (x >= MapSizeInChunks.Width || y >= MapSizeInChunks.Height || x < 0 || y < 0)
-                 throw new IndexOutOfRangeException(
+                throw new IndexOutOfRangeException(
                     $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
             return new Point(x, y);
         }
