@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
@@ -17,11 +15,26 @@ namespace VoidTime.Logic.Objects
         private int currentLiveTime;
         private const int LiveTime = 120;
 
-        public Blast(Vector2D possition, double angle)
+        private readonly float damage;
+
+        private GameObject owner;
+        private HashSet<Type> damagableTypes;
+
+        /// <param name="damagableTypes">Only BattleShipObject allowed</param>
+        public Blast(Vector2D possition, double angle, float damage, GameObject owner,
+            params Type[] damagableTypes)
         {
             Position = possition;
             Angle = angle + Math.PI / 2;
             velocity = new Vector2D(speed, 0).Rotate(angle);
+            this.owner = owner;
+            this.damagableTypes = new HashSet<Type>(damagableTypes.Select(x =>
+            {
+                if (!(x == typeof(BattleShipObject)))
+                    throw new ArgumentException("Only BattleShipObject allowed in blast damagable types");
+                return x;
+            }));
+            this.damage = damage;
         }
 
         public override void Update()
@@ -51,9 +64,10 @@ namespace VoidTime.Logic.Objects
         public override void BeginContact(Contact contact)
         {
             var other = contact.FixtureA.Body == Body ? contact.FixtureB : contact.FixtureA;
-            if (other.Body.UserData is Blast blast)
+            if (damagableTypes.Contains(other.Body.UserData.GetType()) && other.Body.UserData != owner)
             {
-                blast.Destoy();
+                (other.Body.UserData as BattleShipObject)?.GetDamage(damage);
+                Destoy();
             }
         }
     }
