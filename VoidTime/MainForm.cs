@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using SharpGL;
 using SharpGL.Enumerations;
-using VoidTime.GUI;
 
 namespace VoidTime
 {
@@ -14,14 +13,9 @@ namespace VoidTime
         private readonly Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
             new Dictionary<Type, Action<ObjectOnDisplay, OpenGL>>();
 
-        private readonly Dictionary<Type, Action<IDrawData, OpenGL>> drawHelpersUI =
-            new Dictionary<Type, Action<IDrawData, OpenGL>>();
-
         private IGameModel currentModel;
-        private UIWindow currentWindow;
 
         private List<ObjectOnDisplay> drawObjects = new List<ObjectOnDisplay>();
-        private List<IDrawData> drawUI = new List<IDrawData>();
 
         private OpenGLControl openGL;
 
@@ -38,21 +32,12 @@ namespace VoidTime
             ShowIcon = false;
             currentModel.Tick += FrameTick;
 
-            currentWindow = GUIFactory.Create(currentModel);
 
-            openGL.KeyUp += currentWindow.OnKeyRelease;
-            openGL.KeyDown += currentWindow.OnKeyPress;
-            SizeChanged += currentWindow.OnGameSizeChanged;
-            currentWindow.UIChanged += UIChanged;
-
-            currentModel.GameModelChanged += ChangeGameModel;
+            openGL.KeyUp += currentModel.OnKeyRelease;
+            openGL.KeyDown += currentModel.OnKeyPress;
+            SizeChanged += currentModel.OnSizeChanged;
 
             model.Run();
-        }
-
-        private void UIChanged(GUIControl control, List<IDrawData> obj)
-        {
-            drawUI = obj.OrderByDescending(x => x.DrawPriority).ToList();
         }
 
 
@@ -100,9 +85,6 @@ namespace VoidTime
             foreach (var objectOnDisplay in drawObjects)
                 drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay, gl);
 
-            foreach (var drawData in drawUI)
-                drawHelpersUI[drawData.GetType()].Invoke(drawData, gl);
-
             gl.Disable(OpenGL.GL_BLEND);
         }
 
@@ -123,21 +105,6 @@ namespace VoidTime
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
             }
-
-            foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
-                .Where(x => typeof(IUIDrawable).IsAssignableFrom(x) &&
-                            !x.IsInterface &&
-                            !x.IsAbstract))
-            {
-                var instance = Activator.CreateInstance(drawClass);
-                var typeGameObject = (Type) drawClass.GetProperty("DrawDataType")?.GetValue(instance, null);
-                var drawingMethod = (Action<IDrawData, OpenGL>) drawClass
-                    .GetMethod("DrawUi")
-                    ?.CreateDelegate(typeof(Action<IDrawData, OpenGL>), instance);
-
-                drawHelpersUI.Add(typeGameObject, drawingMethod);
-            }
         }
 
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
@@ -145,13 +112,6 @@ namespace VoidTime
             drawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
                 let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
                 select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
-        }
-
-        private void ChangeGameModel(IGameModel obj)
-        {
-            currentWindow.Unsubscribe();
-            currentModel = obj;
-            currentWindow = GUIFactory.Create(obj);
         }
     }
 }
