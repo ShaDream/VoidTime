@@ -30,11 +30,7 @@ namespace VoidTime
         {
             if (canMove)
                 Move();
-            if (ReadonlyKeys.IsKeyPressed(Keys.Space))
-            {
-                var blast = new Blast(Position, Angle);
-                Instance(blast);
-            }
+
             CheckCoordinate();
         }
 
@@ -50,9 +46,7 @@ namespace VoidTime
                 Angle = rotationVector.GetAngle();
             }
             else
-            {
                 velocity *= 0.95f;
-            }
 
             SetLinearVelocity(velocity);
         }

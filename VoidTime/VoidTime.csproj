@@ -101,10 +101,16 @@
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
     <Compile Include="Logic\Control\MouseContol.cs" />
+    <Compile Include="Logic\Data\BattleEndData.cs" />
+    <Compile Include="Logic\Data\BattleGameModelData.cs" />
+    <Compile Include="Logic\Data\BattleShipStatsData.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
-    <Compile Include="Logic\Objects\Blast.cs" />
+    <Compile Include="Logic\Objects\Battle\BattleShipEnemy.cs" />
+    <Compile Include="Logic\Objects\Battle\BattleShipObject.cs" />
+    <Compile Include="Logic\Objects\Battle\BattleShipPlayer.cs" />
+    <Compile Include="Logic\Objects\Battle\Blast.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModels\MainGameModel.cs" />
@@ -114,7 +120,8 @@
     <Compile Include="Logic\Control\Controls.cs" />
     <Compile Include="Logic\Control\ReadonlyKeys.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
-    <Compile Include="Logic\Math\Vector2D.cs" />
+    <Compile Include="Logic\Utility\FrameListComparator.cs" />
+    <Compile Include="Logic\Utility\Vector2D.cs" />
     <Compile Include="Logic\Map\GameMap.cs" />
     <Compile Include="Logic\Physics\GlobalContactListner.cs" />
     <Compile Include="MainForm.cs">
