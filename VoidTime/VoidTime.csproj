@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DA374777-5ADA-44B2-88E7-3ECDB4D9BF65}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>VoidTime</RootNamespace>
     <AssemblyName>VoidTime</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -84,6 +84,7 @@
     <Compile Include="Logic\Data\BattleEndData.cs" />
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
     <Compile Include="Logic\Data\BattleShipStatsData.cs" />
+    <Compile Include="Logic\GameModels\BasicGameModel.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
@@ -98,8 +99,9 @@
     <Compile Include="Logic\Objects\Planet.cs" />
     <Compile Include="Logic\Objects\Player.cs" />
     <Compile Include="Logic\Control\Controls.cs" />
-    <Compile Include="Logic\Control\ReadonlyKeys.cs" />
+    <Compile Include="Logic\Control\Input.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
+    <Compile Include="Logic\Time.cs" />
     <Compile Include="Logic\Utility\FrameListComparator.cs" />
     <Compile Include="Logic\Utility\Vector2D.cs" />
     <Compile Include="Logic\Map\GameMap.cs" />
