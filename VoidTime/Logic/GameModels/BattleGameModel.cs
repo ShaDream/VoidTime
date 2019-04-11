@@ -10,36 +10,37 @@ using Timer = System.Timers.Timer;
 
 namespace VoidTime
 {
-    public class BattleGameModel : IGameModel
+    public class BattleGameModel : BasicGameModel
     {
-        private readonly object locker = new object();
-
-        public World Physics { get; set; }
-        public Controls Controls { get; set; } = new Controls();
         private readonly Timer gameTick;
+        private readonly object locker = new object();
         private readonly GameMap map;
         private readonly BattleShipPlayer player;
+        public int currentCreateRecovery = 0;
+
+        public int EnemyCreateRecovery = 200;
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
 
-        public int EnemyCreateRecovery = 1000;
-        public int currentCreateRecovery = 0;
-
-        public event Action<List<GameObject>, BasicCamera> Tick;
-        public event Action<IGameModel> GameModelChanged;
-        public event Action<BattleEndData> BattleIsOver;
+        public override World Physics { get; set; }
+        public override Controls Controls { get; set; }
 
 
         public BattleGameModel(BattleGameModelData data)
         {
+            player = new BattleShipPlayer(new Vector2D(data.MapSize.Width / 2, data.MapSize.Width / 2), 100, 100);
+            GameBasicCamera = new SmoothCamera(new Size(), player);
+
+            Controls = new Controls(GameBasicCamera);
+
             var axes = new HashSet<Axis>
             {
                 new Axis("horizontal", Keys.D, Keys.A),
                 new Axis("vertical", Keys.W, Keys.S)
             };
             Controls.AxesHandler = axes.ToDictionary(x => x.Name);
-            var k = new ReadonlyKeys(Controls);
+            var k = new Input(Controls);
 
             gameTick = new Timer(16.66667F);
 
@@ -47,20 +48,23 @@ namespace VoidTime
             Physics.SetContactListener(new GlobalContactListner());
 
             map = new GameMap(new Size(1, 1), data.MapSize, Physics);
-            player = new BattleShipPlayer(new Vector2D(data.MapSize.Width / 2, data.MapSize.Width / 2), 100, 100);
 
             map.AddGameObjects(player);
             player.OnDestroy += GameOver;
 
-            GameBasicCamera = new SmoothCamera(new Size(), player);
             gameTick.Elapsed += FrameTick;
         }
 
+        public override event Action<List<GameObject>, BasicCamera> Tick;
+        public override event Action<IGameModel> GameModelChanged;
+        public event Action<BattleEndData> BattleIsOver;
+
         private void GameOver(GameObject obj)
         {
+            Console.WriteLine("Lose");
         }
 
-        public void Run()
+        public override void Run()
         {
             if (!Paused)
                 return;
@@ -69,7 +73,7 @@ namespace VoidTime
             gameTick.Start();
         }
 
-        public void Pause()
+        public override void Pause()
         {
             if (Paused)
                 return;
@@ -78,41 +82,9 @@ namespace VoidTime
             gameTick.Stop();
         }
 
-        public void OnKeyPress(object sender, KeyEventArgs args)
+        public override void OnSizeChanged(object sender, EventArgs args)
         {
-            if (!Controls.KeysHandler.Contains(args.KeyCode))
-                Controls.KeysHandler.Add(args.KeyCode);
-        }
-
-        public void OnKeyRelease(object sender, KeyEventArgs args)
-        {
-            if (Controls.KeysHandler.Contains(args.KeyCode))
-                Controls.KeysHandler.Remove(args.KeyCode);
-        }
-
-        public void OnMouseWheel(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnMouseMove(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnMouseClick(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnMouseDoubleClick(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnSizeChanged(object sender, EventArgs args)
-        {
-            GameBasicCamera.Size = ((Form)sender).Size;
+            GameBasicCamera.Size = ((Form) sender).Size;
         }
 
         private void FrameTick(object sender, ElapsedEventArgs e)
@@ -127,11 +99,12 @@ namespace VoidTime
                 Tick?.Invoke(activeObjects, GameBasicCamera);
                 if (currentCreateRecovery <= 0)
                 {
-                    map.AddGameObject(new BattleShipEnemy(new Vector2D(map.MapSize.Width / 2+1, map.MapSize.Width / 2),
+                    map.AddGameObject(new BattleShipEnemy(new Vector2D(map.MapSize.Width / 2 + 1000, map.MapSize.Width / 2),
                         player, 100, 100));
                     currentCreateRecovery = EnemyCreateRecovery;
                 }
                 currentCreateRecovery--;
+                Controls.ClearOneFrameValues();
             }
         }
     }
