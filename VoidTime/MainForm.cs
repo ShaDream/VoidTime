@@ -35,6 +35,11 @@ namespace VoidTime
 
             openGL.KeyUp += currentModel.OnKeyRelease;
             openGL.KeyDown += currentModel.OnKeyPress;
+            openGL.MouseMove += currentModel.OnMouseMove;
+            openGL.MouseDown += currentModel.OnMousePressed;
+            openGL.MouseUp += currentModel.OnMouseReleased;
+            openGL.MouseDoubleClick += currentModel.OnMouseDoubleClick;
+            openGL.MouseWheel += currentModel.OnMouseWheel;
             SizeChanged += currentModel.OnSizeChanged;
 
             model.Run();
