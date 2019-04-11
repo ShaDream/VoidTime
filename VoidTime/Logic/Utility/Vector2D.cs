@@ -4,11 +4,9 @@ namespace VoidTime
 {
     public struct Vector2D
     {
-        static Vector2D one = new Vector2D(1,1);
-        static Vector2D zero = new Vector2D(0, 0);
+        public static Vector2D Zero { get; } = new Vector2D(0, 0);
 
-        public static Vector2D Zero => zero;
-        public static Vector2D One => one;
+        public static Vector2D One { get; } = new Vector2D(1, 1);
 
         public float X { get; }
         public float Y { get; }
@@ -16,7 +14,7 @@ namespace VoidTime
         public float Magnitude => (float) Math.Sqrt(X * X + Y * Y);
         public float SqrMagnitude => X * X + Y * Y;
         public Vector2D Normilized => new Vector2D(X / Magnitude, Y / Magnitude);
-
+        public double Angle => Math.Atan2(Y, X);
 
         public Vector2D(float x = 0, float y = 0)
         {
@@ -73,10 +71,6 @@ namespace VoidTime
                 (float) (X * Math.Sin(angle) + Y * Math.Cos(angle)));
         }
 
-        public double GetAngle()
-        {
-            return Math.Atan2(Y, X);
-        }
 
         /// <summary>
         ///     Calculate the product of two vectors.
@@ -86,6 +80,11 @@ namespace VoidTime
         public static float Dot(Vector2D a, Vector2D b)
         {
             return a.X * b.X + a.Y * b.Y;
+        }
+
+        public override string ToString()
+        {
+            return $"{{{X}, {Y}}}";
         }
     }
 }
