@@ -1,4 +1,4 @@
-﻿namespace VoidTime.Logic
+﻿namespace VoidTime
 {
     public class Time
     {
