@@ -38,11 +38,11 @@ namespace VoidTime
         private void Move()
         {
             Angle = (Input.GetWorldMousePosition() - Position).Angle;
+
             var rotationVector =
                 new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * speed;
-            if (Math.Abs(Math.Abs(Input.GetAxis("horizontal")) + Math.Abs(Input.GetAxis("vertical"))) > float.Epsilon)
+            if (Math.Abs(Input.GetAxis("horizontal")) + Math.Abs(Input.GetAxis("vertical")) > float.Epsilon)
             {
-                velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
             }
