@@ -14,7 +14,7 @@ namespace VoidTime
         private float recoveryTime = 15;
         private float currentRecovery = 0;
         private bool canShoot => currentRecovery-- <= 0;
-        private float shootRange = 2000;
+        private float shootRange = 1000;
         private float damage = 20;
 
 
@@ -43,7 +43,7 @@ namespace VoidTime
             velocity += rotationVector;
             if (velocity.Magnitude > maxSpeed)
                 velocity = velocity.Normilized * maxSpeed;
-            Angle = rotationVector.GetAngle();
+            Angle = rotationVector.Angle;
 
             SetLinearVelocity(velocity);
         }

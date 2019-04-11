@@ -36,13 +36,13 @@ namespace VoidTime
         private void Move()
         {
             var rotationVector =
-                new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * 10;
-            if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
+                new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * 10;
+            if (Input.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
-                Angle = rotationVector.GetAngle();
+                Angle = rotationVector.Angle;
             }
             else
                 velocity *= 0.95f;

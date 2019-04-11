@@ -24,7 +24,7 @@ namespace VoidTime
         public override void Update()
         {
             Move();
-            if (ReadonlyKeys.IsKeyPressed(Keys.Space) && currentShootRecover <= 0)
+            if (Input.GetMouseButton(MouseButtons.Left) && currentShootRecover <= 0)
             {
                 var blast = new Blast(Position, Angle, damage, this, typeof(BattleShipEnemy));
                 Instantiate(blast);
@@ -37,14 +37,14 @@ namespace VoidTime
 
         private void Move()
         {
+            Angle = (Input.GetWorldMousePosition() - Position).Angle;
             var rotationVector =
-                new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * speed;
-            if (Math.Abs(Math.Abs(ReadonlyKeys.GetAxis("horizontal")) + Math.Abs(ReadonlyKeys.GetAxis("vertical"))) > float.Epsilon)
+                new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * speed;
+            if (Math.Abs(Math.Abs(Input.GetAxis("horizontal")) + Math.Abs(Input.GetAxis("vertical"))) > float.Epsilon)
             {
                 velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
-                Angle = rotationVector.GetAngle();
             }
             else
             {
