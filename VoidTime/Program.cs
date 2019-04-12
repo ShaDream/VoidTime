@@ -11,8 +11,7 @@ namespace VoidTime
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(
-                new MainForm(new BattleGameModel(new BattleGameModelData { MapSize = new Size(200000, 200000) })));
+            Application.Run(new MainForm(new MainGameModel()));
         }
     }
 }

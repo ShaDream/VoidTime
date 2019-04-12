@@ -9,6 +9,7 @@ namespace VoidTime
     {
         World Physics { get; set; }
         Controls Controls { get; set; }
+        TimeData Time { get; set; }
 
         void Run();
         void Pause();

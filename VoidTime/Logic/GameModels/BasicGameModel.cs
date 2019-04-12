@@ -9,6 +9,7 @@ namespace VoidTime
     {
         public abstract World Physics { get; set; }
         public abstract Controls Controls { get; set; }
+        public abstract TimeData Time { get; set; }
         public abstract void Run();
 
         public abstract void Pause();

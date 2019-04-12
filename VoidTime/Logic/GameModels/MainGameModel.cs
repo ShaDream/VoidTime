@@ -19,11 +19,18 @@ namespace VoidTime
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
+
         public override Controls Controls { get; set; }
         public override World Physics { get; set; }
+        public override TimeData Time { get; set; }
 
         public MainGameModel()
         {
+            Physics = new World(new Vector2(0, 0));
+            Physics.SetContactListener(new GlobalContactListner());
+
+            map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
+
             const int border = 1000;
             var allowedCoordinates = new Rectangle(border,
                 border,
@@ -43,18 +50,16 @@ namespace VoidTime
             Controls.AxesHandler = axes.ToDictionary(x => x.Name);
             Input.Create(Controls);
 
+            Time = new TimeData();
+            VoidTime.Time.Create(Time);
+
             gameTick = new Timer(16.66667F);
-
-            Physics = new World(new Vector2(0, 0));
-            Physics.SetContactListener(new GlobalContactListner());
-
-            map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
 
             var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
 
-            var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
+            //var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
 
-            map.AddGameObjects(planet, player, player2);
+            map.AddGameObjects(planet, player);
             gameTick.Elapsed += FrameTick;
         }
 
@@ -88,6 +93,7 @@ namespace VoidTime
         {
             lock (this)
             {
+                Time.Update();
                 var activeObjects = map.GetGameObjects(GameBasicCamera, GameBasicCamera.Size);
                 activeObjects.ForEach(x => x.Update());
                 Physics.StepWithDelete(0.01666667F, 3, 6);
