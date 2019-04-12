@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
+using System.Threading.Tasks;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
@@ -67,21 +69,23 @@ namespace VoidTime
 
         protected BodyDef CreateBodyDef()
         {
-            return new BodyDef {UserData = this};
+            return new BodyDef { UserData = this };
         }
 
         public void DeletePhysics()
         {
-            foreach (var fixture in Fixtures)
-                Body.DestroyFixture(fixture);
+            PhysicsBodyRemover.Add(Body, Fixtures);
+
             Fixtures.Clear();
             position = Position;
-            Body.World.DestroyBody(Body);
+
             Body = null;
         }
 
         public override void Destoy()
         {
+            if (Destroyed)
+                return;
             DeletePhysics();
             base.Destoy();
         }

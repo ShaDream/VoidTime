@@ -18,7 +18,7 @@ namespace VoidTime
         private readonly BattleShipPlayer player;
         public int currentCreateRecovery = 0;
 
-        public int EnemyCreateRecovery = 200;
+        public int EnemyCreateRecovery = 5;
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
@@ -29,7 +29,7 @@ namespace VoidTime
 
         public BattleGameModel(BattleGameModelData data)
         {
-            player = new BattleShipPlayer(new Vector2D(data.MapSize.Width / 2, data.MapSize.Width / 2), 100, 100);
+            player = new BattleShipPlayer(new Vector2D(data.MapSize.Width / 2, data.MapSize.Width / 2), 1000000, 1000000);
             GameBasicCamera = new SmoothCamera(new Size(), player);
 
             Controls = new Controls(GameBasicCamera);
@@ -93,7 +93,7 @@ namespace VoidTime
             {
                 var activeObjects = map.GetGameObjects(GameBasicCamera);
                 activeObjects.ForEach(x => x.Update());
-                Physics.Step(0.01666667F, 3, 6);
+                Physics.StepWithDelete(0.01666667F, 3, 6);
                 map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
                 GameBasicCamera.Update();
                 Tick?.Invoke(activeObjects, GameBasicCamera);

@@ -7,7 +7,7 @@ namespace VoidTime
     {
         private readonly float maxSpeed = 1000;
         private float speed = 40;
-        private const int ShootRecover = 10;
+        private const int ShootRecover = 0;
         private int currentShootRecover = 0;
 
         public double Angle = Math.PI / 2;
@@ -41,8 +41,9 @@ namespace VoidTime
 
             var rotationVector =
                 new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * speed;
-            if (Math.Abs(Input.GetAxis("horizontal")) + Math.Abs(Input.GetAxis("vertical")) > float.Epsilon)
+            if (Math.Abs(Math.Abs(Input.GetAxis("horizontal")) + Math.Abs(Input.GetAxis("vertical"))) > float.Epsilon)
             {
+                velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
             }
