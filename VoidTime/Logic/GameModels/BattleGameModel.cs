@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
+using Box2DSharp.Collision;
+using Box2DSharp.Collision.Collider;
 using Box2DSharp.Dynamics;
 using Timer = System.Timers.Timer;
 
@@ -16,7 +19,7 @@ namespace VoidTime
         private readonly object locker = new object();
         private readonly GameMap map;
         private readonly BattleShipPlayer player;
-        public int currentCreateRecovery = 0;
+        public int currentCreateRecovery;
 
         public int EnemyCreateRecovery = 5;
 
@@ -25,6 +28,8 @@ namespace VoidTime
 
         public override World Physics { get; set; }
         public override Controls Controls { get; set; }
+        public TimeData time { get; set; }
+        public float average;
 
 
         public BattleGameModel(BattleGameModelData data)
@@ -40,9 +45,12 @@ namespace VoidTime
                 new Axis("vertical", Keys.W, Keys.S)
             };
             Controls.AxesHandler = axes.ToDictionary(x => x.Name);
-            var k = new Input(Controls);
+            time = new TimeData();
 
-            gameTick = new Timer(16.66667F);
+            Input.Create(Controls);
+            Time.Create(time);
+
+            gameTick = new Timer(8);
 
             Physics = new World(new Vector2(0, 0));
             Physics.SetContactListener(new GlobalContactListner());
@@ -91,21 +99,30 @@ namespace VoidTime
         {
             lock (locker)
             {
+                time.Update();
                 var activeObjects = map.GetGameObjects(GameBasicCamera);
                 activeObjects.ForEach(x => x.Update());
                 Physics.StepWithDelete(0.01666667F, 3, 6);
                 map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
                 GameBasicCamera.Update();
                 Tick?.Invoke(activeObjects, GameBasicCamera);
-                if (currentCreateRecovery <= 0)
-                {
-                    map.AddGameObject(new BattleShipEnemy(new Vector2D(map.MapSize.Width / 2 + 1000, map.MapSize.Width / 2),
-                        player, 100, 100));
-                    currentCreateRecovery = EnemyCreateRecovery;
-                }
-                currentCreateRecovery--;
+                CreateEnemy();
                 Controls.ClearOneFrameValues();
+                average = average + (Time.DeltaTime - average) / Time.FrameCount;
+                Console.WriteLine(average + " " + Time.DeltaTime);
             }
+        }
+
+        private void CreateEnemy()
+        {
+            if (currentCreateRecovery <= 0)
+            {
+                map.AddGameObject(new BattleShipEnemy(new Vector2D(map.MapSize.Width / 2 + 1000, map.MapSize.Width / 2),
+                    player, 100, 100));
+                currentCreateRecovery = EnemyCreateRecovery;
+            }
+
+            currentCreateRecovery--;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace VoidTime
                 new Axis("vertical", Keys.W, Keys.S)
             };
             Controls.AxesHandler = axes.ToDictionary(x => x.Name);
-            var k = new Input(Controls);
+            Input.Create(Controls);
 
             gameTick = new Timer(16.66667F);
 

@@ -102,9 +102,10 @@
     <Compile Include="Logic\Control\Input.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />
-    <Compile Include="Logic\Time.cs" />
+    <Compile Include="Logic\Utility\Time\Time.cs" />
     <Compile Include="Logic\Utility\Extensions\WorldExtensions.cs" />
     <Compile Include="Logic\Utility\FrameListComparator.cs" />
+    <Compile Include="Logic\Utility\Time\TimeData.cs" />
     <Compile Include="Logic\Utility\Vector2D.cs" />
     <Compile Include="Logic\Map\GameMap.cs" />
     <Compile Include="Logic\Physics\GlobalContactListner.cs" />

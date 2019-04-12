@@ -9,7 +9,7 @@ namespace VoidTime
         private static Controls controlses;
         private static bool IsCreated;
 
-        public Input(Controls controlses)
+        public static void Create(Controls controlses)
         {
             if (IsCreated)
                 return;
