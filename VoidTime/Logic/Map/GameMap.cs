@@ -123,8 +123,11 @@ namespace VoidTime
             var x = (int)Math.Floor(vector.X / chunkSize.Width);
             var y = (int)Math.Floor(vector.Y / chunkSize.Height);
             if (x >= MapSizeInChunks.Width || y >= MapSizeInChunks.Height || x < 0 || y < 0)
+            {
+                var a = 1;
                 throw new IndexOutOfRangeException(
                     $"Index was out of range when {typeof(Vector2D)}, was convert to {typeof(Chunk)} coordinate");
+            }
             return new Point(x, y);
         }
     }

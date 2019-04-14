@@ -14,7 +14,7 @@ namespace VoidTime
     {
         private readonly Timer gameTick;
         private readonly GameMap map;
-        private readonly GameObject player;
+        public readonly Player player;
 
 
         public BasicCamera GameBasicCamera;
@@ -31,7 +31,7 @@ namespace VoidTime
 
             map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
 
-            const int border = 1000;
+            const int border = 3000;
             var allowedCoordinates = new Rectangle(border,
                 border,
                 map.MapSize.Width - 2 * border,

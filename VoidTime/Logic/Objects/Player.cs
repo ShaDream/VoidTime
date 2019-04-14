@@ -9,6 +9,20 @@ namespace VoidTime
 {
     public class Player : PhysicalGameObject
     {
+        private GameObject enterObject;
+
+        public GameObject EnterObject
+        {
+            get => enterObject;
+            set
+            {
+                if (enterObject == value) return;
+
+                enterObject = value;
+                EnterChanged?.Invoke(enterObject != null);
+            }
+        }
+
         private readonly Rectangle AllowedCoordinates;
         private readonly bool canMove;
         private readonly float maxSpeed = 1000;
@@ -16,6 +30,8 @@ namespace VoidTime
         public double Angle = Math.PI / 2;
         private Vector2D velocity;
 
+        public event Action<bool> EnterChanged;
+        public event Action Entering;
 
         public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
         {
@@ -29,6 +45,11 @@ namespace VoidTime
         {
             if (canMove)
                 Move();
+
+            if (Input.IsKeyPressed(Keys.E) && EnterObject != null)
+            {
+                Entering?.Invoke();
+            }
 
             CheckCoordinate();
         }

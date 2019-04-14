@@ -15,7 +15,7 @@ namespace VoidTime
             bodyDef.Position = ConvertToPhysicsVector(Position);
             bodyDef.BodyType = BodyType.StaticBody;
 
-            var shape = new CircleShape {Radius = 5};
+            var shape = new CircleShape {Radius = 600*ScaleFactor};
             Body = world.CreateBody(bodyDef);
             var fixture = Body.CreateFixture(shape, 1);
             Fixtures.Add(fixture);
@@ -25,17 +25,17 @@ namespace VoidTime
         public override void BeginContact(Contact contact)
         {
             var other = contact.FixtureA.Body == Body ? contact.FixtureB : contact.FixtureA;
-            if (other.Body.UserData is Player)
+            if (other.Body.UserData is Player player)
             {
-
+                player.EnterObject = this;
             }
         }
         public override void EndContact(Contact contact)
         {
             var other = contact.FixtureA.Body == Body ? contact.FixtureB : contact.FixtureA;
-            if (other.Body.UserData is Player)
+            if (other.Body.UserData is Player player)
             {
-
+                player.EnterObject = null;
             }
         }
     }

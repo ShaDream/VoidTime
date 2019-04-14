@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using SharpGL;
 using SharpGL.Enumerations;
+using VoidTime.GUI;
 
 namespace VoidTime
 {
@@ -13,7 +15,7 @@ namespace VoidTime
         private readonly Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
             new Dictionary<Type, Action<ObjectOnDisplay, OpenGL>>();
 
-        private IGameModel currentModel;
+        public IGameModel currentModel;
 
         private List<ObjectOnDisplay> drawObjects = new List<ObjectOnDisplay>();
 
@@ -22,11 +24,14 @@ namespace VoidTime
 
         public MainForm(IGameModel model)
         {
+            BackColor = Color.Black;
             currentModel = model;
-
             OpenGLCreate();
+            
+            Window window = new Window(this,(currentModel as MainGameModel).player);
 
             HelperInitialization();
+
 
             WindowState = FormWindowState.Maximized;
             ShowIcon = false;
@@ -54,15 +59,15 @@ namespace VoidTime
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,
-                DrawFPS = true
+                DrawFPS = true,
             };
 
-            ((ISupportInitialize) openGL).BeginInit();
+            ((ISupportInitialize)openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGLInitialized;
 
             Controls.Add(openGL);
-            ((ISupportInitialize) openGL).EndInit();
+            ((ISupportInitialize)openGL).EndInit();
         }
 
         private void OpenGLInitialized(object sender, EventArgs e)
@@ -102,9 +107,9 @@ namespace VoidTime
                             !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                ((IDrawable) instance).Init(openGL.OpenGL);
-                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>) drawClass
+                ((IDrawable)instance).Init(openGL.OpenGL);
+                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>)drawClass
                     .GetMethod("DrawObject")
                     ?.CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>), instance);
 
@@ -115,8 +120,8 @@ namespace VoidTime
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
         {
             drawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
-                let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
-                select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
+                           let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
+                           select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
         }
     }
 }
