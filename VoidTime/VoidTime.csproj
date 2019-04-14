@@ -86,6 +86,7 @@
     <Compile Include="Logic\Data\BattleEndData.cs" />
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
     <Compile Include="Logic\Data\BattleShipStatsData.cs" />
+    <Compile Include="Logic\Data\PlayerStats.cs" />
     <Compile Include="Logic\GameModels\BasicGameModel.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
@@ -144,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VoidTime.Resources\VoidTime.Resources.csproj">
-      <Project>{E478154A-A3DE-4E69-9590-1C6686952E50}</Project>
+      <Project>{e478154a-a3de-4e69-9590-1c6686952e50}</Project>
       <Name>VoidTime.Resources</Name>
     </ProjectReference>
   </ItemGroup>

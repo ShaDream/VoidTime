@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Box2DSharp.Collision;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
 
@@ -9,7 +8,25 @@ namespace VoidTime
 {
     public class Player : PhysicalGameObject
     {
+        private readonly Rectangle AllowedCoordinates;
+        private readonly bool canMove;
+        private readonly float maxSpeed = 1000;
+        private PlayerStats stats;
+
+        public double Angle = Math.PI / 2;
         private GameObject enterObject;
+        private Vector2D velocity;
+
+        public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
+        {
+            AllowedCoordinates = allowedCoordinates;
+            Position = position;
+            this.canMove = canMove;
+            stats.HP = new BattleShipStatsData { MaxHealth = 100, CurrentHealth = 100, Defence = 0};
+            stats.MaxSpeed = 1000;
+            stats.ShootRecover = 10;
+            stats.damage = 10000;
+        }
 
         public GameObject EnterObject
         {
@@ -23,22 +40,8 @@ namespace VoidTime
             }
         }
 
-        private readonly Rectangle AllowedCoordinates;
-        private readonly bool canMove;
-        private readonly float maxSpeed = 1000;
-
-        public double Angle = Math.PI / 2;
-        private Vector2D velocity;
-
         public event Action<bool> EnterChanged;
         public event Action Entering;
-
-        public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
-        {
-            AllowedCoordinates = allowedCoordinates;
-            Position = position;
-            this.canMove = canMove;
-        }
 
 
         public override void Update()
@@ -46,10 +49,7 @@ namespace VoidTime
             if (canMove)
                 Move();
 
-            if (Input.IsKeyPressed(Keys.E) && EnterObject != null)
-            {
-                Entering?.Invoke();
-            }
+            if (Input.IsKeyPressed(Keys.E) && EnterObject != null) Entering?.Invoke();
 
             CheckCoordinate();
         }
@@ -66,7 +66,9 @@ namespace VoidTime
                 Angle = rotationVector.Angle;
             }
             else
+            {
                 velocity *= 0.95f;
+            }
 
             SetLinearVelocity(velocity);
         }
