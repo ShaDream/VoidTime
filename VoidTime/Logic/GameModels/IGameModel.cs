@@ -9,6 +9,7 @@ namespace VoidTime
     {
         World Physics { get; set; }
         Controls Controls { get; set; }
+        TimeData Time { get; set; }
 
         void Run();
         void Pause();
@@ -20,7 +21,9 @@ namespace VoidTime
         void OnKeyRelease(object sender, KeyEventArgs args);
         void OnMouseWheel(object sender, MouseEventArgs args);
         void OnMouseMove(object sender, MouseEventArgs args);
-        void OnMouseClick(object sender, MouseEventArgs args);
         void OnMouseDoubleClick(object sender, MouseEventArgs args);
+        void OnSizeChanged(object sender, EventArgs args);
+        void OnMousePressed(object sender, MouseEventArgs args);
+        void OnMouseReleased(object sender, MouseEventArgs args);
     }
 }

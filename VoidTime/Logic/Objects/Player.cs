@@ -4,12 +4,25 @@ using System.Windows.Forms;
 using Box2DSharp.Collision;
 using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Dynamics;
-using VoidTime.Logic.Objects;
 
 namespace VoidTime
 {
     public class Player : PhysicalGameObject
     {
+        private GameObject enterObject;
+
+        public GameObject EnterObject
+        {
+            get => enterObject;
+            set
+            {
+                if (enterObject == value) return;
+
+                enterObject = value;
+                EnterChanged?.Invoke(enterObject != null);
+            }
+        }
+
         private readonly Rectangle AllowedCoordinates;
         private readonly bool canMove;
         private readonly float maxSpeed = 1000;
@@ -17,6 +30,8 @@ namespace VoidTime
         public double Angle = Math.PI / 2;
         private Vector2D velocity;
 
+        public event Action<bool> EnterChanged;
+        public event Action Entering;
 
         public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
         {
@@ -30,29 +45,28 @@ namespace VoidTime
         {
             if (canMove)
                 Move();
-            if (ReadonlyKeys.IsKeyPressed(Keys.Space))
+
+            if (Input.IsKeyPressed(Keys.E) && EnterObject != null)
             {
-                var blast = new Blast(Position, Angle);
-                Instance(blast);
+                Entering?.Invoke();
             }
+
             CheckCoordinate();
         }
 
         private void Move()
         {
             var rotationVector =
-                new Vector2D(ReadonlyKeys.GetAxis("horizontal"), ReadonlyKeys.GetAxis("vertical")) * 10;
-            if (ReadonlyKeys.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
+                new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * 10;
+            if (Input.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
-                Angle = rotationVector.GetAngle();
+                Angle = rotationVector.Angle;
             }
             else
-            {
                 velocity *= 0.95f;
-            }
 
             SetLinearVelocity(velocity);
         }

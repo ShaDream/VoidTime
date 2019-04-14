@@ -2,7 +2,7 @@
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
 
-namespace VoidTime.Physics
+namespace VoidTime
 {
     public class GlobalContactListner : IContactListener
     {

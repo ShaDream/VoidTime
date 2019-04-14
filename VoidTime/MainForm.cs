@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using SharpGL;
@@ -14,46 +15,39 @@ namespace VoidTime
         private readonly Dictionary<Type, Action<ObjectOnDisplay, OpenGL>> drawHelpers =
             new Dictionary<Type, Action<ObjectOnDisplay, OpenGL>>();
 
-        private readonly Dictionary<Type, Action<IDrawData, OpenGL>> drawHelpersUI =
-            new Dictionary<Type, Action<IDrawData, OpenGL>>();
-
-        private IGameModel currentModel;
-        private UIWindow currentWindow;
+        public IGameModel currentModel;
 
         private List<ObjectOnDisplay> drawObjects = new List<ObjectOnDisplay>();
-        private List<IDrawData> drawUI = new List<IDrawData>();
 
         private OpenGLControl openGL;
 
 
         public MainForm(IGameModel model)
         {
+            BackColor = Color.Black;
             currentModel = model;
-
             OpenGLCreate();
+            
+            Window window = new Window(this,(currentModel as MainGameModel).player);
 
             HelperInitialization();
+
 
             WindowState = FormWindowState.Maximized;
             ShowIcon = false;
             currentModel.Tick += FrameTick;
 
-            currentWindow = GUIFactory.Create(currentModel);
 
-            openGL.KeyUp += currentWindow.OnKeyRelease;
-            openGL.KeyDown += currentWindow.OnKeyPress;
-            SizeChanged += currentWindow.OnGameSizeChanged;
-            currentWindow.UIChanged += UIChanged;
-
-            currentModel.GameModelChanged += ChangeGameModel;
-
+            openGL.KeyUp += currentModel.OnKeyRelease;
+            openGL.KeyDown += currentModel.OnKeyPress;
+            openGL.MouseMove += currentModel.OnMouseMove;
+            openGL.MouseDown += currentModel.OnMousePressed;
+            openGL.MouseUp += currentModel.OnMouseReleased;
+            openGL.MouseDoubleClick += currentModel.OnMouseDoubleClick;
+            openGL.MouseWheel += currentModel.OnMouseWheel;
+            SizeChanged += currentModel.OnSizeChanged;
 
             model.Run();
-        }
-
-        private void UIChanged(GUIControl control, List<IDrawData> obj)
-        {
-            drawUI = obj.OrderByDescending(x => x.DrawPriority).ToList();
         }
 
 
@@ -65,15 +59,15 @@ namespace VoidTime
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,
-                DrawFPS = true
+                DrawFPS = true,
             };
 
-            ((ISupportInitialize) openGL).BeginInit();
+            ((ISupportInitialize)openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGLInitialized;
 
             Controls.Add(openGL);
-            ((ISupportInitialize) openGL).EndInit();
+            ((ISupportInitialize)openGL).EndInit();
         }
 
         private void OpenGLInitialized(object sender, EventArgs e)
@@ -101,9 +95,6 @@ namespace VoidTime
             foreach (var objectOnDisplay in drawObjects)
                 drawHelpers[objectOnDisplay.GameObject.GetType()].Invoke(objectOnDisplay, gl);
 
-            foreach (var drawData in drawUI)
-                drawHelpersUI[drawData.GetType()].Invoke(drawData, gl);
-
             gl.Disable(OpenGL.GL_BLEND);
         }
 
@@ -116,43 +107,21 @@ namespace VoidTime
                             !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                ((IDrawable) instance).Init(openGL.OpenGL);
-                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>) drawClass
+                ((IDrawable)instance).Init(openGL.OpenGL);
+                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>)drawClass
                     .GetMethod("DrawObject")
                     ?.CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>), instance);
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
-            }
-
-            foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
-                .Where(x => typeof(IUIDrawable).IsAssignableFrom(x) &&
-                            !x.IsInterface &&
-                            !x.IsAbstract))
-            {
-                var instance = Activator.CreateInstance(drawClass);
-                var typeGameObject = (Type) drawClass.GetProperty("DrawDataType")?.GetValue(instance, null);
-                var drawingMethod = (Action<IDrawData, OpenGL>) drawClass
-                    .GetMethod("DrawUi")
-                    ?.CreateDelegate(typeof(Action<IDrawData, OpenGL>), instance);
-
-                drawHelpersUI.Add(typeGameObject, drawingMethod);
             }
         }
 
         private void FrameTick(List<GameObject> objectsToDraw, BasicCamera gameBasicCamera)
         {
             drawObjects = (from objectToDraw in objectsToDraw.OrderByDescending(x => x.DrawingPriority)
-                let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
-                select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
-        }
-
-        private void ChangeGameModel(IGameModel obj)
-        {
-            currentWindow.Unsubscribe();
-            currentModel = obj;
-            currentWindow = GUIFactory.Create(obj);
+                           let positionOnDisplay = gameBasicCamera.GamePositionToWindow(objectToDraw.Position)
+                           select new ObjectOnDisplay(objectToDraw, positionOnDisplay)).ToList();
         }
     }
 }

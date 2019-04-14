@@ -12,14 +12,14 @@ namespace VoidTime.Tests
         [Test]
         public void With2x2ChunksWithoutGameObjects()
         {
-            var map = new GameMap(new Size(2, 2), new Size(100, 100),new World());
+            var map = new GameMap(new Size(2, 2), new Size(100, 100), new World());
         }
 
         [Test]
         public void WithSomeRightObjects()
         {
             var objects = new[] { new GameObject(), new GameObject { Position = new Vector2D(5, 5) }, };
-            var map = new GameMap(new Size(2, 2), new Size(100, 100),new World(), objects);
+            var map = new GameMap(new Size(2, 2), new Size(100, 100), new World(), objects);
         }
 
         [Test]
@@ -45,9 +45,9 @@ namespace VoidTime.Tests
             };
             var camera = new Camera(new Size(2, 2), objects[2]);
             var map = new GameMap(new Size(2, 2), new Size(10, 10), new World(), objects);
-            var objectsFromMap = map.GetGameObjects(camera);
+            var objectsFromMap = map.GetGameObjects(camera, camera.Size);
             objectsFromMap[0].Destoy();
-            objectsFromMap = map.GetGameObjects(camera);
+            objectsFromMap = map.GetGameObjects(camera, camera.Size);
             Assert.AreEqual(0, objectsFromMap.Count);
         }
 
@@ -62,13 +62,13 @@ namespace VoidTime.Tests
             };
             var camera = new Camera(new Size(2, 2), objects[2]);
             var map = new GameMap(new Size(2, 2), new Size(10, 10), new World(), objects);
-            var objectsFromMap = map.GetGameObjects(camera);
+            var objectsFromMap = map.GetGameObjects(camera, camera.Size);
             objectsFromMap[0].Position = new Vector2D(3, 3);
-            objectsFromMap = map.GetGameObjects(camera);
+            objectsFromMap = map.GetGameObjects(camera, camera.Size);
             Assert.AreEqual(0, objectsFromMap.Count);
             camera.FollowTo = objects[0];
             camera.Update();
-            objectsFromMap = map.GetGameObjects(camera);
+            objectsFromMap = map.GetGameObjects(camera, camera.Size);
             Assert.AreEqual(3, objectsFromMap.Count);
         }
 
@@ -80,7 +80,7 @@ namespace VoidTime.Tests
             var map = new GameMap(new Size(2, 2), new Size(10, 10), new World(), player);
             try
             {
-                var objectsFromMap = map.GetGameObjects(camera);
+                var objectsFromMap = map.GetGameObjects(camera, camera.Size);
                 Assert.Fail("Should Arguments out of range");
             }
             catch { }

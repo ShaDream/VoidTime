@@ -71,6 +71,9 @@
     <None Include="Resources\Blast.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Enemy.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\mars.png" />
   </ItemGroup>
   <ItemGroup>

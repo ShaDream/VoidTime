@@ -93,9 +93,9 @@ namespace VoidTime.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap EuropeFont {
+        public static System.Drawing.Bitmap Enemy {
             get {
-                object obj = ResourceManager.GetObject("EuropeFont", resourceCulture);
+                object obj = ResourceManager.GetObject("Enemy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -2,7 +2,6 @@
 using System.Drawing;
 using SharpGL;
 using SharpGL.SceneGraph.Assets;
-using VoidTime.Logic.Objects;
 using VoidTime.Resources;
 
 namespace VoidTime
@@ -16,7 +15,7 @@ namespace VoidTime
         {
             blast.Bind(gl);
             var size = new Size(10, 50);
-            DrawHelper.Draw(obj, gl, size);
+            DrawHelper.Draw(obj, gl, size,((Blast) obj.GameObject).Angle);
         }
 
         public void Init(OpenGL gl)

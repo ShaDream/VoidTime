@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DA374777-5ADA-44B2-88E7-3ECDB4D9BF65}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>VoidTime</RootNamespace>
     <AssemblyName>VoidTime</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>VoidTime.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Box2DSharp">
@@ -66,42 +69,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawClasses\BackgroundDrawHelper.cs" />
+    <Compile Include="DrawClasses\BattleShipEnemyDrawHelper.cs" />
+    <Compile Include="DrawClasses\BattleShipPlayerDrawHelper.cs" />
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
     <Compile Include="DrawClasses\ObjectOnDisplay.cs" />
     <Compile Include="DrawClasses\IDrawable.cs" />
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
-    <Compile Include="GUI\Controls\Button.cs" />
-    <Compile Include="GUI\Controls\ProgressBar.cs" />
-    <Compile Include="GUI\Draw\DrawData\RectangleDrawData.cs" />
-    <Compile Include="GUI\Draw\DrawData\TextureDrawData.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\IUIDrawable.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\MaskHelper.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\RectangleDrawHelper.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\TextDrawHelper.cs" />
-    <Compile Include="GUI\Draw\UIDrawHelpers\TextureDrawHelper.cs" />
-    <Compile Include="GUI\EventList.cs" />
-    <Compile Include="GUI\Font\Character.cs" />
-    <Compile Include="GUI\Controls\TextBox.cs" />
-    <Compile Include="GUI\Controls\UIWindow.cs" />
-    <Compile Include="GUI\Font\Atlases\EuropeFontAtlas.cs" />
-    <Compile Include="GUI\Font\FontAtlas.cs" />
-    <Compile Include="GUI\Controls\GUIControl.cs" />
-    <Compile Include="GUI\GUIFactory.cs" />
-    <Compile Include="GUI\Draw\DrawData\IDrawData.cs" />
-    <Compile Include="GUI\UIMask.cs" />
-    <Compile Include="GUI\UIWindows\MainGameUI.cs" />
-    <Compile Include="GUI\Draw\DrawData\TextDrawData.cs" />
-    <Compile Include="GUI\Font\TextRenderer.cs" />
+    <Compile Include="GUI\PlanetPanel.cs" />
+    <Compile Include="GUI\Window.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
     <Compile Include="Logic\Control\MouseContol.cs" />
+    <Compile Include="Logic\Data\BattleEndData.cs" />
+    <Compile Include="Logic\Data\BattleGameModelData.cs" />
+    <Compile Include="Logic\Data\BattleShipStatsData.cs" />
+    <Compile Include="Logic\GameModels\BasicGameModel.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
-    <Compile Include="Logic\Objects\Blast.cs" />
+    <Compile Include="Logic\Objects\Battle\BattleShipEnemy.cs" />
+    <Compile Include="Logic\Objects\Battle\BattleShipObject.cs" />
+    <Compile Include="Logic\Objects\Battle\BattleShipPlayer.cs" />
+    <Compile Include="Logic\Objects\Battle\Blast.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModels\MainGameModel.cs" />
@@ -109,9 +101,14 @@
     <Compile Include="Logic\Objects\Planet.cs" />
     <Compile Include="Logic\Objects\Player.cs" />
     <Compile Include="Logic\Control\Controls.cs" />
-    <Compile Include="Logic\Control\ReadonlyKeys.cs" />
+    <Compile Include="Logic\Control\Input.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
-    <Compile Include="Logic\Math\Vector2D.cs" />
+    <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />
+    <Compile Include="Logic\Utility\Time\Time.cs" />
+    <Compile Include="Logic\Utility\Extensions\WorldExtensions.cs" />
+    <Compile Include="Logic\Utility\FrameListComparator.cs" />
+    <Compile Include="Logic\Utility\Time\TimeData.cs" />
+    <Compile Include="Logic\Utility\Vector2D.cs" />
     <Compile Include="Logic\Map\GameMap.cs" />
     <Compile Include="Logic\Physics\GlobalContactListner.cs" />
     <Compile Include="MainForm.cs">

@@ -7,7 +7,7 @@ namespace VoidTime
     {
         Type GameObjectType { get; }
 
-        void DrawObject(ObjectOnDisplay obj, OpenGL graphics);
+        void DrawObject(ObjectOnDisplay obj, OpenGL gl);
 
         void Init(OpenGL gl);
     }

@@ -6,61 +6,67 @@ using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
 using Box2DSharp.Dynamics;
-using VoidTime.Physics;
 using Timer = System.Timers.Timer;
 
 namespace VoidTime
 {
-    public class MainGameModel : IGameModel
+    public class MainGameModel : BasicGameModel
     {
         private readonly Timer gameTick;
-        public Controls Controls { get; set; } = new Controls();
         private readonly GameMap map;
-        private readonly GameObject player;
+        public readonly Player player;
 
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;
 
+        public override Controls Controls { get; set; }
+        public override World Physics { get; set; }
+        public override TimeData Time { get; set; }
 
         public MainGameModel()
         {
+            Physics = new World(new Vector2(0, 0));
+            Physics.SetContactListener(new GlobalContactListner());
+
+            map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
+
+            const int border = 3000;
+            var allowedCoordinates = new Rectangle(border,
+                border,
+                map.MapSize.Width - 2 * border,
+                map.MapSize.Height - 2 * border);
+
+            player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
+            GameBasicCamera = new SmoothCamera(new Size(), player);
+
+            Controls = new Controls(GameBasicCamera);
+
             var axes = new HashSet<Axis>
             {
                 new Axis("horizontal", Keys.D, Keys.A),
                 new Axis("vertical", Keys.W, Keys.S)
             };
             Controls.AxesHandler = axes.ToDictionary(x => x.Name);
-            var k = new ReadonlyKeys(Controls);
+            Input.Create(Controls);
+
+            Time = new TimeData();
+            VoidTime.Time.Create(Time);
 
             gameTick = new Timer(16.66667F);
 
-            Physics = new World(new Vector2(0, 0));
-            Physics.SetContactListener(new GlobalContactListner());
+            var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
 
-            map = new GameMap(new Size(100, 100), new Size(1000, 1000), Physics);
+            //var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
 
-            var planet = new Planet { Position = new Vector2D(5000, 5000), DrawingPriority = 1 };
-            const int border = 1000;
-            var allowedCoordinates = new Rectangle(border,
-                border,
-                map.MapSize.Width - 2 * border,
-                map.MapSize.Height - 2 * border);
-            player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
-            var player2 = new Player(allowedCoordinates, new Vector2D(5000, 5010), false);
-
-            map.AddGameObjects(new[] { planet, player, player2 });
-            GameBasicCamera = new SmoothCamera(new Size(), player);
+            map.AddGameObjects(planet, player);
             gameTick.Elapsed += FrameTick;
         }
 
+        public override event Action<List<GameObject>, BasicCamera> Tick;
+        public override event Action<IGameModel> GameModelChanged;
 
-        public event Action<List<GameObject>, BasicCamera> Tick;
-        public event Action<IGameModel> GameModelChanged;
-        public World Physics { get; set; }
-
-
-        public void Run()
+        public override void Run()
         {
             if (!Paused)
                 return;
@@ -69,7 +75,7 @@ namespace VoidTime
             gameTick.Start();
         }
 
-        public void Pause()
+        public override void Pause()
         {
             if (Paused)
                 return;
@@ -78,47 +84,23 @@ namespace VoidTime
             gameTick.Stop();
         }
 
-        public void OnKeyPress(object sender, KeyEventArgs args)
+        public override void OnSizeChanged(object sender, EventArgs args)
         {
-            if (!Controls.KeysHandler.Contains(args.KeyCode))
-                Controls.KeysHandler.Add(args.KeyCode);
+            GameBasicCamera.Size = ((Form) sender).Size;
         }
-
-        public void OnKeyRelease(object sender, KeyEventArgs args)
-        {
-            if (Controls.KeysHandler.Contains(args.KeyCode))
-                Controls.KeysHandler.Remove(args.KeyCode);
-        }
-
-        public void OnMouseWheel(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnMouseMove(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnMouseClick(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnMouseDoubleClick(object sender, MouseEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
 
         private void FrameTick(object sender, ElapsedEventArgs e)
         {
-            var activeObjects = map.GetGameObjects(GameBasicCamera);
-            activeObjects.ForEach(x => x.Update());
-            Physics.Step(0.01666667F, 3, 6);
-            map.UpdateMap(GameBasicCamera);
-            GameBasicCamera.Update();
-            Tick?.Invoke(activeObjects, GameBasicCamera);
+            lock (this)
+            {
+                Time.Update();
+                var activeObjects = map.GetGameObjects(GameBasicCamera, GameBasicCamera.Size);
+                activeObjects.ForEach(x => x.Update());
+                Physics.StepWithDelete(0.01666667F, 3, 6);
+                map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
+                GameBasicCamera.Update();
+                Tick?.Invoke(activeObjects, GameBasicCamera);
+            }
         }
     }
 }

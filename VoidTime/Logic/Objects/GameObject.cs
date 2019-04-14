@@ -9,15 +9,20 @@ namespace VoidTime
         public virtual Vector2D Size { get; set; }
         public byte DrawingPriority { get; set; }
 
+        public bool Destroyed { get; protected set; }
 
         public virtual void Update() { }
 
         public virtual void Destoy()
         {
+            if (Destroyed)
+                return;
+
             OnDestroy?.Invoke(this);
+            Destroyed = true;
         }
 
-        public virtual void Instance(GameObject obj)
+        protected void Instantiate(GameObject obj)
         {
             OnCreate?.Invoke(obj);
         }
