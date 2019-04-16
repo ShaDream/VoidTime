@@ -57,17 +57,17 @@ namespace VoidTime
         private void Move()
         {
             var rotationVector =
-                new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * 10;
+                new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * Time.DeltaTime;
             if (Input.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
-                Angle = rotationVector.Angle;
+                Angle = Angle + (rotationVector.Angle - Angle) * 0.2;
             }
             else
             {
-                velocity *= 0.95f;
+                velocity *= 0.99f;
             }
 
             SetLinearVelocity(velocity);
@@ -97,7 +97,7 @@ namespace VoidTime
             bodyDef.BodyType = BodyType.DynamicBody;
 
             var shape = new PolygonShape();
-            shape.SetAsBox(30 * ScaleFactor, 40 * ScaleFactor);
+            shape.SetAsBox(30 * ScaleFactor, 30 * ScaleFactor);
             Body = world.CreateBody(bodyDef);
             Fixtures.Add(canMove ? Body.CreateFixture(shape, 1) : Body.CreateFixture(shape, 100));
         }
