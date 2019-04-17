@@ -21,7 +21,7 @@ namespace VoidTime
         private readonly BattleShipPlayer player;
         public int currentCreateRecovery;
 
-        public int EnemyCreateRecovery = 5;
+        public int EnemyCreateRecovery = 100000;
 
         public BasicCamera GameBasicCamera;
         public bool Paused = true;

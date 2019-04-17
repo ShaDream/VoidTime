@@ -10,10 +10,10 @@ namespace VoidTime
     class Blast : PhysicalGameObject
     {
         private Vector2D velocity;
-        private const float speed = 2000;
+        private const float speed = 3000;
         public double Angle { get; }
         private int currentLiveTime;
-        private const int LiveTime = 120;
+        private const int LiveTime = 200;
 
         private readonly float damage;
 

@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            enemy.Create(gl, Textures.lightfighter0006);
+            enemy.Create(gl, Textures.RD2);
         }
     }
 }
