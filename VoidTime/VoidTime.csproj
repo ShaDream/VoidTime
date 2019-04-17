@@ -104,6 +104,7 @@
     <Compile Include="Logic\Control\Controls.cs" />
     <Compile Include="Logic\Control\Input.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
+    <Compile Include="Logic\Utility\ChipParser.cs" />
     <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />
     <Compile Include="Logic\Utility\Time\Time.cs" />
     <Compile Include="Logic\Utility\Extensions\WorldExtensions.cs" />
@@ -148,6 +149,9 @@
       <Project>{e478154a-a3de-4e69-9590-1c6686952e50}</Project>
       <Name>VoidTime.Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\Chips\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

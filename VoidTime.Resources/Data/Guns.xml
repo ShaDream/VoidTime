@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<guns>
+  <gun>
+    <name>Base Gun</name>
+    <canRotate>true</canRotate>
+    <damage>10</damage>
+    <fireRate></fireRate>
+    <tier>1</tier>
+    <price></price>
+  </gun>
+
+</guns>

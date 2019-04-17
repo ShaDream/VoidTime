@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<chips>
+  <chip>
+    <class>system</class>
+    <value level="1">1</value>
+    <name>HP Gauge</name>
+    <description>Display the player's HP gauge</description>
+    <size level="1">
+      <x>1</x>
+      <y>1</y>
+    </size>
+    <levels>1</levels>
+  </chip>
+
+  <chip>
+    <class>system</class>
+    <value level="1">1</value>
+    <name>System Chip</name>
+    <description>Central system chip. removal means destroy</description>
+    <size level="1">
+      <x>1</x>
+      <y>1</y>
+    </size>
+    <levels>1</levels>
+  </chip>
+
+  <chip>
+    <class>system</class>
+    <value level="1">1</value>
+    <name>Control Chip</name>
+    <description>A chip that allows you to fly a ship</description>
+    <size level="1">
+      <x>1</x>
+      <y>1</y>
+    </size>
+    <levels>1</levels>
+  </chip>
+
+
+  <chip>
+    <class>attack</class>
+    <value level="1">2</value>
+    <value level="2">4</value>
+    <value level="3">8</value>
+    <value level="4">10</value>
+    <value level="5">15</value>
+    <value level="6">20</value>
+    <value level="7">50</value>
+    <value level="8">80</value>
+    <value level="9">100</value>
+    <name>Attack Up</name>
+    <description>Increase you damage deal</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+  <chip>
+    <class>attack</class>
+    <value level="1">2</value>
+    <value level="2">4</value>
+    <value level="3">8</value>
+    <value level="4">10</value>
+    <value level="5">15</value>
+    <value level="6">20</value>
+    <value level="7">50</value>
+    <value level="8">80</value>
+    <value level="9">100</value>
+    <name>Rang Up</name>
+    <description>Increase you blast range</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+  <chip>
+    <class>attack</class>
+    <value level="1">1</value>
+    <value level="2">2</value>
+    <value level="3">3</value>
+    <value level="4">4</value>
+    <value level="5">6</value>
+    <value level="6">8</value>
+    <value level="7">10</value>
+    <value level="8">15</value>
+    <value level="9">30</value>
+    <name>Critical Up</name>
+    <description>Increase you critical chance</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+
+  <chip>
+    <class>defence</class>
+    <value level="1">0.6</value>
+    <value level="2">1.2</value>
+    <value level="3">2.4</value>
+    <value level="4">3.6</value>
+    <value level="5">4.8</value>
+    <value level="6">7.2</value>
+    <value level="7">9.6</value>
+    <value level="8">12</value>
+    <value level="9">18</value>
+    <name>Auto-Heal</name>
+    <description>After 4-6 seconds of not taking damage, restore HP</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+  <chip>
+    <class>defence</class>
+    <value level="1">5</value>
+    <value level="2">10</value>
+    <value level="3">15</value>
+    <value level="4">20</value>
+    <value level="5">25</value>
+    <value level="6">30</value>
+    <value level="7">50</value>
+    <value level="8">80</value>
+    <value level="9">100</value>
+    <name>Max HP Up</name>
+    <description>Increases max HP</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+  <chip>
+    <class>defence</class>
+    <value level="1">2</value>
+    <value level="2">4</value>
+    <value level="3">8</value>
+    <value level="4">10</value>
+    <value level="5">15</value>
+    <value level="6">20</value>
+    <value level="7">30</value>
+    <value level="8">60</value>
+    <value level="9">80</value>
+    <name>Defence Up</name>
+    <description>Reduce damage taken</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+  <chip>
+    <class>support</class>
+    <value level="1">10</value>
+    <value level="2">20</value>
+    <value level="3">30</value>
+    <value level="4">40</value>
+    <value level="5">50</value>
+    <value level="6">60</value>
+    <value level="7">70</value>
+    <value level="8">80</value>
+    <value level="9">90</value>
+    <name>Drop Rate Up</name>
+    <description>Increase enemy item drop rate</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+  <chip>
+    <class>support</class>
+    <value level="1">2</value>
+    <value level="2">4</value>
+    <value level="3">8</value>
+    <value level="4">10</value>
+    <value level="5">12</value>
+    <value level="6">14</value>
+    <value level="7">16</value>
+    <value level="8">18</value>
+    <value level="9">20</value>
+    <name>Moving Speed Up</name>
+    <description>Increase movement speed</description>
+    <size level="1">
+      <x>2</x>
+      <y>1</y>
+    </size>
+    <size level="2">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="3">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="4">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="5">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="6">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="7">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="8">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <size level="9">
+      <x>2</x>
+      <y>2</y>
+    </size>
+    <levels>9</levels>
+  </chip>
+
+</chips>

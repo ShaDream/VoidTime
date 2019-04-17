@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
+using VoidTime.Resources;
 
 namespace VoidTime.GUI
 {
     public class PlanetPanel
     {
         private MainForm owner;
+        private Player player;
 
         private TableLayoutPanel planetPanel;
         private ListBox itemBox;
@@ -16,9 +20,12 @@ namespace VoidTime.GUI
         private Button buyButton;
         private Button repairButton;
 
+        private XmlNodeList list;
+
         public PlanetPanel(MainForm owner, Player player)
         {
             this.owner = owner;
+            this.player = player;
 
             planetPanel = new TableLayoutPanel
             {
@@ -87,6 +94,15 @@ namespace VoidTime.GUI
             planetPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
             planetPanel.Controls.Add(ButtonPanel, 0, 1);
             planetPanel.Controls.Add(ListPanel, 0, 0);
+
+
+            itemBox.SelectedIndexChanged += (s, a) =>
+            {
+                var name = (itemBox.SelectedItem as string);
+                name = name.Substring(0, name.LastIndexOf(' '));
+
+            };
+
         }
 
         public void Show()
@@ -108,6 +124,14 @@ namespace VoidTime.GUI
             }));
         }
 
+        public void UpdateFields()
+        {
+            var names = new List<string>();
+            foreach (XmlNode node in list)
+                names.Add($"{node.Attributes["Name"].Value} {node.Attributes["price"].Value}$");
+
+            itemBox.Items.AddRange(names.ToArray());
+        }
 
     }
 }

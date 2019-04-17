@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ships>
+
+  <ship>
+    <name>Ship</name>
+    <size>
+      <x></x>
+      <y></y>
+    </size>
+    <guns>
+      <gunSlot>
+        <position>
+          <x></x>
+          <y></y>
+        </position>
+        <maxTier></maxTier>
+      </gunSlot>
+    </guns>
+    <upgradeSize>
+      <x></x>
+      <y></y>
+    </upgradeSize>
+    <defence></defence>
+    <hp></hp>
+    <speed></speed>
+    <price></price>
+  </ship>
+
+</ships>

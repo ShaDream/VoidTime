@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data.resx</DependentUpon>
+    </Compile>
     <Compile Include="Textures.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -50,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Data.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Textures.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Textures.Designer.cs</LastGenOutput>
@@ -84,6 +93,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\nebo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Guns.xml" />
+    <Content Include="Data\Ships.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\Chips.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,10 +22,7 @@ namespace VoidTime
             AllowedCoordinates = allowedCoordinates;
             Position = position;
             this.canMove = canMove;
-            stats.HP = new BattleShipStatsData { MaxHealth = 100, CurrentHealth = 100, Defence = 0};
-            stats.MaxSpeed = 1000;
-            stats.ShootRecover = 10;
-            stats.damage = 10000;
+            
         }
 
         public GameObject EnterObject
