@@ -22,7 +22,6 @@ namespace VoidTime
             AllowedCoordinates = allowedCoordinates;
             Position = position;
             this.canMove = canMove;
-            
         }
 
         public GameObject EnterObject

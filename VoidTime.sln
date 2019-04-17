@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoidTime", "VoidTime\VoidTime.csproj", "{DA374777-5ADA-44B2-88E7-3ECDB4D9BF65}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E478154A-A3DE-4E69-9590-1C6686952E50} = {E478154A-A3DE-4E69-9590-1C6686952E50}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoidTime.Tests", "VoidTime.Tests\VoidTime.Tests.csproj", "{6A6B46A2-6C5B-47CE-80C4-46A47FC4192E}"
 	ProjectSection(ProjectDependencies) = postProject
