@@ -73,6 +73,7 @@
     <Compile Include="DrawClasses\BattleShipPlayerDrawHelper.cs" />
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
+    <Compile Include="DrawClasses\EnemyDrawHelper.cs" />
     <Compile Include="DrawClasses\ObjectOnDisplay.cs" />
     <Compile Include="DrawClasses\IDrawable.cs" />
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Logic\Objects\Battle\BattleShipObject.cs" />
     <Compile Include="Logic\Objects\Battle\BattleShipPlayer.cs" />
     <Compile Include="Logic\Objects\Battle\Blast.cs" />
+    <Compile Include="Logic\Objects\Enemy.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModels\MainGameModel.cs" />

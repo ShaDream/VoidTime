@@ -61,26 +61,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Textures.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Textures.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\player.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\time.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\EuropeFont.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Blast.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Enemy.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mars.png" />
@@ -93,6 +80,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\nebo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lightfighter0006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RD2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OMEGA_LASER.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Guns.xml" />
