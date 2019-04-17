@@ -11,7 +11,7 @@ namespace VoidTime
         private readonly Rectangle AllowedCoordinates;
         private readonly bool canMove;
         private readonly float maxSpeed = 1000;
-        private PlayerStats stats;
+        public PlayerStats stats;
 
         public double Angle = Math.PI / 2;
         private GameObject enterObject;

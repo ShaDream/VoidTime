@@ -27,8 +27,8 @@ namespace VoidTime
             BackColor = Color.Black;
             currentModel = model;
             OpenGLCreate();
-            
-            Window window = new Window(this,(currentModel as MainGameModel).player);
+
+            Window window = new Window(this, (currentModel as MainGameModel).player);
 
             HelperInitialization();
 

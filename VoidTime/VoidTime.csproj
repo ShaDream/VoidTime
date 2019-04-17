@@ -82,6 +82,19 @@
     <Compile Include="GUI\Window.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />
     <Compile Include="Logic\Cameras\Camera.cs" />
+    <Compile Include="Logic\Chips\AttackUpChip.cs" />
+    <Compile Include="Logic\Chips\AutoHealChip.cs" />
+    <Compile Include="Logic\Chips\CriticalUpChip.cs" />
+    <Compile Include="Logic\Chips\DefenceUpChip.cs" />
+    <Compile Include="Logic\Chips\DropRateUpChip.cs" />
+    <Compile Include="Logic\Chips\IChip.cs" />
+    <Compile Include="Logic\Chips\ChipType.cs" />
+    <Compile Include="Logic\Chips\ControlChip.cs" />
+    <Compile Include="Logic\Chips\HPGaugeChip.cs" />
+    <Compile Include="Logic\Chips\MaxHPUpChip.cs" />
+    <Compile Include="Logic\Chips\MovingSpeedUpChip.cs" />
+    <Compile Include="Logic\Chips\RangUpChip.cs" />
+    <Compile Include="Logic\Chips\SystemChip.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
     <Compile Include="Logic\Control\MouseContol.cs" />
     <Compile Include="Logic\Data\BattleEndData.cs" />
@@ -146,9 +159,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\Chips\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
