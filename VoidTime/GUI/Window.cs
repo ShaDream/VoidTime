@@ -82,6 +82,8 @@ namespace VoidTime.GUI
             else
             {
                 if (!windowKeys.Contains(args.KeyCode)) return;
+                if (args.KeyCode == Keys.F && player.EnterObject == null)
+                    return;
                 windows[args.KeyCode].Switch();
                 lastKey = args.KeyCode;
             }
