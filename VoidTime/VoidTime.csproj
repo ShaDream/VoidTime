@@ -87,7 +87,7 @@
     <Compile Include="Logic\Chips\CriticalUpChip.cs" />
     <Compile Include="Logic\Chips\DefenceUpChip.cs" />
     <Compile Include="Logic\Chips\DropRateUpChip.cs" />
-    <Compile Include="Logic\Chips\IChip.cs" />
+    <Compile Include="Logic\Chips\Chip.cs" />
     <Compile Include="Logic\Chips\ChipType.cs" />
     <Compile Include="Logic\Chips\ControlChip.cs" />
     <Compile Include="Logic\Chips\HPGaugeChip.cs" />
@@ -100,7 +100,10 @@
     <Compile Include="Logic\Data\BattleEndData.cs" />
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
     <Compile Include="Logic\Data\BattleShipStatsData.cs" />
+    <Compile Include="Logic\Data\GunData.cs" />
     <Compile Include="Logic\Data\PlayerStats.cs" />
+    <Compile Include="Logic\Data\ShipData.cs" />
+    <Compile Include="Logic\Data\ShipSlotData.cs" />
     <Compile Include="Logic\GameModels\BasicGameModel.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />

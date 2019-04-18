@@ -1,4 +1,4 @@
-﻿namespace VoidTime.Logic.Chips
+﻿namespace VoidTime
 {
     public enum ChipType
     {

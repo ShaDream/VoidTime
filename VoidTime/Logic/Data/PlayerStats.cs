@@ -2,6 +2,8 @@
 {
     public struct PlayerStats
     {
+
+
         public string ShipName;
         public string[] Guns;
 
