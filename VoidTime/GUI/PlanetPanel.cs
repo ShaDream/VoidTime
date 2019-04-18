@@ -134,6 +134,7 @@ namespace VoidTime.GUI
                 owner.Controls.Remove(planetPanel);
                 owner.currentModel.Run();
             }));
+            player.velocity = Vector2D.Zero;
         }
 
         public void UpdateFields()

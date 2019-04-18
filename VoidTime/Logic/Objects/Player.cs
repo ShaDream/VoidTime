@@ -16,7 +16,7 @@ namespace VoidTime
         private int currentShootRecover = 0;
         public double Angle = Math.PI / 2;
         private GameObject enterObject;
-        private Vector2D velocity;
+        public Vector2D velocity;
 
         public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
         {
