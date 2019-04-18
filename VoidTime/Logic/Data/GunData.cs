@@ -7,5 +7,6 @@
         public int Tier;
         public float FireRate;
         public bool CanRotate;
+        public float CriticalChance;
     }
 }
