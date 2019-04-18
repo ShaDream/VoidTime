@@ -27,8 +27,9 @@ namespace VoidTime
             BackColor = Color.Black;
             currentModel = model;
             OpenGLCreate();
-
-            Window window = new Window(this, (currentModel as MainGameModel).player);
+            FormBorderStyle = FormBorderStyle.None;
+            var window = new Window(this, (currentModel as MainGameModel).player);
+            openGL.KeyDown += window.OnKeyPress;
 
             HelperInitialization();
 

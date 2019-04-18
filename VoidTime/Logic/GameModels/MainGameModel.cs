@@ -56,11 +56,11 @@ namespace VoidTime
             gameTick = new Timer(16.66667F);
 
             var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
-            for (int i = 0; i < 5; i++)
-            {
-                var enemy = new Enemy(new Vector2D(5000, 5010 + i), player);
-                map.AddGameObjects(enemy);
-            }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var enemy = new Enemy(new Vector2D(5000, 5010 + i), player);
+            //    map.AddGameObjects(enemy);
+            //}
             
 
             map.AddGameObjects(planet, player);
@@ -104,6 +104,7 @@ namespace VoidTime
                 map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
                 GameBasicCamera.Update();
                 Tick?.Invoke(activeObjects, GameBasicCamera);
+                Controls.ClearOneFrameValues();
             }
         }
     }

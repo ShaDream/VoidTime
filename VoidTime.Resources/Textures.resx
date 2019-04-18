@@ -136,10 +136,13 @@
   <data name="neptune1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\neptune1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OMEGA_LASER" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\omega_laser.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RD2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\rd2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\chip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OMEGA_LASER" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OMEGA_LASER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

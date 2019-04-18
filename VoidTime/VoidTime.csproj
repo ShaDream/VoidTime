@@ -78,6 +78,8 @@
     <Compile Include="DrawClasses\IDrawable.cs" />
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
+    <Compile Include="GUI\ISwitcheble.cs" />
+    <Compile Include="GUI\PausePanel.cs" />
     <Compile Include="GUI\PlanetPanel.cs" />
     <Compile Include="GUI\Window.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />

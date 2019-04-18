@@ -7,10 +7,11 @@ using VoidTime.Resources;
 
 namespace VoidTime.GUI
 {
-    public class PlanetPanel
+    public class PlanetPanel : ISwitcheble
     {
         private MainForm owner;
         private Player player;
+        public bool isShow { get; private set; }
 
         private TableLayoutPanel planetPanel;
         private ListBox itemBox;
@@ -19,6 +20,17 @@ namespace VoidTime.GUI
         private Button exitButton;
         private Button buyButton;
         private Button repairButton;
+        public Point Location
+        {
+            get => planetPanel.Location;
+            set => planetPanel.Location = value;
+        }
+        public Size Size
+        {
+            get => planetPanel.Size;
+            set => planetPanel.Size = value;
+        }
+
 
         private XmlNodeList list;
 
@@ -59,9 +71,9 @@ namespace VoidTime.GUI
             ListPanel.Controls.Add(description, 1, 0);
 
             ButtonPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
-            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
-            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
+            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
+            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
+            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
 
             exitButton = new Button
             {
@@ -91,7 +103,7 @@ namespace VoidTime.GUI
 
 
             planetPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
-            planetPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+            planetPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             planetPanel.Controls.Add(ButtonPanel, 0, 1);
             planetPanel.Controls.Add(ListPanel, 0, 0);
 
@@ -105,7 +117,7 @@ namespace VoidTime.GUI
 
         }
 
-        public void Show()
+        private void Show()
         {
             owner.BeginInvoke(new Action(() =>
             {
@@ -115,7 +127,7 @@ namespace VoidTime.GUI
             }));
         }
 
-        public void Hide()
+        private void Hide()
         {
             owner.BeginInvoke(new Action(() =>
             {
@@ -133,5 +145,13 @@ namespace VoidTime.GUI
             itemBox.Items.AddRange(names.ToArray());
         }
 
+        public void Switch()
+        {
+            if (isShow)
+                Hide();
+            else
+                Show();
+            isShow = !isShow;
+        }
     }
 }

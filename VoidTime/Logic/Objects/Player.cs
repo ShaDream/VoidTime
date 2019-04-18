@@ -12,7 +12,8 @@ namespace VoidTime
         private readonly bool canMove;
         private readonly float maxSpeed = 1000;
         public PlayerStats stats;
-
+        private const int ShootRecover = 10;
+        private int currentShootRecover = 0;
         public double Angle = Math.PI / 2;
         private GameObject enterObject;
         private Vector2D velocity;
@@ -37,21 +38,32 @@ namespace VoidTime
         }
 
         public event Action<bool> EnterChanged;
-        public event Action Entering;
 
 
         public override void Update()
         {
             if (canMove)
                 Move();
-
-            if (Input.IsKeyPressed(Keys.E) && EnterObject != null) Entering?.Invoke();
+            Shoot();
 
             CheckCoordinate();
         }
 
+        private void Shoot()
+        {
+            if (Input.GetMouseButtonDown(MouseButtons.Left) && currentShootRecover <= 0)
+            {
+                var blast = new Blast(Position, Angle, 0, this, typeof(BattleShipEnemy));
+                Instantiate(blast);
+                currentShootRecover = ShootRecover;
+            }
+            if (currentShootRecover > 0)
+                currentShootRecover--;
+        }
+
         private void Move()
         {
+            Angle = (Input.GetWorldMousePosition() - Position).Angle;
             var rotationVector =
                 new Vector2D(Input.GetAxis("horizontal"), Input.GetAxis("vertical")) * Time.DeltaTime;
             if (Input.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
@@ -59,7 +71,6 @@ namespace VoidTime
                 velocity += rotationVector;
                 if (velocity.Magnitude > maxSpeed)
                     velocity = velocity.Normilized * maxSpeed;
-                Angle = Angle + (rotationVector.Angle - Angle) * 0.2;
             }
             else
             {
