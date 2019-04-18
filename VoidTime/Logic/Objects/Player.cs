@@ -9,11 +9,7 @@ namespace VoidTime
     public class Player : PhysicalGameObject
     {
         private readonly Rectangle AllowedCoordinates;
-        private readonly bool canMove;
-        private readonly float maxSpeed = 1000;
-        public PlayerStats stats;
-        private const int ShootRecover = 10;
-        private int currentShootRecover = 0;
+        public PlayerStats Stats;
         public double Angle = Math.PI / 2;
         private GameObject enterObject;
         private Vector2D velocity;
@@ -22,7 +18,7 @@ namespace VoidTime
         {
             AllowedCoordinates = allowedCoordinates;
             Position = position;
-            this.canMove = canMove;
+            Size =  new Size(90, 90);
         }
 
         public GameObject EnterObject
@@ -42,10 +38,8 @@ namespace VoidTime
 
         public override void Update()
         {
-            if (canMove)
-                Move();
+            Move();
             Shoot();
-
             CheckCoordinate();
         }
 
@@ -106,7 +100,7 @@ namespace VoidTime
             var shape = new PolygonShape();
             shape.SetAsBox(30 * ScaleFactor, 30 * ScaleFactor);
             Body = world.CreateBody(bodyDef);
-            Fixtures.Add(canMove ? Body.CreateFixture(shape, 1) : Body.CreateFixture(shape, 100));
+            Fixtures.Add(Body.CreateFixture(shape, 1));
         }
     }
 }

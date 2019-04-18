@@ -13,7 +13,7 @@ namespace VoidTime.GUI
         private PausePanel PauseMenu;
         private HashSet<Keys> windowKeys = new HashSet<Keys>{ Keys.F, Keys.Escape };
         private Dictionary<Keys, ISwitcheble> windows;
-        private Keys lastKey = Keys.None;
+        public Keys lastKey = Keys.None;
         private Label EnterLabel;
         public Window(MainForm form, Player player)
         {
@@ -32,8 +32,8 @@ namespace VoidTime.GUI
 
             };
 
-            TradeMenu = new PlanetPanel(owner, player);
-            PauseMenu = new PausePanel(owner);
+            TradeMenu = new PlanetPanel(owner, this, player);
+            PauseMenu = new PausePanel(owner, this);
             windows = new Dictionary<Keys, ISwitcheble>
             {
                 { Keys.F, TradeMenu },
@@ -77,7 +77,7 @@ namespace VoidTime.GUI
             {
                 if (args.KeyCode != lastKey) return;
                 windows[args.KeyCode].Switch();
-                lastKey = Keys.None;
+
             }
             else
             {

@@ -14,8 +14,7 @@ namespace VoidTime
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
             player.Bind(gl);
-            var size = new Size(90, 90);
-            DrawHelper.Draw(obj, gl, size, ((Player) obj.GameObject).Angle);
+            DrawHelper.Draw(obj, gl, obj.GameObject.Size, ((Player) obj.GameObject).Angle);
         }
 
         public void Init(OpenGL gl)

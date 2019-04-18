@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace VoidTime
 {
@@ -6,7 +7,7 @@ namespace VoidTime
     {
         public string NameObject { get; set; }
         public virtual Vector2D Position { get; set; }
-        public virtual Vector2D Size { get; set; }
+        public virtual Size Size { get; set; }
         public byte DrawingPriority { get; set; }
 
         public bool Destroyed { get; protected set; }
