@@ -9,7 +9,8 @@ namespace VoidTime.GUI
 {
     public class PlanetPanel : ISwitcheble
     {
-        private MainForm owner;
+        private MainForm form;
+        private Window owner;
         private Player player;
         public bool isShow { get; private set; }
 
@@ -34,11 +35,11 @@ namespace VoidTime.GUI
 
         private XmlNodeList list;
 
-        public PlanetPanel(MainForm owner, Player player)
+        public PlanetPanel(MainForm form, Window owner, Player player)
         {
-            this.owner = owner;
+            this.form = form;
             this.player = player;
-
+            this.owner = owner;
             planetPanel = new TableLayoutPanel
             {
                 Size = new Size(500, 500),
@@ -83,7 +84,7 @@ namespace VoidTime.GUI
                 Text = "Exit"
             };
             ButtonPanel.Controls.Add(exitButton, 0, 0);
-            exitButton.Click += (s, a) => Hide();
+            exitButton.Click += (s, a) => Switch();
 
             buyButton = new Button
             {
@@ -119,22 +120,22 @@ namespace VoidTime.GUI
 
         private void Show()
         {
-            owner.BeginInvoke(new Action(() =>
+            form.BeginInvoke(new Action(() =>
             {
-                owner.Controls.Add(planetPanel);
+                form.Controls.Add(planetPanel);
                 planetPanel.BringToFront();
-                owner.currentModel.Pause();
+                form.currentModel.Pause();
             }));
         }
 
         private void Hide()
         {
-            owner.BeginInvoke(new Action(() =>
+            form.BeginInvoke(new Action(() =>
             {
-                owner.Controls.Remove(planetPanel);
-                owner.currentModel.Run();
+                form.Controls.Remove(planetPanel);
+                form.currentModel.Run();
             }));
-            player.velocity = Vector2D.Zero;
+            owner.lastKey = Keys.None;
         }
 
         public void UpdateFields()

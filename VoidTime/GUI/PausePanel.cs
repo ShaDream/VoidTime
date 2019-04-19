@@ -6,8 +6,9 @@ namespace VoidTime.GUI
 {
     public class PausePanel : ISwitcheble
     {
-        private MainForm owner;
+        private MainForm form;
         private TableLayoutPanel pausePanel;
+        private Window owner;
         public bool isShow { get; private set; }
         public Point Location
         {
@@ -20,8 +21,9 @@ namespace VoidTime.GUI
             set => pausePanel.Size = value;
         }
 
-        public PausePanel(MainForm owner)
+        public PausePanel(MainForm form, Window owner)
         {
+            this.form = form;
             this.owner = owner;
             pausePanel = new TableLayoutPanel
             {
@@ -49,27 +51,28 @@ namespace VoidTime.GUI
                 Font = new Font(new FontFamily("Arial"), 24),
                 Margin = new Padding(50, 50, 0, 0)
             };
-            exitButton.Click += (s, a) => owner.Close();
-            returnButton.Click += (s, a) => Hide();
+            exitButton.Click += (s, a) => form.Close();
+            returnButton.Click += (s, a) => Switch();
             pausePanel.Controls.Add(returnButton, 0, 0);
             pausePanel.Controls.Add(exitButton, 0, 1);
         }
         private void Hide()
         {
-            owner.BeginInvoke(new Action(() =>
+            form.BeginInvoke(new Action(() =>
             {
-                owner.Controls.Remove(pausePanel);
-                owner.currentModel.Run();
+                form.Controls.Remove(pausePanel);
+                form.currentModel.Run();
             }));
+            owner.lastKey = Keys.None;
         }
 
         private void Show()
         {
-            owner.BeginInvoke(new Action(() =>
+            form.BeginInvoke(new Action(() =>
             {
-                owner.Controls.Add(pausePanel);
+                form.Controls.Add(pausePanel);
                 pausePanel.BringToFront();
-                owner.currentModel.Pause();
+                form.currentModel.Pause();
             }));
         }
 
