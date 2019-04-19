@@ -17,7 +17,7 @@ namespace VoidTime
                 CriticalChance = float.Parse(node["criticalChance"].InnerText),
                 Damage = float.Parse(node["damage"].InnerText),
                 FireRate = float.Parse(node["fireRate"].InnerText),
-                GunName = name,
+                Name = name,
                 Price = int.Parse(node["price"].InnerText),
                 Tier = int.Parse(node["tier"].InnerText),
                 Range = float.Parse(node["range"].InnerText)

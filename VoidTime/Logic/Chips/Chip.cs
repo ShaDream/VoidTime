@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace VoidTime
 {
-    public class Chip
+    public class Chip : IItem
     {
         public virtual string Name { get; set; }
         public virtual int CurrentLevel { get; set; }
@@ -13,7 +13,8 @@ namespace VoidTime
         public virtual ChipType Type { get; set; }
         public virtual int MaxLevel { get; set; }
 
-        public virtual void SetChip(Player player) { }
-        public virtual void RemoveChip(Player player) { }
+        public virtual void SetChip(Ship ship) { }
+        public virtual void RemoveChip(Ship ship) { }
+        public int CurrentCost => Costs[CurrentLevel - 1];
     }
 }

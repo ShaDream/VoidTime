@@ -1,8 +1,8 @@
 ﻿namespace VoidTime
 {
-    public struct GunData
+    public struct GunData : IItem
     {
-        public string GunName;
+        public string Name { get; set; }
         public Vector2D PositionOffset;
         public float Range;
         public float Damage;

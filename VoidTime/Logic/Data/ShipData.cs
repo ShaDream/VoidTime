@@ -49,7 +49,7 @@ namespace VoidTime
                     gun.CriticalChance + gun.CriticalChance * ShipBuffs.CriticalChanceIncrease;
                 ShipStats.Guns[i].Damage = gun.Damage + gun.Damage * ShipBuffs.AttackUp;
                 ShipStats.Guns[i].FireRate = gun.FireRate;
-                ShipStats.Guns[i].GunName = gun.GunName;
+                ShipStats.Guns[i].Name = gun.Name;
                 ShipStats.Guns[i].Range = gun.Range + gun.Range * ShipBuffs.RangUp;
                 i++;
             }

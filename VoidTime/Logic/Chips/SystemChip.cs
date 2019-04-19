@@ -5,14 +5,14 @@ namespace VoidTime
 {
     public class SystemChip : Chip
     {
-        public override void SetChip(Player player)
+        public override void SetChip(Ship ship)
         {
-            player.data.ShipBuffs.Destroy = false;
+            ship.data.ShipBuffs.Destroy = false;
         }
 
-        public override void RemoveChip(Player player)
+        public override void RemoveChip(Ship ship)
         {
-            player.data.ShipBuffs.Destroy = true;
+            ship.data.ShipBuffs.Destroy = true;
         }
     }
 }

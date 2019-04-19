@@ -5,14 +5,14 @@ namespace VoidTime
 {
     public class MaxHPUpChip : Chip
     {
-        public override void SetChip(Player player)
+        public override void SetChip(Ship ship)
         {
-            player.data.ShipBuffs.HPUp += Values[CurrentLevel - 1];
+            ship.data.ShipBuffs.HPUp += Values[CurrentLevel - 1];
         }
 
-        public override void RemoveChip(Player player)
+        public override void RemoveChip(Ship ship)
         {
-            player.data.ShipBuffs.HPUp -= Values[CurrentLevel - 1];
+            ship.data.ShipBuffs.HPUp -= Values[CurrentLevel - 1];
         }
     }
 }

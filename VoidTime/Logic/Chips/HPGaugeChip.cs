@@ -5,14 +5,14 @@ namespace VoidTime
 {
     public class HPGaugeChip : Chip
     {
-        public override void SetChip(Player player)
+        public override void SetChip(Ship ship)
         {
-            player.data.ShipBuffs.DisplayHP = true;
+            ship.data.ShipBuffs.DisplayHP = true;
         }
 
-        public override void RemoveChip(Player player)
+        public override void RemoveChip(Ship ship)
         {
-            player.data.ShipBuffs.DisplayHP = false;
+            ship.data.ShipBuffs.DisplayHP = false;
         }
     }
 }

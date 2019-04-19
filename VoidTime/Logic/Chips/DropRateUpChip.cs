@@ -2,14 +2,14 @@
 {
     public class DropRateUpChip : Chip
     {
-        public override void SetChip(Player player)
+        public override void SetChip(Ship ship)
         {
-            player.data.ShipBuffs.DropRateChanceIncrease += Values[CurrentLevel - 1];
+            ship.data.ShipBuffs.DropRateChanceIncrease += Values[CurrentLevel - 1];
         }
 
-        public override void RemoveChip(Player player)
+        public override void RemoveChip(Ship ship)
         {
-            player.data.ShipBuffs.DropRateChanceIncrease -= Values[CurrentLevel - 1];
+            ship.data.ShipBuffs.DropRateChanceIncrease -= Values[CurrentLevel - 1];
         }
     }
 }

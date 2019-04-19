@@ -18,7 +18,7 @@ namespace VoidTime
         private readonly Timer gameTick;
         private readonly object locker = new object();
         private readonly GameMap map;
-        private readonly Player player;
+        private readonly Player ship;
 
         private BasicCamera GameBasicCamera;
         private bool Paused = true;
@@ -29,7 +29,7 @@ namespace VoidTime
 
         public BattleGameModel(BattleGameModelData data)
         {
-            GameBasicCamera = new SmoothCamera(new Size(), player);
+            GameBasicCamera = new SmoothCamera(new Size(), ship);
 
             Controls = new Controls(GameBasicCamera);
 
@@ -51,8 +51,8 @@ namespace VoidTime
 
             map = new GameMap(new Size(1, 1), data.MapSize, Physics);
 
-            map.AddGameObjects(player);
-            player.OnDestroy += GameOver;
+            map.AddGameObjects(ship);
+            ship.OnDestroy += GameOver;
 
             gameTick.Elapsed += FrameTick;
         }

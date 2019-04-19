@@ -11,7 +11,7 @@ namespace VoidTime.GUI
     {
         private MainForm form;
         private Window owner;
-        private Player player;
+        private Player ship;
         public bool isShow { get; private set; }
 
         private TableLayoutPanel planetPanel;
@@ -35,10 +35,10 @@ namespace VoidTime.GUI
 
         private XmlNodeList list;
 
-        public PlanetPanel(MainForm form, Window owner, Player player)
+        public PlanetPanel(MainForm form, Window owner, Player ship)
         {
             this.form = form;
-            this.player = player;
+            this.ship = ship;
             this.owner = owner;
             planetPanel = new TableLayoutPanel
             {

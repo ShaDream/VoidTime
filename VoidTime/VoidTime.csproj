@@ -101,6 +101,8 @@
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
     <Compile Include="Logic\Data\Buffs.cs" />
     <Compile Include="Logic\Data\GunData.cs" />
+    <Compile Include="Logic\Data\IItem.cs" />
+    <Compile Include="Logic\Data\Inventory.cs" />
     <Compile Include="Logic\Data\ShipData.cs" />
     <Compile Include="Logic\Data\ShipBaseData.cs" />
     <Compile Include="Logic\Data\ShipSlotData.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModels\MainGameModel.cs" />
+    <Compile Include="Logic\Data\InstalledChips.cs" />
     <Compile Include="Logic\Objects\PhysicalGameObject.cs" />
     <Compile Include="Logic\Objects\Planet.cs" />
     <Compile Include="Logic\Objects\Player.cs" />

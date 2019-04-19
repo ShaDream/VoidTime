@@ -8,18 +8,18 @@ namespace VoidTime.GUI
     public class Window
     {
         private MainForm owner;
-        private Player player;
+        private Player ship;
         private PlanetPanel TradeMenu;
         private PausePanel PauseMenu;
         private HashSet<Keys> windowKeys = new HashSet<Keys>{ Keys.F, Keys.Escape };
         private Dictionary<Keys, ISwitcheble> windows;
         public Keys lastKey = Keys.None;
         private Label EnterLabel;
-        public Window(MainForm form, Player player)
+        public Window(MainForm form, Player ship)
         {
             owner = form;
-            this.player = player;
-            player.EnterChanged += UpdateEnterLabel;
+            this.ship = ship;
+            ship.EnterChanged += UpdateEnterLabel;
 
             EnterLabel = new Label
             {
@@ -32,7 +32,7 @@ namespace VoidTime.GUI
 
             };
 
-            TradeMenu = new PlanetPanel(owner, this, player);
+            TradeMenu = new PlanetPanel(owner, this, ship);
             PauseMenu = new PausePanel(owner, this);
             windows = new Dictionary<Keys, ISwitcheble>
             {
@@ -82,7 +82,7 @@ namespace VoidTime.GUI
             else
             {
                 if (!windowKeys.Contains(args.KeyCode)) return;
-                if (args.KeyCode == Keys.F && player.EnterObject == null)
+                if (args.KeyCode == Keys.F && ship.EnterObject == null)
                     return;
                 windows[args.KeyCode].Switch();
                 lastKey = args.KeyCode;

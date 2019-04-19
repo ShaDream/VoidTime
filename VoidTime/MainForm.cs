@@ -28,7 +28,7 @@ namespace VoidTime
             currentModel = model;
             OpenGLCreate();
             //FormBorderStyle = FormBorderStyle.None;
-            var window = new Window(this, (currentModel as MainGameModel).player);
+            var window = new Window(this, (currentModel as MainGameModel).Ship);
             openGL.KeyDown += window.OnKeyPress;
 
             HelperInitialization();

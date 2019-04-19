@@ -14,7 +14,7 @@ namespace VoidTime
     {
         private readonly Timer gameTick;
         private readonly GameMap map;
-        public readonly Player player;
+        public readonly Player Ship;
 
 
         public BasicCamera GameBasicCamera;
@@ -37,8 +37,8 @@ namespace VoidTime
                 map.MapSize.Width - 2 * border,
                 map.MapSize.Height - 2 * border);
 
-            player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
-            GameBasicCamera = new SmoothCamera(new Size(), player);
+            Ship = new Player(allowedCoordinates, new Vector2D(5000, 5000));
+            GameBasicCamera = new SmoothCamera(new Size(), Ship);
 
             Controls = new Controls(GameBasicCamera);
 
@@ -63,7 +63,7 @@ namespace VoidTime
             //}
             
 
-            map.AddGameObjects(planet, player);
+            map.AddGameObjects(planet, Ship);
             gameTick.Elapsed += FrameTick;
         }
 
