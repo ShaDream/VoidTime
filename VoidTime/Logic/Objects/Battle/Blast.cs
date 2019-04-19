@@ -13,18 +13,19 @@ namespace VoidTime
         private const int LiveTime = 200;
 
         private readonly float damage;
-        private int currentLiveTime;
         private readonly HashSet<Type> damagableTypes;
 
         private readonly GameObject owner;
         private readonly Vector2D velocity;
         public double Angle { get; }
+        public float remainingRange;
 
         /// <param name="damagableTypes">Only Ship class allowed</param>
-        public Blast(Vector2D possition, double angle, float damage, GameObject owner,
+        public Blast(Vector2D possition, double angle, float damage, GameObject owner, float range,
             params Type[] damagableTypes)
         {
             Position = possition;
+            remainingRange = range;
             Angle = angle + Math.PI / 2;
             velocity = new Vector2D(speed, 0).Rotate(angle);
             this.owner = owner;
@@ -40,9 +41,9 @@ namespace VoidTime
         public override void Update()
         {
             SetLinearVelocity(velocity);
-            if (currentLiveTime >= LiveTime)
+            if (remainingRange <= 0)
                 Destoy();
-            currentLiveTime++;
+            remainingRange -= velocity.Magnitude*0.018f;
         }
 
         public override void CreatePhysics(World world)

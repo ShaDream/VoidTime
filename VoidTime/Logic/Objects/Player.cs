@@ -29,7 +29,11 @@ namespace VoidTime
         {
             AllowedCoordinates = allowedCoordinates;
             Position = position;
-            Size = new Size(90, 90);
+            Size = new Size(100, 111);
+            data.SetShip("Base ship");
+            data.SetGun("Base gun", 0);
+            //data.SetGun("Base gun", 1);
+            //data.SetGun("Base gun", 2);
         }
 
         public event Action<bool> EnterChanged;

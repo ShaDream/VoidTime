@@ -98,9 +98,9 @@ namespace VoidTime
             lock (this)
             {
                 Time.Update();
+                Physics.StepWithDelete(0.01666667F, 3, 6);
                 var activeObjects = map.GetGameObjects(GameBasicCamera, GameBasicCamera.Size);
                 activeObjects.ForEach(x => x.Update());
-                Physics.StepWithDelete(0.01666667F, 3, 6);
                 map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
                 GameBasicCamera.Update();
                 Tick?.Invoke(activeObjects, GameBasicCamera);

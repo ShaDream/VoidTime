@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <guns>
   <gun>
-    <name>Base Gun</name>
+    <name>Base gun</name>
     <canRotate>true</canRotate>
-    <damage>10</damage>
-    <fireRate></fireRate>
-    <criticalChance></criticalChance>
+    <damage>2</damage>
+    <fireRate>100</fireRate>
+    <criticalChance>1</criticalChance>
     <tier>1</tier>
-    <range></range>
-    <price></price>
+    <range>100</range>
+    <price>0</price>
   </gun>
-
 </guns>

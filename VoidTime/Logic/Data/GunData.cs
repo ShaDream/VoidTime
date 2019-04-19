@@ -15,5 +15,6 @@
         public int Price;
 
         public float RecoveryTime => 1000 / FireRate;
+        public float currentRecovery;
     }
 }

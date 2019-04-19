@@ -27,7 +27,7 @@ namespace VoidTime
 
         public void RemoveGun(int slot)
         {
-            shipBase.slots[slot].HasGun = true;
+            shipBase.slots[slot].HasGun = false;
             UpdateFields();
         }
 

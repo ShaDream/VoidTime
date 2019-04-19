@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace VoidTime
 {
@@ -18,12 +20,31 @@ namespace VoidTime
         {
             var blastList = new List<Blast>();
 
+            if (!Input.GetMouseButton(MouseButtons.Left))
+                return blastList.ToArray();
+
+            for (var i = 0; i < Guns.Length; i++)
+            {
+                if (!(Math.Abs(Guns[i].currentRecovery) < float.Epsilon))
+                    continue;
+
+                Guns[i].currentRecovery = Guns[i].RecoveryTime;
+                var blast = new Blast(player.Position + Guns[i].PositionOffset.Rotate(player.Angle),
+                    player.Angle,
+                    Guns[i].Damage + (Random.IsLucky(Guns[i].CriticalChance) ? Guns[i].Damage : 0),
+                    player,
+                    Guns[i].Range,
+                    typeof(Enemy));
+                blastList.Add(blast);
+            }
 
             return blastList.ToArray();
         }
 
         private void UpdateGuns(Player player)
         {
+            for (var index = 0; index < Guns.Length; index++)
+                Guns[index].currentRecovery = Math.Max(0, Guns[index].currentRecovery - Time.DeltaTime);
 
         }
 

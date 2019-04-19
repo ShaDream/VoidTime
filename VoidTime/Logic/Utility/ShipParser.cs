@@ -27,8 +27,8 @@ namespace VoidTime
                 var slotNode = slotNodes[i];
                 ship.slots[i].HasGun = false;
                 ship.slots[i].MaxTier = int.Parse(slotNode["maxTier"].InnerText);
-                ship.slots[i].positionOffset = new Vector2D(float.Parse(node["position"]["x"].InnerText),
-                    float.Parse(node["position"]["y"].InnerText));
+                ship.slots[i].positionOffset = new Vector2D(float.Parse(slotNode["position"]["x"].InnerText),
+                    float.Parse(slotNode["position"]["y"].InnerText));
             }
 
             return ship;

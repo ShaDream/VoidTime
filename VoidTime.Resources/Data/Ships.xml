@@ -1,26 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <ships>
-
   <ship>
-    <name>Ship</name>
+    <name>Base ship</name>
     <size>
-      <x></x>
-      <y></y>
+      <x>100</x>
+      <y>111</y>
     </size>
     <slots>
       <slot>
         <position>
-          <x></x>
-          <y></y>
+          <x>50</x>
+          <y>0</y>
         </position>
-        <maxTier></maxTier>
+        <maxTier>1</maxTier>
+      </slot>
+      <slot>
+        <position>
+          <x>0</x>
+          <y>50</y>
+        </position>
+        <maxTier>1</maxTier>
+      </slot>
+      <slot>
+        <position>
+          <x>0</x>
+          <y>-50</y>
+        </position>
+        <maxTier>1</maxTier>
       </slot>
     </slots>
-    <defence></defence>
-    <hp></hp>
-    <speed></speed>
-    <price></price>
+    <defence>0</defence>
+    <hp>100</hp>
+    <speed>600</speed>
+    <price>0</price>
   </ship>
-
 </ships>
