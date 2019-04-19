@@ -5,7 +5,9 @@
     <canRotate>true</canRotate>
     <damage>10</damage>
     <fireRate></fireRate>
+    <criticalChance></criticalChance>
     <tier>1</tier>
+    <range></range>
     <price></price>
   </gun>
 

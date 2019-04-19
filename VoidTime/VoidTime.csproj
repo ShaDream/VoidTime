@@ -69,8 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawClasses\BackgroundDrawHelper.cs" />
-    <Compile Include="DrawClasses\BattleShipEnemyDrawHelper.cs" />
-    <Compile Include="DrawClasses\BattleShipPlayerDrawHelper.cs" />
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
     <Compile Include="DrawClasses\EnemyDrawHelper.cs" />
@@ -101,18 +99,16 @@
     <Compile Include="Logic\Control\MouseContol.cs" />
     <Compile Include="Logic\Data\BattleEndData.cs" />
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
-    <Compile Include="Logic\Data\BattleShipStatsData.cs" />
+    <Compile Include="Logic\Data\Buffs.cs" />
     <Compile Include="Logic\Data\GunData.cs" />
-    <Compile Include="Logic\Data\PlayerStats.cs" />
     <Compile Include="Logic\Data\ShipData.cs" />
+    <Compile Include="Logic\Data\ShipBaseData.cs" />
     <Compile Include="Logic\Data\ShipSlotData.cs" />
+    <Compile Include="Logic\Data\ShipStats.cs" />
     <Compile Include="Logic\GameModels\BasicGameModel.cs" />
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
-    <Compile Include="Logic\Objects\Battle\BattleShipEnemy.cs" />
-    <Compile Include="Logic\Objects\Battle\BattleShipObject.cs" />
-    <Compile Include="Logic\Objects\Battle\BattleShipPlayer.cs" />
     <Compile Include="Logic\Objects\Battle\Blast.cs" />
     <Compile Include="Logic\Objects\Enemy.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
@@ -124,8 +120,11 @@
     <Compile Include="Logic\Control\Controls.cs" />
     <Compile Include="Logic\Control\Input.cs" />
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
+    <Compile Include="Logic\Objects\Ship.cs" />
     <Compile Include="Logic\Utility\ChipParser.cs" />
+    <Compile Include="Logic\Utility\GunParser.cs" />
     <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />
+    <Compile Include="Logic\Utility\ShipParser.cs" />
     <Compile Include="Logic\Utility\Time\Time.cs" />
     <Compile Include="Logic\Utility\Extensions\WorldExtensions.cs" />
     <Compile Include="Logic\Utility\FrameListComparator.cs" />

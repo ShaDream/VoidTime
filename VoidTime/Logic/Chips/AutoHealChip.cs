@@ -7,12 +7,12 @@ namespace VoidTime
     {
         public override void SetChip(Player player)
         {
-            player.stats.AutoHeal += Values[CurrentLevel - 1];
+            player.data.ShipBuffs.AutoHeal += Values[CurrentLevel - 1];
         }
 
         public override void RemoveChip(Player player)
         {
-            player.stats.AutoHeal -= Values[CurrentLevel - 1];
+            player.data.ShipBuffs.AutoHeal -= Values[CurrentLevel - 1];
         }
     }
 }

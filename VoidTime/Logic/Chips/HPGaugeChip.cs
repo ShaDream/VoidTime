@@ -7,12 +7,12 @@ namespace VoidTime
     {
         public override void SetChip(Player player)
         {
-            player.stats.DisplayHP = true;
+            player.data.ShipBuffs.DisplayHP = true;
         }
 
         public override void RemoveChip(Player player)
         {
-            player.stats.DisplayHP = false;
+            player.data.ShipBuffs.DisplayHP = false;
         }
     }
 }

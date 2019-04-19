@@ -1,9 +1,7 @@
 ﻿namespace VoidTime
 {
-    public struct PlayerStats
+    public struct Buffs
     {
-        private ShipData Ship;
-
         public float DropRateChance;
 
         public float MoveSpeedIncrease;
@@ -18,6 +16,5 @@
         public bool DisplayHP;
         public bool Destroy;
         public bool CanMove;
-
     }
 }

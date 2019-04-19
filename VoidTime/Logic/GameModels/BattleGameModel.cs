@@ -18,23 +18,17 @@ namespace VoidTime
         private readonly Timer gameTick;
         private readonly object locker = new object();
         private readonly GameMap map;
-        private readonly BattleShipPlayer player;
-        public int currentCreateRecovery;
+        private readonly Player player;
 
-        public int EnemyCreateRecovery = 100000;
-
-        public BasicCamera GameBasicCamera;
-        public bool Paused = true;
+        private BasicCamera GameBasicCamera;
+        private bool Paused = true;
 
         public override World Physics { get; set; }
         public override Controls Controls { get; set; }
         public override TimeData Time { get; set; }
-        public float average;
-
 
         public BattleGameModel(BattleGameModelData data)
         {
-            player = new BattleShipPlayer(new Vector2D(data.MapSize.Width / 2, data.MapSize.Width / 2), 1000000, 1000000);
             GameBasicCamera = new SmoothCamera(new Size(), player);
 
             Controls = new Controls(GameBasicCamera);
@@ -92,7 +86,7 @@ namespace VoidTime
 
         public override void OnSizeChanged(object sender, EventArgs args)
         {
-            GameBasicCamera.Size = ((Form) sender).Size;
+            GameBasicCamera.Size = ((Form)sender).Size;
         }
 
         private void FrameTick(object sender, ElapsedEventArgs e)
@@ -100,7 +94,6 @@ namespace VoidTime
             lock (locker)
             {
                 Time.Update();
-                CreateEnemy();
                 var activeObjects = map.GetGameObjects(GameBasicCamera);
                 activeObjects.ForEach(x => x.Update());
                 Physics.StepWithDelete(0.01666667F, 3, 6);
@@ -109,18 +102,6 @@ namespace VoidTime
                 Tick?.Invoke(activeObjects, GameBasicCamera);
                 Controls.ClearOneFrameValues();
             }
-        }
-
-        private void CreateEnemy()
-        {
-            if (currentCreateRecovery <= 0)
-            {
-                map.AddGameObject(new BattleShipEnemy(new Vector2D(map.MapSize.Width / 2 + 1000, map.MapSize.Width / 2),
-                    player, 100, 100));
-                currentCreateRecovery = EnemyCreateRecovery;
-            }
-
-            currentCreateRecovery--;
         }
     }
 }

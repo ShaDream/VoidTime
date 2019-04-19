@@ -64,28 +64,47 @@ namespace VoidTime.Resources {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;chips&gt;
         ///  &lt;chip&gt;
+        ///    &lt;id&gt;0&lt;/id&gt;
         ///    &lt;class&gt;system&lt;/class&gt;
         ///    &lt;value level=&quot;1&quot;&gt;1&lt;/value&gt;
         ///    &lt;name&gt;HP Gauge&lt;/name&gt;
         ///    &lt;description&gt;Display the player&apos;s HP gauge&lt;/description&gt;
-        ///    &lt;size level=&quot;1&quot;&gt;
-        ///      &lt;x&gt;1&lt;/x&gt;
-        ///      &lt;y&gt;1&lt;/y&gt;
-        ///    &lt;/size&gt;
+        ///    &lt;cost level=&quot;1&quot;&gt;2&lt;/cost&gt;
         ///    &lt;levels&gt;1&lt;/levels&gt;
         ///  &lt;/chip&gt;
         ///
         ///  &lt;chip&gt;
+        ///    &lt;id&gt;1&lt;/id&gt;
         ///    &lt;class&gt;system&lt;/class&gt;
         ///    &lt;value level=&quot;1&quot;&gt;1&lt;/value&gt;
         ///    &lt;name&gt;System Chip&lt;/name&gt;
         ///    &lt;description&gt;Central system chip. removal means destroy&lt;/description&gt;
-        ///    &lt;size level=&quot;1&quot;&gt;
-        ///     [rest of string was truncated]&quot;;.
+        ///    &lt;cost level=&quot;1&quot;&gt;2&lt;/cost&gt;
+        ///  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Chips {
             get {
                 return ResourceManager.GetString("Chips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;guns&gt;
+        ///  &lt;gun&gt;
+        ///    &lt;name&gt;Base Gun&lt;/name&gt;
+        ///    &lt;canRotate&gt;true&lt;/canRotate&gt;
+        ///    &lt;damage&gt;10&lt;/damage&gt;
+        ///    &lt;fireRate&gt;&lt;/fireRate&gt;
+        ///    &lt;tier&gt;1&lt;/tier&gt;
+        ///    &lt;price&gt;&lt;/price&gt;
+        ///  &lt;/gun&gt;
+        ///
+        ///&lt;/guns&gt;.
+        /// </summary>
+        public static string Guns {
+            get {
+                return ResourceManager.GetString("Guns", resourceCulture);
             }
         }
         
@@ -100,22 +119,19 @@ namespace VoidTime.Resources {
         ///      &lt;x&gt;&lt;/x&gt;
         ///      &lt;y&gt;&lt;/y&gt;
         ///    &lt;/size&gt;
-        ///    &lt;guns&gt;
-        ///      &lt;gunSlot&gt;
+        ///    &lt;slots&gt;
+        ///      &lt;slot&gt;
         ///        &lt;position&gt;
         ///          &lt;x&gt;&lt;/x&gt;
         ///          &lt;y&gt;&lt;/y&gt;
         ///        &lt;/position&gt;
         ///        &lt;maxTier&gt;&lt;/maxTier&gt;
-        ///      &lt;/gunSlot&gt;
-        ///    &lt;/guns&gt;
-        ///    &lt;upgradeSize&gt;
-        ///      &lt;x&gt;&lt;/x&gt;
-        ///      &lt;y&gt;&lt;/y&gt;
-        ///    &lt;/upgradeSize&gt;
+        ///      &lt;/slot&gt;
+        ///    &lt;/slots&gt;
         ///    &lt;defence&gt;&lt;/defence&gt;
         ///    &lt;hp&gt;&lt;/hp&gt;
         ///    &lt;speed&gt;&lt;/speed&gt;
+        ///    &lt;price&gt;&lt;/price&gt;
         ///  &lt;/ship&gt;
         ///
         ///&lt;/ships&gt;.

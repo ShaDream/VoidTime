@@ -8,19 +8,15 @@
       <x></x>
       <y></y>
     </size>
-    <guns>
-      <gunSlot>
+    <slots>
+      <slot>
         <position>
           <x></x>
           <y></y>
         </position>
         <maxTier></maxTier>
-      </gunSlot>
-    </guns>
-    <upgradeSize>
-      <x></x>
-      <y></y>
-    </upgradeSize>
+      </slot>
+    </slots>
     <defence></defence>
     <hp></hp>
     <speed></speed>

@@ -6,20 +6,12 @@ using Box2DSharp.Dynamics;
 
 namespace VoidTime
 {
-    public class Player : PhysicalGameObject
+    public class Player : Ship
     {
         private readonly Rectangle AllowedCoordinates;
-        public PlayerStats Stats;
         public double Angle = Math.PI / 2;
         private GameObject enterObject;
         public Vector2D velocity;
-
-        public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
-        {
-            AllowedCoordinates = allowedCoordinates;
-            Position = position;
-            Size =  new Size(90, 90);
-        }
 
         public GameObject EnterObject
         {
@@ -33,27 +25,26 @@ namespace VoidTime
             }
         }
 
+        public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
+        {
+            AllowedCoordinates = allowedCoordinates;
+            Position = position;
+            Size = new Size(90, 90);
+        }
+
         public event Action<bool> EnterChanged;
 
 
         public override void Update()
         {
             Move();
-            Shoot();
+            var blasts = data.ShipStats.Shoot(this);
+            foreach (var blast in blasts)
+                Instantiate(blast);
+            data.ShipStats.UpdateStats(this);
             CheckCoordinate();
         }
 
-        private void Shoot()
-        {
-            if (Input.GetMouseButtonDown(MouseButtons.Left) && currentShootRecover <= 0)
-            {
-                var blast = new Blast(Position, Angle, 0, this, typeof(BattleShipEnemy));
-                Instantiate(blast);
-                currentShootRecover = ShootRecover;
-            }
-            if (currentShootRecover > 0)
-                currentShootRecover--;
-        }
 
         private void Move()
         {
@@ -63,8 +54,8 @@ namespace VoidTime
             if (Input.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
-                if (velocity.Magnitude > maxSpeed)
-                    velocity = velocity.Normilized * maxSpeed;
+                if (velocity.Magnitude > data.ShipStats.Speed)
+                    velocity = velocity.Normilized * data.ShipStats.Speed;
             }
             else
             {

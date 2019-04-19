@@ -46,7 +46,7 @@ namespace VoidTime.GUI
             {
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Text = "Return",
+                Text = "Resume",
                 Size = new Size(150, 50),
                 Font = new Font(new FontFamily("Arial"), 24),
                 Margin = new Padding(50, 50, 0, 0)
