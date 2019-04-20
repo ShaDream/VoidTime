@@ -22,9 +22,10 @@ namespace VoidTime
 
         public void SetShip(ShipBaseData data)
         {
-            foreach (var shipBaseSlot in shipBase.slots)
-                if (shipBaseSlot.HasGun)
-                    owner.Inventory.Add(shipBaseSlot.Gun);
+            if (shipBase.slots != null)
+                foreach (var shipBaseSlot in shipBase.slots)
+                    if (shipBaseSlot.HasGun)
+                        owner.Inventory.Add(shipBaseSlot.Gun);
 
             shipBase = data;
             UpdateFields();
