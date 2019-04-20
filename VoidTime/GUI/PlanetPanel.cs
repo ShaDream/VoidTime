@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Xml;
-using VoidTime.Resources;
 
 namespace VoidTime.GUI
 {
     public class PlanetPanel : BasicGameWindow
     {
-        private Player ship;
+        private readonly Player ship;
+        private Button buyButton;
         private TableLayoutPanel BuySellPanel;
-        private ListBox planetInventory;
         private TextBox description;
 
         private Button exitButton;
-        private Button buyButton;
+        private ListBox planetInventory;
         private Button repairButton;
 
         public PlanetPanel(MainForm form, Window owner, Player ship)
@@ -28,7 +25,7 @@ namespace VoidTime.GUI
             {
                 BackColor = Color.Black,
                 Size = new Size(500, 500),
-                Location = new Point(700, 200),
+                Location = new Point(700, 200)
             };
             tabs.TabPages.Add("Buy/Sell");
             tabs.TabPages.Add("Upgrade");
@@ -45,10 +42,7 @@ namespace VoidTime.GUI
             window = tabs;
         }
 
-        private void UpgradePanelInitialization()
-        {
-
-        }
+        private void UpgradePanelInitialization() { }
 
         private void BuySellPanelInitialization()
         {
@@ -59,8 +53,8 @@ namespace VoidTime.GUI
                 Dock = DockStyle.Fill
             };
 
-            var ButtonPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
-            var ListPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
+            var ButtonPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
+            var ListPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
 
             ListPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             ListPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
@@ -116,7 +110,7 @@ namespace VoidTime.GUI
             {
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Fill
             };
             ButtonPanel.Controls.Add(repairButton, 2, 0);
 
@@ -130,7 +124,7 @@ namespace VoidTime.GUI
 
             planetInventory.SelectedIndexChanged += (s, a) =>
             {
-                var item = (planetInventory.SelectedItem as IItem);
+                var item = planetInventory.SelectedItem as IItem;
                 description.Text = item.GetInfo();
                 buyButton.Text = "Buy";
                 buyButton.Visible = true;
@@ -144,7 +138,9 @@ namespace VoidTime.GUI
                 };
             };
         }
-        private void Update()
+
+
+        protected override void Update()
         {
             planetInventory.Items.Clear();
             planetInventory.Items.Add(ChipParser.GetChip("Attack Up"));

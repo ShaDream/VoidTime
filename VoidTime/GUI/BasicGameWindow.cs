@@ -28,6 +28,7 @@ namespace VoidTime.GUI
         {
             form.BeginInvoke(new Action(() =>
             {
+                Update();
                 form.Controls.Add(window);
                 window.BringToFront();
                 form.currentModel.Pause();
@@ -52,5 +53,7 @@ namespace VoidTime.GUI
                 Show();
             isShow = !isShow;
         }
+
+        protected virtual void Update() { }
     }
 }
