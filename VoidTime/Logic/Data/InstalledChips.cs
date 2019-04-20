@@ -33,12 +33,13 @@ namespace VoidTime
             chip.RemoveChip(owner);
             owner.Data.UpdateFields();
             owner.Inventory.Add(chip);
+            curWeight -= chip.CurrentCost;
         }
 
         public IReadOnlyList<Chip> GetChips => new ReadOnlyCollection<Chip>(chips);
         public bool IsCanAdd(Chip chip)
         {
-            return maxWeight - curWeight > chip.CurrentCost;
+            return maxWeight - curWeight >= chip.CurrentCost;
         }
     }
 }

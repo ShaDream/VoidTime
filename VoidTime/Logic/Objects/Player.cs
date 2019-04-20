@@ -33,9 +33,9 @@ namespace VoidTime
             Position = position;
             Size = new Size(100, 111);
             Data.SetShip("Base ship");
-            Data.SetGun("Base gun", 0);
-            //data.SetGun("Base gun", 1);
-            //data.SetGun("Base gun", 2);
+            //Data.SetGun("Base gun", 0);
+            Data.SetGun("Base gun", 1);
+            Data.SetGun("Base gun", 2);
         }
 
         public event Action<bool> EnterChanged;

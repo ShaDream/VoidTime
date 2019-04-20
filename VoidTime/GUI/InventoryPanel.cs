@@ -32,8 +32,7 @@ namespace VoidTime.GUI
             var tabs = new TabControl
             {
                 BackColor = Color.Black,
-                Size = new Size(500, 500),
-                Location = new Point(700, 200),
+                Dock = DockStyle.Fill
             };
             tabs.TabPages.Add("Installed Chips");
             tabs.TabPages.Add("Installed Guns");
@@ -42,16 +41,22 @@ namespace VoidTime.GUI
             {
                 tabs.TabPages[i].BackColor = Color.Black;
                 tabs.TabPages[i].BorderStyle = BorderStyle.None;
-                tabs.TabPages[i].Dock = DockStyle.Fill;
             }
+            var tabInventory = new TabControl
+            {
+                BackColor = Color.Black,
+                Dock = DockStyle.Fill
+            };
+            tabInventory.TabPages.Add("Inventory");
+            tabInventory.TabPages[0].BackColor = Color.Black;
+            tabInventory.TabPages[0].BorderStyle = BorderStyle.None;
 
             items = new ListBox
             {
                 BackColor = Color.Black,
-                BorderStyle = BorderStyle.Fixed3D,
+                BorderStyle = BorderStyle.None,
                 ForeColor = Color.White,
                 Dock = DockStyle.Fill,
-                Margin = new Padding(0, 23, 3, 0)
             };
 
             installedChips = new ListBox
@@ -68,8 +73,10 @@ namespace VoidTime.GUI
                 ForeColor = Color.White,
                 Dock = DockStyle.Fill,
             };
+
             tabs.TabPages[0].Controls.Add(installedChips);
             tabs.TabPages[1].Controls.Add(installedGuns);
+            tabInventory.TabPages[0].Controls.Add(items);
 
             setRemoveButton = new Button()
             {
@@ -88,8 +95,10 @@ namespace VoidTime.GUI
 
             items.SelectedIndexChanged += (s, a) =>
             {
-                setRemoveButton.Visible = true;
                 var item = items.SelectedItem as IItem;
+                if (item == null)
+                    return;
+                setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Install";
                 if (item is Chip)
                     setRemoveClick = () =>
@@ -100,8 +109,10 @@ namespace VoidTime.GUI
             };
             installedChips.SelectedIndexChanged += (s, a) =>
             {
-                setRemoveButton.Visible = true;
                 var item = installedChips.SelectedItem as Chip;
+                if (item == null)
+                    return;
+                setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Uninstall";
                 setRemoveClick = () =>
                     {
@@ -112,6 +123,9 @@ namespace VoidTime.GUI
             installedGuns.SelectedIndexChanged += (s, a) =>
             {
                 var item = items.SelectedItem as IItem;
+                if (item == null)
+                    return;
+                setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Uninstall";
             };
 
@@ -119,7 +133,7 @@ namespace VoidTime.GUI
             exitButton.Click += (s, a) => Switch();
 
             inventoryPanel.Controls.Add(tabs, 0, 0);
-            inventoryPanel.Controls.Add(items, 1, 0);
+            inventoryPanel.Controls.Add(tabInventory, 1, 0);
             inventoryPanel.Controls.Add(setRemoveButton, 0, 1);
             inventoryPanel.Controls.Add(exitButton, 1, 1);
 
