@@ -8,13 +8,14 @@ namespace VoidTime.GUI
     public class Window
     {
         private readonly Label EnterLabel;
-        private readonly InventoryPanel InventoryMenu;
         public Keys lastKey = Keys.None;
         private readonly MainForm owner;
-        private readonly PausePanel PauseMenu;
         private readonly Player ship;
+        private readonly PausePanel PauseMenu;
         private readonly PlanetPanel TradeMenu;
-        private readonly HashSet<Keys> windowKeys = new HashSet<Keys> {Keys.F, Keys.Escape, Keys.E};
+        private readonly StatsPanel StatsMenu;
+        private readonly InventoryPanel InventoryMenu;
+        private readonly HashSet<Keys> windowKeys = new HashSet<Keys> { Keys.F, Keys.Escape, Keys.E, Keys.Q };
         private readonly Dictionary<Keys, ISwitcheble> windows;
 
         public Window(MainForm form, Player ship)
@@ -36,11 +37,13 @@ namespace VoidTime.GUI
             TradeMenu = new PlanetPanel(owner, this, ship);
             PauseMenu = new PausePanel(owner, this);
             InventoryMenu = new InventoryPanel(owner, this, ship);
+            StatsMenu = new StatsPanel(owner, this, ship);
             windows = new Dictionary<Keys, ISwitcheble>
             {
                 {Keys.F, TradeMenu},
                 {Keys.Escape, PauseMenu},
-                {Keys.E, InventoryMenu}
+                {Keys.E, InventoryMenu},
+                {Keys.Q, StatsMenu }
             };
             owner.SizeChanged += OnSizeChanged;
         }
@@ -48,9 +51,10 @@ namespace VoidTime.GUI
         private void OnSizeChanged(object sender, EventArgs e)
         {
             var form = sender as MainForm;
-            ChangeSize(PauseMenu, form, new SizeF(0.3f, 0.3f), false);
+            ChangeSize(PauseMenu, form, new SizeF(), false);
             ChangeSize(TradeMenu, form, new SizeF(0.6f, 0.6f));
             ChangeSize(InventoryMenu, form, new SizeF(0.6f, 0.6f));
+            ChangeSize(StatsMenu, form, new SizeF(0.2f, 0.6f));
         }
 
         private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, bool isChange = true)

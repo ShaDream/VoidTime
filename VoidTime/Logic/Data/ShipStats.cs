@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace VoidTime
@@ -71,6 +72,22 @@ namespace VoidTime
             currentHP = Math.Min(MaxHP, Math.Max(0, hp));
             if (currentHP <= 0)
                 Death?.Invoke();
+        }
+
+        public string GetInfo()
+        {
+            var gunInfo = new StringBuilder();
+            foreach (var gun in Guns)
+            {
+                gunInfo.Append(gun.GetInfo().Replace("\n", "\n\t"));
+                gunInfo.Append("\n");
+            }
+
+            return $"Health: {currentHP}\n" +
+                   $"Defence: {Defence}\n" +
+                   $"Speed: {Speed}\n\n" +
+                   gunInfo;
+
         }
 
         private event Action Death;
