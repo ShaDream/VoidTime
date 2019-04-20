@@ -7,12 +7,12 @@ namespace VoidTime
     {
         public override void SetChip(Ship ship)
         {
-            ship.data.ShipBuffs.Destroy = false;
+            ship.Data.ShipBuffs.Destroy = false;
         }
 
         public override void RemoveChip(Ship ship)
         {
-            ship.data.ShipBuffs.Destroy = true;
+            ship.Data.ShipBuffs.Destroy = true;
         }
     }
 }

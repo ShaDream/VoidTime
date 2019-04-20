@@ -24,8 +24,8 @@ namespace VoidTime
         {
             var rotationVector = (target.Position - Position).Normilized * Time.DeltaTime;
             velocity += rotationVector;
-            if (velocity.Magnitude > data.ShipStats.Speed)
-                velocity = velocity.Normilized * data.ShipStats.Speed;
+            if (velocity.Magnitude > Data.ShipStats.Speed)
+                velocity = velocity.Normilized * Data.ShipStats.Speed;
             Angle = Angle + (rotationVector.Angle - Angle) * 0.2;
             SetLinearVelocity(velocity);
         }

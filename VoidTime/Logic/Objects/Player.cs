@@ -30,8 +30,8 @@ namespace VoidTime
             AllowedCoordinates = allowedCoordinates;
             Position = position;
             Size = new Size(100, 111);
-            data.SetShip("Base ship");
-            data.SetGun("Base gun", 0);
+            Data.SetShip("Base ship");
+            Data.SetGun("Base gun", 0);
             //data.SetGun("Base gun", 1);
             //data.SetGun("Base gun", 2);
         }
@@ -42,10 +42,10 @@ namespace VoidTime
         public override void Update()
         {
             Move();
-            var blasts = data.ShipStats.Shoot(this);
+            var blasts = Data.ShipStats.Shoot(this);
             foreach (var blast in blasts)
                 Instantiate(blast);
-            data.ShipStats.UpdateStats(this);
+            Data.ShipStats.UpdateStats(this);
             CheckCoordinate();
         }
 
@@ -58,8 +58,8 @@ namespace VoidTime
             if (Input.IsAnyKeyPressed(Keys.D, Keys.W, Keys.A, Keys.S))
             {
                 velocity += rotationVector;
-                if (velocity.Magnitude > data.ShipStats.Speed)
-                    velocity = velocity.Normilized * data.ShipStats.Speed;
+                if (velocity.Magnitude > Data.ShipStats.Speed)
+                    velocity = velocity.Normilized * Data.ShipStats.Speed;
             }
             else
             {

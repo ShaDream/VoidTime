@@ -5,9 +5,10 @@ namespace VoidTime
 {
     public class Ship : PhysicalGameObject
     {
-        public ShipData data;
-        public InstalledChips chips;
-        public Inventory inventory;
+        public InstalledChips Chips;
+        public ShipData Data;
+        public Inventory Inventory;
+
 
         public override void CreatePhysics(World world)
         {

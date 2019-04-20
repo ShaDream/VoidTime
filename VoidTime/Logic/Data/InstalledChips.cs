@@ -24,15 +24,15 @@ namespace VoidTime
             chips.Add(chip);
             curWeight += chip.CurrentCost;
             chip.SetChip(owner);
-            owner.data.UpdateFields();
+            owner.Data.UpdateFields();
         }
 
         public void Remove(Chip chip)
         {
             chips.Remove(chip);
             chip.RemoveChip(owner);
-            owner.data.UpdateFields();
-            owner.inventory.Add(chip);
+            owner.Data.UpdateFields();
+            owner.Inventory.Add(chip);
         }
 
         public IReadOnlyList<Chip> GetChips => new ReadOnlyCollection<Chip>(chips);

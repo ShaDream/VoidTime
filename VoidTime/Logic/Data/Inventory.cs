@@ -7,8 +7,8 @@ namespace VoidTime
 {
     public struct Inventory
     {
-        private List<IItem> items;
-        private Ship owner;
+        private readonly List<IItem> items;
+        private readonly Ship owner;
 
         public Inventory(Ship owner)
         {
@@ -40,10 +40,10 @@ namespace VoidTime
 
         public void InstallChip(Chip chip)
         {
-            if (items.Contains(chip) && owner.chips.IsCanAdd(chip))
+            if (items.Contains(chip) && owner.Chips.IsCanAdd(chip))
             {
                 Remove(chip);
-                owner.chips.Add(chip);
+                owner.Chips.Add(chip);
             }
         }
     }

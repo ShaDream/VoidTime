@@ -67,7 +67,7 @@ namespace VoidTime
             var other = contact.FixtureA.Body == Body ? contact.FixtureB : contact.FixtureA;
             if (damagableTypes.Contains(other.Body.UserData.GetType()) && other.Body.UserData != owner)
             {
-                (other.Body.UserData as Ship)?.data.ShipStats.GetDamage(damage);
+                (other.Body.UserData as Ship)?.Data.ShipStats.GetDamage(damage);
                 Destoy();
             }
         }
