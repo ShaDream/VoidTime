@@ -4,35 +4,23 @@ using System.Windows.Forms;
 
 namespace VoidTime.GUI
 {
-    public class PausePanel : ISwitcheble
+    public class PausePanel : BasicGameWindow
     {
-        private MainForm form;
-        private TableLayoutPanel pausePanel;
-        private Window owner;
-        public bool isShow { get; private set; }
-        public Point Location
-        {
-            get => pausePanel.Location;
-            set => pausePanel.Location = value;
-        }
-        public Size Size
-        {
-            get => pausePanel.Size;
-            set => pausePanel.Size = value;
-        }
-
         public PausePanel(MainForm form, Window owner)
         {
             this.form = form;
             this.owner = owner;
-            pausePanel = new TableLayoutPanel
+            var pausePanel = new TableLayoutPanel
             {
-                Size = new Size(250, 250),
+                Size = new Size(250, 300),
                 Location = new Point(100, 100)
             };
-            pausePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            pausePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-            pausePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            pausePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50));
+            pausePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
+            pausePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50));
+            for (var i = 0; i < 5; i++)
+                pausePanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
+            
             var exitButton = new Button
             {
                 BackColor = Color.Black,
@@ -40,7 +28,6 @@ namespace VoidTime.GUI
                 Text = "Exit",
                 Size = new Size(150, 50),
                 Font = new Font(new FontFamily("Arial"), 24),
-                Margin = new Padding(50, 25, 0, 0)
             };
             var returnButton = new Button
             {
@@ -49,40 +36,12 @@ namespace VoidTime.GUI
                 Text = "Resume",
                 Size = new Size(150, 50),
                 Font = new Font(new FontFamily("Arial"), 24),
-                Margin = new Padding(50, 50, 0, 0)
             };
             exitButton.Click += (s, a) => form.Close();
             returnButton.Click += (s, a) => Switch();
-            pausePanel.Controls.Add(returnButton, 0, 0);
-            pausePanel.Controls.Add(exitButton, 0, 1);
-        }
-        private void Hide()
-        {
-            form.BeginInvoke(new Action(() =>
-            {
-                form.Controls.Remove(pausePanel);
-                form.currentModel.Run();
-            }));
-            owner.lastKey = Keys.None;
-        }
-
-        private void Show()
-        {
-            form.BeginInvoke(new Action(() =>
-            {
-                form.Controls.Add(pausePanel);
-                pausePanel.BringToFront();
-                form.currentModel.Pause();
-            }));
-        }
-
-        public void Switch()
-        {
-            if (isShow)
-                Hide();
-            else
-                Show();
-            isShow = !isShow;
+            pausePanel.Controls.Add(returnButton, 1, 1);
+            pausePanel.Controls.Add(exitButton, 1, 3);
+            window = pausePanel;
         }
     }
 }

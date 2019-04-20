@@ -7,15 +7,9 @@ using VoidTime.Resources;
 
 namespace VoidTime.GUI
 {
-    public class PlanetPanel : ISwitcheble
+    public class PlanetPanel : BasicGameWindow
     {
-        private MainForm form;
-        private Window owner;
         private Player ship;
-        public bool isShow { get; private set; }
-
-        private TabControl tabs;
-
         private TableLayoutPanel BuySellPanel;
         private ListBox planetInventory;
         private TextBox description;
@@ -23,17 +17,6 @@ namespace VoidTime.GUI
         private Button exitButton;
         private Button buyButton;
         private Button repairButton;
-        public Point Location
-        {
-            get => tabs.Location;
-            set => tabs.Location = value;
-        }
-        public Size Size
-        {
-            get => tabs.Size;
-            set => tabs.Size = value;
-        }
-
 
         public PlanetPanel(MainForm form, Window owner, Player ship)
         {
@@ -41,7 +24,7 @@ namespace VoidTime.GUI
             this.ship = ship;
             this.owner = owner;
 
-            tabs = new TabControl
+            var tabs = new TabControl
             {
                 BackColor = Color.Black,
                 Size = new Size(500, 500),
@@ -59,7 +42,7 @@ namespace VoidTime.GUI
             BuySellPanelInitialization();
 
             tabs.TabPages[0].Controls.Add(BuySellPanel);
-
+            window = tabs;
         }
 
         private void UpgradePanelInitialization()
@@ -161,37 +144,6 @@ namespace VoidTime.GUI
                 };
             };
         }
-
-        private void Show()
-        {
-            form.BeginInvoke(new Action(() =>
-            {
-                Update();
-                form.Controls.Add(tabs);
-                tabs.BringToFront();
-                form.currentModel.Pause();
-            }));
-        }
-
-        private void Hide()
-        {
-            form.BeginInvoke(new Action(() =>
-            {
-                form.Controls.Remove(tabs);
-                form.currentModel.Run();
-            }));
-            owner.lastKey = Keys.None;
-        }
-
-        public void Switch()
-        {
-            if (isShow)
-                Hide();
-            else
-                Show();
-            isShow = !isShow;
-        }
-
         private void Update()
         {
             planetInventory.Items.Clear();

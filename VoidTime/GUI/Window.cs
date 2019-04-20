@@ -7,14 +7,16 @@ namespace VoidTime.GUI
 {
     public class Window
     {
-        private MainForm owner;
-        private Player ship;
-        private PlanetPanel TradeMenu;
-        private PausePanel PauseMenu;
-        private HashSet<Keys> windowKeys = new HashSet<Keys>{ Keys.F, Keys.Escape };
-        private Dictionary<Keys, ISwitcheble> windows;
+        private readonly Label EnterLabel;
+        private readonly InventoryPanel InventoryMenu;
         public Keys lastKey = Keys.None;
-        private Label EnterLabel;
+        private readonly MainForm owner;
+        private readonly PausePanel PauseMenu;
+        private readonly Player ship;
+        private readonly PlanetPanel TradeMenu;
+        private readonly HashSet<Keys> windowKeys = new HashSet<Keys> {Keys.F, Keys.Escape, Keys.E};
+        private readonly Dictionary<Keys, ISwitcheble> windows;
+
         public Window(MainForm form, Player ship)
         {
             owner = form;
@@ -28,16 +30,17 @@ namespace VoidTime.GUI
                 Font = new Font(new FontFamily("Arial"), 24),
                 ForeColor = Color.White,
                 Size = new Size(150, 50),
-                Location = new Point(900, 800),
-
+                Location = new Point(900, 800)
             };
 
             TradeMenu = new PlanetPanel(owner, this, ship);
             PauseMenu = new PausePanel(owner, this);
+            InventoryMenu = new InventoryPanel(owner, this, ship);
             windows = new Dictionary<Keys, ISwitcheble>
             {
-                { Keys.F, TradeMenu },
-                { Keys.Escape, PauseMenu }
+                {Keys.F, TradeMenu},
+                {Keys.Escape, PauseMenu},
+                {Keys.E, InventoryMenu}
             };
             owner.SizeChanged += OnSizeChanged;
         }
@@ -45,30 +48,32 @@ namespace VoidTime.GUI
         private void OnSizeChanged(object sender, EventArgs e)
         {
             var form = sender as MainForm;
-            EnterLabel.Location = new Point(
-                (form.Size.Width - EnterLabel.Size.Width) / 2,
-                (form.Size.Height - EnterLabel.Size.Height) * 9 / 10);
-            TradeMenu.Size = new Size(form.Size.Width * 3 / 6, form.Size.Height * 4 / 6);
-            TradeMenu.Location = new Point(form.Size.Width * 1 / 4, form.Size.Height * 1 / 6);
-            PauseMenu.Location = new Point((form.Size.Width - PauseMenu.Size.Width) / 2,
-                                           (form.Size.Height - PauseMenu.Size.Height) / 2);
+            ChangeSize(PauseMenu, form, new SizeF(0.3f, 0.3f), false);
+            ChangeSize(TradeMenu, form, new SizeF(0.6f, 0.6f));
+            ChangeSize(InventoryMenu, form, new SizeF(0.6f, 0.6f));
+        }
+
+        private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, bool isChange = true)
+        {
+            if (isChange)
+            {
+                window.Size = new Size((int)(form.Size.Width * size.Width),
+                                       (int)(form.Size.Height * size.Height));
+            }
+            window.Location = new Point((form.Size.Width - window.Size.Width) / 2,
+                                        (form.Size.Height - window.Size.Height) / 2);
         }
 
         private void UpdateEnterLabel(bool isShow)
         {
             if (isShow)
-            {
                 owner.BeginInvoke(new Action(() =>
                 {
                     owner.Controls.Add(EnterLabel);
                     EnterLabel.BringToFront();
                 }));
-            }
             else
-                owner.BeginInvoke(new Action(() =>
-                {
-                    owner.Controls.Remove(EnterLabel);
-                }));
+                owner.BeginInvoke(new Action(() => { owner.Controls.Remove(EnterLabel); }));
         }
 
         public void OnKeyPress(object sender, KeyEventArgs args)
@@ -77,7 +82,6 @@ namespace VoidTime.GUI
             {
                 if (args.KeyCode != lastKey) return;
                 windows[args.KeyCode].Switch();
-
             }
             else
             {

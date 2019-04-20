@@ -28,12 +28,9 @@ namespace VoidTime
             items.Remove(item);
         }
 
-        public IReadOnlyCollection<IItem> GetItems()
-        {
-            return new ReadOnlyCollection<IItem>(items);
-        }
+        public IReadOnlyCollection<IItem> GetItems => new ReadOnlyCollection<IItem>(items);
 
-        public IReadOnlyCollection<IItem> GetItems(Type type)
+        public IReadOnlyCollection<IItem> GetItemsByType(Type type)
         {
             return new ReadOnlyCollection<IItem>(items
                 .Where(x => x.GetType() == type)
