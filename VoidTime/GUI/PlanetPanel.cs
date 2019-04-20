@@ -9,7 +9,7 @@ namespace VoidTime.GUI
         private readonly Player ship;
         private Button buyButton;
         private TableLayoutPanel BuySellPanel;
-        private TextBox description;
+        private Label description;
 
         private Button exitButton;
         private ListBox planetInventory;
@@ -69,13 +69,12 @@ namespace VoidTime.GUI
             };
             ListPanel.Controls.Add(planetInventory, 0, 0);
 
-            description = new TextBox
+            description = new Label
             {
-                Multiline = true,
                 Dock = DockStyle.Fill,
-                ReadOnly = true,
                 BackColor = Color.Black,
-                ForeColor = Color.White
+                ForeColor = Color.White,
+                Font = new Font("Arial",36)
             };
             ListPanel.Controls.Add(description, 1, 0);
 
@@ -125,6 +124,9 @@ namespace VoidTime.GUI
             planetInventory.SelectedIndexChanged += (s, a) =>
             {
                 var item = planetInventory.SelectedItem as IItem;
+                if(item == null)
+                    return;
+                var t = item.GetInfo();
                 description.Text = item.GetInfo();
                 buyButton.Text = "Buy";
                 buyButton.Visible = true;

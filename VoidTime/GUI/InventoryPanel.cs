@@ -34,6 +34,7 @@ namespace VoidTime.GUI
                 BackColor = Color.Black,
                 Size = new Size(500, 500),
                 Location = new Point(700, 200),
+                Dock = DockStyle.Fill
             };
             tabs.TabPages.Add("Installed Chips");
             tabs.TabPages.Add("Installed Guns");
