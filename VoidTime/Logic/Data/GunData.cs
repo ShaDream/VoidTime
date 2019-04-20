@@ -9,14 +9,14 @@
 
         public string GetInfo()
         {
-            return $"Slot {Slot}" +
-                   $"{Name}:\n" +
+            return $"Slot {Slot}\n" +
+                   $"{Name}\n" +
                    $"Damage: {Damage}\n" +
                    $"Tier: {Tier}\n" +
                    $"Fire rate: {FireRate}\n" +
                    $"Critical chance: {CriticalChance}\n" +
                    $"Range: {Range}\n" +
-                   $"Price: {Price}";
+                   $"Price: {Price}\n";
         }
 
         public Vector2D PositionOffset;

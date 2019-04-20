@@ -69,6 +69,7 @@ namespace VoidTime
             {
                 ShipStats.Guns[i].PositionOffset = slot.positionOffset;
                 var gun = slot.Gun;
+                ShipStats.Guns[i].Slot = gun.Slot;
                 ShipStats.Guns[i].CanRotate = gun.CanRotate;
                 ShipStats.Guns[i].CriticalChance =
                     gun.CriticalChance + gun.CriticalChance * ShipBuffs.CriticalChanceIncrease / 100;
