@@ -42,6 +42,7 @@ namespace VoidTime.GUI
             {
                 tabs.TabPages[i].BackColor = Color.Black;
                 tabs.TabPages[i].BorderStyle = BorderStyle.None;
+                tabs.TabPages[i].Dock = DockStyle.Fill;
             }
 
             items = new ListBox
@@ -52,7 +53,7 @@ namespace VoidTime.GUI
                 Dock = DockStyle.Fill,
                 Margin = new Padding(0, 23, 3, 0)
             };
-            
+
             installedChips = new ListBox
             {
                 BackColor = Color.Black,
@@ -100,12 +101,11 @@ namespace VoidTime.GUI
             installedChips.SelectedIndexChanged += (s, a) =>
             {
                 setRemoveButton.Visible = true;
-                var item = items.SelectedItem as IItem;
+                var item = installedChips.SelectedItem as Chip;
                 setRemoveButton.Text = "Uninstall";
-                if (item is Chip)
-                    setRemoveClick = () =>
+                setRemoveClick = () =>
                     {
-                        ship.Chips.Remove(item as Chip);
+                        ship.Chips.Remove(item);
                         Update();
                     };
             };
@@ -126,7 +126,7 @@ namespace VoidTime.GUI
             window = inventoryPanel;
         }
 
-        private void Update()
+        protected override void Update()
         {
             setRemoveButton.Visible = false;
             items.Items.Clear();
