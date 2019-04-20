@@ -27,6 +27,8 @@ namespace VoidTime
 
         public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
         {
+            Inventory = new Inventory(this);
+            Chips = new InstalledChips(this, 60);
             AllowedCoordinates = allowedCoordinates;
             Position = position;
             Size = new Size(100, 111);

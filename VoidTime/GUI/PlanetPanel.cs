@@ -17,7 +17,7 @@ namespace VoidTime.GUI
         private TabControl tabs;
 
         private TableLayoutPanel BuySellPanel;
-        private ListBox itemBox;
+        private ListBox planetInventory;
         private TextBox description;
 
         private Button exitButton;
@@ -49,7 +49,12 @@ namespace VoidTime.GUI
             };
             tabs.TabPages.Add("Buy/Sell");
             tabs.TabPages.Add("Upgrade");
-            tabs.TabPages.Add("Set Weapons");
+
+            for (var i = 0; i < tabs.TabCount; i++)
+            {
+                tabs.TabPages[i].BackColor = Color.Black;
+                tabs.TabPages[i].BorderStyle = BorderStyle.None;
+            }
 
             BuySellPanelInitialization();
 
@@ -71,21 +76,21 @@ namespace VoidTime.GUI
                 Dock = DockStyle.Fill
             };
 
-            var ButtonPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
-            var ListPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
+            var ButtonPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
+            var ListPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
 
             ListPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             ListPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             ListPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
 
-            itemBox = new ListBox
+            planetInventory = new ListBox
             {
                 BackColor = Color.Black,
                 ForeColor = Color.White,
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.None
             };
-            ListPanel.Controls.Add(itemBox, 0, 0);
+            ListPanel.Controls.Add(planetInventory, 0, 0);
 
             description = new TextBox
             {
@@ -101,6 +106,9 @@ namespace VoidTime.GUI
             ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
             ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
             ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
+            ButtonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 0));
+
+            Action buyClick = () => { };
 
             exitButton = new Button
             {
@@ -117,6 +125,7 @@ namespace VoidTime.GUI
                 BackColor = Color.Black,
                 ForeColor = Color.White,
                 Dock = DockStyle.Fill,
+                Visible = false
             };
             ButtonPanel.Controls.Add(buyButton, 1, 0);
 
@@ -134,11 +143,22 @@ namespace VoidTime.GUI
             BuySellPanel.Controls.Add(ButtonPanel, 0, 1);
             BuySellPanel.Controls.Add(ListPanel, 0, 0);
 
+            buyButton.Click += (s, a) => buyClick();
 
-            itemBox.SelectedIndexChanged += (s, a) =>
+            planetInventory.SelectedIndexChanged += (s, a) =>
             {
-                var name = (itemBox.SelectedItem as string);
-                name = name.Substring(0, name.LastIndexOf(' '));
+                var item = (planetInventory.SelectedItem as IItem);
+                description.Text = item.GetInfo();
+                buyButton.Text = "Buy";
+                buyButton.Visible = true;
+                if (item.Price > ship.Inventory.Money)
+                    buyButton.Enabled = false;
+                buyClick = () =>
+                {
+                    ship.Inventory.Money -= item.Price;
+                    ship.Inventory.Add(item);
+                    Update();
+                };
             };
         }
 
@@ -146,6 +166,7 @@ namespace VoidTime.GUI
         {
             form.BeginInvoke(new Action(() =>
             {
+                Update();
                 form.Controls.Add(tabs);
                 tabs.BringToFront();
                 form.currentModel.Pause();
@@ -169,6 +190,14 @@ namespace VoidTime.GUI
             else
                 Show();
             isShow = !isShow;
+        }
+
+        private void Update()
+        {
+            planetInventory.Items.Clear();
+            planetInventory.Items.Add(ChipParser.GetChip("Attack Up"));
+            planetInventory.Items.Add(ChipParser.GetChip("Defence Up"));
+            buyButton.Visible = false;
         }
     }
 }
