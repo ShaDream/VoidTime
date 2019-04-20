@@ -83,14 +83,14 @@ namespace VoidTime.GUI
                 Visible = false,
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Size = new Size(150, 50)
+                Dock = DockStyle.Fill
             };
             exitButton = new Button
             {
                 BackColor = Color.Black,
                 ForeColor = Color.White,
                 Text = "Exit",
-                Size = new Size(150, 50)
+                Dock = DockStyle.Fill
             };
 
             items.SelectedIndexChanged += (s, a) =>

@@ -79,7 +79,7 @@ namespace VoidTime
             var gunInfo = new StringBuilder();
             foreach (var gun in Guns)
             {
-                gunInfo.Append(gun.GetInfo().Replace("\n", "\n\t"));
+                gunInfo.Append(gun.GetInfo());
                 gunInfo.Append("\n");
             }
 
