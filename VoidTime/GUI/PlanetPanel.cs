@@ -128,6 +128,13 @@ namespace VoidTime.GUI
                 };
             };
 
+            planetInventory.MouseDoubleClick += (s, a) =>
+            {
+                if (!(planetInventory.SelectedItem is IItem item))
+                    return;
+                buyButton.PerformClick();
+            };
+
             window = planetPanel;
         }
 

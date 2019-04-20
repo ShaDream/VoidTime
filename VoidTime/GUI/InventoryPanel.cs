@@ -107,10 +107,15 @@ namespace VoidTime.GUI
                         Update();
                     };
             };
+            items.MouseDoubleClick += (s, a) =>
+            {
+                if (!(items.SelectedItem is Chip item))
+                    return;
+                setRemoveButton.PerformClick();
+            };
             installedChips.SelectedIndexChanged += (s, a) =>
             {
-                var item = installedChips.SelectedItem as Chip;
-                if (item == null)
+                if (!(installedChips.SelectedItem is Chip item))
                     return;
                 setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Uninstall";
@@ -120,6 +125,13 @@ namespace VoidTime.GUI
                         Update();
                     };
             };
+            installedChips.MouseDoubleClick += (s, a) =>
+            {
+                if (!(installedChips.SelectedItem is Chip item))
+                    return;
+                setRemoveButton.PerformClick();
+            };
+
             installedGuns.SelectedIndexChanged += (s, a) =>
             {
                 var item = items.SelectedItem as IItem;
