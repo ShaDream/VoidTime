@@ -9,5 +9,10 @@
         public int MaxTier;
         public bool HasGun;
         public GunData Gun;
+
+        public bool IsCanAdd(GunData gun)
+        {
+            return MaxTier >= gun.Tier;
+        }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="GUI\ISwitcheble.cs" />
     <Compile Include="GUI\PausePanel.cs" />
     <Compile Include="GUI\PlanetPanel.cs" />
+    <Compile Include="GUI\Prompt.cs" />
     <Compile Include="GUI\StatsPanel.cs" />
     <Compile Include="GUI\Window.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />

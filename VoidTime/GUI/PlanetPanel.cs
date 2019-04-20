@@ -54,8 +54,11 @@ namespace VoidTime.GUI
             };
             tabsInfo.TabPages.Add("Information");
             tabsInfo.TabPages.Add("Inventory");
-            tabsInfo.TabPages[0].BackColor = Color.Black;
-            tabsInfo.TabPages[0].BorderStyle = BorderStyle.None;
+            for (var i = 0; i < tabsInfo.TabCount; i++)
+            {
+                tabsInfo.TabPages[i].BackColor = Color.Black;
+                tabsInfo.TabPages[i].BorderStyle = BorderStyle.None;
+            }
             planetPanel.Controls.Add(tabsInfo, 1, 0);
 
             planetInventory = new ListBox
@@ -130,7 +133,7 @@ namespace VoidTime.GUI
 
             planetInventory.MouseDoubleClick += (s, a) =>
             {
-                if (!(planetInventory.SelectedItem is IItem item))
+                if (planetInventory.SelectedItem == null)
                     return;
                 buyButton.PerformClick();
             };

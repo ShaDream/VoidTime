@@ -100,19 +100,33 @@ namespace VoidTime.GUI
                     return;
                 setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Install";
-                if (item is Chip)
-                    setRemoveClick = () =>
-                    {
-                        ship.Inventory.InstallChip(item as Chip);
-                        Update();
-                    };
+                switch (item)
+                {
+                    case Chip _:
+                        setRemoveClick = () =>
+                        {
+                            ship.Inventory.InstallChip(item as Chip);
+                            Update();
+                        };
+                        break;
+                    case GunData _:
+
+                        setRemoveClick = () =>
+                        {
+                            //ship.Data.SetGun();
+                            Update();
+                        };
+                        break;
+                }
             };
+
             items.MouseDoubleClick += (s, a) =>
             {
-                if (!(items.SelectedItem is Chip item))
+                if (items.SelectedItem == null)
                     return;
                 setRemoveButton.PerformClick();
             };
+
             installedChips.SelectedIndexChanged += (s, a) =>
             {
                 if (!(installedChips.SelectedItem is Chip item))
@@ -125,20 +139,32 @@ namespace VoidTime.GUI
                         Update();
                     };
             };
+
             installedChips.MouseDoubleClick += (s, a) =>
             {
-                if (!(installedChips.SelectedItem is Chip item))
+                if (installedChips.SelectedItem == null)
                     return;
                 setRemoveButton.PerformClick();
             };
 
             installedGuns.SelectedIndexChanged += (s, a) =>
             {
-                var item = items.SelectedItem as IItem;
-                if (item == null)
+                if (!(installedGuns.SelectedItem is GunData item))
                     return;
                 setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Uninstall";
+                setRemoveClick = () =>
+                {
+                    ship.Data.RemoveGun(item.Slot);
+                    Update();
+                };
+            };
+
+            installedGuns.MouseDoubleClick += (s, a) =>
+            {
+                if (installedGuns.SelectedItem == null)
+                    return;
+                setRemoveButton.PerformClick();
             };
 
             setRemoveButton.Click += (s, a) => setRemoveClick();
@@ -164,6 +190,11 @@ namespace VoidTime.GUI
             foreach (var item in ship.Chips.GetChips)
             {
                 installedChips.Items.Add(item);
+            }
+            installedGuns.Items.Clear();
+            foreach (var item in ship.Data.ShipStats.Guns)
+            {
+                installedGuns.Items.Add(item);
             }
         }
     }

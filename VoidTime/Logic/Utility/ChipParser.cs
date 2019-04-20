@@ -66,7 +66,7 @@ namespace VoidTime
             doc.LoadXml(Data.Chips);
             var chipNodes = doc.SelectNodes($"//chip");
             foreach (XmlElement chipNode in chipNodes)
-                chips.Add(GetChip(chipNode["name"].InnerText));
+                chips.Add(GetChip(chipNode["name"].InnerText, int.Parse(chipNode["levels"].InnerText)));
 
             return chips.ToArray();
         }
