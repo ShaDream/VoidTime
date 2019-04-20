@@ -162,15 +162,6 @@ namespace VoidTime.GUI
             owner.lastKey = Keys.None;
         }
 
-        public void UpdateFields()
-        {
-            var names = new List<string>();
-            foreach (XmlNode node in list)
-                names.Add($"{node.Attributes["Name"].Value} {node.Attributes["price"].Value}$");
-
-            itemBox.Items.AddRange(names.ToArray());
-        }
-
         public void Switch()
         {
             if (isShow)
