@@ -5,15 +5,18 @@
         public string Name { get; set; }
         public int Price { get; set; }
 
+        public int Slot { get; set; }
+
         public string GetInfo()
         {
-            return $"{Name}:\n" +
+            return $"Slot {Slot}" +
+                   $"{Name}:\n" +
                    $"Damage: {Damage}\n" +
                    $"Tier: {Tier}\n" +
                    $"Fire rate: {FireRate}\n" +
                    $"Critical chance: {CriticalChance}\n" +
                    $"Range: {Range}\n" +
-                   $"Price: {Price}\n";
+                   $"Price: {Price}";
         }
 
         public Vector2D PositionOffset;
