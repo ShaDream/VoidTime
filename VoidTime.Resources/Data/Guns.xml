@@ -10,4 +10,14 @@
     <range>100</range>
     <price>0</price>
   </gun>
+  <gun>
+    <name>Omega gun</name>
+    <canRotate>true</canRotate>
+    <damage>10</damage>
+    <fireRate>10</fireRate>
+    <criticalChance>3</criticalChance>
+    <tier>1</tier>
+    <range>2000</range>
+    <price>0</price>
+  </gun>
 </guns>
