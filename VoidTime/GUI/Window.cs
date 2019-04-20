@@ -7,7 +7,6 @@ namespace VoidTime.GUI
 {
     public class Window
     {
-        private readonly Label EnterLabel;
         public Keys lastKey = Keys.None;
         private readonly MainForm owner;
         private readonly Player ship;
@@ -15,6 +14,7 @@ namespace VoidTime.GUI
         private readonly PlanetPanel TradeMenu;
         private readonly StatsPanel StatsMenu;
         private readonly InventoryPanel InventoryMenu;
+        private readonly EnterPanel EnterMenu;
         private readonly HashSet<Keys> windowKeys = new HashSet<Keys> { Keys.F, Keys.Escape, Keys.E, Keys.Q };
         private readonly Dictionary<Keys, ISwitcheble> windows;
 
@@ -24,16 +24,7 @@ namespace VoidTime.GUI
             this.ship = ship;
             ship.EnterChanged += UpdateEnterLabel;
 
-            EnterLabel = new Label
-            {
-                Text = "Press F",
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font(new FontFamily("Arial"), 24),
-                ForeColor = Color.White,
-                Size = new Size(150, 50),
-                Location = new Point(900, 800)
-            };
-
+            EnterMenu = new EnterPanel(owner, this);
             TradeMenu = new PlanetPanel(owner, this, ship);
             PauseMenu = new PausePanel(owner, this);
             InventoryMenu = new InventoryPanel(owner, this, ship);
@@ -51,33 +42,27 @@ namespace VoidTime.GUI
         private void OnSizeChanged(object sender, EventArgs e)
         {
             var form = sender as MainForm;
-            ChangeSize(PauseMenu, form, new SizeF(), false);
-            ChangeSize(TradeMenu, form, new SizeF(0.6f, 0.6f));
-            ChangeSize(InventoryMenu, form, new SizeF(0.6f, 0.6f));
-            ChangeSize(StatsMenu, form, new SizeF(0.2f, 0.6f));
+            ChangeSize(PauseMenu, form, new SizeF(), new PointF(0.5f, 0.5f), false);
+            ChangeSize(TradeMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
+            ChangeSize(InventoryMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
+            ChangeSize(StatsMenu, form, new SizeF(0.2f, 0.6f), new PointF(0.5f, 0.5f));
+            ChangeSize(EnterMenu, form, new SizeF(), new PointF(0.5f, 0.9f), false);
         }
 
-        private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, bool isChange = true)
+        private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, PointF center, bool isChange = true)
         {
             if (isChange)
             {
                 window.Size = new Size((int)(form.Size.Width * size.Width),
                                        (int)(form.Size.Height * size.Height));
             }
-            window.Location = new Point((form.Size.Width - window.Size.Width) / 2,
-                                        (form.Size.Height - window.Size.Height) / 2);
+            window.Location = new Point((int)((form.Size.Width - window.Size.Width) * center.X),
+                                        (int)((form.Size.Height - window.Size.Height) * center.Y));
         }
 
         private void UpdateEnterLabel(bool isShow)
         {
-            if (isShow)
-                owner.BeginInvoke(new Action(() =>
-                {
-                    owner.Controls.Add(EnterLabel);
-                    EnterLabel.BringToFront();
-                }));
-            else
-                owner.BeginInvoke(new Action(() => { owner.Controls.Remove(EnterLabel); }));
+            EnterMenu.Switch();
         }
 
         public void OnKeyPress(object sender, KeyEventArgs args)

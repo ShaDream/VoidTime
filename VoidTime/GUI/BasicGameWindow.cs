@@ -8,7 +8,7 @@ namespace VoidTime.GUI
     {
         protected MainForm form;
         protected Window owner;
-        public bool isShow { get; private set; }
+        public bool isShow { get; protected set; }
 
         protected Control window;
 
