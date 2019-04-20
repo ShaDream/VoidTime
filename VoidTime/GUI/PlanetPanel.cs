@@ -32,7 +32,8 @@ namespace VoidTime.GUI
             {
                 BackColor = Color.Black,
                 Size = new Size(500, 500),
-                Location = new Point(700, 200)
+                Location = new Point(700, 200),
+                Dock = DockStyle.Fill
             };
             tabs.TabPages.Add("Buy/Sell");
             tabs.TabPages.Add("Upgrade");
@@ -48,7 +49,8 @@ namespace VoidTime.GUI
             {
                 BackColor = Color.Black,
                 Size = new Size(500, 500),
-                Location = new Point(700, 200)
+                Location = new Point(700, 200),
+                Dock = DockStyle.Fill
             };
             tabsInfo.TabPages.Add("Information");
             tabsInfo.TabPages.Add("Inventory");
@@ -76,9 +78,9 @@ namespace VoidTime.GUI
             items = new ListBox
             {
                 BackColor = Color.Black,
-                BorderStyle = BorderStyle.None,
                 ForeColor = Color.White,
                 Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.None
             };
 
             tabsInfo.TabPages[0].Controls.Add(description);
@@ -110,8 +112,7 @@ namespace VoidTime.GUI
 
             planetInventory.SelectedIndexChanged += (s, a) =>
             {
-                var item = planetInventory.SelectedItem as IItem;
-                if (item == null)
+                if (!(planetInventory.SelectedItem is IItem item))
                     return;
                 var t = item.GetInfo();
                 description.Text = item.GetInfo();
