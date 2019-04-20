@@ -58,5 +58,17 @@ namespace VoidTime
 
             return chip;
         }
+
+        public static Chip[] GetAllChips()
+        {
+            var chips = new List<Chip>();
+            var doc = new XmlDocument();
+            doc.LoadXml(Data.Chips);
+            var chipNodes = doc.SelectNodes($"//chip");
+            foreach (XmlElement chipNode in chipNodes)
+                chips.Add(GetChip(chipNode["name"].InnerText));
+
+            return chips.ToArray();
+        }
     }
 }

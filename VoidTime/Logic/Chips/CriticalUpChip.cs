@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace VoidTime
 {
-    public abstract class CriticalUpChip : Chip
+    public class CriticalUpChip : Chip
     {
         public override void SetChip(Ship ship)
         {

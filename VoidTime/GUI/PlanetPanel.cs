@@ -53,8 +53,8 @@ namespace VoidTime.GUI
                 Dock = DockStyle.Fill
             };
 
-            var ButtonPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
-            var ListPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
+            var ButtonPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
+            var ListPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
 
             ListPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             ListPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
@@ -74,7 +74,7 @@ namespace VoidTime.GUI
                 Dock = DockStyle.Fill,
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Font = new Font("Arial",36)
+                Font = new Font("Arial", 36)
             };
             ListPanel.Controls.Add(description, 1, 0);
 
@@ -124,7 +124,7 @@ namespace VoidTime.GUI
             planetInventory.SelectedIndexChanged += (s, a) =>
             {
                 var item = planetInventory.SelectedItem as IItem;
-                if(item == null)
+                if (item == null)
                     return;
                 var t = item.GetInfo();
                 description.Text = item.GetInfo();
@@ -145,8 +145,7 @@ namespace VoidTime.GUI
         protected override void Update()
         {
             planetInventory.Items.Clear();
-            planetInventory.Items.Add(ChipParser.GetChip("Attack Up"));
-            planetInventory.Items.Add(ChipParser.GetChip("Defence Up"));
+            planetInventory.Items.AddRange(ChipParser.GetAllChips());
             buyButton.Visible = false;
         }
     }
