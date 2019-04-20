@@ -14,7 +14,9 @@ namespace VoidTime.GUI
         private Player ship;
         public bool isShow { get; private set; }
 
-        private TableLayoutPanel planetPanel;
+        private TabControl tabs;
+
+        private TableLayoutPanel BuySellPanel;
         private ListBox itemBox;
         private TextBox description;
 
@@ -23,30 +25,54 @@ namespace VoidTime.GUI
         private Button repairButton;
         public Point Location
         {
-            get => planetPanel.Location;
-            set => planetPanel.Location = value;
+            get => tabs.Location;
+            set => tabs.Location = value;
         }
         public Size Size
         {
-            get => planetPanel.Size;
-            set => planetPanel.Size = value;
+            get => tabs.Size;
+            set => tabs.Size = value;
         }
 
-
-        private XmlNodeList list;
 
         public PlanetPanel(MainForm form, Window owner, Player ship)
         {
             this.form = form;
             this.ship = ship;
             this.owner = owner;
-            planetPanel = new TableLayoutPanel
+
+            tabs = new TabControl
             {
+                BackColor = Color.Black,
                 Size = new Size(500, 500),
                 Location = new Point(700, 200),
             };
-            var ButtonPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
-            var ListPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
+            tabs.TabPages.Add("Buy/Sell");
+            tabs.TabPages.Add("Upgrade");
+            tabs.TabPages.Add("Set Weapons");
+
+            BuySellPanelInitialization();
+
+            tabs.TabPages[0].Controls.Add(BuySellPanel);
+
+        }
+
+        private void UpgradePanelInitialization()
+        {
+
+        }
+
+        private void BuySellPanelInitialization()
+        {
+            BuySellPanel = new TableLayoutPanel
+            {
+                Size = new Size(500, 500),
+                Location = new Point(700, 200),
+                Dock = DockStyle.Fill
+            };
+
+            var ButtonPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
+            var ListPanel = new TableLayoutPanel {Dock = DockStyle.Fill};
 
             ListPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             ListPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
@@ -103,27 +129,25 @@ namespace VoidTime.GUI
             ButtonPanel.Controls.Add(repairButton, 2, 0);
 
 
-            planetPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
-            planetPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
-            planetPanel.Controls.Add(ButtonPanel, 0, 1);
-            planetPanel.Controls.Add(ListPanel, 0, 0);
+            BuySellPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
+            BuySellPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+            BuySellPanel.Controls.Add(ButtonPanel, 0, 1);
+            BuySellPanel.Controls.Add(ListPanel, 0, 0);
 
 
             itemBox.SelectedIndexChanged += (s, a) =>
             {
                 var name = (itemBox.SelectedItem as string);
                 name = name.Substring(0, name.LastIndexOf(' '));
-
             };
-
         }
 
         private void Show()
         {
             form.BeginInvoke(new Action(() =>
             {
-                form.Controls.Add(planetPanel);
-                planetPanel.BringToFront();
+                form.Controls.Add(tabs);
+                tabs.BringToFront();
                 form.currentModel.Pause();
             }));
         }
@@ -132,7 +156,7 @@ namespace VoidTime.GUI
         {
             form.BeginInvoke(new Action(() =>
             {
-                form.Controls.Remove(planetPanel);
+                form.Controls.Remove(tabs);
                 form.currentModel.Run();
             }));
             owner.lastKey = Keys.None;

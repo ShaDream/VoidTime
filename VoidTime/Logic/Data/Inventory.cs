@@ -9,11 +9,13 @@ namespace VoidTime
     {
         private readonly List<IItem> items;
         private readonly Ship owner;
+        public int Money;
 
         public Inventory(Ship owner)
         {
             this.owner = owner;
             items = new List<IItem>();
+            Money = 0;
         }
 
         public void Add(IItem item)
