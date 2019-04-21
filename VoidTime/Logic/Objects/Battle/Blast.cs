@@ -10,7 +10,6 @@ namespace VoidTime
     public class Blast : PhysicalGameObject
     {
         private const float speed = 3000;
-        private const int LiveTime = 200;
 
         private readonly float damage;
         private readonly HashSet<Type> damagableTypes;

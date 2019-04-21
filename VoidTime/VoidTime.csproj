@@ -118,6 +118,7 @@
     <Compile Include="Logic\Objects\Background.cs" />
     <Compile Include="Logic\Objects\Battle\Blast.cs" />
     <Compile Include="Logic\Objects\Enemy.cs" />
+    <Compile Include="Logic\Objects\Explosion.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
     <Compile Include="Logic\Map\Chunk.cs" />
     <Compile Include="Logic\GameModels\MainGameModel.cs" />
