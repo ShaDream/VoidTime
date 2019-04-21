@@ -72,6 +72,7 @@
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
     <Compile Include="DrawClasses\EnemyDrawHelper.cs" />
+    <Compile Include="DrawClasses\ExplosionDrawer.cs" />
     <Compile Include="DrawClasses\ObjectOnDisplay.cs" />
     <Compile Include="DrawClasses\IDrawable.cs" />
     <Compile Include="DrawClasses\PlanetDrawHelper.cs" />

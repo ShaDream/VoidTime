@@ -86,6 +86,7 @@
     <None Include="Resources\RD2.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Explosion.xml" />
     <Content Include="Data\Guns.xml" />
     <Content Include="Data\Ships.xml">
       <SubType>Designer</SubType>
@@ -93,6 +94,7 @@
     <Content Include="Data\Chips.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Resources\explosion.png" />
     <None Include="Resources\chip.png" />
     <None Include="Resources\OMEGA_LASER.png" />
   </ItemGroup>

@@ -89,18 +89,56 @@ namespace VoidTime.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;atlas&gt;
+        ///    &lt;sprite&gt;
+        ///        &lt;id&gt;1&lt;/id&gt;
+        ///        &lt;posX&gt;0&lt;/posX&gt;
+        ///        &lt;posY&gt;0&lt;/posY&gt;
+        ///        &lt;sizeX&gt;0.09090909&lt;/sizeX&gt;
+        ///        &lt;sizeY&gt;0.09090909&lt;/sizeY&gt;
+        ///    &lt;/sprite&gt;
+        ///    &lt;sprite&gt;
+        ///        &lt;id&gt;2&lt;/id&gt;
+        ///        &lt;posX&gt;0.09090909&lt;/posX&gt;
+        ///        &lt;posY&gt;0&lt;/posY&gt;
+        ///        &lt;sizeX&gt;0.09090909&lt;/sizeX&gt;
+        ///        &lt;sizeY&gt;0.09090909&lt;/sizeY&gt;
+        ///    &lt;/sprite&gt;
+        ///    &lt;sprite&gt;
+        ///        &lt;id&gt;3&lt;/id&gt;
+        ///        &lt;posX&gt;0.181818187&lt;/posX&gt;
+        ///        &lt;posY&gt;0&lt;/posY&gt;
+        ///        &lt;sizeX&gt;0.09090909&lt;/sizeX&gt;
+        ///        &lt;sizeY&gt;0.09090909&lt;/sizeY&gt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Explosion {
+            get {
+                return ResourceManager.GetString("Explosion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;guns&gt;
         ///  &lt;gun&gt;
-        ///    &lt;name&gt;Base Gun&lt;/name&gt;
+        ///    &lt;name&gt;Base gun&lt;/name&gt;
+        ///    &lt;canRotate&gt;true&lt;/canRotate&gt;
+        ///    &lt;damage&gt;2&lt;/damage&gt;
+        ///    &lt;fireRate&gt;100&lt;/fireRate&gt;
+        ///    &lt;criticalChance&gt;1&lt;/criticalChance&gt;
+        ///    &lt;tier&gt;1&lt;/tier&gt;
+        ///    &lt;range&gt;100&lt;/range&gt;
+        ///    &lt;price&gt;0&lt;/price&gt;
+        ///  &lt;/gun&gt;
+        ///  &lt;gun&gt;
+        ///    &lt;name&gt;Omega gun&lt;/name&gt;
         ///    &lt;canRotate&gt;true&lt;/canRotate&gt;
         ///    &lt;damage&gt;10&lt;/damage&gt;
-        ///    &lt;fireRate&gt;&lt;/fireRate&gt;
+        ///    &lt;fireRate&gt;10&lt;/fireRate&gt;
+        ///    &lt;criticalChance&gt;3&lt;/criticalChance&gt;
         ///    &lt;tier&gt;1&lt;/tier&gt;
-        ///    &lt;price&gt;&lt;/price&gt;
-        ///  &lt;/gun&gt;
-        ///
-        ///&lt;/guns&gt;.
+        ///    &lt;range&gt;2000&lt;/range&gt;
+        ///    &lt;price&gt;0&lt;/p [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Guns {
             get {
@@ -112,29 +150,31 @@ namespace VoidTime.Resources {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///
         ///&lt;ships&gt;
-        ///
         ///  &lt;ship&gt;
-        ///    &lt;name&gt;Ship&lt;/name&gt;
+        ///    &lt;name&gt;Base ship&lt;/name&gt;
         ///    &lt;size&gt;
-        ///      &lt;x&gt;&lt;/x&gt;
-        ///      &lt;y&gt;&lt;/y&gt;
+        ///      &lt;x&gt;100&lt;/x&gt;
+        ///      &lt;y&gt;111&lt;/y&gt;
         ///    &lt;/size&gt;
         ///    &lt;slots&gt;
         ///      &lt;slot&gt;
         ///        &lt;position&gt;
-        ///          &lt;x&gt;&lt;/x&gt;
-        ///          &lt;y&gt;&lt;/y&gt;
+        ///          &lt;x&gt;50&lt;/x&gt;
+        ///          &lt;y&gt;0&lt;/y&gt;
         ///        &lt;/position&gt;
-        ///        &lt;maxTier&gt;&lt;/maxTier&gt;
+        ///        &lt;maxTier&gt;1&lt;/maxTier&gt;
         ///      &lt;/slot&gt;
-        ///    &lt;/slots&gt;
-        ///    &lt;defence&gt;&lt;/defence&gt;
-        ///    &lt;hp&gt;&lt;/hp&gt;
-        ///    &lt;speed&gt;&lt;/speed&gt;
-        ///    &lt;price&gt;&lt;/price&gt;
-        ///  &lt;/ship&gt;
-        ///
-        ///&lt;/ships&gt;.
+        ///      &lt;slot&gt;
+        ///        &lt;position&gt;
+        ///          &lt;x&gt;0&lt;/x&gt;
+        ///          &lt;y&gt;50&lt;/y&gt;
+        ///        &lt;/position&gt;
+        ///        &lt;maxTier&gt;1&lt;/maxTier&gt;
+        ///      &lt;/slot&gt;
+        ///      &lt;slot&gt;
+        ///        &lt;position&gt;
+        ///          &lt;x&gt;0&lt;/x&gt;
+        ///          &lt;y [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Ships {
             get {
