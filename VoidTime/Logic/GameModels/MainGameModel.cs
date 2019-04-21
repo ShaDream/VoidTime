@@ -72,7 +72,6 @@ namespace VoidTime
             {
                 obj.Destoy();
                 player.CreatePhysics(Physics);
-                player.Position = m.;
                 Run();
             };
             GameModelChanged?.Invoke(model);

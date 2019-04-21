@@ -30,8 +30,8 @@ namespace VoidTime
             this.owner = owner;
             this.damagableTypes = new HashSet<Type>(damagableTypes.Select(x =>
             {
-                if (!x.IsSubclassOf(typeof(Ship)))
-                    throw new ArgumentException("Only BattleShipObject allowed in blast damagable types");
+                if (!x.IsSubclassOf(typeof(Ship)) && x != typeof(Ship))
+                    throw new ArgumentException("Only Ship allowed in blast damagable types");
                 return x;
             }));
             this.damage = damage;
