@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Xml;
 using System.Xml.Resolvers;
 using SharpGL;
@@ -12,17 +13,17 @@ namespace VoidTime
     public class ExplosionDrawer : IDrawable
     {
         public Texture exp;
-        public Dictionary<int, Tuple<PointF, SizeF>> data;
+        public Dictionary<int, Tuple<PointF, SizeF>> data = new Dictionary<int, Tuple<PointF, SizeF>>();
 
 
         private static Vector2D[] ArrayTexCoords(PointF location, SizeF size)
         {
             return new[]
             {
-                new Vector2D(location.X, location.Y-size.Height),
                 new Vector2D(location.X, location.Y),
+                new Vector2D(location.X, location.Y+size.Height),
+                new Vector2D(location.X+size.Width, location.Y+size.Height),
                 new Vector2D(location.X+size.Width, location.Y),
-                new Vector2D(location.X+size.Width, location.Y-size.Height)
             };
         }
 
@@ -66,11 +67,15 @@ namespace VoidTime
 
             var nodes = doc.SelectNodes("//sprite");
 
+            var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             foreach (XmlNode node in nodes)
             {
-                var loc = new PointF(float.Parse(node["posX"].InnerText), float.Parse(node["posY"].InnerText));
+                var loc = new PointF(float.Parse(node["posX"].InnerText, NumberStyles.Any, ci),
+                                     float.Parse(node["posY"].InnerText, NumberStyles.Any, ci));
                 var id = int.Parse(node["id"].InnerText);
-                var size = new SizeF(float.Parse(node["sizeX"].InnerText), float.Parse(node["sizeY"].InnerText));
+                var size = new SizeF(float.Parse(node["sizeX"].InnerText, NumberStyles.Any, ci),
+                                     float.Parse(node["sizeY"].InnerText, NumberStyles.Any, ci));
                 data[id] = Tuple.Create(loc, size);
             }
         }

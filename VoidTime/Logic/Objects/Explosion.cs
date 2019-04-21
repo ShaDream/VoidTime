@@ -4,7 +4,7 @@ namespace VoidTime
 {
     public class Explosion : GameObject
     {
-        private int frame;
+        public int frame;
 
         public Explosion(Vector2D position)
         {
@@ -13,8 +13,8 @@ namespace VoidTime
 
         public override void Update()
         {
-            frame++;
-            if (frame > 110)
+                frame++;
+            if (frame > 109)
                 Destoy();
         }
     }

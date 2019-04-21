@@ -137,8 +137,8 @@ namespace VoidTime.Resources {
         ///    &lt;fireRate&gt;10&lt;/fireRate&gt;
         ///    &lt;criticalChance&gt;3&lt;/criticalChance&gt;
         ///    &lt;tier&gt;1&lt;/tier&gt;
-        ///    &lt;range&gt;2000&lt;/range&gt;
-        ///    &lt;price&gt;0&lt;/p [rest of string was truncated]&quot;;.
+        ///    &lt;range&gt;500&lt;/range&gt;
+        ///    &lt;price&gt;0&lt;/pr [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Guns {
             get {

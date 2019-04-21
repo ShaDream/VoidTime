@@ -41,8 +41,11 @@ namespace VoidTime
         {
             SetLinearVelocity(velocity);
             if (remainingRange <= 0)
+            {
+                Instantiate(new Explosion(Position));
                 Destoy();
-            remainingRange -= velocity.Magnitude*0.018f;
+            }
+            remainingRange -= velocity.Magnitude * 0.018f;
         }
 
         public override void CreatePhysics(World world)
