@@ -14,13 +14,13 @@ namespace VoidTime
         private readonly float damage;
         private readonly HashSet<Type> damagableTypes;
 
-        private readonly GameObject owner;
+        private readonly Ship owner;
         private readonly Vector2D velocity;
         public double Angle { get; }
-        public float remainingRange;
+        private float remainingRange;
 
         /// <param name="damagableTypes">Only Ship class allowed</param>
-        public Blast(Vector2D possition, double angle, float damage, GameObject owner, float range,
+        public Blast(Vector2D possition, double angle, float damage, Ship owner, float range,
             params Type[] damagableTypes)
         {
             Position = possition;
@@ -67,11 +67,18 @@ namespace VoidTime
         public override void BeginContact(Contact contact)
         {
             var other = contact.FixtureA.Body == Body ? contact.FixtureB : contact.FixtureA;
-            if (damagableTypes.Contains(other.Body.UserData.GetType()) && other.Body.UserData != owner)
+            if (owner is Player && other.Body.UserData is MapEnemy || owner is MapEnemy && other.Body.UserData is Player)
             {
-                (other.Body.UserData as Ship)?.Data.ShipStats.GetDamage(damage);
-                Destoy();
+                var player = (Player) (owner is Player ? owner : other.Body.UserData);
+                var enemy = (MapEnemy)(owner is MapEnemy ? owner : other.Body.UserData);
+                player.StartBattle(enemy);
             }
+
+            if (!damagableTypes.Contains(other.Body.UserData.GetType()) || other.Body.UserData == owner)
+                return;
+
+            (other.Body.UserData as Ship)?.Data.ShipStats.GetDamage(damage);
+            Destoy();
         }
     }
 }

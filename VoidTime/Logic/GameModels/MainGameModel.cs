@@ -14,7 +14,7 @@ namespace VoidTime
     {
         private readonly Timer gameTick;
         private readonly GameMap map;
-        public readonly Player Ship;
+        public readonly Player player;
 
 
         public BasicCamera GameBasicCamera;
@@ -37,8 +37,8 @@ namespace VoidTime
                 map.MapSize.Width - 2 * border,
                 map.MapSize.Height - 2 * border);
 
-            Ship = new Player(allowedCoordinates, new Vector2D(5000, 5000));
-            GameBasicCamera = new SmoothCamera(new Size(), Ship);
+            player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
+            GameBasicCamera = new SmoothCamera(new Size(), player);
 
             Controls = new Controls(GameBasicCamera);
 
@@ -56,8 +56,26 @@ namespace VoidTime
             gameTick = new Timer(16.66667F);
 
             var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
-            map.AddGameObjects(planet, Ship);
+
+            map.AddGameObjects(planet, player);
             gameTick.Elapsed += FrameTick;
+
+            player.StartingBattle += StartBattle;
+        }
+
+        private void StartBattle(MapEnemy obj)
+        {
+            Pause();
+            var data = new BattleGameModelData();
+            var model = new BattleGameModel(data);
+            model.GameModelChanged += (m) =>
+            {
+                obj.Destoy();
+                player.CreatePhysics(Physics);
+                Run();
+            };
+            GameModelChanged?.Invoke(model);
+            model.Run();
         }
 
         public override event Action<List<GameObject>, BasicCamera> Tick;

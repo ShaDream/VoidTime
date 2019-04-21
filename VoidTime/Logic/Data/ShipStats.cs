@@ -16,8 +16,7 @@ namespace VoidTime
         public GunData[] Guns;
 
 
-
-        public Blast[] Shoot(Player player)
+        public Blast[] Shoot(Ship ship)
         {
             var blastList = new List<Blast>();
 
@@ -30,28 +29,28 @@ namespace VoidTime
                     continue;
 
                 Guns[i].currentRecovery = Guns[i].RecoveryTime;
-                var blast = new Blast(player.Position + Guns[i].PositionOffset.Rotate(player.Angle),
-                    player.Angle,
+                var blast = new Blast(ship.Position + Guns[i].PositionOffset.Rotate(ship.Angle),
+                    ship.Angle,
                     Guns[i].Damage + (Random.IsLucky(Guns[i].CriticalChance) ? Guns[i].Damage : 0),
-                    player,
+                    ship,
                     Guns[i].Range,
-                    typeof(Enemy));
+                    typeof(Ship));
                 blastList.Add(blast);
             }
 
             return blastList.ToArray();
         }
 
-        private void UpdateGuns(Player player)
+        private void UpdateGuns(Ship ship)
         {
             for (var index = 0; index < Guns.Length; index++)
                 Guns[index].currentRecovery = Math.Max(0, Guns[index].currentRecovery - Time.DeltaTime);
 
         }
 
-        public void UpdateStats(Player player)
+        public void UpdateStats(Ship ship)
         {
-            UpdateGuns(player);
+            UpdateGuns(ship);
         }
 
         public void GetDamage(float damage)

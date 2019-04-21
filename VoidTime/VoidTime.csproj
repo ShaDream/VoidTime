@@ -137,6 +137,7 @@
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Objects\Ship.cs" />
     <Compile Include="Logic\Utility\ChipParser.cs" />
+    <Compile Include="Logic\Utility\EnumExtensions.cs" />
     <Compile Include="Logic\Utility\GunParser.cs" />
     <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />
     <Compile Include="Logic\Utility\Random.cs" />

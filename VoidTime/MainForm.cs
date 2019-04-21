@@ -28,7 +28,7 @@ namespace VoidTime
             currentModel = model;
             OpenGLCreate();
             //FormBorderStyle = FormBorderStyle.None;
-            var window = new Window(this, (currentModel as MainGameModel).Ship);
+            var window = new Window(this, (currentModel as MainGameModel).player);
             openGL.KeyDown += window.OnKeyPress;
 
             HelperInitialization();
@@ -36,9 +36,15 @@ namespace VoidTime
 
             WindowState = FormWindowState.Maximized;
             ShowIcon = false;
+
+            MakeEvents();
+
+            model.Run();
+        }
+
+        private void MakeEvents()
+        {
             currentModel.Tick += FrameTick;
-
-
             openGL.KeyUp += currentModel.OnKeyRelease;
             openGL.KeyDown += currentModel.OnKeyPress;
             openGL.MouseMove += currentModel.OnMouseMove;
@@ -47,10 +53,12 @@ namespace VoidTime
             openGL.MouseDoubleClick += currentModel.OnMouseDoubleClick;
             openGL.MouseWheel += currentModel.OnMouseWheel;
             SizeChanged += currentModel.OnSizeChanged;
-
-            model.Run();
+            currentModel.GameModelChanged += (m) =>
+            {
+                currentModel = m;
+                MakeEvents();
+            };
         }
-
 
         private void OpenGLCreate()
         {

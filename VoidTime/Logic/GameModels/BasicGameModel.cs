@@ -17,6 +17,7 @@ namespace VoidTime
         public abstract event Action<List<GameObject>, BasicCamera> Tick;
         public abstract event Action<IGameModel> GameModelChanged;
 
+
         public virtual void OnKeyPress(object sender, KeyEventArgs args)
         {
             if (!Controls.KeysHandler.Contains(args.KeyCode))
