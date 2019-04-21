@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            background.Create(gl, Textures.nebo);
+            background.Create(gl, Textures.background);
         }
     }
 }
