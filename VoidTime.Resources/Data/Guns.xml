@@ -4,17 +4,17 @@
     <name>Base gun</name>
     <canRotate>true</canRotate>
     <damage>2</damage>
-    <fireRate>100</fireRate>
+    <fireRate>3</fireRate>
     <criticalChance>1</criticalChance>
     <tier>1</tier>
-    <range>100</range>
+    <range>500</range>
     <price>0</price>
   </gun>
   <gun>
     <name>Omega gun</name>
     <canRotate>true</canRotate>
     <damage>10</damage>
-    <fireRate>10</fireRate>
+    <fireRate>100</fireRate>
     <criticalChance>3</criticalChance>
     <tier>1</tier>
     <range>500</range>

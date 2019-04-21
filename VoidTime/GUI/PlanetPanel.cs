@@ -12,6 +12,7 @@ namespace VoidTime.GUI
         private ListBox items;
         private Button exitButton;
         private ListBox planetInventory;
+        private ListBox quests;
 
         public PlanetPanel(MainForm form, Window owner, Player ship)
         {
@@ -37,6 +38,7 @@ namespace VoidTime.GUI
             };
             tabs.TabPages.Add("Buy/Sell");
             tabs.TabPages.Add("Upgrade");
+            tabs.TabPages.Add("Quests");
 
             for (var i = 0; i < tabs.TabCount; i++)
             {
@@ -69,7 +71,16 @@ namespace VoidTime.GUI
                 BorderStyle = BorderStyle.None
             };
 
+            quests = new ListBox
+            {
+                BackColor = Color.Black,
+                ForeColor = Color.White,
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.None
+            };
+
             tabs.TabPages[0].Controls.Add(planetInventory);
+            tabs.TabPages[2].Controls.Add(quests);
 
             description = new Label
             {
@@ -117,7 +128,6 @@ namespace VoidTime.GUI
             {
                 if (!(planetInventory.SelectedItem is IItem item))
                     return;
-                var t = item.GetInfo();
                 description.Text = item.GetInfo();
                 buyButton.Text = "Buy";
                 buyButton.Visible = true;

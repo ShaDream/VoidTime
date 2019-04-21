@@ -109,6 +109,7 @@
     <Compile Include="Logic\Data\GunData.cs" />
     <Compile Include="Logic\Data\IItem.cs" />
     <Compile Include="Logic\Data\Inventory.cs" />
+    <Compile Include="Logic\Data\Quest.cs" />
     <Compile Include="Logic\Data\ShipData.cs" />
     <Compile Include="Logic\Data\ShipBaseData.cs" />
     <Compile Include="Logic\Data\ShipSlotData.cs" />

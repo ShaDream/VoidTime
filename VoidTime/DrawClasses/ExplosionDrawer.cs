@@ -43,7 +43,7 @@ namespace VoidTime
         {
             exp.Bind(gl);
             var o = (Explosion)obj.GameObject;
-            var size = new Size(1000, 1000);
+            var size = new Size(1080, 1080);
             var pos = GetObjectCorners(obj.PositionOnDisplay, size);
             var posTex = ArrayTexCoords(data[o.frame].Item1, data[o.frame].Item2);
 
