@@ -106,9 +106,10 @@
     <Compile Include="Logic\Data\BattleEndData.cs" />
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
     <Compile Include="Logic\Data\Buffs.cs" />
-    <Compile Include="Logic\Data\EnemyData\EnemyBehaviorType.cs" />
-    <Compile Include="Logic\Data\EnemyData\EnemyCount.cs" />
-    <Compile Include="Logic\Data\EnemyData\EnemyDifficult.cs" />
+    <Compile Include="Logic\Data\Enums\EnemyBehaviorType.cs" />
+    <Compile Include="Logic\Data\Enums\EnemyCount.cs" />
+    <Compile Include="Logic\Data\Enums\EnemyDifficult.cs" />
+    <Compile Include="Logic\Data\Enums\QuestStatus.cs" />
     <Compile Include="Logic\Data\GunData.cs" />
     <Compile Include="Logic\Data\IItem.cs" />
     <Compile Include="Logic\Data\Inventory.cs" />

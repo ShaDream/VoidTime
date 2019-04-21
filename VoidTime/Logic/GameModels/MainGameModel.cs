@@ -56,13 +56,6 @@ namespace VoidTime
             gameTick = new Timer(16.66667F);
 
             var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    var enemy = new Enemy(new Vector2D(5000, 5010 + i), player);
-            //    map.AddGameObjects(enemy);
-            //}
-            
-
             map.AddGameObjects(planet, Ship);
             gameTick.Elapsed += FrameTick;
         }
@@ -107,5 +100,11 @@ namespace VoidTime
                 Controls.ClearOneFrameValues();
             }
         }
+
+        public void AddObjectOnMap(GameObject obj)
+        {
+            map.AddGameObject(obj);
+        }
+
     }
 }

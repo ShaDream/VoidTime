@@ -13,6 +13,7 @@ namespace VoidTime
         {
             Position = position;
             this.target = target;
+            Data.SetShip(ShipParser.GetShip("Base ship"));
         }
 
         public override void Update()
