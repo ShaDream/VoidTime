@@ -2,14 +2,16 @@
 
 namespace VoidTime
 {
-    public class Enemy : Ship
+    public class MapEnemy : Ship
     {
         public double Angle = Math.PI / 2;
         private readonly PhysicalGameObject target;
         private Vector2D velocity;
 
+        private int EnemiesCount;
+        private EnemyDifficult difficult;
 
-        public Enemy(Vector2D position, PhysicalGameObject target)
+        public MapEnemy(Vector2D position, PhysicalGameObject target, int enemiesCount, EnemyDifficult difficult)
         {
             Position = position;
             this.target = target;
@@ -19,6 +21,11 @@ namespace VoidTime
         public override void Update()
         {
             Move();
+            var blasts = Data.ShipStats.Shoot(this);
+            foreach (var blast in blasts)
+                Instantiate(blast);
+
+            Data.ShipStats.UpdateStats(this);
         }
 
         private void Move()
