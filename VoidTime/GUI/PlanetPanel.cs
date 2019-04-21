@@ -125,7 +125,7 @@ namespace VoidTime.GUI
             var testQuest = new Quest("Noob Challenge", 10, EnemyCount.Few, EnemyDifficult.Easy, () =>
             {
                 var mainForm = form.currentModel as MainGameModel;
-                var enemy = new Enemy(ship.Position + new Vector2D(200, 200), ship);
+                var enemy = new MapEnemy(ship.Position + new Vector2D(200, 200), ship, 100, EnemyDifficult.Easy);
                 mainForm.AddObjectOnMap(enemy);
                 return enemy;
             });
