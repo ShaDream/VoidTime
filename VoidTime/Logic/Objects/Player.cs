@@ -9,7 +9,6 @@ namespace VoidTime
     public class Player : Ship
     {
         private readonly Rectangle AllowedCoordinates;
-        public double Angle = Math.PI / 2;
         private GameObject enterObject;
         public Vector2D velocity;
 
@@ -51,7 +50,6 @@ namespace VoidTime
             CheckCoordinate();
         }
 
-
         private void Move()
         {
             Angle = (Input.GetWorldMousePosition() - Position).Angle;
@@ -86,7 +84,6 @@ namespace VoidTime
                 Position = new Vector2D(Position.X, AllowedCoordinates.Top);
         }
 
-
         public override void CreatePhysics(World world)
         {
             var bodyDef = CreateBodyDef();
@@ -99,5 +96,12 @@ namespace VoidTime
             Body = world.CreateBody(bodyDef);
             Fixtures.Add(Body.CreateFixture(shape, 1));
         }
+
+        public void StartBattle(MapEnemy enemy)
+        {
+            StartingBattle?.Invoke(enemy);
+        }
+
+        public event Action<MapEnemy> StartingBattle;
     }
 }
