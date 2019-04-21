@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            blast.Create(gl, Textures.OMEGA_LASER);
+            blast.Create(gl, Textures.blast);
         }
     }
 }

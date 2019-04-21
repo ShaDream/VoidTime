@@ -118,32 +118,41 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BaKWfln" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\bakwfln.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lightfighter0006" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\lightfighter0006.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mars" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\mars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="nebo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\nebo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="neptune1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\neptune1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RD2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\rd2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="blast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\blast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="chip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\chip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OMEGA_LASER" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\OMEGA_LASER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enemy_basic_ship" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\enemy_basic_ship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\mars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="neptune" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\neptune.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="player_basic_ship" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\player_basic_ship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pluto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\pluto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_backgroound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test_backgroound.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="upiter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\upiter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="venus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\venus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="explosion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\explosion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

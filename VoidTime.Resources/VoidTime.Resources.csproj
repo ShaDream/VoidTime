@@ -65,28 +65,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\back.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\mars.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\neptune1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BaKWfln.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\nebo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lightfighter0006.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RD2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\Explosion.xml" />
     <Content Include="Data\Guns.xml" />
     <Content Include="Data\Ships.xml">
       <SubType>Designer</SubType>
@@ -94,9 +75,18 @@
     <Content Include="Data\Chips.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Resources\background.jpg" />
+    <Content Include="Resources\blast.png" />
+    <Content Include="Resources\enemy_basic_ship.png" />
+    <Content Include="Resources\neptune.png" />
+    <Content Include="Resources\player_basic_ship.png" />
+    <Content Include="Resources\pluto.png" />
+    <Content Include="Resources\test_backgroound.png" />
+    <Content Include="Resources\venus.png" />
+    <None Include="Resources\earth.png" />
+    <None Include="Resources\upiter.png" />
     <Content Include="Resources\explosion.png" />
     <None Include="Resources\chip.png" />
-    <None Include="Resources\OMEGA_LASER.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
