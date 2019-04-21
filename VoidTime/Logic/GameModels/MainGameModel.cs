@@ -119,5 +119,11 @@ namespace VoidTime
                 Controls.ClearOneFrameValues();
             }
         }
+
+        public void AddObjectOnMap(GameObject obj)
+        {
+            map.AddGameObject(obj);
+        }
+
     }
 }
