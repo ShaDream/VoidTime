@@ -9,6 +9,7 @@ namespace VoidTime
         public ShipData Data;
         public Inventory Inventory;
 
+        public double Angle { get; set; }
 
         public override void CreatePhysics(World world)
         {

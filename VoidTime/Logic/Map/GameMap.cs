@@ -13,7 +13,6 @@ namespace VoidTime
         private readonly World world;
         private readonly FrameListComparator<Point> lastChunks = new FrameListComparator<Point>();
 
-
         public Size MapSizeInChunks { get; }
         public Size MapSize { get; }
 
