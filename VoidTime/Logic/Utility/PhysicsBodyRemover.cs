@@ -10,7 +10,7 @@ namespace VoidTime
 
         public static void RemoveBodyies(World world)
         {
-            if(!removeBodyList.ContainsKey(world))
+            if (!removeBodyList.ContainsKey(world))
                 return;
 
             foreach (var item in removeBodyList[world])
@@ -25,6 +25,8 @@ namespace VoidTime
 
         public static void Add(Body body, IEnumerable<Fixture> fixtures)
         {
+            if (body == null)
+                return;
             if (!removeBodyList.ContainsKey(body.World))
                 removeBodyList[body.World] = new List<Tuple<Body, IEnumerable<Fixture>>>();
             removeBodyList[body.World].Add(Tuple.Create(body, fixtures));

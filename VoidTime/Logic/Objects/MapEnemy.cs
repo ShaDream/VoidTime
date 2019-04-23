@@ -8,8 +8,8 @@ namespace VoidTime
         private readonly PhysicalGameObject target;
         private Vector2D velocity;
 
-        private int EnemiesCount;
-        private EnemyDifficult difficult;
+        public int EnemiesCount;
+        public EnemyDifficult Difficult;
 
         public MapEnemy(Vector2D position, PhysicalGameObject target, int enemiesCount, EnemyDifficult difficult)
         {

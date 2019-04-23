@@ -29,20 +29,16 @@ namespace VoidTime
 
         public BattleGameModel(BattleGameModelData data)
         {
-            GameBasicCamera = new SmoothCamera(new Size(), ship);
+            ship = data.Player;
+            ship.DeletePhysics();
+            ship.Position = new Vector2D(data.MapSize.Width / 2, data.MapSize.Height / 2);
 
-            Controls = new Controls(GameBasicCamera);
+            GameBasicCamera = new SmoothCamera(data.CameraSize, ship);
+            
+            Controls = data.Controls;
+            Controls.MouseHandler.ChangeCamera(GameBasicCamera);
 
-            var axes = new HashSet<Axis>
-            {
-                new Axis("horizontal", Keys.D, Keys.A),
-                new Axis("vertical", Keys.W, Keys.S)
-            };
-            Controls.AxesHandler = axes.ToDictionary(x => x.Name);
-            Time = new TimeData();
-
-            Input.Create(Controls);
-            VoidTime.Time.Create(Time);
+            Time = data.Time;
 
             gameTick = new Timer(8);
 
@@ -59,7 +55,6 @@ namespace VoidTime
 
         public override event Action<List<GameObject>, BasicCamera> Tick;
         public override event Action<IGameModel> GameModelChanged;
-        public event Action<BattleEndData> BattleIsOver;
 
         private void GameOver(GameObject obj)
         {

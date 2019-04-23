@@ -113,6 +113,7 @@
     <Compile Include="Logic\Data\GunData.cs" />
     <Compile Include="Logic\Data\IItem.cs" />
     <Compile Include="Logic\Data\Inventory.cs" />
+    <Compile Include="Logic\Data\Manager\BattleGameManager.cs" />
     <Compile Include="Logic\Data\Quest.cs" />
     <Compile Include="Logic\Data\ShipData.cs" />
     <Compile Include="Logic\Data\ShipBaseData.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Logic\GameModels\BattleGameModel.cs" />
     <Compile Include="Logic\GameModels\IGameModel.cs" />
     <Compile Include="Logic\Objects\Background.cs" />
+    <Compile Include="Logic\Objects\BattleEnemy.cs" />
     <Compile Include="Logic\Objects\Battle\Blast.cs" />
     <Compile Include="Logic\Objects\Explosion.cs" />
     <Compile Include="Logic\Objects\GameObject.cs" />
@@ -137,7 +139,7 @@
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Objects\Ship.cs" />
     <Compile Include="Logic\Utility\ChipParser.cs" />
-    <Compile Include="Logic\Utility\EnumExtensions.cs" />
+    <Compile Include="Logic\Utility\Extensions\EnumExtensions.cs" />
     <Compile Include="Logic\Utility\GunParser.cs" />
     <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />
     <Compile Include="Logic\Utility\Random.cs" />

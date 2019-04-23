@@ -7,5 +7,8 @@ namespace VoidTime
         public Size MapSize;
         public Player Player;
         public MapEnemy Enemy;
+        public Controls Controls;
+        public TimeData Time;
+        public Size CameraSize;
     }
 }

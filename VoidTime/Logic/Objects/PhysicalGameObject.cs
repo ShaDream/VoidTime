@@ -36,6 +36,8 @@ namespace VoidTime
             }
         }
 
+        private bool deleted = false;
+
         private Vector2 PhysicsPosition
         {
             get => Body.GetPosition();
@@ -57,7 +59,8 @@ namespace VoidTime
 
         public void SetLinearVelocity(Vector2D velocity)
         {
-            Body.SetLinearVelocity(new Vector2(velocity.X * ScaleFactor, velocity.Y * ScaleFactor));
+            if (!deleted)
+                Body.SetLinearVelocity(new Vector2(velocity.X * ScaleFactor, velocity.Y * ScaleFactor));
         }
 
         public void ApplyLinearImpulseToCenter(Vector2D velocity)
@@ -69,6 +72,7 @@ namespace VoidTime
 
         protected BodyDef CreateBodyDef()
         {
+            deleted = false;
             return new BodyDef { UserData = this };
         }
 
@@ -80,6 +84,7 @@ namespace VoidTime
             position = Position;
 
             Body = null;
+            deleted = true;
         }
 
         public override void Destoy()
