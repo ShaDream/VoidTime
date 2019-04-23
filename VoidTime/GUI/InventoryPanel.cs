@@ -7,12 +7,12 @@ namespace VoidTime.GUI
 {
     public class InventoryPanel : BasicGameWindow
     {
-        private Player ship;
-        private ListBox items;
-        private ListBox installedChips;
-        private ListBox installedGuns;
-        private Button setRemoveButton;
-        private Button exitButton;
+        private readonly Button exitButton;
+        private readonly ListBox installedChips;
+        private readonly ListBox installedGuns;
+        private readonly ListBox items;
+        private readonly Button setRemoveButton;
+        private readonly Player ship;
 
         public InventoryPanel(MainForm form, Window owner, Player ship)
         {
@@ -43,6 +43,7 @@ namespace VoidTime.GUI
                 tabs.TabPages[i].BackColor = Color.Black;
                 tabs.TabPages[i].BorderStyle = BorderStyle.None;
             }
+
             var tabInventory = new TabControl
             {
                 BackColor = Color.Black,
@@ -57,7 +58,7 @@ namespace VoidTime.GUI
                 BackColor = Color.Black,
                 BorderStyle = BorderStyle.None,
                 ForeColor = Color.White,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Fill
             };
 
             installedChips = new ListBox
@@ -65,21 +66,21 @@ namespace VoidTime.GUI
                 BackColor = Color.Black,
                 BorderStyle = BorderStyle.None,
                 ForeColor = Color.White,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Fill
             };
             installedGuns = new ListBox
             {
                 BackColor = Color.Black,
                 BorderStyle = BorderStyle.None,
                 ForeColor = Color.White,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Fill
             };
 
             tabs.TabPages[0].Controls.Add(installedChips);
             tabs.TabPages[1].Controls.Add(installedGuns);
             tabInventory.TabPages[0].Controls.Add(items);
 
-            setRemoveButton = new Button()
+            setRemoveButton = new Button
             {
                 Visible = false,
                 BackColor = Color.Black,
@@ -141,10 +142,10 @@ namespace VoidTime.GUI
                 setRemoveButton.Visible = true;
                 setRemoveButton.Text = "Uninstall";
                 setRemoveClick = () =>
-                    {
-                        ship.Chips.Remove(item);
-                        Update();
-                    };
+                {
+                    ship.Chips.Remove(item);
+                    Update();
+                };
             };
 
             installedChips.MouseDoubleClick += (s, a) =>
@@ -189,20 +190,11 @@ namespace VoidTime.GUI
         {
             setRemoveButton.Visible = false;
             items.Items.Clear();
-            foreach (var item in ship.Inventory.GetItems)
-            {
-                items.Items.Add(item);
-            }
+            foreach (var item in ship.Inventory.GetItems) items.Items.Add(item);
             installedChips.Items.Clear();
-            foreach (var item in ship.Chips.GetChips)
-            {
-                installedChips.Items.Add(item);
-            }
+            foreach (var item in ship.Chips.GetChips) installedChips.Items.Add(item);
             installedGuns.Items.Clear();
-            foreach (var item in ship.Data.ShipStats.Guns)
-            {
-                installedGuns.Items.Add(item);
-            }
+            foreach (var item in ship.Data.ShipStats.Guns) installedGuns.Items.Add(item);
         }
     }
 }

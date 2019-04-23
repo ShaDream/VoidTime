@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace VoidTime
+﻿namespace VoidTime
 {
     public class Explosion : GameObject
     {
@@ -13,7 +11,7 @@ namespace VoidTime
 
         public override void Update()
         {
-                frame++;
+            frame++;
             if (frame > 109)
                 Destoy();
         }

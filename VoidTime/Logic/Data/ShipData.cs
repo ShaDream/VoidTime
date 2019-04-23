@@ -33,7 +33,6 @@ namespace VoidTime
 
         public void SetGun(GunData data, int slot)
         {
-
             if (shipBase.slots[slot].MaxTier < data.Tier)
                 return;
             if (shipBase.slots[slot].HasGun)

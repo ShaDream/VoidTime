@@ -13,10 +13,9 @@ namespace VoidTime.GUI
                 Height = 75,
                 FormBorderStyle = FormBorderStyle.None,
                 StartPosition = FormStartPosition.CenterScreen,
-                BackColor = Color.Black,
-
+                BackColor = Color.Black
             };
-            var panel = new Panel()
+            var panel = new Panel
             {
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.Fixed3D,
@@ -24,16 +23,13 @@ namespace VoidTime.GUI
             };
             var inputBox = new ComboBox
             {
-                Location = new Point(50, 25), Size = new Size(50, 25),
+                Location = new Point(50, 25),
+                Size = new Size(50, 25),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.Black,
-                ForeColor = Color.White,
-                
+                ForeColor = Color.White
             };
-            foreach (var slot in slots)
-            {
-                inputBox.Items.Add(slot);
-            }
+            foreach (var slot in slots) inputBox.Items.Add(slot);
             var confirmation = new Button
             {
                 Text = "Set slot",
@@ -46,7 +42,7 @@ namespace VoidTime.GUI
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(panel);
             prompt.ShowDialog();
-            return (int)(inputBox.SelectedItem ?? -1);
+            return (int) (inputBox.SelectedItem ?? -1);
         }
     }
 }

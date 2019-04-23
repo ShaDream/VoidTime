@@ -5,9 +5,9 @@ namespace VoidTime
 {
     public class Controls
     {
+        public MouseContol MouseHandler;
         public HashSet<Keys> KeysHandler { get; }
         public Dictionary<string, Axis> AxesHandler { get; set; } = new Dictionary<string, Axis>();
-        public MouseContol MouseHandler;
 
         public Controls(BasicCamera camera)
         {
@@ -22,7 +22,6 @@ namespace VoidTime
             MouseHandler.MouseWheelDelta = 0;
             MouseHandler.MouseUp = MouseButtons.None;
             MouseHandler.MouseDown = MouseButtons.None;
-
         }
     }
 }

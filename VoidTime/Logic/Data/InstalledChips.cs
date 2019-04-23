@@ -5,10 +5,10 @@ namespace VoidTime
 {
     public struct InstalledChips
     {
-        private List<Chip> chips;
-        private int maxWeight;
+        private readonly List<Chip> chips;
+        private readonly int maxWeight;
         private int curWeight;
-        private Ship owner;
+        private readonly Ship owner;
 
         public InstalledChips(Ship owner, int maxWeight)
         {
@@ -37,6 +37,7 @@ namespace VoidTime
         }
 
         public IReadOnlyList<Chip> GetChips => new ReadOnlyCollection<Chip>(chips);
+
         public bool IsCanAdd(Chip chip)
         {
             return maxWeight - curWeight >= chip.CurrentCost;

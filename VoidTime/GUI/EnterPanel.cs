@@ -32,10 +32,7 @@ namespace VoidTime.GUI
 
         protected override void Hide()
         {
-            form.BeginInvoke(new Action(() =>
-            {
-                form.Controls.Remove(window);
-            }));
+            form.BeginInvoke(new Action(() => { form.Controls.Remove(window); }));
         }
 
         public override void Switch()

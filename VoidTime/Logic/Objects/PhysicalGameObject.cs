@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using System.Threading.Tasks;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
@@ -11,6 +9,8 @@ namespace VoidTime
     public abstract class PhysicalGameObject : GameObject
     {
         public const float ScaleFactor = 0.001F;
+
+        private bool deleted;
 
         private Vector2D position;
 
@@ -35,8 +35,6 @@ namespace VoidTime
                     PhysicsPosition = new Vector2(value.X * ScaleFactor, value.Y * ScaleFactor);
             }
         }
-
-        private bool deleted = false;
 
         private Vector2 PhysicsPosition
         {
@@ -73,7 +71,7 @@ namespace VoidTime
         protected BodyDef CreateBodyDef()
         {
             deleted = false;
-            return new BodyDef { UserData = this };
+            return new BodyDef {UserData = this};
         }
 
         public void DeletePhysics()

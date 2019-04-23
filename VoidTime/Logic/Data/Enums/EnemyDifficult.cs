@@ -4,13 +4,11 @@ namespace VoidTime
 {
     public enum EnemyDifficult
     {
-        [Description("Very easy")]
-        VeryEasy,
+        [Description("Very easy")] VeryEasy,
         Easy,
         Normal,
         Hard,
-        [Description("Very hard")]
-        VeryHard,
+        [Description("Very hard")] VeryHard,
         Extreame,
         Insane
     }

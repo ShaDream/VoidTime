@@ -4,8 +4,7 @@ namespace VoidTime
 {
     public enum QuestStatus
     {
-        [Description ("Not Started")]
-        NotStarted,
+        [Description("Not Started")] NotStarted,
         Performed,
         Сompleted
     }

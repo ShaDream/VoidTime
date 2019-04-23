@@ -10,6 +10,6 @@
         Throng,
         Swarm,
         Zounds,
-        Legion,
+        Legion
     }
 }

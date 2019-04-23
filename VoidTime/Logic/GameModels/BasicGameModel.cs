@@ -5,7 +5,7 @@ using Box2DSharp.Dynamics;
 
 namespace VoidTime
 {
-    public abstract class BasicGameModel :IGameModel
+    public abstract class BasicGameModel : IGameModel
     {
         public abstract World Physics { get; set; }
         public abstract Controls Controls { get; set; }

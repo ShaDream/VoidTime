@@ -9,6 +9,8 @@ namespace VoidTime
     {
         private readonly List<GameObject> gameObjects = new List<GameObject>();
 
+        public Action<GameObject> OnObjectCreate;
+
         public Point Coordinates { get; }
         public Size Size { get; }
 
@@ -68,7 +70,5 @@ namespace VoidTime
         {
             return gameObjects;
         }
-
-        public Action<GameObject> OnObjectCreate;
     }
 }

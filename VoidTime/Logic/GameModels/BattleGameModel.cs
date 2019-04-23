@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Numerics;
 using System.Timers;
 using System.Windows.Forms;
-using Box2DSharp.Collision;
-using Box2DSharp.Collision.Collider;
 using Box2DSharp.Dynamics;
 using Timer = System.Timers.Timer;
 
@@ -20,7 +16,7 @@ namespace VoidTime
         private readonly GameMap map;
         private readonly Player ship;
 
-        private BasicCamera GameBasicCamera;
+        private readonly BasicCamera GameBasicCamera;
         private bool Paused = true;
 
         public override World Physics { get; set; }
@@ -34,7 +30,7 @@ namespace VoidTime
             ship.Position = new Vector2D(data.MapSize.Width / 2, data.MapSize.Height / 2);
 
             GameBasicCamera = new SmoothCamera(data.CameraSize, ship);
-            
+
             Controls = data.Controls;
             Controls.MouseHandler.ChangeCamera(GameBasicCamera);
 
@@ -81,7 +77,7 @@ namespace VoidTime
 
         public override void OnSizeChanged(object sender, EventArgs args)
         {
-            GameBasicCamera.Size = ((Form)sender).Size;
+            GameBasicCamera.Size = ((Form) sender).Size;
         }
 
         private void FrameTick(object sender, ElapsedEventArgs e)

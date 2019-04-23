@@ -8,9 +8,9 @@ namespace VoidTime.GUI
     {
         protected MainForm form;
         protected Window owner;
-        public bool isShow { get; protected set; }
 
         protected Control window;
+        public bool isShow { get; protected set; }
 
         public Point Location
         {
@@ -22,6 +22,15 @@ namespace VoidTime.GUI
         {
             get => window.Size;
             set => window.Size = value;
+        }
+
+        public virtual void Switch()
+        {
+            if (isShow)
+                Hide();
+            else
+                Show();
+            isShow = !isShow;
         }
 
         protected virtual void Show()
@@ -43,15 +52,6 @@ namespace VoidTime.GUI
                 form.currentModel.Run();
             }));
             owner.lastKey = Keys.None;
-        }
-
-        public virtual void Switch()
-        {
-            if (isShow)
-                Hide();
-            else
-                Show();
-            isShow = !isShow;
         }
 
         protected virtual void Update() { }

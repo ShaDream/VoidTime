@@ -4,11 +4,11 @@ namespace VoidTime
 {
     public class Quest
     {
-        public string Name;
         public Func<Ship> BeginQuest;
-        public int Reward;
         public EnemyCount Count;
         public EnemyDifficult Difficult;
+        public string Name;
+        public int Reward;
         public QuestStatus Status;
 
         public Quest(string name,
@@ -27,7 +27,7 @@ namespace VoidTime
 
         public void AcceptQuest()
         {
-            BeginQuest.Invoke().OnDestroy += (o) => { Status = QuestStatus.Сompleted; };
+            BeginQuest.Invoke().OnDestroy += o => { Status = QuestStatus.Сompleted; };
             Status = QuestStatus.Performed;
         }
 
@@ -42,7 +42,6 @@ namespace VoidTime
                    $"QuestStatus: {Status.ToString()}\n" +
                    $"Enemy Difficult: {Difficult.ToString()}\n" +
                    $"Enemy Count: {Count.ToString()}\n";
-
         }
     }
 }

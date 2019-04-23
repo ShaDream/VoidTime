@@ -1,7 +1,4 @@
 ﻿namespace VoidTime
 {
-    public class BattleEnemy : Ship
-    {
-        
-    }
+    public class BattleEnemy : Ship { }
 }

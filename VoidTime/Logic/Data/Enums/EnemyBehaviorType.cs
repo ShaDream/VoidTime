@@ -3,6 +3,6 @@
     public enum EnemyBehaviorType
     {
         CloseCombat,
-        DistantCombat,
+        DistantCombat
     }
 }

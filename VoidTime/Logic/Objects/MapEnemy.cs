@@ -4,12 +4,12 @@ namespace VoidTime
 {
     public class MapEnemy : Ship
     {
-        public double Angle = Math.PI / 2;
         private readonly PhysicalGameObject target;
-        private Vector2D velocity;
+        public double Angle = Math.PI / 2;
+        public EnemyDifficult Difficult;
 
         public int EnemiesCount;
-        public EnemyDifficult Difficult;
+        private Vector2D velocity;
 
         public MapEnemy(Vector2D position, PhysicalGameObject target, int enemiesCount, EnemyDifficult difficult)
         {

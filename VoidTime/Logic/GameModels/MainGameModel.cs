@@ -33,9 +33,9 @@ namespace VoidTime
 
             const int border = 3000;
             var allowedCoordinates = new Rectangle(border,
-                border,
-                map.MapSize.Width - 2 * border,
-                map.MapSize.Height - 2 * border);
+                                                   border,
+                                                   map.MapSize.Width - 2 * border,
+                                                   map.MapSize.Height - 2 * border);
 
             player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
             GameBasicCamera = new SmoothCamera(new Size(), player);
@@ -55,7 +55,7 @@ namespace VoidTime
 
             gameTick = new Timer(16.66667F);
 
-            var planet = new Planet { Position = new Vector2D(5000, 5000), DrawingPriority = 1 };
+            var planet = new Planet {Position = new Vector2D(5000, 5000), DrawingPriority = 1};
 
             map.AddGameObjects(planet, player);
             gameTick.Elapsed += FrameTick;
@@ -76,7 +76,7 @@ namespace VoidTime
                 CameraSize = GameBasicCamera.Size
             };
             var model = new BattleGameModel(data);
-            model.GameModelChanged += (m) =>
+            model.GameModelChanged += m =>
             {
                 obj.Destoy();
                 player.DeletePhysics();
@@ -110,7 +110,7 @@ namespace VoidTime
 
         public override void OnSizeChanged(object sender, EventArgs args)
         {
-            GameBasicCamera.Size = ((Form)sender).Size;
+            GameBasicCamera.Size = ((Form) sender).Size;
         }
 
         private void FrameTick(object sender, ElapsedEventArgs e)
@@ -132,6 +132,5 @@ namespace VoidTime
         {
             map.AddGameObject(obj);
         }
-
     }
 }

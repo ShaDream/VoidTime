@@ -5,9 +5,10 @@ namespace VoidTime.GUI
 {
     public class StatsPanel : BasicGameWindow
     {
-        private Player ship;
-        private string stats;
-        private Label label;
+        private readonly Label label;
+        private readonly Player ship;
+        private readonly string stats;
+
         public StatsPanel(MainForm form, Window owner, Player ship)
         {
             this.form = form;
@@ -15,7 +16,7 @@ namespace VoidTime.GUI
             this.ship = ship;
             var tabs = new TabControl
             {
-                BackColor = Color.Black,
+                BackColor = Color.Black
             };
             tabs.TabPages.Add("Player Statistics");
             tabs.TabPages[0].BackColor = Color.Black;
@@ -25,7 +26,7 @@ namespace VoidTime.GUI
             {
                 Text = stats,
                 ForeColor = Color.White,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Fill
             };
             tabs.TabPages[0].Controls.Add(label);
             window = tabs;

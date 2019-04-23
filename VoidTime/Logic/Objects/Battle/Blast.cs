@@ -10,18 +10,18 @@ namespace VoidTime
     public class Blast : PhysicalGameObject
     {
         private const float speed = 3000;
+        private readonly HashSet<Type> damagableTypes;
 
         private readonly float damage;
-        private readonly HashSet<Type> damagableTypes;
 
         private readonly Ship owner;
         private readonly Vector2D velocity;
-        public double Angle { get; }
         private float remainingRange;
+        public double Angle { get; }
 
         /// <param name="damagableTypes">Only Ship class allowed</param>
         public Blast(Vector2D possition, double angle, float damage, Ship owner, float range,
-            params Type[] damagableTypes)
+                     params Type[] damagableTypes)
         {
             Position = possition;
             remainingRange = range;
@@ -45,6 +45,7 @@ namespace VoidTime
                 Instantiate(new Explosion(Position));
                 Destoy();
             }
+
             remainingRange -= velocity.Magnitude * 0.018f;
         }
 
@@ -67,10 +68,11 @@ namespace VoidTime
         public override void BeginContact(Contact contact)
         {
             var other = contact.FixtureA.Body == Body ? contact.FixtureB : contact.FixtureA;
-            if (owner is Player && other.Body.UserData is MapEnemy || owner is MapEnemy && other.Body.UserData is Player)
+            if (owner is Player && other.Body.UserData is MapEnemy ||
+                owner is MapEnemy && other.Body.UserData is Player)
             {
                 var player = (Player) (owner is Player ? owner : other.Body.UserData);
-                var enemy = (MapEnemy)(owner is MapEnemy ? owner : other.Body.UserData);
+                var enemy = (MapEnemy) (owner is MapEnemy ? owner : other.Body.UserData);
                 player.StartBattle(enemy);
             }
 

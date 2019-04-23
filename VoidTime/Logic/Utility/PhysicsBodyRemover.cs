@@ -6,7 +6,8 @@ namespace VoidTime
 {
     public static class PhysicsBodyRemover
     {
-        private static Dictionary<World, List<Tuple<Body, IEnumerable<Fixture>>>> removeBodyList = new Dictionary<World, List<Tuple<Body, IEnumerable<Fixture>>>>();
+        private static readonly Dictionary<World, List<Tuple<Body, IEnumerable<Fixture>>>> removeBodyList =
+            new Dictionary<World, List<Tuple<Body, IEnumerable<Fixture>>>>();
 
         public static void RemoveBodyies(World world)
         {

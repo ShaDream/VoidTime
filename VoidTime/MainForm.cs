@@ -53,7 +53,7 @@ namespace VoidTime
             openGL.MouseDoubleClick += currentModel.OnMouseDoubleClick;
             openGL.MouseWheel += currentModel.OnMouseWheel;
             SizeChanged += currentModel.OnSizeChanged;
-            currentModel.GameModelChanged += (m) =>
+            currentModel.GameModelChanged += m =>
             {
                 currentModel = m;
                 MakeEvents();
@@ -68,15 +68,15 @@ namespace VoidTime
                 RenderContextType = RenderContextType.NativeWindow,
                 RenderTrigger = RenderTrigger.TimerBased,
                 Dock = DockStyle.Fill,
-                DrawFPS = true,
+                DrawFPS = true
             };
 
-            ((ISupportInitialize)openGL).BeginInit();
+            ((ISupportInitialize) openGL).BeginInit();
             openGL.OpenGLDraw += OpenGLDraw;
             openGL.OpenGLInitialized += OpenGLInitialized;
 
             Controls.Add(openGL);
-            ((ISupportInitialize)openGL).EndInit();
+            ((ISupportInitialize) openGL).EndInit();
         }
 
         private void OpenGLInitialized(object sender, EventArgs e)
@@ -110,17 +110,18 @@ namespace VoidTime
         private void HelperInitialization()
         {
             foreach (var drawClass in AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
-                .Where(x => typeof(IDrawable).IsAssignableFrom(x) &&
-                            !x.IsInterface &&
-                            !x.IsAbstract))
+                                               .SelectMany(x => x.GetTypes())
+                                               .Where(x => typeof(IDrawable).IsAssignableFrom(x) &&
+                                                           !x.IsInterface &&
+                                                           !x.IsAbstract))
             {
                 var instance = Activator.CreateInstance(drawClass);
-                ((IDrawable)instance).Init(openGL.OpenGL);
-                var typeGameObject = (Type)drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
-                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>)drawClass
-                    .GetMethod("DrawObject")
-                    ?.CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>), instance);
+                ((IDrawable) instance).Init(openGL.OpenGL);
+                var typeGameObject = (Type) drawClass.GetProperty("GameObjectType")?.GetValue(instance, null);
+                var drawingMethod = (Action<ObjectOnDisplay, OpenGL>) drawClass
+                                                                      .GetMethod("DrawObject")
+                                                                      ?.CreateDelegate(typeof(Action<ObjectOnDisplay, OpenGL>),
+                                                                                       instance);
 
                 drawHelpers.Add(typeGameObject, drawingMethod);
             }

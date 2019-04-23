@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace VoidTime
+﻿namespace VoidTime
 {
     public class ControlChip : Chip
     {
