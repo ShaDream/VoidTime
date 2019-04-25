@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<enemies>
+  <enemy>
+    <difficult></difficult>
+    <ship></ship>
+    <guns>
+      <gun></gun>
+    </guns>
+    <chipCount></chipCount>
+  </enemy>
+</enemies>
