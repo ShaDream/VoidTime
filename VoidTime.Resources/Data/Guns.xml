@@ -4,20 +4,43 @@
     <name>Base gun</name>
     <canRotate>true</canRotate>
     <damage>2</damage>
-    <fireRate>3</fireRate>
-    <criticalChance>1</criticalChance>
+    <fireRate>1</fireRate>
+    <criticalChance>0,1</criticalChance>
     <tier>1</tier>
     <range>500</range>
-    <price>0</price>
+    <price>100</price>
   </gun>
+
+  <gun>
+    <name>Fast gun</name>
+    <canRotate>true</canRotate>
+    <damage>1</damage>
+    <fireRate>8</fireRate>
+    <criticalChance>0,05</criticalChance>
+    <tier>2</tier>
+    <range>1000</range>
+    <price>500</price>
+  </gun>
+
+  <gun>
+    <name>Power gun</name>
+    <canRotate>true</canRotate>
+    <damage>50</damage>
+    <fireRate>0,1</fireRate>
+    <criticalChance>5</criticalChance>
+    <tier>3</tier>
+    <range>2000</range>
+    <price>750</price>
+  </gun>
+
   <gun>
     <name>Omega gun</name>
     <canRotate>true</canRotate>
     <damage>10</damage>
-    <fireRate>100</fireRate>
+    <fireRate>50</fireRate>
     <criticalChance>3</criticalChance>
-    <tier>1</tier>
+    <tier>5</tier>
     <range>500</range>
-    <price>0</price>
+    <price>2000</price>
   </gun>
 </guns>
