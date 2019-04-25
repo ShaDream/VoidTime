@@ -14,7 +14,7 @@ namespace VoidTime
 
             var ship = new ShipBaseData
             {
-                ShipName = name,
+                Name = name,
                 HP = float.Parse(node["hp"].InnerText),
                 Defence = float.Parse(node["defence"].InnerText),
                 MoveSpeed = float.Parse(node["speed"].InnerText),
