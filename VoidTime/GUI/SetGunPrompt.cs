@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace VoidTime.GUI
 {
-    public static class Prompt
+    public static class SetGunPrompt
     {
         public static int ShowDialog(int[] slots)
         {

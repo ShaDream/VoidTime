@@ -117,7 +117,7 @@ namespace VoidTime.GUI
                             var slots = ship.Data.GetSlots().Where(x => x.MaxTier >= gun.Tier);
                             if (!slots.Any())
                                 return;
-                            var result = Prompt.ShowDialog(slots.Select(x => x.SlotId).ToArray());
+                            var result = SetGunPrompt.ShowDialog(slots.Select(x => x.SlotId).ToArray());
                             if (result == -1)
                                 return;
                             ship.Data.SetGun(gun, result);
