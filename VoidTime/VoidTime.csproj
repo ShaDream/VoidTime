@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawClasses\BackgroundDrawHelper.cs" />
+    <Compile Include="DrawClasses\BattleEnemyDrawHelper.cs" />
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
     <Compile Include="DrawClasses\EnemyDrawHelper.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Logic\Cameras\SmoothCamera.cs" />
     <Compile Include="Logic\Objects\Ship.cs" />
     <Compile Include="Logic\Utility\ChipParser.cs" />
+    <Compile Include="Logic\Utility\EnemyCreator.cs" />
     <Compile Include="Logic\Utility\Extensions\EnumExtensions.cs" />
     <Compile Include="Logic\Utility\GunParser.cs" />
     <Compile Include="Logic\Utility\PhysicsBodyRemover.cs" />

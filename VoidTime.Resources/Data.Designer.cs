@@ -89,6 +89,25 @@ namespace VoidTime.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;enemies&gt;
+        ///  &lt;enemy&gt;
+        ///    &lt;difficult&gt;&lt;/difficult&gt;
+        ///    &lt;ship&gt;&lt;/ship&gt;
+        ///    &lt;guns&gt;
+        ///      &lt;gun&gt;&lt;/gun&gt;
+        ///    &lt;/guns&gt;
+        ///    &lt;chipCount&gt;&lt;/chipCount&gt;
+        ///  &lt;/enemy&gt;
+        ///&lt;/enemies&gt;.
+        /// </summary>
+        public static string Enemies {
+            get {
+                return ResourceManager.GetString("Enemies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;atlas&gt;
         ///    &lt;sprite&gt;
         ///        &lt;id&gt;1&lt;/id&gt;
@@ -124,21 +143,22 @@ namespace VoidTime.Resources {
         ///    &lt;name&gt;Base gun&lt;/name&gt;
         ///    &lt;canRotate&gt;true&lt;/canRotate&gt;
         ///    &lt;damage&gt;2&lt;/damage&gt;
-        ///    &lt;fireRate&gt;100&lt;/fireRate&gt;
-        ///    &lt;criticalChance&gt;1&lt;/criticalChance&gt;
-        ///    &lt;tier&gt;1&lt;/tier&gt;
-        ///    &lt;range&gt;100&lt;/range&gt;
-        ///    &lt;price&gt;0&lt;/price&gt;
-        ///  &lt;/gun&gt;
-        ///  &lt;gun&gt;
-        ///    &lt;name&gt;Omega gun&lt;/name&gt;
-        ///    &lt;canRotate&gt;true&lt;/canRotate&gt;
-        ///    &lt;damage&gt;10&lt;/damage&gt;
-        ///    &lt;fireRate&gt;10&lt;/fireRate&gt;
-        ///    &lt;criticalChance&gt;3&lt;/criticalChance&gt;
+        ///    &lt;fireRate&gt;1&lt;/fireRate&gt;
+        ///    &lt;criticalChance&gt;0,1&lt;/criticalChance&gt;
         ///    &lt;tier&gt;1&lt;/tier&gt;
         ///    &lt;range&gt;500&lt;/range&gt;
-        ///    &lt;price&gt;0&lt;/pr [rest of string was truncated]&quot;;.
+        ///    &lt;price&gt;100&lt;/price&gt;
+        ///  &lt;/gun&gt;
+        ///
+        ///  &lt;gun&gt;
+        ///    &lt;name&gt;Fast gun&lt;/name&gt;
+        ///    &lt;canRotate&gt;true&lt;/canRotate&gt;
+        ///    &lt;damage&gt;1&lt;/damage&gt;
+        ///    &lt;fireRate&gt;8&lt;/fireRate&gt;
+        ///    &lt;criticalChance&gt;0,05&lt;/criticalChance&gt;
+        ///    &lt;tier&gt;2&lt;/tier&gt;
+        ///    &lt;range&gt;1000&lt;/range&gt;
+        ///    &lt;price&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Guns {
             get {
@@ -164,17 +184,18 @@ namespace VoidTime.Resources {
         ///        &lt;/position&gt;
         ///        &lt;maxTier&gt;1&lt;/maxTier&gt;
         ///      &lt;/slot&gt;
-        ///      &lt;slot&gt;
-        ///        &lt;position&gt;
-        ///          &lt;x&gt;0&lt;/x&gt;
-        ///          &lt;y&gt;50&lt;/y&gt;
-        ///        &lt;/position&gt;
-        ///        &lt;maxTier&gt;1&lt;/maxTier&gt;
-        ///      &lt;/slot&gt;
-        ///      &lt;slot&gt;
-        ///        &lt;position&gt;
-        ///          &lt;x&gt;0&lt;/x&gt;
-        ///          &lt;y [rest of string was truncated]&quot;;.
+        ///    &lt;/slots&gt;
+        ///    &lt;defence&gt;1&lt;/defence&gt;
+        ///    &lt;hp&gt;200&lt;/hp&gt;
+        ///    &lt;speed&gt;600&lt;/speed&gt;
+        ///    &lt;chipsCost&gt;20&lt;/chipsCost&gt;
+        ///    &lt;price&gt;200&lt;/price&gt;
+        ///  &lt;/ship&gt;
+        ///
+        ///  &lt;ship&gt;
+        ///    &lt;name&gt;Fast ship&lt;/name&gt;
+        ///    &lt;size&gt;
+        ///      &lt; [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Ships {
             get {

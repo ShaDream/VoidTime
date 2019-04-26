@@ -5,7 +5,6 @@ namespace VoidTime
     public class MapEnemy : Ship
     {
         private readonly PhysicalGameObject target;
-        public double Angle = Math.PI / 2;
         public EnemyDifficult Difficult;
 
         public int EnemiesCount;
@@ -13,6 +12,8 @@ namespace VoidTime
 
         public MapEnemy(Vector2D position, PhysicalGameObject target, int enemiesCount, EnemyDifficult difficult)
         {
+            EnemiesCount = enemiesCount;
+            Difficult = difficult;
             Position = position;
             this.target = target;
             Data.SetShip(ShipParser.GetShip("Base ship"));

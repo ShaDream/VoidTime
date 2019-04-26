@@ -8,5 +8,10 @@
         {
             return Rng.NextDouble() * 100 < chance;
         }
+
+        public static int Next(int max)
+        {
+            return Rng.Next(max);
+        }
     }
 }
