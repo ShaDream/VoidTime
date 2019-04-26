@@ -24,7 +24,7 @@ namespace VoidTime
             }
         }
 
-        public Player(Rectangle allowedCoordinates, Vector2D position, bool canMove = true)
+        public Player(Rectangle allowedCoordinates, Vector2D position)
         {
             Inventory = new Inventory(this);
             Chips = new InstalledChips(this, 6000);
@@ -99,6 +99,17 @@ namespace VoidTime
         public void StartBattle(MapEnemy enemy)
         {
             StartingBattle?.Invoke(enemy);
+        }
+
+        public Player Copy()
+        {
+            var pl = new Player(AllowedCoordinates, Position)
+            {
+                Data = Data,
+                Chips = Chips,
+                Inventory = Inventory
+            };
+            return pl;
         }
 
         public event Action<MapEnemy> StartingBattle;

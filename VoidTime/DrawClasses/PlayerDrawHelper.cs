@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using SharpGL;
 using SharpGL.SceneGraph.Assets;
 using VoidTime.Resources;

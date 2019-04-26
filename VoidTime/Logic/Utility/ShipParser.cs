@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using VoidTime.Resources;
 
 namespace VoidTime
 {
@@ -8,12 +9,12 @@ namespace VoidTime
         public static ShipBaseData GetShip(string name)
         {
             var doc = new XmlDocument();
-            doc.LoadXml(Resources.Data.Ships);
+            doc.LoadXml(Data.Ships);
             var node = doc.SelectSingleNode($"//ship[name=\'{name}\']");
 
             var ship = new ShipBaseData
             {
-                ShipName = name,
+                Name = name,
                 HP = float.Parse(node["hp"].InnerText),
                 Defence = float.Parse(node["defence"].InnerText),
                 MoveSpeed = float.Parse(node["speed"].InnerText),
@@ -29,7 +30,7 @@ namespace VoidTime
                 ship.slots[i].HasGun = false;
                 ship.slots[i].MaxTier = int.Parse(slotNode["maxTier"].InnerText);
                 ship.slots[i].positionOffset = new Vector2D(float.Parse(slotNode["position"]["x"].InnerText),
-                    float.Parse(slotNode["position"]["y"].InnerText));
+                                                            float.Parse(slotNode["position"]["y"].InnerText));
             }
 
             return ship;

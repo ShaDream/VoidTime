@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using System.Threading.Tasks;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Dynamics;
 using Box2DSharp.Dynamics.Contacts;
@@ -11,6 +9,8 @@ namespace VoidTime
     public abstract class PhysicalGameObject : GameObject
     {
         public const float ScaleFactor = 0.001F;
+
+        private bool deleted;
 
         private Vector2D position;
 
@@ -57,7 +57,8 @@ namespace VoidTime
 
         public void SetLinearVelocity(Vector2D velocity)
         {
-            Body.SetLinearVelocity(new Vector2(velocity.X * ScaleFactor, velocity.Y * ScaleFactor));
+            if (!deleted)
+                Body.SetLinearVelocity(new Vector2(velocity.X * ScaleFactor, velocity.Y * ScaleFactor));
         }
 
         public void ApplyLinearImpulseToCenter(Vector2D velocity)
@@ -69,7 +70,8 @@ namespace VoidTime
 
         protected BodyDef CreateBodyDef()
         {
-            return new BodyDef { UserData = this };
+            deleted = false;
+            return new BodyDef {UserData = this};
         }
 
         public void DeletePhysics()
@@ -80,6 +82,7 @@ namespace VoidTime
             position = Position;
 
             Body = null;
+            deleted = true;
         }
 
         public override void Destoy()

@@ -68,6 +68,7 @@
     <None Include="Resources\mars.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Enemies.xml" />
     <Content Include="Data\Explosion.xml" />
     <Content Include="Data\Guns.xml" />
     <Content Include="Data\Ships.xml">

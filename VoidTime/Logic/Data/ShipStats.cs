@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -30,11 +29,11 @@ namespace VoidTime
 
                 Guns[i].currentRecovery = Guns[i].RecoveryTime;
                 var blast = new Blast(ship.Position + Guns[i].PositionOffset.Rotate(ship.Angle),
-                    ship.Angle,
-                    Guns[i].Damage + (Random.IsLucky(Guns[i].CriticalChance) ? Guns[i].Damage : 0),
-                    ship,
-                    Guns[i].Range,
-                    typeof(Ship));
+                                      ship.Angle,
+                                      Guns[i].Damage + (Random.IsLucky(Guns[i].CriticalChance) ? Guns[i].Damage : 0),
+                                      ship,
+                                      Guns[i].Range,
+                                      typeof(Ship));
                 blastList.Add(blast);
             }
 
@@ -45,7 +44,6 @@ namespace VoidTime
         {
             for (var index = 0; index < Guns.Length; index++)
                 Guns[index].currentRecovery = Math.Max(0, Guns[index].currentRecovery - Time.DeltaTime);
-
         }
 
         public void UpdateStats(Ship ship)
@@ -86,7 +84,6 @@ namespace VoidTime
                    $"Defence: {Defence}\n" +
                    $"Speed: {Speed}\n\n" +
                    gunInfo;
-
         }
 
         private event Action Death;

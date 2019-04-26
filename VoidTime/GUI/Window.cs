@@ -7,16 +7,16 @@ namespace VoidTime.GUI
 {
     public class Window
     {
-        public Keys lastKey = Keys.None;
-        private readonly MainForm owner;
-        private readonly Player ship;
-        private readonly PausePanel PauseMenu;
-        private readonly PlanetPanel TradeMenu;
-        private readonly StatsPanel StatsMenu;
-        private readonly InventoryPanel InventoryMenu;
         private readonly EnterPanel EnterMenu;
-        private readonly HashSet<Keys> windowKeys = new HashSet<Keys> { Keys.F, Keys.Escape, Keys.E, Keys.Q };
+        private readonly InventoryPanel InventoryMenu;
+        private readonly MainForm owner;
+        private readonly PausePanel PauseMenu;
+        private readonly Player ship;
+        private readonly StatsPanel StatsMenu;
+        private readonly PlanetPanel TradeMenu;
+        private readonly HashSet<Keys> windowKeys = new HashSet<Keys> {Keys.F, Keys.Escape, Keys.E, Keys.Q};
         private readonly Dictionary<Keys, ISwitcheble> windows;
+        public Keys lastKey = Keys.None;
 
         public Window(MainForm form, Player ship)
         {
@@ -34,7 +34,7 @@ namespace VoidTime.GUI
                 {Keys.F, TradeMenu},
                 {Keys.Escape, PauseMenu},
                 {Keys.E, InventoryMenu},
-                {Keys.Q, StatsMenu }
+                {Keys.Q, StatsMenu}
             };
             owner.SizeChanged += OnSizeChanged;
         }
@@ -52,12 +52,10 @@ namespace VoidTime.GUI
         private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, PointF center, bool isChange = true)
         {
             if (isChange)
-            {
-                window.Size = new Size((int)(form.Size.Width * size.Width),
-                                       (int)(form.Size.Height * size.Height));
-            }
-            window.Location = new Point((int)((form.Size.Width - window.Size.Width) * center.X),
-                                        (int)((form.Size.Height - window.Size.Height) * center.Y));
+                window.Size = new Size((int) (form.Size.Width * size.Width),
+                                       (int) (form.Size.Height * size.Height));
+            window.Location = new Point((int) ((form.Size.Width - window.Size.Width) * center.X),
+                                        (int) ((form.Size.Height - window.Size.Height) * center.Y));
         }
 
         private void UpdateEnterLabel(bool isShow)

@@ -5,18 +5,17 @@ namespace VoidTime
 {
     public class MouseContol
     {
-        public HashSet<MouseButtons> PressedButtons = new HashSet<MouseButtons>();
-
-        public MouseButtons MouseUp = MouseButtons.None;
-        public MouseButtons MouseDown = MouseButtons.None;
+        private BasicCamera currentCamera;
         public MouseButtons DoubleClicked = MouseButtons.None;
+        public MouseButtons MouseDown = MouseButtons.None;
 
         public Vector2D MousePosition = Vector2D.Zero;
         public Vector2D MousePositionDelta = Vector2D.Zero;
 
-        public float MouseWheelDelta;
+        public MouseButtons MouseUp = MouseButtons.None;
 
-        private BasicCamera currentCamera;
+        public float MouseWheelDelta;
+        public HashSet<MouseButtons> PressedButtons = new HashSet<MouseButtons>();
 
         public MouseContol(BasicCamera camera)
         {

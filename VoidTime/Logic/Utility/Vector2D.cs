@@ -68,7 +68,7 @@ namespace VoidTime
         public Vector2D Rotate(double angle)
         {
             return new Vector2D((float) (X * Math.Cos(angle) - Y * Math.Sin(angle)),
-                (float) (X * Math.Sin(angle) + Y * Math.Cos(angle)));
+                                (float) (X * Math.Sin(angle) + Y * Math.Cos(angle)));
         }
 
 

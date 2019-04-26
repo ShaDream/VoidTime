@@ -3,46 +3,24 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Xml;
-using System.Xml.Resolvers;
 using SharpGL;
 using SharpGL.Enumerations;
 using SharpGL.SceneGraph.Assets;
+using VoidTime.Resources;
 
 namespace VoidTime
 {
     public class ExplosionDrawer : IDrawable
     {
-        public Texture exp;
         public Dictionary<int, Tuple<PointF, SizeF>> data = new Dictionary<int, Tuple<PointF, SizeF>>();
-
-
-        private static Vector2D[] ArrayTexCoords(PointF location, SizeF size)
-        {
-            return new[]
-            {
-                new Vector2D(location.X, location.Y),
-                new Vector2D(location.X, location.Y+size.Height),
-                new Vector2D(location.X+size.Width, location.Y+size.Height),
-                new Vector2D(location.X+size.Width, location.Y),
-            };
-        }
-
-        private static Vector2D[] GetObjectCorners(Vector2D vector, Size size)
-        {
-            return new[]
-            {
-                vector + new Vector2D(-size.Width / 2, -size.Height / 2),
-                vector + new Vector2D(-size.Width / 2, size.Height / 2),
-                vector + new Vector2D(size.Width / 2, size.Height / 2),
-                vector + new Vector2D(size.Width / 2, -size.Height / 2)
-            };
-        }
+        public Texture exp;
 
         public Type GameObjectType { get; } = typeof(Explosion);
+
         public void DrawObject(ObjectOnDisplay obj, OpenGL gl)
         {
             exp.Bind(gl);
-            var o = (Explosion)obj.GameObject;
+            var o = (Explosion) obj.GameObject;
             var size = new Size(1080, 1080);
             var pos = GetObjectCorners(obj.PositionOnDisplay, size);
             var posTex = ArrayTexCoords(data[o.frame].Item1, data[o.frame].Item2);
@@ -60,14 +38,14 @@ namespace VoidTime
         public void Init(OpenGL gl)
         {
             exp = new Texture();
-            exp.Create(gl, Resources.Textures.explosion);
+            exp.Create(gl, Textures.explosion);
 
             var doc = new XmlDocument();
-            doc.LoadXml(Resources.Data.Explosion);
+            doc.LoadXml(Data.Explosion);
 
             var nodes = doc.SelectNodes("//sprite");
 
-            var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = ".";
             foreach (XmlNode node in nodes)
             {
@@ -78,6 +56,29 @@ namespace VoidTime
                                      float.Parse(node["sizeY"].InnerText, NumberStyles.Any, ci));
                 data[id] = Tuple.Create(loc, size);
             }
+        }
+
+
+        private static Vector2D[] ArrayTexCoords(PointF location, SizeF size)
+        {
+            return new[]
+            {
+                new Vector2D(location.X, location.Y),
+                new Vector2D(location.X, location.Y + size.Height),
+                new Vector2D(location.X + size.Width, location.Y + size.Height),
+                new Vector2D(location.X + size.Width, location.Y)
+            };
+        }
+
+        private static Vector2D[] GetObjectCorners(Vector2D vector, Size size)
+        {
+            return new[]
+            {
+                vector + new Vector2D(-size.Width / 2, -size.Height / 2),
+                vector + new Vector2D(-size.Width / 2, size.Height / 2),
+                vector + new Vector2D(size.Width / 2, size.Height / 2),
+                vector + new Vector2D(size.Width / 2, -size.Height / 2)
+            };
         }
     }
 }

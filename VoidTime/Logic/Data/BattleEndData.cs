@@ -1,7 +1,4 @@
 ﻿namespace VoidTime
 {
-    public struct BattleEndData
-    {
-        
-    }
+    public struct BattleEndData { }
 }

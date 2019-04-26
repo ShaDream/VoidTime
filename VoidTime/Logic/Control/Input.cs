@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 
 namespace VoidTime
@@ -24,7 +23,7 @@ namespace VoidTime
 
         public static bool IsAnyKeyPressed(params Keys[] keys)
         {
-            return keys.Any(x => Input.controlses.KeysHandler.Contains(x));
+            return keys.Any(x => controlses.KeysHandler.Contains(x));
         }
 
         public static bool IsMouseButtonPressed(MouseButtons button)
@@ -38,7 +37,7 @@ namespace VoidTime
 
             var local = controlses.AxesHandler[name];
             return local.GetValue(controlses.KeysHandler.Contains(local.PositiveKey),
-                controlses.KeysHandler.Contains(local.NegativeKey));
+                                  controlses.KeysHandler.Contains(local.NegativeKey));
         }
 
         public static Vector2D GetMouseDelta()

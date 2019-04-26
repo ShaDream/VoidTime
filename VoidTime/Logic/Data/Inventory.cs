@@ -33,8 +33,8 @@ namespace VoidTime
         public IReadOnlyCollection<IItem> GetItemsByType(Type type)
         {
             return new ReadOnlyCollection<IItem>(items
-                .Where(x => x.GetType() == type)
-                .ToList());
+                                                 .Where(x => x.GetType() == type)
+                                                 .ToList());
         }
 
         public void InstallChip(Chip chip)

@@ -15,24 +15,70 @@
         </position>
         <maxTier>1</maxTier>
       </slot>
+    </slots>
+    <defence>1</defence>
+    <hp>200</hp>
+    <speed>600</speed>
+    <chipsCost>20</chipsCost>
+    <price>200</price>
+  </ship>
+
+  <ship>
+    <name>Fast ship</name>
+    <size>
+      <x>100</x>
+      <y>111</y>
+    </size>
+    <slots>
+      <slot>
+        <position>
+          <x>50</x>
+          <y>0</y>
+        </position>
+        <maxTier>3</maxTier>
+      </slot>
+    </slots>
+    <defence>2</defence>
+    <hp>250</hp>
+    <speed>600</speed>
+    <chipsCost>30</chipsCost>
+    <price>600</price>
+  </ship>
+
+  <ship>
+    <name>Fight ship</name>
+    <size>
+      <x>100</x>
+      <y>111</y>
+    </size>
+    <slots>
+      <slot>
+        <position>
+          <x>50</x>
+          <y>0</y>
+        </position>
+        <maxTier>3</maxTier>
+      </slot>
       <slot>
         <position>
           <x>0</x>
           <y>50</y>
         </position>
-        <maxTier>1</maxTier>
+        <maxTier>2</maxTier>
       </slot>
       <slot>
         <position>
           <x>0</x>
-          <y>-50</y>
+          <y>50</y>
         </position>
-        <maxTier>1</maxTier>
+        <maxTier>2</maxTier>
       </slot>
     </slots>
-    <defence>0</defence>
-    <hp>100</hp>
+    <defence>7</defence>
+    <hp>500</hp>
     <speed>600</speed>
-    <price>0</price>
+    <chipsCost>60</chipsCost>
+    <price>2000</price>
   </ship>
+
 </ships>

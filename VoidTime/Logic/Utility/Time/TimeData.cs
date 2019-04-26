@@ -5,11 +5,10 @@ namespace VoidTime
 {
     public class TimeData
     {
+        private readonly Stopwatch timer = new Stopwatch();
         public float DeltaTime { get; set; }
         public int FrameCount { get; set; }
         public DateTime StartTime { get; set; }
-
-        private Stopwatch timer = new Stopwatch();
 
         public TimeData()
         {

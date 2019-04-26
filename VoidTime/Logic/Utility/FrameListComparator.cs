@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace VoidTime
 {
     public class FrameListComparator<T>
     {
-        HashSet<T> lastFrame = new HashSet<T>();
+        private HashSet<T> lastFrame = new HashSet<T>();
 
         public void SetNewFrameData(List<T> newData)
         {
@@ -17,10 +16,7 @@ namespace VoidTime
                 lastFrame.Remove(item);
             }
 
-            foreach (var removedItem in lastFrame)
-            {
-                ItemRemoved?.Invoke(removedItem);
-            }
+            foreach (var removedItem in lastFrame) ItemRemoved?.Invoke(removedItem);
 
             lastFrame = new HashSet<T>(newData);
         }

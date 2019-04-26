@@ -33,9 +33,9 @@ namespace VoidTime
 
             const int border = 3000;
             var allowedCoordinates = new Rectangle(border,
-                border,
-                map.MapSize.Width - 2 * border,
-                map.MapSize.Height - 2 * border);
+                                                   border,
+                                                   map.MapSize.Width - 2 * border,
+                                                   map.MapSize.Height - 2 * border);
 
             player = new Player(allowedCoordinates, new Vector2D(5000, 5000));
             GameBasicCamera = new SmoothCamera(new Size(), player);
@@ -66,12 +66,21 @@ namespace VoidTime
         private void StartBattle(MapEnemy obj)
         {
             Pause();
-            var data = new BattleGameModelData();
+            var data = new BattleGameModelData
+            {
+                MapSize = new Size(20000, 20000),
+                Player = player,
+                Controls = Controls,
+                Enemy = obj,
+                Time = Time,
+                CameraSize = GameBasicCamera.Size
+            };
             var model = new BattleGameModel(data);
-            model.GameModelChanged += (m) =>
+            model.GameModelChanged += m =>
             {
                 obj.Destoy();
-                player.CreatePhysics(Physics);
+                player.DeletePhysics();
+                Controls.MouseHandler.ChangeCamera(GameBasicCamera);
                 Run();
             };
             GameModelChanged?.Invoke(model);
@@ -123,6 +132,5 @@ namespace VoidTime
         {
             map.AddGameObject(obj);
         }
-
     }
 }

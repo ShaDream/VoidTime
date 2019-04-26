@@ -15,7 +15,7 @@ namespace VoidTime
         {
             enemy.Bind(gl);
             var size = new Size(80, 80);
-            DrawHelper.Draw(obj, gl, size, ((MapEnemy)obj.GameObject).Angle);
+            DrawHelper.Draw(obj, gl, size, ((MapEnemy) obj.GameObject).Angle);
         }
 
         public void Init(OpenGL gl)

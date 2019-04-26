@@ -7,15 +7,15 @@ namespace VoidTime.GUI
     public class PlanetPanel : BasicGameWindow
     {
         private readonly Player ship;
-        
-        private Label description;
-        
-        private Button exitButton;
-        private Button menuButton;
 
-        private ListBox items;
-        private ListBox planetInventory;
-        private ListBox quests;
+        private readonly Label description;
+
+        private readonly Button exitButton;
+
+        private readonly ListBox items;
+        private readonly Button menuButton;
+        private readonly ListBox planetInventory;
+        private readonly ListBox quests;
 
         public PlanetPanel(MainForm form, Window owner, Player ship)
         {
@@ -137,14 +137,11 @@ namespace VoidTime.GUI
 
         protected override void Update()
         {
-            description.Text = string.Empty;;
+            description.Text = string.Empty;
             planetInventory.Items.Clear();
             planetInventory.Items.AddRange(ChipParser.GetAllChips());
             items.Items.Clear();
-            foreach (var item in ship.Inventory.GetItems)
-            {
-                items.Items.Add(item);
-            }
+            foreach (var item in ship.Inventory.GetItems) items.Items.Add(item);
             menuButton.Visible = false;
         }
 
@@ -237,7 +234,7 @@ namespace VoidTime.GUI
             {
                 Dock = DockStyle.Fill,
                 BackColor = Color.Black,
-                ForeColor = Color.White,
+                ForeColor = Color.White
             };
         }
 
