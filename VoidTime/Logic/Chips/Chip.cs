@@ -37,9 +37,9 @@ namespace VoidTime
             return GetType() == obj.GetType() && CurrentLevel == ((Chip) obj).CurrentLevel;
         }
 
-        public Chip Copy(Chip chip)
+        public Chip Copy()
         {
-            var result = (Chip)Activator.CreateInstance(chip.GetType());
+            var result = (Chip)Activator.CreateInstance(GetType());
             result.CurrentLevel = CurrentLevel;
             result.Costs = Costs;
             result.Description = Description;
