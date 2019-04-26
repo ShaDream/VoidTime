@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <enemies>
   <enemy>
-    <difficult></difficult>
-    <ship></ship>
+    <difficult>Easy</difficult>
+    <ship>Base ship</ship>
+    <behavior>CloseCombat</behavior>
     <guns>
-      <gun></gun>
+      <gun>Base gun</gun>
     </guns>
-    <chipCount></chipCount>
+    <chipCosts>0</chipCosts>
   </enemy>
 </enemies>

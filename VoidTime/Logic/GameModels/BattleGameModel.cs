@@ -15,6 +15,7 @@ namespace VoidTime
         private readonly object locker = new object();
         private readonly GameMap map;
         private readonly Player ship;
+        private readonly BattleGameManager manager;
 
         private readonly BasicCamera GameBasicCamera;
         private bool Paused = true;
@@ -34,6 +35,7 @@ namespace VoidTime
             Controls = data.Controls;
             Controls.MouseHandler.ChangeCamera(GameBasicCamera);
 
+
             Time = data.Time;
 
             gameTick = new Timer(8);
@@ -44,6 +46,9 @@ namespace VoidTime
             map = new GameMap(new Size(1, 1), data.MapSize, Physics);
 
             map.AddGameObjects(ship);
+
+            manager = new BattleGameManager(data.Enemy, map, ship);
+
             ship.OnDestroy += GameOver;
 
             gameTick.Elapsed += FrameTick;
@@ -77,7 +82,7 @@ namespace VoidTime
 
         public override void OnSizeChanged(object sender, EventArgs args)
         {
-            GameBasicCamera.Size = ((Form) sender).Size;
+            GameBasicCamera.Size = ((Form)sender).Size;
         }
 
         private void FrameTick(object sender, ElapsedEventArgs e)

@@ -1,4 +1,6 @@
-﻿namespace VoidTime
+﻿using System;
+
+namespace VoidTime
 {
     public class Chip : IItem
     {
@@ -26,6 +28,27 @@
         public override string ToString()
         {
             return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!typeof(object).IsSubclassOf(typeof(Chip))) return false;
+
+            return GetType() == obj.GetType() && CurrentLevel == ((Chip) obj).CurrentLevel;
+        }
+
+        public Chip Copy()
+        {
+            var result = (Chip)Activator.CreateInstance(GetType());
+            result.CurrentLevel = CurrentLevel;
+            result.Costs = Costs;
+            result.Description = Description;
+            result.MaxLevel = MaxLevel;
+            result.Name = Name;
+            result.Price = Price;
+            result.Type = Type;
+            result.Values = Values;
+            return result;
         }
     }
 }

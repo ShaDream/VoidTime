@@ -1,37 +1,43 @@
 ﻿using System;
 
-namespace VoidTime.Manager
+namespace VoidTime
 {
     public class BattleGameManager
     {
-        private static readonly int[] aliveEnemiesCount = {3, 4, 5, 6, 7, 8, 6};
+        private static readonly int[] aliveEnemiesCount = { 3, 4, 5, 6, 7, 8, 6 };
 
         private EnemyDifficult difficulty;
-        private int enemies;
+        private int _alivesEnemies;
         private readonly int enemiesToCreate;
 
         private GameMap map;
+        private Player player;
 
         private int alivesEnemies
         {
-            get => enemies;
+            get => _alivesEnemies;
             set
             {
-                enemies = value;
-                if (enemies < aliveEnemiesCount[(int) difficulty] && enemiesToCreate > 0)
+                _alivesEnemies = value;
+                if (_alivesEnemies < aliveEnemiesCount[(int)difficulty] && enemiesToCreate > 0)
                     CreateEnemy();
             }
         }
 
-        public BattleGameManager(MapEnemy enemy, GameMap map)
+        public BattleGameManager(MapEnemy enemy, GameMap map, Player player)
         {
+            difficulty = enemy.Difficult;
             this.map = map;
             enemiesToCreate = enemy.EnemiesCount;
+            this.player = player;
+            alivesEnemies = 0;
         }
 
-        public void CreateEnemy()
+        private void CreateEnemy()
         {
-            var enemy = new BattleEnemy();
+            var enemy = EnemyCreator.CreateEnemy(difficulty, (EnemyBehaviorType.CloseCombat));
+            enemy.Position = new Vector2D(Random.Next(map.MapSize.Width), Random.Next(map.MapSize.Height));
+            enemy.player = player;
             alivesEnemies++;
             enemy.OnDestroy += o =>
             {
@@ -39,6 +45,7 @@ namespace VoidTime.Manager
                 if (alivesEnemies == 0 && enemiesToCreate == 0)
                     Win?.Invoke();
             };
+            map.AddGameObject(enemy);
         }
 
         public event Action Win;
