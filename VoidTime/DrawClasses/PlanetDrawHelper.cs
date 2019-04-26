@@ -20,7 +20,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            planet.Create(gl, Textures.upiter);
+            planet.Create(gl, Textures.pluto);
         }
     }
 }
