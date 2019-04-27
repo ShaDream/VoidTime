@@ -42,9 +42,13 @@ namespace VoidTime
         public override void Update()
         {
             Move();
-            var blasts = Data.ShipStats.Shoot(this);
-            foreach (var blast in blasts)
-                Instantiate(blast);
+            if (Input.GetMouseButton(MouseButtons.Left))
+            {
+                var blasts = Data.ShipStats.Shoot(this);
+                foreach (var blast in blasts)
+                    Instantiate(blast);
+            }
+                
             Data.ShipStats.UpdateStats(this);
             CheckCoordinate();
         }
