@@ -14,8 +14,8 @@ namespace VoidTime
 
         public GunData[] Guns;
 
-
-        public Blast[] Shoot(Ship ship)
+        /// <param name="enemiesType">Allows only ShipTypes</param>
+        public Blast[] Shoot(Ship ship, params Type[] enemiesType)
         {
             var blastList = new List<Blast>();
 
@@ -30,7 +30,7 @@ namespace VoidTime
                                       Guns[i].Damage + (Random.IsLucky(Guns[i].CriticalChance) ? Guns[i].Damage : 0),
                                       ship,
                                       Guns[i].Range,
-                                      typeof(Ship));
+                                      enemiesType);
                 blastList.Add(blast);
             }
 
@@ -50,7 +50,7 @@ namespace VoidTime
 
         public void GetDamage(float damage)
         {
-            damage *= Defence / 100;
+            damage *= 1 - Defence / 100;
             currentHP -= damage;
             if (currentHP <= 0)
                 Death?.Invoke();
@@ -83,6 +83,6 @@ namespace VoidTime
                    gunInfo;
         }
 
-        private event Action Death;
+        public event Action Death;
     }
 }
