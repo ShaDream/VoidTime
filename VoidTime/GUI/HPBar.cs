@@ -12,11 +12,9 @@ namespace VoidTime.GUI
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Rectangle rec = e.ClipRectangle;
-            rec.Height = rec.Height - 3;
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(187, 187, 187)), 0, 0, rec.Width, rec.Height);
-            rec.Width = (int)(rec.Width * ((double)Value / Maximum));
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(145, 53, 53)),  0, 0, rec.Width, rec.Height);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(187, 187, 187)), 0, 0, Size.Width, Size.Height);
+            var value = (int)(Size.Width * ((double)Value / Maximum));
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(145, 53, 53)),  0, 0, value, Size.Height);
         }
     }
 }
