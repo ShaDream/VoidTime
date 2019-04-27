@@ -7,7 +7,6 @@ namespace VoidTime.GUI
 {
     public class Window
     {
-        private readonly EnterPanel enterMenu;
         private readonly InventoryPanel inventoryMenu;
         private readonly MainForm owner;
         private readonly PausePanel pauseMenu;
@@ -23,9 +22,7 @@ namespace VoidTime.GUI
         {
             owner = form;
             this.ship = ship;
-            ship.EnterChanged += UpdateEnterLabel;
 
-            enterMenu = new EnterPanel(owner, this);
             tradeMenu = new PlanetPanel(owner, this, ship);
             pauseMenu = new PausePanel(owner, this);
             inventoryMenu = new InventoryPanel(owner, this, ship);
@@ -48,7 +45,6 @@ namespace VoidTime.GUI
             ChangeSize(tradeMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
             ChangeSize(inventoryMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
             ChangeSize(statsMenu, form, new SizeF(0.2f, 0.6f), new PointF(0.5f, 0.5f));
-            ChangeSize(enterMenu, form, new SizeF(), new PointF(0.5f, 0.9f), false);
             ChangeSize(statusBar, form, new SizeF(1f, 0.0261f), new PointF(0.5f, 1f));
             statusBar.Resize();
         }
@@ -62,10 +58,6 @@ namespace VoidTime.GUI
                                         (int) ((form.Size.Height - window.Size.Height) * center.Y));
         }
 
-        private void UpdateEnterLabel(bool isShow)
-        {
-            enterMenu.Switch();
-        }
 
         public void OnKeyPress(object sender, KeyEventArgs args)
         {

@@ -15,7 +15,8 @@ namespace VoidTime.GUI
                 Text = "Press F",
                 TextAlign = ContentAlignment.MiddleCenter,
                 Font = new Font(new FontFamily("Arial"), 24),
-                ForeColor = Color.White,
+                ForeColor = Color.FromArgb(233, 238, 201),
+                BackColor = Color.Black,
                 Size = new Size(150, 50),
                 Location = new Point(900, 800)
             };

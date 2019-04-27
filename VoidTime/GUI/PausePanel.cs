@@ -12,6 +12,7 @@ namespace VoidTime.GUI
             var pausePanel = new TableLayoutPanel
             {
                 Size = new Size(250, 300),
+                BackColor = Color.FromArgb(25, 34, 57),
                 Location = new Point(100, 100)
             };
             pausePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50));
@@ -22,16 +23,16 @@ namespace VoidTime.GUI
 
             var exitButton = new Button
             {
-                BackColor = Color.Black,
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Text = "Exit",
                 Size = new Size(150, 50),
                 Font = new Font(new FontFamily("Arial"), 24)
             };
             var returnButton = new Button
             {
-                BackColor = Color.Black,
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Text = "Resume",
                 Size = new Size(150, 50),
                 Font = new Font(new FontFamily("Arial"), 24)

@@ -23,6 +23,7 @@ namespace VoidTime.GUI
 
             var inventoryPanel = new TableLayoutPanel
             {
+                BackColor = Color.FromArgb(25, 34, 57),
                 Size = new Size(250, 300),
                 Location = new Point(100, 100)
             };
@@ -32,7 +33,7 @@ namespace VoidTime.GUI
             inventoryPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             var tabs = new TabControl
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 Dock = DockStyle.Fill
             };
             tabs.TabPages.Add("Installed Chips");
@@ -40,39 +41,39 @@ namespace VoidTime.GUI
 
             for (var i = 0; i < tabs.TabCount; i++)
             {
-                tabs.TabPages[i].BackColor = Color.Black;
+                tabs.TabPages[i].BackColor = Color.FromArgb(40, 49, 72);
                 tabs.TabPages[i].BorderStyle = BorderStyle.None;
             }
 
             var tabInventory = new TabControl
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 Dock = DockStyle.Fill
             };
             tabInventory.TabPages.Add("Inventory");
-            tabInventory.TabPages[0].BackColor = Color.Black;
+            tabInventory.TabPages[0].BackColor = Color.FromArgb(40, 49, 72);
             tabInventory.TabPages[0].BorderStyle = BorderStyle.None;
 
             items = new ListBox
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 BorderStyle = BorderStyle.None,
-                ForeColor = Color.White,
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Dock = DockStyle.Fill
             };
 
             installedChips = new ListBox
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 BorderStyle = BorderStyle.None,
-                ForeColor = Color.White,
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Dock = DockStyle.Fill
             };
             installedGuns = new ListBox
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 BorderStyle = BorderStyle.None,
-                ForeColor = Color.White,
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Dock = DockStyle.Fill
             };
 
@@ -83,14 +84,14 @@ namespace VoidTime.GUI
             setRemoveButton = new Button
             {
                 Visible = false,
-                BackColor = Color.Black,
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Dock = DockStyle.Fill
             };
             exitButton = new Button
             {
-                BackColor = Color.Black,
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Text = "Exit",
                 Dock = DockStyle.Fill
             };

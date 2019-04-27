@@ -177,6 +177,7 @@ namespace VoidTime.GUI
                     menuButtonClick = () =>
                     {
                         ship.Inventory.Money += item.Reward;
+                        item.Status = QuestStatus.NotStarted;
                         Update();
                     };
                 }
@@ -216,6 +217,7 @@ namespace VoidTime.GUI
             var planetPanel = new TableLayoutPanel
             {
                 Size = new Size(250, 300),
+                BackColor = Color.FromArgb(25, 34, 57),
                 Location = new Point(100, 100)
             };
 
@@ -231,7 +233,7 @@ namespace VoidTime.GUI
         {
             var tabs = new TabControl
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 Size = new Size(500, 500),
                 Location = new Point(700, 200),
                 Dock = DockStyle.Fill
@@ -243,7 +245,7 @@ namespace VoidTime.GUI
 
             for (var i = 0; i < tabs.TabCount; i++)
             {
-                tabs.TabPages[i].BackColor = Color.Black;
+                tabs.TabPages[i].BackColor = Color.FromArgb(40, 49, 72);
                 tabs.TabPages[i].BorderStyle = BorderStyle.None;
             }
 
@@ -254,10 +256,10 @@ namespace VoidTime.GUI
         {
             var tabsInfo = new TabControl
             {
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(40, 49, 72),
                 Size = new Size(500, 500),
                 Location = new Point(700, 200),
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
             };
 
             tabsInfo.TabPages.Add("Information");
@@ -265,7 +267,7 @@ namespace VoidTime.GUI
 
             for (var i = 0; i < tabsInfo.TabCount; i++)
             {
-                tabsInfo.TabPages[i].BackColor = Color.Black;
+                tabsInfo.TabPages[i].BackColor = Color.FromArgb(40, 49, 72);
                 tabsInfo.TabPages[i].BorderStyle = BorderStyle.None;
             }
 
@@ -276,8 +278,8 @@ namespace VoidTime.GUI
         {
             return new ListBox
             {
-                BackColor = Color.Black,
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.None
             };
@@ -288,8 +290,8 @@ namespace VoidTime.GUI
             return new Label
             {
                 Dock = DockStyle.Fill,
-                BackColor = Color.Black,
-                ForeColor = Color.White
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201)
             };
         }
 
@@ -297,8 +299,8 @@ namespace VoidTime.GUI
         {
             return new Button
             {
-                BackColor = Color.Black,
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(40, 49, 72),
+                ForeColor = Color.FromArgb(233, 238, 201),
                 Dock = DockStyle.Fill,
                 Visible = false
             };

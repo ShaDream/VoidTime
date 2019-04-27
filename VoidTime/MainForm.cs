@@ -25,7 +25,7 @@ namespace VoidTime
         public MainForm(IGameModel model)
         {
             DoubleBuffered = true;
-            BackColor = Color.Black;
+            BackColor = Color.FromArgb(25, 34, 57);
             currentModel = model;
             OpenGLCreate();
             FormBorderStyle = FormBorderStyle.None;
