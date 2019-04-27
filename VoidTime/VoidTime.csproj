@@ -80,6 +80,9 @@
     <Compile Include="DrawClasses\PlayerDrawHelper.cs" />
     <Compile Include="GUI\BasicGameWindow.cs" />
     <Compile Include="GUI\EnterPanel.cs" />
+    <Compile Include="GUI\HPBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GUI\InventoryPanel.cs" />
     <Compile Include="GUI\ISwitcheble.cs" />
     <Compile Include="GUI\PausePanel.cs" />

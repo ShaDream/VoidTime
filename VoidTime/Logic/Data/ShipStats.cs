@@ -7,7 +7,7 @@ namespace VoidTime
 {
     public struct ShipStats
     {
-        private float currentHP;
+        public float CurrentHP { get; private set; }
         public float MaxHP;
         public float Defence;
         public float Speed;
@@ -51,20 +51,20 @@ namespace VoidTime
         public void GetDamage(float damage)
         {
             damage *= 1 - Defence / 100;
-            currentHP -= damage;
-            if (currentHP <= 0)
+            CurrentHP -= damage;
+            if (CurrentHP <= 0)
                 Death?.Invoke();
         }
 
         public void Heal(float heal)
         {
-            currentHP = Math.Min(currentHP + heal, MaxHP);
+            CurrentHP = Math.Min(CurrentHP + heal, MaxHP);
         }
 
         public void SetHP(float hp)
         {
-            currentHP = Math.Min(MaxHP, Math.Max(0, hp));
-            if (currentHP <= 0)
+            CurrentHP = Math.Min(MaxHP, Math.Max(0, hp));
+            if (CurrentHP <= 0)
                 Death?.Invoke();
         }
 
@@ -77,7 +77,7 @@ namespace VoidTime
                 gunInfo.Append("\n");
             }
 
-            return $"Health: {currentHP}\n" +
+            return $"Health: {CurrentHP}\n" +
                    $"Defence: {Defence}\n" +
                    $"Speed: {Speed}\n\n" +
                    gunInfo;

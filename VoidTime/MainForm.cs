@@ -24,6 +24,7 @@ namespace VoidTime
 
         public MainForm(IGameModel model)
         {
+            DoubleBuffered = true;
             BackColor = Color.Black;
             currentModel = model;
             OpenGLCreate();
