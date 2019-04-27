@@ -34,6 +34,7 @@ namespace VoidTime
             Size = new Size(100, 111);
             Data.SetShip(ShipParser.GetShip("Base ship"));
             Data.SetGun(GunParser.GetGun("Base gun"), 0);
+            Data.ShipStats.Death += Destoy;
         }
 
         public event Action<bool> EnterChanged;
@@ -44,7 +45,7 @@ namespace VoidTime
             Move();
             if (Input.GetMouseButton(MouseButtons.Left))
             {
-                var blasts = Data.ShipStats.Shoot(this);
+                var blasts = Data.ShipStats.Shoot(this,typeof(BattleEnemy));
                 foreach (var blast in blasts)
                     Instantiate(blast);
             }

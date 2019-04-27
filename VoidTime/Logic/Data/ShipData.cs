@@ -29,6 +29,7 @@ namespace VoidTime
 
             shipBase = data;
             UpdateFields();
+            ShipStats.SetHP(ShipStats.MaxHP);
         }
 
         public void SetGun(GunData data, int slot)

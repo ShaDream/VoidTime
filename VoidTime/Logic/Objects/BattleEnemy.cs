@@ -6,13 +6,17 @@
         public Player player;
         private Vector2D velocity;
 
+        public BattleEnemy()
+        {
+
+        }
 
         public override void Update()
         {
             Move();
             if ((player.Position - Position).Magnitude < 1000)
             {
-                var blasts = Data.ShipStats.Shoot(this);
+                var blasts = Data.ShipStats.Shoot(this,typeof(Player));
                 foreach (var blast in blasts)
                     Instantiate(blast);
             }
