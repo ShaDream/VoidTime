@@ -86,6 +86,7 @@
     <Compile Include="GUI\PlanetPanel.cs" />
     <Compile Include="GUI\SetGunPrompt.cs" />
     <Compile Include="GUI\StatsPanel.cs" />
+    <Compile Include="GUI\StatusBar.cs" />
     <Compile Include="GUI\UpgradePrompt.cs" />
     <Compile Include="GUI\Window.cs" />
     <Compile Include="Logic\Cameras\BasicCamera.cs" />

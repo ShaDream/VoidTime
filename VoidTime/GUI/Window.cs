@@ -7,13 +7,14 @@ namespace VoidTime.GUI
 {
     public class Window
     {
-        private readonly EnterPanel EnterMenu;
-        private readonly InventoryPanel InventoryMenu;
+        private readonly EnterPanel enterMenu;
+        private readonly InventoryPanel inventoryMenu;
         private readonly MainForm owner;
-        private readonly PausePanel PauseMenu;
+        private readonly PausePanel pauseMenu;
         private readonly Player ship;
-        private readonly StatsPanel StatsMenu;
-        private readonly PlanetPanel TradeMenu;
+        private readonly StatsPanel statsMenu;
+        private readonly PlanetPanel tradeMenu;
+        private readonly StatusBar statusBar;
         private readonly HashSet<Keys> windowKeys = new HashSet<Keys> {Keys.F, Keys.Escape, Keys.E, Keys.Q};
         private readonly Dictionary<Keys, ISwitcheble> windows;
         public Keys lastKey = Keys.None;
@@ -24,17 +25,18 @@ namespace VoidTime.GUI
             this.ship = ship;
             ship.EnterChanged += UpdateEnterLabel;
 
-            EnterMenu = new EnterPanel(owner, this);
-            TradeMenu = new PlanetPanel(owner, this, ship);
-            PauseMenu = new PausePanel(owner, this);
-            InventoryMenu = new InventoryPanel(owner, this, ship);
-            StatsMenu = new StatsPanel(owner, this, ship);
+            enterMenu = new EnterPanel(owner, this);
+            tradeMenu = new PlanetPanel(owner, this, ship);
+            pauseMenu = new PausePanel(owner, this);
+            inventoryMenu = new InventoryPanel(owner, this, ship);
+            statsMenu = new StatsPanel(owner, this, ship);
+            statusBar = new StatusBar(owner, this, ship);
             windows = new Dictionary<Keys, ISwitcheble>
             {
-                {Keys.F, TradeMenu},
-                {Keys.Escape, PauseMenu},
-                {Keys.E, InventoryMenu},
-                {Keys.Q, StatsMenu}
+                {Keys.F, tradeMenu},
+                {Keys.Escape, pauseMenu},
+                {Keys.E, inventoryMenu},
+                {Keys.Q, statsMenu}
             };
             owner.SizeChanged += OnSizeChanged;
         }
@@ -42,11 +44,12 @@ namespace VoidTime.GUI
         private void OnSizeChanged(object sender, EventArgs e)
         {
             var form = sender as MainForm;
-            ChangeSize(PauseMenu, form, new SizeF(), new PointF(0.5f, 0.5f), false);
-            ChangeSize(TradeMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
-            ChangeSize(InventoryMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
-            ChangeSize(StatsMenu, form, new SizeF(0.2f, 0.6f), new PointF(0.5f, 0.5f));
-            ChangeSize(EnterMenu, form, new SizeF(), new PointF(0.5f, 0.9f), false);
+            ChangeSize(pauseMenu, form, new SizeF(), new PointF(0.5f, 0.5f), false);
+            ChangeSize(tradeMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
+            ChangeSize(inventoryMenu, form, new SizeF(0.6f, 0.6f), new PointF(0.5f, 0.5f));
+            ChangeSize(statsMenu, form, new SizeF(0.2f, 0.6f), new PointF(0.5f, 0.5f));
+            ChangeSize(enterMenu, form, new SizeF(), new PointF(0.5f, 0.9f), false);
+            ChangeSize(statusBar, form, new SizeF(1f, 0.0261f), new PointF(0.5f, 1f));
         }
 
         private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, PointF center, bool isChange = true)
@@ -60,7 +63,7 @@ namespace VoidTime.GUI
 
         private void UpdateEnterLabel(bool isShow)
         {
-            EnterMenu.Switch();
+            enterMenu.Switch();
         }
 
         public void OnKeyPress(object sender, KeyEventArgs args)
