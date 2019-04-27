@@ -64,16 +64,11 @@ namespace VoidTime.GUI
                 currentTab = (Tabs)tabs.SelectedIndex;
             };
 
-            upgrades.SelectedIndexChanged += (s, a) =>
-            {
-
-            };
-
             inventory.SelectedIndexChanged += (s, a) =>
             {
                 if (!(inventory.SelectedItem is Chip item) || currentTab != Tabs.Upgrades)
                     return;
-                if (upgrades.Items.Count > 0 && !upgrades.Items[0].Equals(item))
+                if (upgrades.Items.Count > 0 && !((Chip)upgrades.Items[0]).Equals(item))
                     return;
                 if (upgrades.Items.Count == 3 || item.CurrentLevel == item.MaxLevel)
                     return;
@@ -85,12 +80,21 @@ namespace VoidTime.GUI
                     ship.Inventory.Remove(item);
                     upgrades.Items.Add(item);
 
-                    if (upgrades.Items.Count == 3 && UpgradePrompt.ShowDialog())
+                    if (upgrades.Items.Count == 3)
                     {
-                        item.CurrentLevel++;
-                        ship.Inventory.Add(item);
+                        if (UpgradePrompt.ShowDialog())
+                        {
+                            item.CurrentLevel++;
+                            ship.Inventory.Add(item);
+                        }
+                        else
+                        {
+                            foreach (var it in upgrades.Items)
+                                ship.Inventory.Add((Chip)it);
+                        }
                         upgrades.Items.Clear();
                     }
+                        
 
                     Update();
                 };

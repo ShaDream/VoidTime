@@ -32,7 +32,7 @@ namespace VoidTime
 
         public override bool Equals(object obj)
         {
-            if (!typeof(object).IsSubclassOf(typeof(Chip))) return false;
+            if (!obj.GetType().IsSubclassOf(typeof(Chip))) return false;
 
             return GetType() == obj.GetType() && CurrentLevel == ((Chip) obj).CurrentLevel;
         }

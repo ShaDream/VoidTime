@@ -24,7 +24,7 @@ namespace VoidTime
 
         private static Dictionary<string, Chip> chips = new Dictionary<string, Chip>();
 
-        private static readonly bool Initialized = false;
+        private static bool Initialized = false;
 
         public static Chip GetChip(string name, int level = 1)
         {
@@ -60,6 +60,7 @@ namespace VoidTime
             var chipNodes = doc.SelectNodes("//chip");
             foreach (XmlElement chipNode in chipNodes)
                 chips.Add(chipNode["name"].InnerText, ParseChip(chipNode["name"].InnerText));
+            Initialized = true;
         }
 
         private static Chip ParseChip(string name)
