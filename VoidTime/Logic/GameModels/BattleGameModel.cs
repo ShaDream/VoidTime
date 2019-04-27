@@ -16,9 +16,12 @@ namespace VoidTime
         private readonly GameMap map;
         private readonly Player ship;
         private readonly BattleGameManager manager;
+        private BattleGameModelData data;
+
 
         private readonly BasicCamera GameBasicCamera;
-        private bool Paused = true;
+        private bool paused = true;
+        private bool win = false;
 
         public override World Physics { get; set; }
         public override Controls Controls { get; set; }
@@ -26,6 +29,7 @@ namespace VoidTime
 
         public BattleGameModel(BattleGameModelData data)
         {
+            this.data = data;
             ship = data.Player;
             ship.DeletePhysics();
             ship.Position = new Vector2D(data.MapSize.Width / 2, data.MapSize.Height / 2);
@@ -49,6 +53,11 @@ namespace VoidTime
 
             manager = new BattleGameManager(data.Enemy, map, ship);
 
+            manager.Win += () =>
+            {
+                win = true;
+            };
+
             ship.OnDestroy += GameOver;
 
             gameTick.Elapsed += FrameTick;
@@ -64,19 +73,19 @@ namespace VoidTime
 
         public override void Run()
         {
-            if (!Paused)
+            if (!paused)
                 return;
 
-            Paused = false;
+            paused = false;
             gameTick.Start();
         }
 
         public override void Pause()
         {
-            if (Paused)
+            if (paused)
                 return;
 
-            Paused = true;
+            paused = true;
             gameTick.Stop();
         }
 
@@ -89,14 +98,22 @@ namespace VoidTime
         {
             lock (locker)
             {
+                if (paused)
+                    return;
                 Time.Update();
                 var activeObjects = map.GetGameObjects(GameBasicCamera);
                 activeObjects.ForEach(x => x.Update());
                 Physics.StepWithDelete(0.01666667F, 3, 6);
                 map.UpdateMap(GameBasicCamera, GameBasicCamera.Size);
                 GameBasicCamera.Update();
+                manager.Update();
                 Tick?.Invoke(activeObjects, GameBasicCamera);
                 Controls.ClearOneFrameValues();
+                if (!win)
+                    return;
+                Pause();
+                ship.DeletePhysics();
+                GameModelChanged?.Invoke(data.MainModel);
             }
         }
     }

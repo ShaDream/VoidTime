@@ -8,7 +8,7 @@
 
         public BattleEnemy()
         {
-
+            Data.ShipStats.Death += Destoy;
         }
 
         public override void Update()
@@ -16,7 +16,7 @@
             Move();
             if ((player.Position - Position).Magnitude < 1000)
             {
-                var blasts = Data.ShipStats.Shoot(this,typeof(Player));
+                var blasts = Data.ShipStats.Shoot(this, typeof(Player));
                 foreach (var blast in blasts)
                     Instantiate(blast);
             }

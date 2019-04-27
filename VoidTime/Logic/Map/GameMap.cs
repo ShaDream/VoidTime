@@ -56,6 +56,12 @@ namespace VoidTime
             AddGameObjects(gameObject);
         }
 
+        public void RemoveObject(GameObject gameObject)
+        {
+            var chunkIndex = ChunkCoordinateFromVector(gameObject.Position);
+            chunks[chunkIndex.X,chunkIndex.Y].RemoveGameObject(gameObject);
+        }
+
         public List<GameObject> GetGameObjects(BasicCamera basicCamera, Size overrun = new Size())
         {
             var chunksCoordinate = GetChunksCoordinateFromCamera(basicCamera, overrun);

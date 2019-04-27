@@ -109,7 +109,6 @@
     <Compile Include="Logic\Chips\SystemChip.cs" />
     <Compile Include="Logic\Control\Axis.cs" />
     <Compile Include="Logic\Control\MouseContol.cs" />
-    <Compile Include="Logic\Data\BattleEndData.cs" />
     <Compile Include="Logic\Data\BattleGameModelData.cs" />
     <Compile Include="Logic\Data\Buffs.cs" />
     <Compile Include="Logic\Data\Enums\EnemyBehaviorType.cs" />

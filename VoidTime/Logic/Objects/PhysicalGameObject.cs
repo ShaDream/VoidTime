@@ -76,7 +76,7 @@ namespace VoidTime
 
         public void DeletePhysics()
         {
-            PhysicsBodyRemover.Add(Body, Fixtures);
+            PhysicsBodyRemover.Add(Body, new List<Fixture>(Fixtures));
 
             Fixtures.Clear();
             position = Position;

@@ -10,5 +10,6 @@ namespace VoidTime
         public Controls Controls;
         public TimeData Time;
         public Size CameraSize;
+        public IGameModel MainModel;
     }
 }
