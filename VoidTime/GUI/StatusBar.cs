@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace VoidTime.GUI
@@ -8,6 +9,7 @@ namespace VoidTime.GUI
         private readonly Player ship;
         private readonly ProgressBar hp;
         private readonly Label money;
+        private readonly Label maxHP;
         private readonly TableLayoutPanel panel;
 
         public StatusBar(MainForm form, Window owner, Player ship)
@@ -26,18 +28,25 @@ namespace VoidTime.GUI
             hp = new HPBar
             {
                 Maximum = (int)ship.Data.ShipStats.MaxHP,
-                Value = 50,
+                Value = (int)ship.Data.ShipStats.CurrentHP,
             };
-
+            ship.Data.ShipStats.OnDamage += ChangeHP;
+            ship.Data.ShipStats.OnChangeMaxHP += ChangeMaxHP;
+            ship.Inventory.OnChangeMoney += ChangeMoney;
             panel.Controls.Add(hp, 0, 0);
             money = new Label
             {
                 ForeColor = Color.FromArgb(233, 238, 201),
-                Text = "Money : ",
+                Text = $"Money:      {ship.Inventory.Money}",
+            };
+            maxHP = new Label
+            {
+                ForeColor = Color.FromArgb(233, 238, 201),
+                Text = $"Maximum HP:      {ship.Data.ShipStats.MaxHP}",
             };
 
             panel.Controls.Add(money, 1, 0);
-            panel.Controls.Add(new Label(), 2, 0);
+            panel.Controls.Add(maxHP, 2, 0);
             panel.Controls.Add(new Label(), 3, 0);
             window = panel;
             form.Controls.Add(window);
@@ -63,6 +72,25 @@ namespace VoidTime.GUI
 
             money.Margin = new Padding(offset, 0, 0, 0);
             money.Font = new Font("Calibri", money.Size.Height * 0.5f);
+
+            maxHP.Margin = new Padding(offset, 0, 0, 0);
+            maxHP.Font = new Font("Calibri", money.Size.Height * 0.5f);
+            maxHP.Size = new Size(width - 2 * offset, height);
+        }
+
+        private void ChangeHP()
+        {
+            window.BeginInvoke(new Action(() => { hp.Value = (int)ship.Data.ShipStats.CurrentHP; }));
+        }
+
+        private void ChangeMoney()
+        {
+            window.BeginInvoke(new Action(() => { money.Text = $"Money:      {ship.Inventory.Money}"; }));
+        }
+
+        private void ChangeMaxHP()
+        {
+            window.BeginInvoke(new Action(() => { maxHP.Text = $"Maximum HP:      {ship.Data.ShipStats.MaxHP}"; }));
         }
     }
 }

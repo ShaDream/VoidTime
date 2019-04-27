@@ -32,8 +32,10 @@ namespace VoidTime
             AllowedCoordinates = allowedCoordinates;
             Position = position;
             Size = new Size(100, 111);
-            Data.SetShip(ShipParser.GetShip("Base ship"));
-            Data.SetGun(GunParser.GetGun("Base gun"), 0);
+            Data.SetShip(ShipParser.GetShip("Fight ship"));
+            Data.SetGun(GunParser.GetGun("Omega gun"), 0);
+            Data.SetGun(GunParser.GetGun("Omega gun"), 1);
+            Data.SetGun(GunParser.GetGun("Omega gun"), 2);
             Data.ShipStats.Death += Destoy;
         }
 
