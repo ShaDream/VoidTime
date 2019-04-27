@@ -112,6 +112,7 @@ namespace VoidTime
                 if (!win)
                     return;
                 Pause();
+                map.RemoveObject(ship);
                 ship.DeletePhysics();
                 GameModelChanged?.Invoke(data.MainModel);
             }

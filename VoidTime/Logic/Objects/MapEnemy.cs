@@ -9,6 +9,7 @@ namespace VoidTime
 
         public int EnemiesCount;
         private Vector2D velocity;
+        public bool InBattle = false;
 
         public MapEnemy(Vector2D position, PhysicalGameObject target, int enemiesCount, EnemyDifficult difficult)
         {

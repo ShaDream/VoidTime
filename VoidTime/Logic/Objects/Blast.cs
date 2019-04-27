@@ -77,7 +77,12 @@ namespace VoidTime
             {
                 var player = (Player) (owner is Player ? owner : other.Body.UserData);
                 var enemy = (MapEnemy) (owner is MapEnemy ? owner : other.Body.UserData);
-                player.StartBattle(enemy);
+                if (!enemy.InBattle)
+                {
+                    enemy.InBattle = true;
+                    player.StartBattle(enemy);
+                }
+                Destoy();
             }
 
             if (!damagableTypes.Contains(other.Body.UserData.GetType()) || other.Body.UserData == owner)
