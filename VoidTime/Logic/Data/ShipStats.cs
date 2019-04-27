@@ -19,9 +19,6 @@ namespace VoidTime
         {
             var blastList = new List<Blast>();
 
-            if (!Input.GetMouseButton(MouseButtons.Left))
-                return blastList.ToArray();
-
             for (var i = 0; i < Guns.Length; i++)
             {
                 if (!(Math.Abs(Guns[i].currentRecovery) < float.Epsilon))

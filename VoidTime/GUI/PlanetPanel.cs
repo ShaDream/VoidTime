@@ -84,8 +84,9 @@ namespace VoidTime.GUI
                     {
                         if (UpgradePrompt.ShowDialog())
                         {
-                            item.CurrentLevel++;
-                            ship.Inventory.Add(item);
+                            var itemCopy = item.Copy();
+                            itemCopy.CurrentLevel++;
+                            ship.Inventory.Add(itemCopy);
                         }
                         else
                         {
