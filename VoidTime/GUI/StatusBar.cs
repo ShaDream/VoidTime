@@ -33,7 +33,7 @@ namespace VoidTime.GUI
             money = new Label
             {
                 ForeColor = Color.FromArgb(233, 238, 201),
-                Text = "ABDBBADBBDakfkasfj27146172",
+                Text = "Money : ",
             };
 
             panel.Controls.Add(money, 1, 0);
@@ -61,9 +61,8 @@ namespace VoidTime.GUI
             hp.Margin = new Padding(offset, offset, 0, 0);
             hp.Size = new Size(width - 2 * offset, height - 2 * offset);
 
-            money.Margin = new Padding(offset, offset, 0, 0);
-            money.Size = new Size(width - 2 * offset, height - 2 * offset);
-            money.Font = new Font("Arial", money.Size.Height * 3 / 4);
+            money.Margin = new Padding(offset, offset * 2 / 3, 0, 0);
+            money.Font = new Font("OCR A", money.Size.Height * 0.4f);
         }
     }
 }
