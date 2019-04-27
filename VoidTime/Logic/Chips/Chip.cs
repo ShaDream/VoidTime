@@ -27,14 +27,14 @@ namespace VoidTime
 
         public override string ToString()
         {
-            return Name;
+            return Name + (CurrentLevel != 1 ? $" +{CurrentLevel - 1}" : "");
         }
 
         public override bool Equals(object obj)
         {
             if (!obj.GetType().IsSubclassOf(typeof(Chip))) return false;
 
-            return GetType() == obj.GetType() && CurrentLevel == ((Chip) obj).CurrentLevel;
+            return GetType() == obj.GetType() && CurrentLevel == ((Chip)obj).CurrentLevel;
         }
 
         public Chip Copy()
