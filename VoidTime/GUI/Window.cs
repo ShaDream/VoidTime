@@ -50,6 +50,7 @@ namespace VoidTime.GUI
             ChangeSize(statsMenu, form, new SizeF(0.2f, 0.6f), new PointF(0.5f, 0.5f));
             ChangeSize(enterMenu, form, new SizeF(), new PointF(0.5f, 0.9f), false);
             ChangeSize(statusBar, form, new SizeF(1f, 0.0261f), new PointF(0.5f, 1f));
+            statusBar.Resize();
         }
 
         private void ChangeSize(BasicGameWindow window, MainForm form, SizeF size, PointF center, bool isChange = true)
