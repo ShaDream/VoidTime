@@ -9,24 +9,31 @@ namespace VoidTime
 {
     public class Blast : PhysicalGameObject
     {
-        private const float speed = 3000;
+        private const float speed = 5000;
+        private const float rangeScale = 0.018f;
+
         private readonly HashSet<Type> damagableTypes;
-
         private readonly float damage;
-
         private readonly Ship owner;
+        private readonly float rangePerFrame;
         private readonly Vector2D velocity;
+
         private float remainingRange;
         public double Angle { get; }
 
         /// <param name="damagableTypes">Only Ship class allowed</param>
-        public Blast(Vector2D possition, double angle, float damage, Ship owner, float range,
+        public Blast(Vector2D possition,
+                     double angle,
+                     float damage,
+                     Ship owner,
+                     float range,
                      params Type[] damagableTypes)
         {
             Position = possition;
             remainingRange = range;
             Angle = angle + Math.PI / 2;
-            velocity = new Vector2D(speed, 0).Rotate(angle);
+            velocity = new Vector2D(speed).Rotate(angle);
+            rangePerFrame = speed * rangeScale;
             this.owner = owner;
             this.damagableTypes = new HashSet<Type>(damagableTypes.Select(x =>
             {
@@ -41,12 +48,9 @@ namespace VoidTime
         {
             SetLinearVelocity(velocity);
             if (remainingRange <= 0)
-            {
-                Instantiate(new Explosion(Position));
                 Destoy();
-            }
 
-            remainingRange -= velocity.Magnitude * 0.018f;
+            remainingRange -= rangePerFrame;
         }
 
         public override void CreatePhysics(World world)
