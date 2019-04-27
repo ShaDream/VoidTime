@@ -61,8 +61,8 @@ namespace VoidTime.GUI
             hp.Margin = new Padding(offset, offset, 0, 0);
             hp.Size = new Size(width - 2 * offset, height - 2 * offset);
 
-            money.Margin = new Padding(offset, offset * 2 / 3, 0, 0);
-            money.Font = new Font("OCR A", money.Size.Height * 0.4f);
+            money.Margin = new Padding(offset, 0, 0, 0);
+            money.Font = new Font("Calibri", money.Size.Height * 0.5f);
         }
     }
 }
