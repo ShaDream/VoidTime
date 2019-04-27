@@ -7,8 +7,27 @@ namespace VoidTime
 {
     public struct ShipStats
     {
-        public float CurrentHP { get; private set; }
-        public float MaxHP;
+        private float currentHP;
+        public float CurrentHP
+        {
+            get => currentHP;
+            private set
+            {
+                currentHP = value;
+                OnDamage?.Invoke();
+            }
+        }
+
+        private float maxHP;
+        public float MaxHP
+        {
+            get => maxHP;
+            set
+            {
+                maxHP = value;
+                OnChangeMaxHP?.Invoke();
+            }
+        }
         public float Defence;
         public float Speed;
 
@@ -84,5 +103,7 @@ namespace VoidTime
         }
 
         public event Action Death;
+        public event Action OnDamage;
+        public event Action OnChangeMaxHP;
     }
 }

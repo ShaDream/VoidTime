@@ -39,8 +39,8 @@
     <damage>10</damage>
     <fireRate>50</fireRate>
     <criticalChance>3</criticalChance>
-    <tier>5</tier>
-    <range>500</range>
+    <tier>0</tier>
+    <range>2000</range>
     <price>2000</price>
   </gun>
 </guns>

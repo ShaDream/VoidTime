@@ -69,7 +69,7 @@
       <slot>
         <position>
           <x>0</x>
-          <y>50</y>
+          <y>-50</y>
         </position>
         <maxTier>2</maxTier>
       </slot>

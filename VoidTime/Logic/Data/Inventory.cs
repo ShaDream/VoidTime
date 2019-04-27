@@ -5,11 +5,20 @@ using System.Linq;
 
 namespace VoidTime
 {
-    public struct Inventory
+    public class Inventory
     {
         private readonly List<IItem> items;
         private readonly Ship owner;
-        public int Money;
+        private int money;
+        public int Money
+        {
+            get => money;
+            set
+            {
+                money = value;
+                OnChangeMoney?.Invoke();
+            }
+        }
 
         public Inventory(Ship owner)
         {
@@ -45,5 +54,7 @@ namespace VoidTime
                 owner.Chips.Add(chip);
             }
         }
+
+        public event Action OnChangeMoney;
     }
 }
