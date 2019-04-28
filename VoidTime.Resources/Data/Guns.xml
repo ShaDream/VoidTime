@@ -8,6 +8,7 @@
     <criticalChance>0,1</criticalChance>
     <tier>1</tier>
     <range>500</range>
+    <speed>2000</speed>
     <price>100</price>
   </gun>
 
@@ -19,6 +20,7 @@
     <criticalChance>0,05</criticalChance>
     <tier>2</tier>
     <range>1000</range>
+    <speed>2000</speed>
     <price>500</price>
   </gun>
 
@@ -30,6 +32,7 @@
     <criticalChance>5</criticalChance>
     <tier>3</tier>
     <range>2000</range>
+    <speed>2000</speed>
     <price>750</price>
   </gun>
 
@@ -41,6 +44,7 @@
     <criticalChance>3</criticalChance>
     <tier>0</tier>
     <range>2000</range>
-    <price>2000</price>
+    <speed>5000</speed>
+    <price>20000</price>
   </gun>
 </guns>

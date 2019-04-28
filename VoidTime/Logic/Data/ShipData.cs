@@ -78,6 +78,7 @@ namespace VoidTime
                 ShipStats.Guns[i].FireRate = gun.FireRate;
                 ShipStats.Guns[i].Name = gun.Name;
                 ShipStats.Guns[i].Range = gun.Range + gun.Range * ShipBuffs.RangUp / 100;
+                ShipStats.Guns[i].Speed = gun.Speed;
                 i++;
             }
         }

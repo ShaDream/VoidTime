@@ -28,6 +28,7 @@
         private Vector2D direction;
         public bool CanRotate;
         public float CriticalChance;
+        public float Speed;
 
         public float RecoveryTime => 1000 / FireRate;
         public float currentRecovery;

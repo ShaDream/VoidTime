@@ -49,6 +49,7 @@ namespace VoidTime
                                       Guns[i].Damage + (Random.IsLucky(Guns[i].CriticalChance) ? Guns[i].Damage : 0),
                                       ship,
                                       Guns[i].Range,
+                                      Guns[i].Speed,
                                       enemiesType);
                 blastList.Add(blast);
             }

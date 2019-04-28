@@ -20,7 +20,8 @@ namespace VoidTime
                 Name = name,
                 Price = int.Parse(node["price"].InnerText),
                 Tier = int.Parse(node["tier"].InnerText),
-                Range = float.Parse(node["range"].InnerText)
+                Range = float.Parse(node["range"].InnerText),
+                Speed = float.Parse(node["speed"].InnerText)
             };
 
             return gun;

@@ -9,7 +9,7 @@ namespace VoidTime
 {
     public class Blast : PhysicalGameObject
     {
-        private const float speed = 5000;
+        private float speed;
         private const float rangeScale = 0.018f;
 
         private readonly HashSet<Type> damagableTypes;
@@ -27,8 +27,10 @@ namespace VoidTime
                      float damage,
                      Ship owner,
                      float range,
+                    float speed,
                      params Type[] damagableTypes)
         {
+            this.speed = speed;
             Position = possition;
             remainingRange = range;
             Angle = angle + Math.PI / 2;
@@ -75,8 +77,8 @@ namespace VoidTime
             if (owner is Player && other.Body.UserData is MapEnemy ||
                 owner is MapEnemy && other.Body.UserData is Player)
             {
-                var player = (Player) (owner is Player ? owner : other.Body.UserData);
-                var enemy = (MapEnemy) (owner is MapEnemy ? owner : other.Body.UserData);
+                var player = (Player)(owner is Player ? owner : other.Body.UserData);
+                var enemy = (MapEnemy)(owner is MapEnemy ? owner : other.Body.UserData);
                 if (!enemy.InBattle)
                 {
                     enemy.InBattle = true;
