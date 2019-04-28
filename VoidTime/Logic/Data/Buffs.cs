@@ -1,20 +1,21 @@
 ﻿namespace VoidTime
 {
-    public struct Buffs
+    public class Buffs
     {
-        public float DropRateChance;
+        public float DropRateChance = 0;
 
-        public float MoveSpeedIncrease;
-        public float CriticalChanceIncrease;
-        public float DropRateChanceIncrease;
-        public float AutoHeal;
-        public float AttackUp;
-        public float DefenceUp;
-        public float RangUp;
-        public float HPUp;
+        public float MoveSpeedIncrease = 0;
+        public float CriticalChanceIncrease = 0;
+        public float DropRateChanceIncrease = 0;
+        public float AutoHeal = 0;
+        public float AttackUp = 0;
+        public float DefenceUp = 0;
+        public float RangUp = 0;
+        public float HPUp = 0;
 
-        public bool DisplayHP;
-        public bool Destroy;
-        public bool CanMove;
+        public bool DisplayHP = false;
+        public bool Destroy = true;
+        public bool CanMove = false;
+
     }
 }

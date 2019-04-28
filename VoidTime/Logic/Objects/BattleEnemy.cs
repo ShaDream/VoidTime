@@ -8,6 +8,7 @@
 
         public BattleEnemy()
         {
+            Data = new ShipData(this);
             Data.ShipStats.Death += Destoy;
         }
 

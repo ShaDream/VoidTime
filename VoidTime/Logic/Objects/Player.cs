@@ -29,6 +29,7 @@ namespace VoidTime
             Inventory = new Inventory(this);
             Chips = new InstalledChips(this, 6000);
             Data = new ShipData(this);
+            
             AllowedCoordinates = allowedCoordinates;
             Position = position;
             Size = new Size(100, 111);
@@ -36,6 +37,8 @@ namespace VoidTime
             Data.SetGun(GunParser.GetGun("Omega gun"), 0);
             Data.SetGun(GunParser.GetGun("Omega gun"), 1);
             Data.SetGun(GunParser.GetGun("Omega gun"), 2);
+            Chips.Add(ChipParser.GetChip("System Chip"));
+            Chips.Add(ChipParser.GetChip("Control Chip"));
             Data.ShipStats.Death += Destoy;
         }
 
@@ -44,14 +47,17 @@ namespace VoidTime
 
         public override void Update()
         {
-            Move();
+            if(Data.ShipBuffs.Destroy)
+                Destoy();
+            if (Data.ShipBuffs.CanMove)
+                Move();
             if (Input.GetMouseButton(MouseButtons.Left))
             {
-                var blasts = Data.ShipStats.Shoot(this,typeof(BattleEnemy));
+                var blasts = Data.ShipStats.Shoot(this, typeof(BattleEnemy));
                 foreach (var blast in blasts)
                     Instantiate(blast);
             }
-                
+
             Data.ShipStats.UpdateStats(this);
             CheckCoordinate();
         }

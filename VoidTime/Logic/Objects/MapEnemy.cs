@@ -13,6 +13,7 @@ namespace VoidTime
 
         public MapEnemy(Vector2D position, PhysicalGameObject target, int enemiesCount, EnemyDifficult difficult)
         {
+            Data = new ShipData(this);
             EnemiesCount = enemiesCount;
             Difficult = difficult;
             Position = position;
