@@ -45,10 +45,10 @@ namespace VoidTime.Tests
             };
             var camera = new Camera(new Size(2, 2), objects[2]);
             var map = new GameMap(new Size(2, 2), new Size(10, 10), new World(), objects);
-            var objectsFromMap = map.GetGameObjects(camera, camera.Size);
-            objectsFromMap[0].Destoy();
+            var objectsFromMap = map.GetGameObjects(camera);
+            objectsFromMap[1].Destoy();
             objectsFromMap = map.GetGameObjects(camera, camera.Size);
-            Assert.AreEqual(0, objectsFromMap.Count);
+            Assert.AreEqual(1, objectsFromMap.Count);
         }
 
         [Test]
@@ -64,11 +64,11 @@ namespace VoidTime.Tests
             var map = new GameMap(new Size(2, 2), new Size(10, 10), new World(), objects);
             var objectsFromMap = map.GetGameObjects(camera, camera.Size);
             objectsFromMap[0].Position = new Vector2D(3, 3);
-            objectsFromMap = map.GetGameObjects(camera, camera.Size);
-            Assert.AreEqual(0, objectsFromMap.Count);
+            objectsFromMap = map.GetGameObjects(camera);
+            Assert.AreEqual(2, objectsFromMap.Count);
             camera.FollowTo = objects[0];
             camera.Update();
-            objectsFromMap = map.GetGameObjects(camera, camera.Size);
+            objectsFromMap = map.GetGameObjects(camera);
             Assert.AreEqual(3, objectsFromMap.Count);
         }
 

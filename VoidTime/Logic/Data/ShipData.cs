@@ -62,9 +62,9 @@ namespace VoidTime
             ShipStats.MaxHP = shipBase.HP + shipBase.HP * ShipBuffs.HPUp / 100;
             ShipStats.Defence = shipBase.Defence + shipBase.Defence * ShipBuffs.DefenceUp / 100;
             ShipStats.Speed = shipBase.MoveSpeed + shipBase.MoveSpeed * ShipBuffs.MoveSpeedIncrease / 100;
-            ShipStats.Guns = new GunData[shipBase.slots.Count(x => x.HasGun)];
+            ShipStats.Guns = new GunData[shipBase.slots?.Count(x => x.HasGun) ?? 0];
 
-            var guns = shipBase.slots.Where(x => x.HasGun);
+            var guns = shipBase.slots?.Where(x => x.HasGun) ?? new ShipSlotData[0];
             var i = 0;
             foreach (var slot in guns)
             {
