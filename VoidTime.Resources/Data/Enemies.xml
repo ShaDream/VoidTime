@@ -2,7 +2,7 @@
 <enemies>
   <enemy>
     <difficult>Easy</difficult>
-    <ship>Base ship</ship>
+    <ship>Base enemy ship</ship>
     <behavior>CloseCombat</behavior>
     <guns>
       <gun>Base gun</gun>

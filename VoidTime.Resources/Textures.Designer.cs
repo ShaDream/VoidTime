@@ -73,6 +73,16 @@ namespace VoidTime.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BaseEnemyShip {
+            get {
+                object obj = ResourceManager.GetObject("BaseEnemyShip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BaseShip {
             get {
                 object obj = ResourceManager.GetObject("BaseShip", resourceCulture);
@@ -106,16 +116,6 @@ namespace VoidTime.Resources {
         public static System.Drawing.Bitmap earth {
             get {
                 object obj = ResourceManager.GetObject("earth", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap enemy_basic_ship {
-            get {
-                object obj = ResourceManager.GetObject("enemy_basic_ship", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -4,6 +4,8 @@ namespace VoidTime
 {
     public struct ShipData
     {
+        public string ShipName => shipBase.Name;
+
         private readonly Ship owner;
 
         private ShipBaseData shipBase;

@@ -18,7 +18,7 @@ namespace VoidTime
             Difficult = difficult;
             Position = position;
             this.target = target;
-            Data.SetShip(ShipParser.GetShip("Base ship"));
+            Data.SetShip(ShipParser.GetShip("Base enemy ship"));
         }
 
         public override void Update()

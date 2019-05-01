@@ -72,7 +72,7 @@
     <Compile Include="DrawClasses\BattleEnemyDrawHelper.cs" />
     <Compile Include="DrawClasses\BlastDrawHelper.cs" />
     <Compile Include="DrawClasses\DrawHelper.cs" />
-    <Compile Include="DrawClasses\EnemyDrawHelper.cs" />
+    <Compile Include="DrawClasses\MapEnemyDrawHelper.cs" />
     <Compile Include="DrawClasses\ExplosionDrawer.cs" />
     <Compile Include="DrawClasses\ObjectOnDisplay.cs" />
     <Compile Include="DrawClasses\IDrawable.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="GUI\PausePanel.cs" />
     <Compile Include="GUI\PlanetPanel.cs" />
     <Compile Include="GUI\SetGunPrompt.cs" />
+    <Compile Include="DrawClasses\ShipTexturesHelper.cs" />
     <Compile Include="GUI\StatsPanel.cs" />
     <Compile Include="GUI\StatusBar.cs" />
     <Compile Include="GUI\UpgradePrompt.cs" />

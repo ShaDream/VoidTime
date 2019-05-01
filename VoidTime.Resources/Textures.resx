@@ -133,7 +133,7 @@
   <data name="earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="enemy_basic_ship" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="BaseEnemyShip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\enemy_basic_ship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="explosion" type="System.Resources.ResXFileRef, System.Windows.Forms">

@@ -24,6 +24,28 @@
   </ship>
 
   <ship>
+    <name>Base enemy ship</name>
+    <size>
+      <x>100</x>
+      <y>111</y>
+    </size>
+    <slots>
+      <slot>
+        <position>
+          <x>50</x>
+          <y>0</y>
+        </position>
+        <maxTier>1</maxTier>
+      </slot>
+    </slots>
+    <defence>1</defence>
+    <hp>20</hp>
+    <speed>400</speed>
+    <chipsCost>20</chipsCost>
+    <price>200</price>
+  </ship>
+
+  <ship>
     <name>Fast ship</name>
     <size>
       <x>100</x>
