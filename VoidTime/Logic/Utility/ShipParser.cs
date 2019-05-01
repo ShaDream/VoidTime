@@ -42,7 +42,7 @@ namespace VoidTime
             var ships = new List<ShipBaseData>();
 
             var doc = new XmlDocument();
-            doc.LoadXml(Data.Guns);
+            doc.LoadXml(Data.Ships);
             var nodes = doc.SelectNodes($"//ship");
             foreach (XmlNode nodeShip in nodes)
                 ships.Add(GetShip(nodeShip["name"].InnerText));
