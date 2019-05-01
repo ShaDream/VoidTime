@@ -28,13 +28,13 @@ namespace VoidTime
             return gun;
         }
 
-        public static GunData[] GetAllGuns()
+        public static GunData[] GetGunsToShop()
         {
             var guns = new List<GunData>();
 
             var doc = new XmlDocument();
             doc.LoadXml(Data.Guns);
-            var nodes = doc.SelectNodes($"//gun");
+            var nodes = doc.SelectNodes($"//gun[canBuy='true']");
             foreach (XmlNode nodeGun in nodes)
                 guns.Add(GetGun(nodeGun["name"].InnerText));
 

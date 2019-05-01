@@ -215,7 +215,7 @@ namespace VoidTime.GUI
             shop.Items.Clear();
             shop.Items.AddRange(ChipParser.GetAllChips());
             shop.Items.AddRange(ShipParser.GetAllShips());
-            shop.Items.AddRange(GunParser.GetAllGuns());
+            shop.Items.AddRange(GunParser.GetGunsToShop());
             inventory.Items.Clear();
             foreach (var item in ship.Inventory.GetItems)
                 inventory.Items.Add(item);
