@@ -18,5 +18,7 @@
                    $"Slots count: {slots.Length}\n" +
                    $"Price: {Price}\n";
         }
+
+        public override string ToString() => Name;
     }
 }
