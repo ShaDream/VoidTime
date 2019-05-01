@@ -18,7 +18,7 @@ namespace VoidTime
 
         public void Init(OpenGL gl)
         {
-            player.Create(gl, Textures.player_basic_ship);
+            player.Create(gl, Textures.BaseShip);
         }
     }
 }
