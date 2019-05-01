@@ -23,5 +23,11 @@ namespace VoidTime
             Body = world.CreateBody(bodyDef);
             Fixtures.Add(Body.CreateFixture(shape, 1));
         }
+
+        public override void Destoy()
+        {
+            Instantiate(new Explosion(Position));
+            base.Destoy();
+        }
     }
 }
