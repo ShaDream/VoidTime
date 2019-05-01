@@ -28,7 +28,6 @@ namespace VoidTime
                                                             true);
 
             //TODO: Create chips
-            enemy.Data.ShipStats.SetHP(1);
             return enemy;
         }
     }
