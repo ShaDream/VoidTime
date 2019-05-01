@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 using VoidTime.Resources;
 
 namespace VoidTime
@@ -34,6 +35,19 @@ namespace VoidTime
             }
 
             return ship;
+        }
+
+        public static ShipBaseData[] GetAllShips()
+        {
+            var ships = new List<ShipBaseData>();
+
+            var doc = new XmlDocument();
+            doc.LoadXml(Data.Guns);
+            var nodes = doc.SelectNodes($"//ship");
+            foreach (XmlNode nodeShip in nodes)
+                ships.Add(GetShip(nodeShip["name"].InnerText));
+
+            return ships.ToArray();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 using VoidTime.Resources;
 
 namespace VoidTime
@@ -25,6 +26,19 @@ namespace VoidTime
             };
 
             return gun;
+        }
+
+        public static GunData[] GetAllGuns()
+        {
+            var guns = new List<GunData>();
+
+            var doc = new XmlDocument();
+            doc.LoadXml(Data.Guns);
+            var nodes = doc.SelectNodes($"//gun");
+            foreach (XmlNode nodeGun in nodes)
+                guns.Add(GetGun(nodeGun["name"].InnerText));
+
+            return guns.ToArray();
         }
     }
 }

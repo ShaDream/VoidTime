@@ -75,6 +75,7 @@ namespace VoidTime.GUI
 
                 menuButton.Text = "To upgrade";
                 menuButton.Visible = true;
+                menuButton.Enabled = true;
                 menuButtonClick = () =>
                 {
                     ship.Inventory.Remove(item);
@@ -95,7 +96,7 @@ namespace VoidTime.GUI
                         }
                         upgrades.Items.Clear();
                     }
-                        
+
 
                     Update();
                 };
@@ -115,6 +116,7 @@ namespace VoidTime.GUI
 
                 menuButton.Text = "To inventory";
                 menuButton.Visible = true;
+                menuButton.Enabled = true;
                 menuButtonClick = () =>
                 {
                     ship.Inventory.Add(item);
@@ -137,51 +139,57 @@ namespace VoidTime.GUI
                 description.Text = item.GetInfo();
                 menuButton.Text = "Buy";
                 menuButton.Visible = true;
-                if (item.Price > ship.Inventory.Money)
-                    menuButton.Enabled = false;
+                menuButton.Enabled = item.Price <= ship.Inventory.Money;
                 menuButtonClick = () =>
                 {
                     ship.Inventory.Money -= item.Price;
-                    ship.Inventory.Add(item);
+
+                    if (item is ShipBaseData shipData)
+                        ship.Data.SetShip(shipData);
+                    else
+                        ship.Inventory.Add(item);
+
                     Update();
                 };
             };
 
             shop.MouseDoubleClick += (s, a) =>
-            {
-                if (shop.SelectedItem == null)
-                    return;
-                menuButton.PerformClick();
-            };
+                {
+                    if (shop.SelectedItem == null)
+                        return;
+                    menuButton.PerformClick();
+                };
 
             quests.SelectedIndexChanged += (s, a) =>
-            {
-                if (!(quests.SelectedItem is Quest item))
-                    return;
-                description.Text = item.GetInfo();
-                if (item.Status == QuestStatus.NotStarted)
-                {
-                    menuButton.Text = "Accept";
-                    menuButton.Visible = true;
-                    menuButtonClick = () =>
                     {
-                        item.AcceptQuest();
-                        Update();
-                    };
-                }
+                        if (!(quests.SelectedItem is Quest item))
+                            return;
+                        description.Text = item.GetInfo();
+                        if (item.Status == QuestStatus.NotStarted)
+                        {
+                            menuButton.Text = "Accept";
+                            menuButton.Visible = true;
+                            menuButton.Enabled = true;
+                            menuButtonClick = () =>
+                            {
+                                item.AcceptQuest();
+                                Update();
+                            };
+                        }
 
-                if (item.Status == QuestStatus.Сompleted)
-                {
-                    menuButton.Text = "Get reward";
-                    menuButton.Visible = true;
-                    menuButtonClick = () =>
-                    {
-                        ship.Inventory.Money += item.Reward;
-                        item.Status = QuestStatus.NotStarted;
-                        Update();
+                        if (item.Status != QuestStatus.Сompleted)
+                            return;
+
+                        menuButton.Text = "Get reward";
+                        menuButton.Visible = true;
+                        menuButton.Enabled = true;
+                        menuButtonClick = () =>
+                        {
+                            ship.Inventory.Money += item.Reward;
+                            item.Status = QuestStatus.NotStarted;
+                            Update();
+                        };
                     };
-                }
-            };
             quests.MouseDoubleClick += (s, a) =>
             {
                 if (quests.SelectedItem == null)
@@ -189,7 +197,7 @@ namespace VoidTime.GUI
                 menuButton.PerformClick();
             };
 
-            var testQuest = new Quest("Noob Challenge", 10, EnemyCount.Few, EnemyDifficult.Easy, () =>
+            var testQuest = new Quest("Noob Challenge", 1000, EnemyCount.Few, EnemyDifficult.Easy, () =>
             {
                 var mainForm = form.currentModel as MainGameModel;
                 var enemy = new MapEnemy(ship.Position + new Vector2D(200, 200), ship, 1, EnemyDifficult.Easy);
@@ -206,6 +214,8 @@ namespace VoidTime.GUI
             description.Text = string.Empty;
             shop.Items.Clear();
             shop.Items.AddRange(ChipParser.GetAllChips());
+            shop.Items.AddRange(ShipParser.GetAllShips());
+            shop.Items.AddRange(GunParser.GetAllGuns());
             inventory.Items.Clear();
             foreach (var item in ship.Inventory.GetItems)
                 inventory.Items.Add(item);

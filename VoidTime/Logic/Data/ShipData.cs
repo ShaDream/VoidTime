@@ -68,7 +68,7 @@ namespace VoidTime
             var i = 0;
             foreach (var slot in guns)
             {
-                ShipStats.Guns[i].PositionOffset = slot.positionOffset;
+                ShipStats.Guns[i] = new GunData { PositionOffset = slot.positionOffset };
                 var gun = slot.Gun;
                 ShipStats.Guns[i].Slot = gun.Slot;
                 ShipStats.Guns[i].CanRotate = gun.CanRotate;

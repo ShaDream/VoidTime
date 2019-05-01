@@ -1,6 +1,6 @@
 ﻿namespace VoidTime
 {
-    public struct GunData : IItem
+    public class GunData : IItem
     {
         public string Name { get; set; }
         public int Price { get; set; }

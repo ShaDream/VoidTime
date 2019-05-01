@@ -1,6 +1,6 @@
 ﻿namespace VoidTime
 {
-    public struct ShipBaseData : IItem
+    public class ShipBaseData : IItem
     {
         public string Name { get; set; }
         public float HP;
