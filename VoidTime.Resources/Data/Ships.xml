@@ -18,7 +18,7 @@
     </slots>
     <defence>1</defence>
     <hp>200</hp>
-    <speed>600</speed>
+    <speed>400</speed>
     <chipsCost>20</chipsCost>
     <price>200</price>
   </ship>
@@ -40,7 +40,7 @@
     </slots>
     <defence>2</defence>
     <hp>250</hp>
-    <speed>600</speed>
+    <speed>1000</speed>
     <chipsCost>30</chipsCost>
     <price>600</price>
   </ship>
@@ -76,7 +76,7 @@
     </slots>
     <defence>7</defence>
     <hp>500</hp>
-    <speed>600</speed>
+    <speed>800</speed>
     <chipsCost>60</chipsCost>
     <price>2000</price>
   </ship>
