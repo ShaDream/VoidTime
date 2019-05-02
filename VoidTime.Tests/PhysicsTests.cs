@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace VoidTime.Tests
 {
     [TestFixture]
-    public class PhysicsTest
+    public class PhysicsTests
     {
         [TestCase(100)]
         [TestCase(500)]
