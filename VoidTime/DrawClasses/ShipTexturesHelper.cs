@@ -25,7 +25,8 @@ namespace VoidTime
             {
                 {"Base ship", CreateTexture(gl, Textures.BaseShip)},
                 {"Base enemy ship", CreateTexture(gl, Textures.BaseEnemyShip)},
-                {"Fight ship", CreateTexture(gl, Textures.BaseShip)}
+                {"Fight ship", CreateTexture(gl, Textures.BaseShip)},
+                {"Fast ship", CreateTexture(gl, Textures.BaseShip)}
             };
             initialized = true;
         }
